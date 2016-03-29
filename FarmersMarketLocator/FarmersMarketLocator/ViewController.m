@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "FMLAPIClient.h"
+#import "FMLMarket.h"
 
 @interface ViewController ()
 
@@ -16,12 +18,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+
+//    // Testing out our API calls with sample locations.
+//    [FMLAPIClient getMarketsForZip:@"10004"];
+//    [FMLAPIClient getMarketsForLatitude:40.7 longitude:-74];
+    [FMLAPIClient getDetailsForMarketWithId:1000066];
+
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end
