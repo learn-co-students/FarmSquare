@@ -16,6 +16,7 @@
 +(void)getMarketsForLatitude:(CGFloat)latitude
                    longitude:(CGFloat)longitude;
 +(void)getDetailsForMarketWithId:(NSUInteger)idNumber;
++(NSDictionary *)getCoordinatesFromGoogleMapsLink:(NSString *)googleMapsLink;
 
 
 @end

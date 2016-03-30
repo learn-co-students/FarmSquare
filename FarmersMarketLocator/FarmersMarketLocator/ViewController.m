@@ -22,7 +22,8 @@
 //    // Testing out our API calls with sample locations.
 //    [FMLAPIClient getMarketsForZip:@"10004"];
 //    [FMLAPIClient getMarketsForLatitude:40.7 longitude:-74];
-    [FMLAPIClient getDetailsForMarketWithId:1000066];
+//    [FMLAPIClient getDetailsForMarketWithId:1000066];
+    [FMLAPIClient getCoordinatesFromGoogleMapsLink:@"asdad"];
 
 }
 

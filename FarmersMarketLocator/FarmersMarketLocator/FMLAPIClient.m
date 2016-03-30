@@ -94,5 +94,50 @@
     }
 }
 
++(NSDictionary *)getCoordinatesFromGoogleMapsLink:(NSString *)googleMapsLink {
+    
+//    // Uncomment this to test the method
+//    googleMapsLink = @"http://maps.google.com/?q=40.704587%2C%20-74.014313%20(%22Bowling+Green+Greenmarket%22)";
+    
+    
+    // Google maps link example:
+    // http://maps.google.com/?q=40.704587%2C%20-74.014313%20(%22Bowling+Green+Greenmarket%22)
+    // We want to:
+    // 1) Get the number between: "?q=" and "%", and the number between "%20" and "(".
+    // 2) Turn each number into a CGFloat and put them in the dictionary as latitude and longitude.
+    // 3) Test this with a bunch of URLs to make sure the link is always formatted the same. Even if it is, put in an if-statement so we don't crash if we can't figure out the coordinates.
+
+    // Create a mutable dictionary to hold the coordinates
+    NSMutableDictionary *coordinatesDictionary = [NSMutableDictionary new];
+    
+    // Create an NSURLComponents object for the URL
+    NSURLComponents *urlComponents = [NSURLComponents componentsWithString:googleMapsLink];
+    // Get the queries from the URL. The first and only query's value is a string containing the location's coordinates and name.
+    NSArray *queryItems = urlComponents.queryItems;
+    NSURLQueryItem *query = queryItems[0];
+    NSString *coordinatesAndName = query.value;
+    
+    // Now we have a string of the form "LAT, LONG (name)".
+    // Example: "40.704587, -74.014313 (\"Bowling+Green+Greenmarket\")"
+    
+    // Get the latitude (from 0 to the comma)
+    NSRange rangeOfComma = [coordinatesAndName rangeOfString:@","];
+    NSRange rangeOfLatitude = NSMakeRange(0, rangeOfComma.location);
+    NSString *latitude = [coordinatesAndName substringWithRange:rangeOfLatitude];
+    NSLog(@"latitude: %@", latitude);
+    
+    // Get the longitude (bounded by spaces)
+    NSArray *junkArray = [coordinatesAndName componentsSeparatedByString:@" "];
+    NSString *longitude = junkArray[1];
+
+    // Put the latitude and longitude in the dictionary (as NSNumbers)
+    coordinatesDictionary[@"latitude"] = @([latitude floatValue]);
+    coordinatesDictionary[@"longitude"] = @([longitude floatValue]);
+
+    NSLog(@"Coordinates dictionary: \n%@", coordinatesDictionary);
+    return coordinatesDictionary;
+    
+}
+
 
 @end
