@@ -16,4 +16,5 @@
                    longitude:(CGFloat)longitude;
 +(void)getDetailsForMarketWithId:(NSUInteger)idNumber;
 
+
 @end
