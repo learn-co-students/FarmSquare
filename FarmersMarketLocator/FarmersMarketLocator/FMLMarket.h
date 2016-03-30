@@ -16,10 +16,10 @@
 @property (strong, nonatomic) NSString *googleMapLink;
 @property (strong, nonatomic) NSString *productsString;
 @property (strong, nonatomic) NSString *scheduleString;
-@property (nonatomic) CGFloat latitude;
-@property (nonatomic) CGFloat longitude;
+@property (strong, nonatomic) NSString *latitude;
+@property (strong, nonatomic) NSString *longitude;
 
--(instancetype)initWithNameString:(NSString *)name googleLink:(NSString *)googleLink;
+-(instancetype)initWithName:(NSString *)name;
 
 @end
 
