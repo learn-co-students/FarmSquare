@@ -130,9 +130,13 @@
     NSArray *junkArray = [coordinatesAndName componentsSeparatedByString:@" "];
     NSString *longitude = junkArray[1];
 
-    // Put the latitude and longitude in the dictionary (as NSNumbers)
-    coordinatesDictionary[@"latitude"] = @([latitude floatValue]);
-    coordinatesDictionary[@"longitude"] = @([longitude floatValue]);
+//    // Put the latitude and longitude in the dictionary (as NSNumbers)
+//    coordinatesDictionary[@"latitude"] = @([latitude floatValue]);
+//    coordinatesDictionary[@"longitude"] = @([longitude floatValue]);
+    
+    //    // Put the latitude and longitude in the dictionary (as strings)
+    coordinatesDictionary[@"latitude"] = latitude;
+    coordinatesDictionary[@"longitude"] = longitude;
 
     NSLog(@"Coordinates dictionary: \n%@", coordinatesDictionary);
     return coordinatesDictionary;
