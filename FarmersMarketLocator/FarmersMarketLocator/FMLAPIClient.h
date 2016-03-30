@@ -11,6 +11,7 @@
 
 @interface FMLAPIClient : NSObject
 
+
 +(void)getMarketsForZip:(NSString *)zip;
 +(void)getMarketsForLatitude:(CGFloat)latitude
                    longitude:(CGFloat)longitude;
