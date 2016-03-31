@@ -11,17 +11,21 @@
 
 @interface FMLAPIClient : NSObject
 
-
-// API stuff
-+(void)getMarketsForZip:(NSString *)zip;
+// API methods
++(void)getMarketsForZip:(NSString *)zip
+         withCompletion:(void (^)(NSMutableArray *marketsArray))zipCompletion;
 +(void)getMarketsForLatitude:(CGFloat)latitude
                    longitude:(CGFloat)longitude
-              withCompletion:(void (^)(NSMutableArray *marketsArray))completion;
-+(void)getDetailsForMarketWithId:(NSString *)idNumber withCompletion:(void (^)(NSDictionary *marketDetails))completion;
-+(void)marketsArrayForListOfMarkets:(NSDictionary *)marketsDict withCompletion:(void (^)(NSMutableArray *marketsArray))completion;
+              withCompletion:(void (^)(NSMutableArray *marketsArray))coordinatesCompletion;
++(void)getDetailsForMarketWithId:(NSString *)idNumber
+                  withCompletion:(void (^)(NSDictionary *marketDetails))idCompletion;
++(void)marketsArrayForListOfMarkets:(NSDictionary *)marketsDict
+                     withCompletion:(void (^)(NSMutableArray *marketsArray))listMarketsCompletion;
 
 // Non-internet helper methods
 +(NSDictionary *)getCoordinatesFromGoogleMapsLink:(NSString *)googleMapsLink;
+
++(NSArray *)searchProducts:(NSArray *)usersProducts inMarkets:(NSArray *)marketsToSearch;
 
 
 @end

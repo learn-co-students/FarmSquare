@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F1569941CAC23B40049DC81 /* Secrets.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1569931CAC23B40049DC81 /* Secrets.m */; };
 		1F3ED95E1CAB0AE50038F590 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3ED95D1CAB0AE50038F590 /* main.m */; };
 		1F3ED9611CAB0AE50038F590 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3ED9601CAB0AE50038F590 /* AppDelegate.m */; };
 		1F3ED9641CAB0AE50038F590 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3ED9631CAB0AE50038F590 /* ViewController.m */; };
@@ -19,6 +18,7 @@
 		E112CE9CB833D7D11064E042 /* libPods-FarmersMarketLocator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CDB776E48FF26680E2F899 /* libPods-FarmersMarketLocator.a */; };
 		E1F95DCD1CAB12D6009DA977 /* FMLAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F95DCC1CAB12D6009DA977 /* FMLAPIClient.m */; };
 		E1F95DD01CAB1CFE009DA977 /* FMLMarket.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F95DCF1CAB1CFE009DA977 /* FMLMarket.m */; };
+		E1F95DD61CAD5F8A009DA977 /* Secrets.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F95DD51CAD5F8A009DA977 /* Secrets.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +41,6 @@
 /* Begin PBXFileReference section */
 		02F904EDCF8946A897CA1C2A /* Pods-FarmersMarketLocator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FarmersMarketLocator.release.xcconfig"; path = "Pods/Target Support Files/Pods-FarmersMarketLocator/Pods-FarmersMarketLocator.release.xcconfig"; sourceTree = "<group>"; };
 		04CDB776E48FF26680E2F899 /* libPods-FarmersMarketLocator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FarmersMarketLocator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1F1569931CAC23B40049DC81 /* Secrets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secrets.m; sourceTree = "<group>"; };
 		1F3ED9591CAB0AE40038F590 /* FarmersMarketLocator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FarmersMarketLocator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F3ED95D1CAB0AE50038F590 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1F3ED95F1CAB0AE50038F590 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -63,6 +62,7 @@
 		E1F95DCC1CAB12D6009DA977 /* FMLAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLAPIClient.m; sourceTree = "<group>"; };
 		E1F95DCE1CAB1CFE009DA977 /* FMLMarket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLMarket.h; sourceTree = "<group>"; };
 		E1F95DCF1CAB1CFE009DA977 /* FMLMarket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLMarket.m; sourceTree = "<group>"; };
+		E1F95DD51CAD5F8A009DA977 /* Secrets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secrets.m; sourceTree = "<group>"; };
 		E426A69268E3DA9622C8E051 /* Pods-FarmersMarketLocator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FarmersMarketLocator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FarmersMarketLocator/Pods-FarmersMarketLocator.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,7 +128,7 @@
 				1F3ED9651CAB0AE50038F590 /* Main.storyboard */,
 				1F3ED9681CAB0AE50038F590 /* Assets.xcassets */,
 				1F3ED98F1CAB0C990038F590 /* Secrets.h */,
-				1F1569931CAC23B40049DC81 /* Secrets.m */,
+				E1F95DD51CAD5F8A009DA977 /* Secrets.m */,
 				1F3ED96A1CAB0AE50038F590 /* LaunchScreen.storyboard */,
 				1F3ED96D1CAB0AE50038F590 /* Info.plist */,
 				1F3ED95C1CAB0AE50038F590 /* Supporting Files */,
@@ -368,7 +368,7 @@
 				1F3ED9611CAB0AE50038F590 /* AppDelegate.m in Sources */,
 				1F3ED95E1CAB0AE50038F590 /* main.m in Sources */,
 				E1F95DD01CAB1CFE009DA977 /* FMLMarket.m in Sources */,
-				1F1569941CAC23B40049DC81 /* Secrets.m in Sources */,
+				E1F95DD61CAD5F8A009DA977 /* Secrets.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
