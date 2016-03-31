@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "Annotation.h"
 #import "SampleZipCodes.h"
+#import "FMLAPIClient.h"
 #import <CoreLocation/CoreLocation.h>
 
 
@@ -373,6 +374,20 @@
 //    
 //    
 //}
-
+//    [FMLAPIClient getMarketsForZip:@"10004" withCompletion:^(NSMutableArray *marketsArray) {
+//        //whatever logic you want 
+//    }];
+//
+//    [FMLAPIClient getMarketsForLatitude:40.7 longitude:-74 withCompletion:^(NSMutableArray *marketsArray) {
+//        for (FMLMarket *market in marketsArray) {
+//            NSLog(@"We have a market named %@\nand it's hours are: %@\nand available products are: %@", market.name, market.scheduleString, market.productsArray);
+//            
+//            // search
+//            [FMLAPIClient searchProducts:@[@"Honey"] inMarkets:marketsArray];
+//        }
+//    }];
+//   // [FMLAPIClient getCoordinatesFromGoogleMapsLink:@"asdad"];
+//    
+//}
 
 @end
