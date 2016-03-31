@@ -16,6 +16,9 @@
 		1F3ED96C1CAB0AE50038F590 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F3ED96A1CAB0AE50038F590 /* LaunchScreen.storyboard */; };
 		1F3ED9771CAB0AE50038F590 /* FarmersMarketLocatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3ED9761CAB0AE50038F590 /* FarmersMarketLocatorTests.m */; };
 		1F3ED9821CAB0AE50038F590 /* FarmersMarketLocatorUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3ED9811CAB0AE50038F590 /* FarmersMarketLocatorUITests.m */; };
+		A38473B31CADAF7200ED08CA /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A38473B21CADAF7200ED08CA /* Annotation.m */; };
+		A38473B61CADAFC300ED08CA /* SampleZipCodes.m in Sources */ = {isa = PBXBuildFile; fileRef = A38473B51CADAFC300ED08CA /* SampleZipCodes.m */; };
+		A38473BA1CADB02B00ED08CA /* Secrets.m in Sources */ = {isa = PBXBuildFile; fileRef = A38473B91CADB02B00ED08CA /* Secrets.m */; };
 		E112CE9CB833D7D11064E042 /* libPods-FarmersMarketLocator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CDB776E48FF26680E2F899 /* libPods-FarmersMarketLocator.a */; };
 		E1F95DCD1CAB12D6009DA977 /* FMLAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F95DCC1CAB12D6009DA977 /* FMLAPIClient.m */; };
 		E1F95DD01CAB1CFE009DA977 /* FMLMarket.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F95DCF1CAB1CFE009DA977 /* FMLMarket.m */; };
@@ -59,6 +62,11 @@
 		1F3ED9811CAB0AE50038F590 /* FarmersMarketLocatorUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FarmersMarketLocatorUITests.m; sourceTree = "<group>"; };
 		1F3ED9831CAB0AE50038F590 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F3ED98F1CAB0C990038F590 /* Secrets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Secrets.h; path = ../Secrets.h; sourceTree = "<group>"; };
+		A38473B11CADAF7200ED08CA /* Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Annotation.h; sourceTree = "<group>"; };
+		A38473B21CADAF7200ED08CA /* Annotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Annotation.m; sourceTree = "<group>"; };
+		A38473B41CADAFC300ED08CA /* SampleZipCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleZipCodes.h; sourceTree = "<group>"; };
+		A38473B51CADAFC300ED08CA /* SampleZipCodes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleZipCodes.m; sourceTree = "<group>"; };
+		A38473B91CADB02B00ED08CA /* Secrets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secrets.m; sourceTree = "<group>"; };
 		E1F95DCB1CAB12D6009DA977 /* FMLAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLAPIClient.h; sourceTree = "<group>"; };
 		E1F95DCC1CAB12D6009DA977 /* FMLAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLAPIClient.m; sourceTree = "<group>"; };
 		E1F95DCE1CAB1CFE009DA977 /* FMLMarket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLMarket.h; sourceTree = "<group>"; };
@@ -119,8 +127,12 @@
 			children = (
 				1F3ED95F1CAB0AE50038F590 /* AppDelegate.h */,
 				1F3ED9601CAB0AE50038F590 /* AppDelegate.m */,
+				A38473B11CADAF7200ED08CA /* Annotation.h */,
+				A38473B21CADAF7200ED08CA /* Annotation.m */,
 				1F3ED9621CAB0AE50038F590 /* ViewController.h */,
 				1F3ED9631CAB0AE50038F590 /* ViewController.m */,
+				A38473B41CADAFC300ED08CA /* SampleZipCodes.h */,
+				A38473B51CADAFC300ED08CA /* SampleZipCodes.m */,
 				E1F95DCB1CAB12D6009DA977 /* FMLAPIClient.h */,
 				E1F95DCC1CAB12D6009DA977 /* FMLAPIClient.m */,
 				E1F95DCE1CAB1CFE009DA977 /* FMLMarket.h */,
@@ -129,6 +141,7 @@
 				1F3ED9681CAB0AE50038F590 /* Assets.xcassets */,
 				1F3ED98F1CAB0C990038F590 /* Secrets.h */,
 				1F1569931CAC23B40049DC81 /* Secrets.m */,
+				A38473B91CADB02B00ED08CA /* Secrets.m */,
 				1F3ED96A1CAB0AE50038F590 /* LaunchScreen.storyboard */,
 				1F3ED96D1CAB0AE50038F590 /* Info.plist */,
 				1F3ED95C1CAB0AE50038F590 /* Supporting Files */,
@@ -366,9 +379,12 @@
 				1F3ED9641CAB0AE50038F590 /* ViewController.m in Sources */,
 				E1F95DCD1CAB12D6009DA977 /* FMLAPIClient.m in Sources */,
 				1F3ED9611CAB0AE50038F590 /* AppDelegate.m in Sources */,
+				A38473B31CADAF7200ED08CA /* Annotation.m in Sources */,
 				1F3ED95E1CAB0AE50038F590 /* main.m in Sources */,
 				E1F95DD01CAB1CFE009DA977 /* FMLMarket.m in Sources */,
+				A38473B61CADAFC300ED08CA /* SampleZipCodes.m in Sources */,
 				1F1569941CAC23B40049DC81 /* Secrets.m in Sources */,
+				A38473BA1CADB02B00ED08CA /* Secrets.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
