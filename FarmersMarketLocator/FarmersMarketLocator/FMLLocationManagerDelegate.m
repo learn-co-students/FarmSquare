@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "SampleZipCodes.h"
 
+// TODO: Handle Zip Codes not in New York - EDGE CASE
 
 @interface FMLLocationManagerDelegate()
 

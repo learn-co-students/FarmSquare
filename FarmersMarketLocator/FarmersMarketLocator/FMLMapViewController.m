@@ -15,6 +15,7 @@
 #import "FMLAPIClient.h"
 #import "Annotation.h"
 #import "FMLMarket.h"
+#import "FMLDetailView.h"
 
 @interface FMLMapViewController () <CLLocationManagerDelegate>
 
@@ -22,11 +23,11 @@
 @property (strong, nonatomic) MKMapView *mapView;
 @property (strong, nonatomic) FMLMapViewDelegate *mapDelegate;
 @property (strong, nonatomic) FMLLocationManagerDelegate *locationDelegate;
-@property (strong, nonatomic) NSArray *marketsArray;
 
 @end
 
 @implementation FMLMapViewController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -47,9 +48,15 @@
     
     
     // Create detail view
-    [self setUpDetailView];
-    [self.view addSubview:self.detailView];
+//    [self setUpDetailView];
+    CGFloat width = self.view.frame.size.width;
+    CGFloat height = self.view.frame.size.height / 5;
+    CGFloat yCoordinateOfMarketView = self.view.frame.size.height - height;
     
+    //define detail view (property)
+    self.detailView = [[FMLDetailView alloc] initWithFrame:CGRectMake(0, yCoordinateOfMarketView, width, height)];
+    [self.view addSubview:self.detailView];
+    [self.detailView constrainViews];
     
     self.manager = [[CLLocationManager alloc] init];
     self.manager.delegate = self.locationDelegate;
@@ -58,6 +65,21 @@
     
     // TODO: Figure out if queue should be main queue
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMarketObjects) name:@"GotUserCoordinates" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomBackOut:) name:@"ZoomBackOutKThxBai" object:nil];
+    
+    self.detailView.transform = CGAffineTransformMakeTranslation(0, self.detailView.frame.size.height);
+}
+
+-(void)zoomBackOut:(NSNotification *)notification {
+    
+    [self.mapView deselectAnnotation:self.mapDelegate.selectedAnnotationView.annotation animated:YES];
+    
+    NSValue *value = (NSValue *)notification.object;
+    MKCoordinateRegion region;
+    [value getValue:&region];
+    
+    [self zoomMaptoLatitude:region.center.latitude longitude:region.center.longitude withLatitudeSpan:region.span.latitudeDelta longitudeSpan:region.span.longitudeDelta];
 }
 
 #pragma mark - Helper Method
@@ -82,29 +104,7 @@
     [self.mapView setRegion:region animated:YES];
 }
 
--(void)setUpDetailView{
-    //dimensions
-    CGFloat width = self.view.frame.size.width;
-    CGFloat heightOfMarketDetailView = self.view.frame.size.height / 5;
-    CGFloat yCoordinateOfMarketView = self.view.frame.size.height - heightOfMarketDetailView;
-    
-    //define detail view (property)
-    self.detailView = [[UIView alloc]initWithFrame:CGRectMake(0, yCoordinateOfMarketView, width, heightOfMarketDetailView)];
-    self.detailView.backgroundColor = [UIColor whiteColor];
-    
-    self.nameLabel = [self setUpLabelWithText:@"Greenhouse Farmer's Market" textColor:[UIColor blackColor]];
-        [self.detailView addSubview:self.nameLabel];
-    
-        self.addressLabel = [self setUpLabelWithText:@"123 Easy Street, Manhattan, NY, 11002" textColor:[UIColor blackColor]];
-        [self.detailView addSubview:self.addressLabel];
-    
-//        //define constraints for labels
-//    NSLayoutConstraint *constrainNameLabelTopAnchor = [self.nameLabel.topAnchor constraintEqualToAnchor:hideDetailViewButton.bottomAnchor constant:8];
-//    NSLayoutConstraint *constrainNameLabelCenterXAnchor = [self.nameLabel.centerXAnchor constraintEqualToAnchor: self.detailView.centerXAnchor];
-//
-//    NSLayoutConstraint *constrainAddressLabelTopAnchor = [self.addressLabel.topAnchor constraintEqualToAnchor:self.nameLabel.bottomAnchor constant:8];
-//    NSLayoutConstraint *constrainAddressLabelCenterXAnchor = [self.addressLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor];
-}
+
 
 -(void)getMarketObjects {
     CGFloat latitude = [[NSUserDefaults standardUserDefaults] floatForKey:@"latitude"];
@@ -131,16 +131,11 @@
     
 }
 
--(UILabel *)setUpLabelWithText:(NSString *)text textColor:(UIColor *)color{
-    
-    //create new label using parameters
-    UILabel *label = [[UILabel alloc]init];
-    label.text = text;
-    label.font = [UIFont fontWithName:@"Helvetica" size:16];
-    label.textColor = color;
-    label.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    return label;
-}
+
+
+
+
+
+
 
 @end

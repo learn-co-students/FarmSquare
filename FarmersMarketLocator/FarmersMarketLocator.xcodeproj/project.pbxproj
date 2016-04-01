@@ -17,6 +17,7 @@
 		1F3ED9821CAB0AE50038F590 /* FarmersMarketLocatorUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3ED9811CAB0AE50038F590 /* FarmersMarketLocatorUITests.m */; };
 		8BBD3FFE1CAEA8AB00A1DB0E /* FMLMapViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD3FFD1CAEA8AB00A1DB0E /* FMLMapViewDelegate.m */; };
 		8BBD400A1CAEB81700A1DB0E /* FMLLocationManagerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD40091CAEB81700A1DB0E /* FMLLocationManagerDelegate.m */; };
+		8BBD400D1CAED53E00A1DB0E /* FMLDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD400C1CAED53E00A1DB0E /* FMLDetailView.m */; };
 		8BC2BA3A1CADC8E6005DD7F3 /* Secrets.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC2BA391CADC8E6005DD7F3 /* Secrets.m */; };
 		8BC2BA3C1CADCAEB005DD7F3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC2BA3B1CADCAEB005DD7F3 /* MapKit.framework */; };
 		8BC2BA3E1CADCAF0005DD7F3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC2BA3D1CADCAF0005DD7F3 /* CoreLocation.framework */; };
@@ -69,6 +70,8 @@
 		8BBD3FFD1CAEA8AB00A1DB0E /* FMLMapViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLMapViewDelegate.m; sourceTree = "<group>"; };
 		8BBD40081CAEB81700A1DB0E /* FMLLocationManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLLocationManagerDelegate.h; sourceTree = "<group>"; };
 		8BBD40091CAEB81700A1DB0E /* FMLLocationManagerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLLocationManagerDelegate.m; sourceTree = "<group>"; };
+		8BBD400B1CAED53E00A1DB0E /* FMLDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLDetailView.h; sourceTree = "<group>"; };
+		8BBD400C1CAED53E00A1DB0E /* FMLDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLDetailView.m; sourceTree = "<group>"; };
 		8BC2BA391CADC8E6005DD7F3 /* Secrets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secrets.m; sourceTree = "<group>"; };
 		8BC2BA3B1CADCAEB005DD7F3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		8BC2BA3D1CADCAF0005DD7F3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -246,6 +249,8 @@
 		8BBD40071CAEAF3800A1DB0E /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				8BBD400B1CAED53E00A1DB0E /* FMLDetailView.h */,
+				8BBD400C1CAED53E00A1DB0E /* FMLDetailView.m */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -447,6 +452,7 @@
 				8BBD3FFE1CAEA8AB00A1DB0E /* FMLMapViewDelegate.m in Sources */,
 				1F3ED9641CAB0AE50038F590 /* ViewController.m in Sources */,
 				E1F95DCD1CAB12D6009DA977 /* FMLAPIClient.m in Sources */,
+				8BBD400D1CAED53E00A1DB0E /* FMLDetailView.m in Sources */,
 				1F3ED9611CAB0AE50038F590 /* AppDelegate.m in Sources */,
 				A38473B31CADAF7200ED08CA /* Annotation.m in Sources */,
 				8BC2BA411CADD02E005DD7F3 /* FMLMapViewController.m in Sources */,

@@ -13,6 +13,7 @@
 @interface FMLMapViewDelegate : NSObject <MKMapViewDelegate>
 
 @property (strong, nonatomic) FMLMapViewController *viewController;
+@property (strong, nonatomic) MKAnnotationView *selectedAnnotationView;
 
 - (instancetype)initWithTarget:(FMLMapViewController *)target;
 
