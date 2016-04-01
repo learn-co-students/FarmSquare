@@ -42,26 +42,27 @@
     if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
         CLLocationCoordinate2D coordinates = manager.location.coordinate;
         [self.viewController zoomMaptoLatitude:coordinates.latitude longitude:coordinates.longitude withLatitudeSpan:0.05 longitudeSpan:0.05];
-        [self saveUserCoordinates:coordinates];
-        
+        if (!self.viewController.showingSavedData) {
+            [self saveUserCoordinates:coordinates];
+        }
     }
-
+    
     if (status == kCLAuthorizationStatusDenied) {
-        
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"zipCodeSaved"]) {
             CGFloat latitude = [[NSUserDefaults standardUserDefaults] floatForKey:@"latitude"];
             CGFloat longitude = [[NSUserDefaults standardUserDefaults] floatForKey:@"longitude"];
             
             [self.viewController zoomMaptoLatitude:latitude longitude:longitude withLatitudeSpan:0.05 longitudeSpan:0.05];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"GotUserCoordinates" object:nil];
-
+            if (!self.viewController.showingSavedData) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"GotUserCoordinates" object:nil];
+            }
+            
+            
         } else {
             [self displayZipCodeAlert];
         }
-        
-        
-        
     }
+
 }
 
 

@@ -8,6 +8,7 @@
 
 #import "FMLMapViewDelegate.h"
 #import "FMLMarket.h"
+#import "FMLMarket+CoreDataProperties.h"
 #import "FMLDetailView.h"
 #import "Annotation.h"
 

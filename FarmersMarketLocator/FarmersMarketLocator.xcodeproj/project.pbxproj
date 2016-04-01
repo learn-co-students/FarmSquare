@@ -15,6 +15,8 @@
 		1F3ED96C1CAB0AE50038F590 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F3ED96A1CAB0AE50038F590 /* LaunchScreen.storyboard */; };
 		1F3ED9771CAB0AE50038F590 /* FarmersMarketLocatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3ED9761CAB0AE50038F590 /* FarmersMarketLocatorTests.m */; };
 		1F3ED9821CAB0AE50038F590 /* FarmersMarketLocatorUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3ED9811CAB0AE50038F590 /* FarmersMarketLocatorUITests.m */; };
+		8B5635981CAF081A007DC27E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B5635961CAF081A007DC27E /* DataModel.xcdatamodeld */; };
+		8B5635C11CAF0858007DC27E /* CoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5635C01CAF0858007DC27E /* CoreDataStack.m */; };
 		8BBD3FFE1CAEA8AB00A1DB0E /* FMLMapViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD3FFD1CAEA8AB00A1DB0E /* FMLMapViewDelegate.m */; };
 		8BBD400A1CAEB81700A1DB0E /* FMLLocationManagerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD40091CAEB81700A1DB0E /* FMLLocationManagerDelegate.m */; };
 		8BBD400D1CAED53E00A1DB0E /* FMLDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD400C1CAED53E00A1DB0E /* FMLDetailView.m */; };
@@ -22,11 +24,12 @@
 		8BC2BA3C1CADCAEB005DD7F3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC2BA3B1CADCAEB005DD7F3 /* MapKit.framework */; };
 		8BC2BA3E1CADCAF0005DD7F3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC2BA3D1CADCAF0005DD7F3 /* CoreLocation.framework */; };
 		8BC2BA411CADD02E005DD7F3 /* FMLMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC2BA401CADD02E005DD7F3 /* FMLMapViewController.m */; };
+		8BE219A71CAF0A980014D046 /* FMLMarket+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE219A61CAF0A980014D046 /* FMLMarket+CoreDataProperties.m */; };
+		8BE219AA1CAF1D610014D046 /* FMLMarket.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE219A91CAF1D610014D046 /* FMLMarket.m */; };
 		A38473B31CADAF7200ED08CA /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A38473B21CADAF7200ED08CA /* Annotation.m */; };
 		A38473B61CADAFC300ED08CA /* SampleZipCodes.m in Sources */ = {isa = PBXBuildFile; fileRef = A38473B51CADAFC300ED08CA /* SampleZipCodes.m */; };
 		E112CE9CB833D7D11064E042 /* libPods-FarmersMarketLocator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CDB776E48FF26680E2F899 /* libPods-FarmersMarketLocator.a */; };
 		E1F95DCD1CAB12D6009DA977 /* FMLAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F95DCC1CAB12D6009DA977 /* FMLAPIClient.m */; };
-		E1F95DD01CAB1CFE009DA977 /* FMLMarket.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F95DCF1CAB1CFE009DA977 /* FMLMarket.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +69,9 @@
 		1F3ED9811CAB0AE50038F590 /* FarmersMarketLocatorUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FarmersMarketLocatorUITests.m; sourceTree = "<group>"; };
 		1F3ED9831CAB0AE50038F590 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F3ED98F1CAB0C990038F590 /* Secrets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Secrets.h; path = ../Secrets.h; sourceTree = "<group>"; };
+		8B5635971CAF081A007DC27E /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		8B5635BF1CAF0858007DC27E /* CoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataStack.h; sourceTree = "<group>"; };
+		8B5635C01CAF0858007DC27E /* CoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataStack.m; sourceTree = "<group>"; };
 		8BBD3FFC1CAEA8AB00A1DB0E /* FMLMapViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLMapViewDelegate.h; sourceTree = "<group>"; };
 		8BBD3FFD1CAEA8AB00A1DB0E /* FMLMapViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLMapViewDelegate.m; sourceTree = "<group>"; };
 		8BBD40081CAEB81700A1DB0E /* FMLLocationManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLLocationManagerDelegate.h; sourceTree = "<group>"; };
@@ -77,14 +83,16 @@
 		8BC2BA3D1CADCAF0005DD7F3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		8BC2BA3F1CADD02E005DD7F3 /* FMLMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLMapViewController.h; sourceTree = "<group>"; };
 		8BC2BA401CADD02E005DD7F3 /* FMLMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLMapViewController.m; sourceTree = "<group>"; };
+		8BE219A51CAF0A980014D046 /* FMLMarket+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FMLMarket+CoreDataProperties.h"; sourceTree = "<group>"; };
+		8BE219A61CAF0A980014D046 /* FMLMarket+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMLMarket+CoreDataProperties.m"; sourceTree = "<group>"; };
+		8BE219A81CAF1D610014D046 /* FMLMarket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLMarket.h; sourceTree = "<group>"; };
+		8BE219A91CAF1D610014D046 /* FMLMarket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLMarket.m; sourceTree = "<group>"; };
 		A38473B11CADAF7200ED08CA /* Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Annotation.h; sourceTree = "<group>"; };
 		A38473B21CADAF7200ED08CA /* Annotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Annotation.m; sourceTree = "<group>"; };
 		A38473B41CADAFC300ED08CA /* SampleZipCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleZipCodes.h; sourceTree = "<group>"; };
 		A38473B51CADAFC300ED08CA /* SampleZipCodes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleZipCodes.m; sourceTree = "<group>"; };
 		E1F95DCB1CAB12D6009DA977 /* FMLAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLAPIClient.h; sourceTree = "<group>"; };
 		E1F95DCC1CAB12D6009DA977 /* FMLAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLAPIClient.m; sourceTree = "<group>"; };
-		E1F95DCE1CAB1CFE009DA977 /* FMLMarket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLMarket.h; sourceTree = "<group>"; };
-		E1F95DCF1CAB1CFE009DA977 /* FMLMarket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLMarket.m; sourceTree = "<group>"; };
 		E426A69268E3DA9622C8E051 /* Pods-FarmersMarketLocator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FarmersMarketLocator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FarmersMarketLocator/Pods-FarmersMarketLocator.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -143,6 +151,8 @@
 			children = (
 				1F3ED95F1CAB0AE50038F590 /* AppDelegate.h */,
 				1F3ED9601CAB0AE50038F590 /* AppDelegate.m */,
+				8B5635BF1CAF0858007DC27E /* CoreDataStack.h */,
+				8B5635C01CAF0858007DC27E /* CoreDataStack.m */,
 				8BBD40071CAEAF3800A1DB0E /* Custom Views */,
 				8BBD40021CAEAD6600A1DB0E /* View Controllers */,
 				8BBD40061CAEAED600A1DB0E /* Objects */,
@@ -225,8 +235,11 @@
 		8BBD40051CAEADA200A1DB0E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E1F95DCE1CAB1CFE009DA977 /* FMLMarket.h */,
-				E1F95DCF1CAB1CFE009DA977 /* FMLMarket.m */,
+				8BE219A81CAF1D610014D046 /* FMLMarket.h */,
+				8BE219A91CAF1D610014D046 /* FMLMarket.m */,
+				8BE219A51CAF0A980014D046 /* FMLMarket+CoreDataProperties.h */,
+				8BE219A61CAF0A980014D046 /* FMLMarket+CoreDataProperties.m */,
+				8B5635961CAF081A007DC27E /* DataModel.xcdatamodeld */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -452,13 +465,16 @@
 				8BBD3FFE1CAEA8AB00A1DB0E /* FMLMapViewDelegate.m in Sources */,
 				1F3ED9641CAB0AE50038F590 /* ViewController.m in Sources */,
 				E1F95DCD1CAB12D6009DA977 /* FMLAPIClient.m in Sources */,
+				8BE219A71CAF0A980014D046 /* FMLMarket+CoreDataProperties.m in Sources */,
 				8BBD400D1CAED53E00A1DB0E /* FMLDetailView.m in Sources */,
+				8BE219AA1CAF1D610014D046 /* FMLMarket.m in Sources */,
 				1F3ED9611CAB0AE50038F590 /* AppDelegate.m in Sources */,
 				A38473B31CADAF7200ED08CA /* Annotation.m in Sources */,
 				8BC2BA411CADD02E005DD7F3 /* FMLMapViewController.m in Sources */,
 				1F3ED95E1CAB0AE50038F590 /* main.m in Sources */,
 				8BC2BA3A1CADC8E6005DD7F3 /* Secrets.m in Sources */,
-				E1F95DD01CAB1CFE009DA977 /* FMLMarket.m in Sources */,
+				8B5635C11CAF0858007DC27E /* CoreDataStack.m in Sources */,
+				8B5635981CAF081A007DC27E /* DataModel.xcdatamodeld in Sources */,
 				A38473B61CADAFC300ED08CA /* SampleZipCodes.m in Sources */,
 				8BBD400A1CAEB81700A1DB0E /* FMLLocationManagerDelegate.m in Sources */,
 			);
@@ -722,6 +738,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8B5635961CAF081A007DC27E /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8B5635971CAF081A007DC27E /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 8B5635971CAF081A007DC27E /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1F3ED9511CAB0AE40038F590 /* Project object */;
 }

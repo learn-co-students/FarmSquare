@@ -16,7 +16,7 @@
 @property(strong, nonatomic) UILabel *nameLabel;
 @property(strong, nonatomic) UILabel *addressLabel;
 @property (strong, nonatomic) NSArray *marketsArray;
-
+@property (assign, nonatomic) BOOL showingSavedData;
 
 -(void)zoomMaptoLatitude:(CGFloat)latitude longitude:(CGFloat)longitude withLatitudeSpan:(CGFloat)latitudeSpan longitudeSpan:(CGFloat)longitudeSpan;
 

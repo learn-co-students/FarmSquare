@@ -2,25 +2,21 @@
 //  FMLMarket.h
 //  FarmersMarketLocator
 //
-//  Created by Slobodan Kovrlija on 3/29/16.
+//  Created by Magfurul Abeer on 4/1/16.
 //  Copyright © 2016 Jeff Spingeld. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
-@interface FMLMarket : NSObject
+NS_ASSUME_NONNULL_BEGIN
 
-@property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSString *address;
-@property (strong, nonatomic) NSString *googleMapLink;
+@interface FMLMarket : NSManagedObject
+
 @property (strong, nonatomic) NSArray *productsArray;
-@property (strong, nonatomic) NSString *scheduleString;
-@property (strong, nonatomic) NSString *latitude;
-@property (strong, nonatomic) NSString *longitude;
-
--(instancetype)initWithName:(NSString *)name;
 
 @end
 
+NS_ASSUME_NONNULL_END
 
+#import "FMLMarket+CoreDataProperties.h"

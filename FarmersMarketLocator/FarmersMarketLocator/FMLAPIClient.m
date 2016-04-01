@@ -8,6 +8,8 @@
 
 #import "FMLAPIClient.h"
 #import "FMLMarket.h"
+#import "CoreDataStack.h"
+#import "FMLMarket+CoreDataProperties.h"
 
 @implementation FMLAPIClient
 
@@ -36,6 +38,8 @@
 
 +(void)getMarketsForLatitude:(CGFloat)latitude longitude:(CGFloat)longitude withCompletion:(void (^)(NSMutableArray *marketsArray))coordinatesCompletion {
     
+    NSLog(@"Making an API Call");
+    
     //http://search.ams.usda.gov/farmersmarkets/v1/data.svc/locSearch?lat=" + lat + "&lng=" + lng
     //http://search.ams.usda.gov/farmersmarkets/v1/svcdesc.html
     
@@ -49,7 +53,7 @@
     AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
     [sessionManager GET:finalCoordinatesURLString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        NSLog(@"response object: %@", responseObject);
+//        NSLog(@"response object: %@", responseObject);
         
         // Plug that response object into a method that gets details for all of those markets.
         [FMLAPIClient marketsArrayForListOfMarkets:responseObject withCompletion:^(NSMutableArray *marketsArray) {
@@ -116,7 +120,11 @@
         
         // Initialize market object.
         // (Note that the "marketname" from the API has the distance inside the string, but this is handled by the initializer. See comments on initializer for details.)
-        FMLMarket *market = [[FMLMarket alloc] initWithName:nameString];
+//        FMLMarket *marketsss = [[FMLMarket alloc] initWithName:nameString];
+        
+        NSManagedObjectContext *context = [[CoreDataStack sharedStack] managedObjectContext];
+        
+        FMLMarket *market = (FMLMarket *)[NSEntityDescription insertNewObjectForEntityForName:@"FMLMarket" inManagedObjectContext:context];
         
         // Now to give it its properties (other than name), call getDetails... to make the API call that gets the dictionary of details.
         [FMLAPIClient getDetailsForMarketWithId:marketID withCompletion:^(NSDictionary *marketDetails) {
@@ -126,7 +134,7 @@
             market.googleMapLink = marketDetails[@"GoogleLink"];
             //Converting products string into an array of products
             NSString *productsString = marketDetails[@"Products"];
-            market.productsArray = [productsString componentsSeparatedByString:@"; "];
+            market.produceList = productsString;
             market.scheduleString = marketDetails[@"Schedule"];
             // (Use the Google link to get the coordinates before setting them.)
             NSDictionary *marketCoordinates = [FMLAPIClient getCoordinatesFromGoogleMapsLink:market.googleMapLink];
@@ -141,7 +149,11 @@
                 // Pass the array of market objects to the completion block
                 listMarketsCompletion(marketObjectsArray);
             }
+            
+            [[CoreDataStack sharedStack] saveContext];
         }];
+        
+        
     }
 }
 
@@ -175,7 +187,7 @@
     NSRange rangeOfComma = [coordinatesAndName rangeOfString:@","];
     NSRange rangeOfLatitude = NSMakeRange(0, rangeOfComma.location);
     NSString *latitude = [coordinatesAndName substringWithRange:rangeOfLatitude];
-    NSLog(@"latitude: %@", latitude);
+//    NSLog(@"latitude: %@", latitude);
     
     // Get the longitude (bounded by spaces)
     NSArray *junkArray = [coordinatesAndName componentsSeparatedByString:@" "];
@@ -189,7 +201,7 @@
     coordinatesDictionary[@"latitude"] = latitude;
     coordinatesDictionary[@"longitude"] = longitude;
 
-    NSLog(@"Coordinates dictionary: \n%@", coordinatesDictionary);
+//    NSLog(@"Coordinates dictionary: \n%@", coordinatesDictionary);
     return coordinatesDictionary;
 }
 

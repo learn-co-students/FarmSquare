@@ -16,6 +16,10 @@
 #import "Annotation.h"
 #import "FMLMarket.h"
 #import "FMLDetailView.h"
+#import "FMLMarket+CoreDataProperties.h"
+#import "CoreDataStack.h"
+
+// TODO: When network connection is lost, Core Data misfunctions and saves 0 objects which shouldn't be ok
 
 @interface FMLMapViewController () <CLLocationManagerDelegate>
 
@@ -48,7 +52,6 @@
     
     
     // Create detail view
-//    [self setUpDetailView];
     CGFloat width = self.view.frame.size.width;
     CGFloat height = self.view.frame.size.height / 5;
     CGFloat yCoordinateOfMarketView = self.view.frame.size.height - height;
@@ -60,6 +63,22 @@
     
     self.manager = [[CLLocationManager alloc] init];
     self.manager.delegate = self.locationDelegate;
+    
+    
+    // Show saved data
+    
+    
+    NSManagedObjectContext *context = [[CoreDataStack sharedStack] managedObjectContext];
+    NSFetchRequest *getSavedLocationsFetch = [NSFetchRequest fetchRequestWithEntityName:@"FMLMarket"];
+    
+    self.marketsArray = [context executeFetchRequest:getSavedLocationsFetch error:nil];
+    
+    if ([self.marketsArray count] > 0) {
+        self.showingSavedData = YES;
+        [self displayMarketObjects:self.marketsArray];
+    } else {
+        self.showingSavedData = NO;
+    }
     
     [self.manager requestWhenInUseAuthorization];
     
@@ -114,21 +133,26 @@
         
         self.marketsArray = marketsArray;
         // Plot a pin for the coordinates of each FMLMarket object in marketsArray.
-        NSUInteger index = 0;
-        for (FMLMarket *farmersMarket in marketsArray) {
-            CLLocationCoordinate2D location;
-            location.latitude = [farmersMarket.latitude floatValue];
-            location.longitude = [farmersMarket.longitude floatValue];
-            
-            Annotation *annotation = [[Annotation alloc] initWithCoordinate:location
-                                                                      title:farmersMarket.name subtitle:farmersMarket.address andTag:index];
-            index++;
-            
-            [self.mapView addAnnotation:annotation];
-        }
+        [self displayMarketObjects:marketsArray];
         
     }];
     
+}
+
+-(void)displayMarketObjects:(NSArray *)marketsArray {
+    NSUInteger index = 0;
+    for (FMLMarket *farmersMarket in marketsArray) {
+        CLLocationCoordinate2D location;
+        NSLog(@"%f", location.latitude);
+        location.latitude = [farmersMarket.latitude floatValue];
+        location.longitude = [farmersMarket.longitude floatValue];
+        
+        Annotation *annotation = [[Annotation alloc] initWithCoordinate:location
+                                                                  title:farmersMarket.name subtitle:farmersMarket.address andTag:index];
+        index++;
+        
+        [self.mapView addAnnotation:annotation];
+    }
 }
 
 
