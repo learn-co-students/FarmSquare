@@ -13,7 +13,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 
-@interface ViewController ()
+@interface ViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property(strong, nonatomic) CLLocationManager *manager;
 @property(strong, nonatomic) NSMutableArray *annotationArray;
@@ -21,6 +21,7 @@
 @property(strong, nonatomic) UIImage *arrowImageView;
 @property(strong, nonatomic) UILabel *nameLabel;
 @property(strong, nonatomic) UILabel *addressLabel;
+@property(strong, nonatomic) MKMapView *mapView;
 
 @end
 
@@ -29,142 +30,127 @@
 
 @implementation ViewController
 
-//-(void)loadView{
-//    [super loadView];
-//
-//    CGRect applicationFrame = [[UIScreen mainScreen] applicationFrame];
-//    UIView *contentView = [[UIView alloc] initWithFrame:applicationFrame];
-//    contentView.backgroundColor = [UIColor blackColor];
-//    self.view = contentView;
-//
-//    levelView = [[LevelView alloc] initWithFrame:applicationFrame viewController:self];
-//    [self.view addSubview:levelView];
-//
-//
-//
-//
-//}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //set up map and add it to the view
+    [self setUpMap];
+    self.mapView.delegate = self;
+    [self.view addSubview:self.mapView];
+
     
     //for location request
     self.manager = [[CLLocationManager alloc]init];
     self.manager.delegate = self;
-    [self.manager requestWhenInUseAuthorization];
-    
-    //set up map and add it to the view
-    MKMapView *mapView = [self setUpMap];
-    mapView.delegate = self;
-    [self.view addSubview:mapView];
-    
-    
-    //dummy data -- will be the user-specified location
-    CGFloat NYC_LATITUDE = 40.7141667;
-    CGFloat NYC_LONGITUDE = -74.0063889;
-    
-    //zoom map into user's location
-    [self zoomMap:mapView toLatitude:NYC_LATITUDE longitude:NYC_LONGITUDE withLatitudeSpan:0.05f longitudeSpan:0.05f];
-    
-    
-    //set up detail view and add it to the view
-    [self setUpDetailView];
-    [self.view addSubview:self.detailView];
-    
-    
-    //set up constraints for detail view
-    NSLayoutConstraint *constrainDetailViewBottomAnchor = [self.detailView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor];
-    NSLayoutConstraint *constrainDetailViewCenterXAnchor = [self.detailView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor];
-    
-    NSArray *detailViewConstraints = @[constrainDetailViewBottomAnchor, constrainDetailViewCenterXAnchor];
-    
-    [self updateViewWithConstraints:detailViewConstraints];
-    
-    
-    //set up labels (and whatever else) for the detail view
-    //and add it as a subview of the detail view
-    self.nameLabel = [self setUpLabelWithText:@"Greenhouse Farmer's Market" textColor:[UIColor blackColor]];
-    [self.detailView addSubview:self.nameLabel];
-    
-    self.addressLabel = [self setUpLabelWithText:@"123 Easy Street, Manhattan, NY, 11002" textColor:[UIColor blackColor]];
-    [self.detailView addSubview:self.addressLabel];
     
     
     
-    //set up button
-    UIButton *hideDetailViewButton = [self setUpButton];
-    [self.detailView addSubview:hideDetailViewButton];
-    
-    
-    //define constraints for button
-    NSLayoutConstraint *constrainButtonTopAnchor = [hideDetailViewButton.topAnchor constraintEqualToAnchor:self.detailView.topAnchor constant:6];
-    NSLayoutConstraint *constrainButtonCenterXAnchor = [hideDetailViewButton.centerXAnchor constraintEqualToAnchor:self.detailView.centerXAnchor];
-    
-    NSArray *buttonConstraints = @[constrainButtonTopAnchor, constrainButtonCenterXAnchor];
-    
-    [self updateViewWithConstraints:buttonConstraints];
-    
-    
-    //define constraints for labels
-    NSLayoutConstraint *constrainNameLabelTopAnchor = [self.nameLabel.topAnchor constraintEqualToAnchor:hideDetailViewButton.bottomAnchor constant:8];
-    NSLayoutConstraint *constrainNameLabelCenterXAnchor = [self.nameLabel.centerXAnchor constraintEqualToAnchor: self.detailView.centerXAnchor];
-    
-    NSLayoutConstraint *constrainAddressLabelTopAnchor = [self.addressLabel.topAnchor constraintEqualToAnchor:self.nameLabel.bottomAnchor constant:8];
-    NSLayoutConstraint *constrainAddressLabelCenterXAnchor = [self.addressLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor];
-    
-    
-    //setting up for custom constraint activation method
-    NSArray *labelConstraints = @[constrainNameLabelTopAnchor, constrainNameLabelCenterXAnchor, constrainAddressLabelTopAnchor, constrainAddressLabelCenterXAnchor];
-    
-    //activate constraints
-    [self updateViewWithConstraints:labelConstraints];
-    
-    
-    //more dummy data -- will be the market locations
-    NSArray *latitudes = [SampleZipCodes returnLatitudes];
-    NSArray *longitudes = [SampleZipCodes returnLongitudes];
-    NSArray *zipCodes = [SampleZipCodes returnZipCodes];
-    
-    NSInteger numberOfIterations = latitudes.count;
-    
-    for (NSInteger i = 0; i < numberOfIterations; i++){
-        //create annotation and add it to the map view
-        CGFloat latitude = [latitudes[i] floatValue];
-        CGFloat longitude = [longitudes[i] floatValue];
-        NSString *title = zipCodes[i];
-        NSString *subtitle = @"This should be an address.";
-        
-        Annotation *annotation = [self makeAnnotationUsingLatitude:latitude longitude:longitude title:title subtitle:subtitle];
-        MKAnnotationView *annotationView = [mapView viewForAnnotation:annotation];
-        //to identify which annotation has been selected via the
-        //annotation array (property) .. index of array == tag
-        annotationView.tag = i;
-        [mapView addAnnotation:annotation];
-    }
-    
-    self.detailView.transform = CGAffineTransformMakeTranslation(0, self.detailView.frame.size.height);
+//    //dummy data -- will be the user-specified location
+//    CGFloat NYC_LATITUDE = 40.7141667;
+//    CGFloat NYC_LONGITUDE = -74.0063889;
+//    
+//    
+//    
+//    
+//    //set up detail view and add it to the view
+//    [self setUpDetailView];
+//    [self.view addSubview:self.detailView];
+//    
+//    
+//    //set up constraints for detail view
+//    NSLayoutConstraint *constrainDetailViewBottomAnchor = [self.detailView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor];
+//    NSLayoutConstraint *constrainDetailViewCenterXAnchor = [self.detailView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor];
+//    
+//    NSArray *detailViewConstraints = @[constrainDetailViewBottomAnchor, constrainDetailViewCenterXAnchor];
+//    
+//    [self updateViewWithConstraints:detailViewConstraints];
+//    
+//    
+//    //set up labels (and whatever else) for the detail view
+//    //and add it as a subview of the detail view
+//    self.nameLabel = [self setUpLabelWithText:@"Greenhouse Farmer's Market" textColor:[UIColor blackColor]];
+//    [self.detailView addSubview:self.nameLabel];
+//    
+//    self.addressLabel = [self setUpLabelWithText:@"123 Easy Street, Manhattan, NY, 11002" textColor:[UIColor blackColor]];
+//    [self.detailView addSubview:self.addressLabel];
+//    
+//    
+//    
+//    //set up button
+//    UIButton *hideDetailViewButton = [self setUpButton];
+//    [self.detailView addSubview:hideDetailViewButton];
+//    
+//    
+//    //define constraints for button
+//    NSLayoutConstraint *constrainButtonTopAnchor = [hideDetailViewButton.topAnchor constraintEqualToAnchor:self.detailView.topAnchor constant:6];
+//    NSLayoutConstraint *constrainButtonCenterXAnchor = [hideDetailViewButton.centerXAnchor constraintEqualToAnchor:self.detailView.centerXAnchor];
+//    
+//    NSArray *buttonConstraints = @[constrainButtonTopAnchor, constrainButtonCenterXAnchor];
+//    
+//    [self updateViewWithConstraints:buttonConstraints];
+//    
+//    
+//    //define constraints for labels
+//    NSLayoutConstraint *constrainNameLabelTopAnchor = [self.nameLabel.topAnchor constraintEqualToAnchor:hideDetailViewButton.bottomAnchor constant:8];
+//    NSLayoutConstraint *constrainNameLabelCenterXAnchor = [self.nameLabel.centerXAnchor constraintEqualToAnchor: self.detailView.centerXAnchor];
+//    
+//    NSLayoutConstraint *constrainAddressLabelTopAnchor = [self.addressLabel.topAnchor constraintEqualToAnchor:self.nameLabel.bottomAnchor constant:8];
+//    NSLayoutConstraint *constrainAddressLabelCenterXAnchor = [self.addressLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor];
+//    
+//    
+//    //setting up for custom constraint activation method
+//    NSArray *labelConstraints = @[constrainNameLabelTopAnchor, constrainNameLabelCenterXAnchor, constrainAddressLabelTopAnchor, constrainAddressLabelCenterXAnchor];
+//    
+//    //activate constraints
+//    [self updateViewWithConstraints:labelConstraints];
+//    
+//    
+//    //more dummy data -- will be the market locations
+//    NSArray *latitudes = [SampleZipCodes returnLatitudes];
+//    NSArray *longitudes = [SampleZipCodes returnLongitudes];
+//    NSArray *zipCodes = [SampleZipCodes returnZipCodes];
+//    
+//    NSInteger numberOfIterations = latitudes.count;
+//    
+//    for (NSInteger i = 0; i < numberOfIterations; i++){
+//        //create annotation and add it to the map view
+//        CGFloat latitude = [latitudes[i] floatValue];
+//        CGFloat longitude = [longitudes[i] floatValue];
+//        NSString *title = zipCodes[i];
+//        NSString *subtitle = @"This should be an address.";
+//        
+//        Annotation *annotation = [self makeAnnotationUsingLatitude:latitude longitude:longitude title:title subtitle:subtitle];
+//        MKAnnotationView *annotationView = [mapView viewForAnnotation:annotation];
+//        //to identify which annotation has been selected via the
+//        //annotation array (property) .. index of array == tag
+//        annotationView.tag = i;
+//        [mapView addAnnotation:annotation];
+//    }
+//    
+//    self.detailView.transform = CGAffineTransformMakeTranslation(0, self.detailView.frame.size.height);
     
 }
 
--(MKMapView *)setUpMap{
+-(void)viewDidAppear:(BOOL)animated {
+    [self.manager requestWhenInUseAuthorization];
+}
+
+-(void)setUpMap{
     //screen dimensions
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
     
     //map dimensions
-    MKMapView *mapView = [[MKMapView alloc]initWithFrame:CGRectMake(0, 50, screenWidth, screenHeight - 50)];
+    self.mapView = [[MKMapView alloc]initWithFrame:CGRectMake(0, 50, screenWidth, screenHeight - 50)];
     
     //map preferences
-    mapView.mapType = MKMapTypeStandard;
-    //    mapView.showsUserLocation = YES;
-    //    mapView.showsTraffic = YES;
-    //    mapView.showsBuildings = YES;
+    self.mapView.mapType = MKMapTypeStandard;
+    self.mapView.showsUserLocation = YES;
     
-    return mapView;
 }
 
--(void)zoomMap:(MKMapView *)mapView toLatitude:(CGFloat)latitude longitude:(CGFloat)longitude withLatitudeSpan:(CGFloat)latitudeSpan longitudeSpan:(CGFloat)longitudeSpan{
+-(void)zoomMaptoLatitude:(CGFloat)latitude longitude:(CGFloat)longitude withLatitudeSpan:(CGFloat)latitudeSpan longitudeSpan:(CGFloat)longitudeSpan{
     
     MKCoordinateRegion region;
     
@@ -181,7 +167,7 @@
     //add center and span to map view
     region.center = center;
     region.span = span;
-    [mapView setRegion:region animated:YES];
+    [self.mapView setRegion:region animated:YES];
 }
 
 
@@ -294,18 +280,6 @@
     region.center = view.annotation.coordinate;
     region.span = span;
     [mapView setRegion:region animated:YES];
-    //    Annotation *selectedAnnotation = self.annotationArray[view.tag];
-    //    self.detailView.nameLabel.text = selectedAnnotation.title;
-    //    self.detailView.addressLabel.text = selectedAnnotation.subtitle;
-    //include product list and schedule
-    
-    
-    
-    //    NSLog(@"WTF");
-    
-    
-    
-    
 }
 
 -(void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view{
@@ -314,80 +288,29 @@
     
 }
 
+//-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+//    
+//}
+
 -(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    if (status == kCLAuthorizationStatusDenied) {
-        UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"Please enter Zip Code" message:@"Zip please!!!" preferredStyle:UIAlertControllerStyleAlert];
-        [controller addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-            // Add stuff, maybe?
-        }];
-        
-        UIAlertAction *enter = [UIAlertAction actionWithTitle:@"Enter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            NSString *input = controller.textFields.firstObject.text;
-            
-            
-            // TODO: Validate input so letters are not allowed
-            if ((NSUInteger)input == nil || input.length != 5) {
-                [self presentViewController:controller animated:YES completion:nil];
-            } else {
-                //                NSUInteger lat = [self getLatForZip:input];
-                //                NSUInteger lon = [self getLatForZip:input];
-                
-                //                [[NSUserDefaults standardUserDefaults] setInteger:lat forKey:@"latitude"];
-                //                [[NSUserDefaults standardUserDefaults] setInteger:lon forKey:@"longitude"];
-            }
-        }];
-        
-        [controller addAction:enter];
-        
-        [self presentViewController:controller animated:YES completion:nil];
-        
+    
+    
+    if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        NSLog(@"authorization changed");
+        [self refocusToUserLocation];
     }
+        
+}
+    
+
+
+-(void)refocusToUserLocation {
+    CLLocationCoordinate2D coordinates = self.mapView.userLocation.location.coordinate;
+    NSLog(@"(%f,%f)", coordinates.latitude, coordinates.longitude);
+    //zoom map into user's location
+    
+    [self zoomMaptoLatitude:coordinates.latitude longitude:coordinates.longitude withLatitudeSpan:0.05 longitudeSpan:0.05];
 }
 
-
-
-
-//    // Testing out our API calls with sample locations.
-//    [FMLAPIClient getMarketsForZip:@"10004"];
-//    [FMLAPIClient getMarketsForLatitude:40.7 longitude:-74];
-//    [FMLAPIClient getDetailsForMarketWithId:1000066];
-    
- 
-    
-
-
-//
-//-(void)populateMapViewWithLocationsUsingDictionary:(NSDictionary *)coordinateDictionary {
-//    NSInteger numberOfIterations = [coordinateDictionary allKeys].count;
-//    
-//    for (NSInteger i = 0; i < numberOfIterations; i++){
-//        CGFloat latitude = [coordinateDictionary[@"latitude"] floatValue];
-//        CGFloat longitude = [coordinateDictionary[@"longitude"] floatValue];
-//        
-//        
-//        
-//        
-//    }
-//    
-//    
-//    
-//    
-//}
-//    [FMLAPIClient getMarketsForZip:@"10004" withCompletion:^(NSMutableArray *marketsArray) {
-//        //whatever logic you want 
-//    }];
-//
-//    [FMLAPIClient getMarketsForLatitude:40.7 longitude:-74 withCompletion:^(NSMutableArray *marketsArray) {
-//        for (FMLMarket *market in marketsArray) {
-//            NSLog(@"We have a market named %@\nand it's hours are: %@\nand available products are: %@", market.name, market.scheduleString, market.productsArray);
-//            
-//            // search
-//            [FMLAPIClient searchProducts:@[@"Honey"] inMarkets:marketsArray];
-//        }
-//    }];
-//   // [FMLAPIClient getCoordinatesFromGoogleMapsLink:@"asdad"];
-//    
-//}
 
 @end

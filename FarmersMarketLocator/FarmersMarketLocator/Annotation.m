@@ -10,4 +10,16 @@
 
 @implementation Annotation
 
+- (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate title:(NSString *)title subtitle:(NSString *)subtitle andTag:(NSUInteger)tag {
+    self = [super init];
+    if (self) {
+        _coordinate = coordinate;
+        _title = title;
+        _subtitle = subtitle;
+        _tag = tag;
+    }
+    return self;
+}
+    
+    
 @end
