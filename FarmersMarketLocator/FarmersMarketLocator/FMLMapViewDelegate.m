@@ -36,20 +36,24 @@
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     self.selectedAnnotationView = view;
     
-    Annotation *annotation = (Annotation *)view.annotation;
-    FMLMarket *market = self.viewController.marketsArray[ annotation.tag ];
-    FMLDetailView *detailView = self.viewController.detailView;
-    detailView.nameLabel.text = market.name;
-    detailView.addressLabel.text = market.address;
-    
-    if (mapView.region.span.longitudeDelta != detailView.previousRegion.span.longitudeDelta) {
-        detailView.previousRegion = mapView.region;
+    if ([Annotation isSubclassOfClass:view.annotation.class]  ) {
+        Annotation *annotation = (Annotation *)view.annotation;
+        FMLMarket *market = self.viewController.marketsArray[ annotation.tag ];
+        FMLDetailView *detailView = self.viewController.detailView;
+        detailView.nameLabel.text = market.name;
+        detailView.addressLabel.text = market.address;
+        
+        if (mapView.region.span.longitudeDelta != detailView.previousRegion.span.longitudeDelta) {
+            detailView.previousRegion = mapView.region;
+        }
+        
+        
+        [self.viewController zoomMaptoLatitude:[market.latitude floatValue]  longitude:[market.longitude floatValue] withLatitudeSpan:0.01 longitudeSpan:0.01];
+        
+        [detailView showDetailView];
     }
     
-    
-    [self.viewController zoomMaptoLatitude:[market.latitude floatValue]  longitude:[market.longitude floatValue] withLatitudeSpan:0.01 longitudeSpan:0.01];
-    
-    [detailView showDetailView];
+   
 }
 
 -(void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
