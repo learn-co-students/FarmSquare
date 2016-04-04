@@ -40,14 +40,9 @@
         Annotation *annotation = (Annotation *)view.annotation;
         FMLMarket *market = self.viewController.marketsArray[ annotation.tag ];
         FMLDetailView *detailView = self.viewController.detailView;
+        
         detailView.nameLabel.text = market.name;
-        
-        NSLog(@"market name fromm market is: %@", market.name);
-        NSLog(@"market name is: %@", detailView.nameLabel.text);
-        
         detailView.addressLabel.text = market.address;
-        
-        NSLog(@"market name fromm market is: %@", market.name);
         
         if (mapView.region.span.longitudeDelta != detailView.previousRegion.span.longitudeDelta) {
             detailView.previousRegion = mapView.region;

@@ -53,7 +53,7 @@
     
     // Create detail view
     CGFloat width = self.view.frame.size.width;
-    CGFloat height = self.view.frame.size.height / 5;
+    CGFloat height = self.view.frame.size.height * 0.4;
     CGFloat yCoordinateOfMarketView = self.view.frame.size.height - height;
     
     //define detail view (property)

@@ -19,7 +19,6 @@
         _addressLabel = [self setUpLabelWithText:@"123 Easy Street, Manhattan, NY, 11002" textColor:[UIColor blackColor]];
         _arrowDownButton = [self setUpDownButton];
         _arrowUpButton = [self setUpUpButton];
-        _addressLabel.numberOfLines = 3;
     }
     [self addSubview:_nameLabel];
     [self addSubview:_addressLabel];
@@ -57,7 +56,7 @@
     
     //create button with down arrow image
     UIButton *downButton = [[UIButton alloc]init];
-    UIImage *arrowImage = [UIImage imageNamed:@"down arrow"];
+    UIImage *arrowImage = [UIImage imageNamed:@"arrowdown"];
     [downButton setImage:arrowImage forState:UIControlStateNormal];
     [downButton addTarget:self action:@selector(hideButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     downButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -69,9 +68,9 @@
     
     //create button with up arrow image
     UIButton *upButton = [[UIButton alloc]init];
-    UIImage *arrowImage = [UIImage imageNamed:@"up arrow"];
+    UIImage *arrowImage = [UIImage imageNamed:@"arrowup"];
     [upButton setImage:arrowImage forState:UIControlStateNormal];
-    [upButton addTarget:self action:@selector(hideButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [upButton addTarget:self action:@selector(expandButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     upButton.translatesAutoresizingMaskIntoConstraints = NO;
     
     return upButton;
@@ -88,26 +87,26 @@
     [self.widthAnchor constraintEqualToAnchor:self.superview.widthAnchor].active = YES;
     [self.bottomAnchor constraintEqualToAnchor:self.superview.bottomAnchor].active = YES;
     [self.centerXAnchor constraintEqualToAnchor:self.superview.centerXAnchor].active = YES;
-    [self.heightAnchor constraintEqualToConstant:self.superview.frame.size.height / 5].active = YES;
+    [self.heightAnchor constraintEqualToConstant:self.superview.frame.size.height * 0.4].active = YES;  //full Detail View is 2/5 of the frame size height
     
     
     [self.arrowUpButton.topAnchor constraintEqualToAnchor:self.topAnchor constant:0].active = YES;
     [self.arrowUpButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor].active = YES;
     
-    [self.arrowDownButton.topAnchor constraintEqualToAnchor:self.arrowUpButton.topAnchor constant:15
+    [self.arrowDownButton.topAnchor constraintEqualToAnchor:self.arrowUpButton.topAnchor constant:12
      ].active = YES;
     [self.arrowDownButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor].active = YES;
 
     
     [self.nameLabel.topAnchor constraintEqualToAnchor:self.arrowDownButton.bottomAnchor constant:8].active = YES;
     [self.nameLabel.centerXAnchor constraintEqualToAnchor: self.centerXAnchor].active = YES;
-    [self.nameLabel.leftAnchor constraintEqualToAnchor:self.leftAnchor constant:30].active = YES;
-    [self.nameLabel.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-30].active = YES;
+    [self.nameLabel.leftAnchor constraintEqualToAnchor:self.leftAnchor constant:20].active = YES;
+    [self.nameLabel.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-20].active = YES;
     
     [self.addressLabel.topAnchor constraintEqualToAnchor:self.nameLabel.bottomAnchor constant:8].active = YES;
     [self.addressLabel.centerXAnchor constraintEqualToAnchor:self.centerXAnchor].active = YES;
-    [self.addressLabel.leftAnchor constraintEqualToAnchor:self.leftAnchor constant:30].active = YES;
-    [self.addressLabel.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-30].active = YES;
+    [self.addressLabel.leftAnchor constraintEqualToAnchor:self.leftAnchor constant:20].active = YES;
+    [self.addressLabel.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-20].active = YES;
 }
 
 -(void)hideButtonPressed {
@@ -118,17 +117,32 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ZoomBackOutKThxBai" object:regionStruct];
 }
 
--(void)hideDetailView{
+-(void)hideDetailView {
     [UIView animateWithDuration:0.25 animations:^{
         self.transform = CGAffineTransformMakeTranslation(0, self.frame.size.height);
         
     } completion:nil];
 }
 
--(void)showDetailView{
+//shows the Detail View only up to half of its height
+-(void)showDetailView {
+    [UIView animateWithDuration:0.25 animations:^{
+        self.transform = CGAffineTransformMakeTranslation(0, self.frame.size.height/2);
+        
+    } completion:nil];
+}
+
+//pressing Up Arrow calls this method to expand the Detail View
+-(void)expandButtonPressed {
+    
+    [self showFullDetailView];
+}
+
+//shows full Detail View
+-(void)showFullDetailView {
+ 
     [UIView animateWithDuration:0.25 animations:^{
         self.transform = CGAffineTransformIdentity;
-        
     } completion:nil];
 }
 
