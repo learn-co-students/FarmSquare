@@ -18,7 +18,6 @@
         _nameLabel = [self setUpLabelWithText:@"Greenhouse Farmer's Market" textColor:[UIColor blackColor]];
         _addressLabel = [self setUpLabelWithText:@"123 Easy Street, Manhattan, NY, 11002" textColor:[UIColor blackColor]];
         _arrowButton = [self setUpButton];
-        _addressLabel.numberOfLines = 3;
     }
     [self addSubview:_nameLabel];
     [self addSubview:_addressLabel];
@@ -45,6 +44,7 @@
     label.text = text;
     label.font = [UIFont fontWithName:@"Helvetica" size:16];
     label.textColor = color;
+    label.numberOfLines = 0;
     label.translatesAutoresizingMaskIntoConstraints = NO;
     
     return label;
@@ -78,9 +78,13 @@
     
     [self.nameLabel.topAnchor constraintEqualToAnchor:self.arrowButton.bottomAnchor constant:8].active = YES;
     [self.nameLabel.centerXAnchor constraintEqualToAnchor: self.centerXAnchor].active = YES;
+    [self.nameLabel.leftAnchor constraintEqualToAnchor:self.leftAnchor constant:30].active = YES;
+    [self.nameLabel.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-30].active = YES;
     
     [self.addressLabel.topAnchor constraintEqualToAnchor:self.nameLabel.bottomAnchor constant:8].active = YES;
     [self.addressLabel.centerXAnchor constraintEqualToAnchor:self.centerXAnchor].active = YES;
+    [self.addressLabel.leftAnchor constraintEqualToAnchor:self.leftAnchor constant:30].active = YES;
+    [self.addressLabel.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-30].active = YES;
 }
 
 -(void)hideButtonPressed {
