@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSArray *productsArray;
 
+-(NSString *)nameFromString:(NSString *)name;
+
 @end
 
 NS_ASSUME_NONNULL_END
