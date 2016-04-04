@@ -118,6 +118,8 @@
         NSString *marketID = marketDict[@"id"];
         NSString *nameString = marketDict[@"marketname"];
         
+        
+        
         // Initialize market object.
         // (Note that the "marketname" from the API has the distance inside the string, but this is handled by the initializer. See comments on initializer for details.)
 //        FMLMarket *marketsss = [[FMLMarket alloc] initWithName:nameString];
@@ -126,10 +128,14 @@
         
         FMLMarket *market = (FMLMarket *)[NSEntityDescription insertNewObjectForEntityForName:@"FMLMarket" inManagedObjectContext:context];
         
+        market.name = [market nameFromString:nameString];
+        NSLog(@"market name is this: %@", market.name);
+        
         // Now to give it its properties (other than name), call getDetails... to make the API call that gets the dictionary of details.
         [FMLAPIClient getDetailsForMarketWithId:marketID withCompletion:^(NSDictionary *marketDetails) {
             
             // Give it its properties, from the marketDetails dictionary.
+            
             market.address = marketDetails[@"Address"];
             market.googleMapLink = marketDetails[@"GoogleLink"];
             //Converting products string into an array of products

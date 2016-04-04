@@ -12,7 +12,7 @@
 
 @implementation FMLMarket
 
-+(NSString *)nameFromString:(NSString *)name {
+-(NSString *)nameFromString:(NSString *)name {
     // The name string from the API always starts with the distance: e.g., "0.1 Blah Market."
     // After confirming that the string begins with a digit, we want to remove the distance before assigning _name.
     NSString *nameString = name;
