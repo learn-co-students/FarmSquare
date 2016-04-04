@@ -148,7 +148,9 @@
         location.longitude = [farmersMarket.longitude floatValue];
         
         Annotation *annotation = [[Annotation alloc] initWithCoordinate:location
-                                                                  title:farmersMarket.name subtitle:farmersMarket.address andTag:index];
+                                                                  title:farmersMarket.name
+                                                               subtitle:farmersMarket.address
+                                                                 andTag:index];
         index++;
         
         [self.mapView addAnnotation:annotation];

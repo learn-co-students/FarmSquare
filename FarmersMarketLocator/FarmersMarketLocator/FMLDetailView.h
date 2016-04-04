@@ -13,7 +13,8 @@
 
 @property (strong, nonatomic) UILabel *nameLabel;
 @property (strong, nonatomic) UILabel *addressLabel;
-@property (strong, nonatomic) UIButton *arrowButton;
+@property (strong, nonatomic) UIButton *arrowDownButton;
+@property (strong, nonatomic) UIButton *arrowUpButton;
 @property (assign, nonatomic) MKCoordinateRegion previousRegion;
 
 -(void)constrainViews;

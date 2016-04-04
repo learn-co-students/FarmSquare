@@ -17,12 +17,14 @@
     if (self) {
         _nameLabel = [self setUpLabelWithText:@"Greenhouse Farmer's Market" textColor:[UIColor blackColor]];
         _addressLabel = [self setUpLabelWithText:@"123 Easy Street, Manhattan, NY, 11002" textColor:[UIColor blackColor]];
-        _arrowButton = [self setUpButton];
+        _arrowDownButton = [self setUpDownButton];
+        _arrowUpButton = [self setUpUpButton];
         _addressLabel.numberOfLines = 3;
     }
     [self addSubview:_nameLabel];
     [self addSubview:_addressLabel];
-    [self addSubview:_arrowButton];
+    [self addSubview:_arrowDownButton];
+    [self addSubview:_arrowUpButton];
     
     if (!UIAccessibilityIsReduceTransparencyEnabled()) {
         UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
@@ -50,21 +52,35 @@
     return label;
 }
 
--(UIButton *)setUpButton{
+-(UIButton *)setUpDownButton{
     
     //create button with down arrow image
-    UIButton *button = [[UIButton alloc]init];
+    UIButton *downButton = [[UIButton alloc]init];
     UIImage *arrowImage = [UIImage imageNamed:@"down arrow"];
-    [button setImage:arrowImage forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(hideButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    button.translatesAutoresizingMaskIntoConstraints = NO;
+    [downButton setImage:arrowImage forState:UIControlStateNormal];
+    [downButton addTarget:self action:@selector(hideButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    downButton.translatesAutoresizingMaskIntoConstraints = NO;
     
-    return button;
+    return downButton;
 }
+
+-(UIButton *)setUpUpButton{
+    
+    //create button with up arrow image
+    UIButton *upButton = [[UIButton alloc]init];
+    UIImage *arrowImage = [UIImage imageNamed:@"up arrow"];
+    [upButton setImage:arrowImage forState:UIControlStateNormal];
+    [upButton addTarget:self action:@selector(hideButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    upButton.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    return upButton;
+}
+
 
 -(void)constrainViews {
     self.translatesAutoresizingMaskIntoConstraints = NO;
-    self.arrowButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.arrowDownButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.arrowUpButton.translatesAutoresizingMaskIntoConstraints = NO;
     self.nameLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.addressLabel.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -73,10 +89,16 @@
     [self.centerXAnchor constraintEqualToAnchor:self.superview.centerXAnchor].active = YES;
     [self.heightAnchor constraintEqualToConstant:self.superview.frame.size.height / 5].active = YES;
     
-    [self.arrowButton.topAnchor constraintEqualToAnchor:self.topAnchor constant:6].active = YES;
-    [self.arrowButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor].active = YES;
     
-    [self.nameLabel.topAnchor constraintEqualToAnchor:self.arrowButton.bottomAnchor constant:8].active = YES;
+    [self.arrowUpButton.topAnchor constraintEqualToAnchor:self.topAnchor constant:0].active = YES;
+    [self.arrowUpButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor].active = YES;
+    
+    [self.arrowDownButton.topAnchor constraintEqualToAnchor:self.arrowUpButton.topAnchor constant:15
+     ].active = YES;
+    [self.arrowDownButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor].active = YES;
+
+    
+    [self.nameLabel.topAnchor constraintEqualToAnchor:self.arrowDownButton.bottomAnchor constant:8].active = YES;
     [self.nameLabel.centerXAnchor constraintEqualToAnchor: self.centerXAnchor].active = YES;
     
     [self.addressLabel.topAnchor constraintEqualToAnchor:self.nameLabel.bottomAnchor constant:8].active = YES;
