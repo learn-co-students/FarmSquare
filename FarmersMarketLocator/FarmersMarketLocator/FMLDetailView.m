@@ -98,12 +98,12 @@
     [self.arrowDownButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor].active = YES;
 
     
-    [self.nameLabel.topAnchor constraintEqualToAnchor:self.arrowDownButton.bottomAnchor constant:8].active = YES;
+    [self.nameLabel.topAnchor constraintEqualToAnchor:self.arrowDownButton.bottomAnchor constant:3].active = YES;
     [self.nameLabel.centerXAnchor constraintEqualToAnchor: self.centerXAnchor].active = YES;
     [self.nameLabel.leftAnchor constraintEqualToAnchor:self.leftAnchor constant:20].active = YES;
     [self.nameLabel.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-20].active = YES;
     
-    [self.addressLabel.topAnchor constraintEqualToAnchor:self.nameLabel.bottomAnchor constant:8].active = YES;
+    [self.addressLabel.topAnchor constraintEqualToAnchor:self.nameLabel.bottomAnchor constant:6].active = YES;
     [self.addressLabel.centerXAnchor constraintEqualToAnchor:self.centerXAnchor].active = YES;
     [self.addressLabel.leftAnchor constraintEqualToAnchor:self.leftAnchor constant:20].active = YES;
     [self.addressLabel.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-20].active = YES;
