@@ -138,7 +138,11 @@
             //Converting products string into an array of products
             NSString *productsString = marketDetails[@"Products"];
             market.produceList = productsString;
-            market.scheduleString = marketDetails[@"Schedule"];
+
+            //erasing the <br><br><br> at the end of schedule strings
+            NSString *cleanScheduleString = [marketDetails[@"Schedule"] stringByReplacingOccurrencesOfString:@"<br>" withString:@""];
+            market.scheduleString = cleanScheduleString;
+            
             // (Use the Google link to get the coordinates before setting them.)
             NSDictionary *marketCoordinates = [FMLAPIClient getCoordinatesFromGoogleMapsLink:market.googleMapLink];
             market.latitude = marketCoordinates[@"latitude"];

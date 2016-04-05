@@ -41,13 +41,15 @@
         FMLMarket *market = self.viewController.marketsArray[ annotation.tag ];
         FMLDetailView *detailView = self.viewController.detailView;
         
-        detailView.nameLabel.text = market.name;
-        detailView.addressLabel.text = market.address;
+        detailView.nameLabel.text = market.name.uppercaseString;
+        detailView.addressLabel.text = [NSString stringWithFormat:@"ADDRESS: %@", market.address];
+        detailView.produceTextView.text = [NSString stringWithFormat:@"AVAILABLE PRODUCE: %@", market.produceList];
+        detailView.scheduleLabel.text = [NSString stringWithFormat:@"SCHEDULE: %@", market.scheduleString];
+        
         
         if (mapView.region.span.longitudeDelta != detailView.previousRegion.span.longitudeDelta) {
             detailView.previousRegion = mapView.region;
         }
-        
         
         [self.viewController zoomMaptoLatitude:[market.latitude floatValue]  longitude:[market.longitude floatValue] withLatitudeSpan:0.01 longitudeSpan:0.01];
         
