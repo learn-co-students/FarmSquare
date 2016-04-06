@@ -40,7 +40,6 @@
     self.mapDelegate = [[FMLMapViewDelegate alloc] initWithTarget:self];
     self.locationDelegate = [[FMLLocationManagerDelegate alloc] initWithTarget:self];
     
-    
     // Create and customize map view
     self.mapView = [[MKMapView alloc]initWithFrame:CGRectMake(0, 50, self.view.frame.size.width, self.view.frame.size.height - 50)];
     self.mapView.mapType = MKMapTypeStandard;
@@ -61,9 +60,11 @@
     [self.view addSubview:self.detailView];
     [self.detailView constrainViews];
     
+    
     self.manager = [[CLLocationManager alloc] init];
     self.manager.delegate = self.locationDelegate;
-    
+    self.detailView.locationManager = self.manager;
+
     
     // Show saved data
     

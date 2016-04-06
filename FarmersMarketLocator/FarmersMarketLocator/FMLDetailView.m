@@ -9,6 +9,7 @@
 #import "FMLDetailView.h"
 #import "FMLMapViewController.h"
 
+
 @implementation FMLDetailView
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -22,8 +23,11 @@
         _produceTextView = [self setUpProduceTextViewWithText:@"Fruits and Vegetables"
                                                  textColor:[UIColor blackColor]];
         _scheduleLabel = [self setUpLabelWithText:@"Mon-Fri 7am-4pm" textColor:[UIColor blackColor]];
-        _arrowDownButton = [self setUpDownButton];
-        _arrowUpButton = [self setUpUpButton];
+        _arrowDownButton = [self setUpButtonWithImageName:@"arrowdown" action:@selector(hideButtonPressed)];
+        _arrowUpButton = [self setUpButtonWithImageName:@"arrowup" action:@selector(expandButtonPressed)];
+        _yelpButton = [self setUpButtonWithImageName:@"yelp_review_btn_red" action:@selector(yelpButtonPressed)];
+        _directionsButton = [self setUpButtonWithImageName:@"map-directions-btn" action:@selector(directionsButtonPressed)];
+        
     }
     [self addSubview:_nameLabel];
     [self addSubview:_addressLabel];
@@ -31,6 +35,8 @@
     [self addSubview:_arrowUpButton];
     [self addSubview:_produceTextView];
     [self addSubview:_scheduleLabel];
+    [self addSubview:_yelpButton];
+    [self addSubview:_directionsButton];
     
     if (!UIAccessibilityIsReduceTransparencyEnabled()) {
         UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
@@ -74,29 +80,29 @@
     return textView;
 }
 
--(UIButton *)setUpDownButton {
+-(UIButton *)setUpButtonWithImageName:(NSString *)imageName action:(SEL)action {
     
-    //create button with down arrow image
-    UIButton *downButton = [[UIButton alloc]init];
-    UIImage *arrowImage = [UIImage imageNamed:@"arrowdown"];
-    [downButton setImage:arrowImage forState:UIControlStateNormal];
-    [downButton addTarget:self action:@selector(hideButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    downButton.translatesAutoresizingMaskIntoConstraints = NO;
+    //method modified to create all buttons
+    UIButton *button = [[UIButton alloc]init];
+    UIImage *buttonImage = [UIImage imageNamed:imageName];
+    [button setImage:buttonImage forState:UIControlStateNormal];
+    [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    button.translatesAutoresizingMaskIntoConstraints = NO;
     
-    return downButton;
+    return button;
 }
 
--(UIButton *)setUpUpButton{
-    
-    //create button with up arrow image
-    UIButton *upButton = [[UIButton alloc]init];
-    UIImage *arrowImage = [UIImage imageNamed:@"arrowup"];
-    [upButton setImage:arrowImage forState:UIControlStateNormal];
-    [upButton addTarget:self action:@selector(expandButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    upButton.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    return upButton;
-}
+//-(UIButton *)setUpUpButton{
+//    
+//    //create button with up arrow image
+//    UIButton *upButton = [[UIButton alloc]init];
+//    UIImage *arrowImage = [UIImage imageNamed:@"arrowup"];
+//    [upButton setImage:arrowImage forState:UIControlStateNormal];
+//    [upButton addTarget:self action:@selector(expandButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+//    upButton.translatesAutoresizingMaskIntoConstraints = NO;
+//    
+//    return upButton;
+//}
 
 
 -(void)constrainViews {
@@ -107,6 +113,8 @@
     self.addressLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.produceTextView.translatesAutoresizingMaskIntoConstraints = NO;
     self.scheduleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.yelpButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.directionsButton.translatesAutoresizingMaskIntoConstraints = NO;
     
     [self.widthAnchor constraintEqualToAnchor:self.superview.widthAnchor].active = YES;
     [self.bottomAnchor constraintEqualToAnchor:self.superview.bottomAnchor].active = YES;
@@ -142,6 +150,13 @@
     [self.produceTextView.widthAnchor constraintEqualToConstant:textViewWidth].active = YES;
     [self.produceTextView.heightAnchor constraintEqualToConstant:textViewHeight].active = YES;
     
+    [self.yelpButton.topAnchor constraintEqualToAnchor:self.produceTextView.bottomAnchor constant:5].active = YES;
+    [self.yelpButton.leftAnchor constraintEqualToAnchor:self.leftAnchor constant:20].active = YES;
+    
+    [self.directionsButton.topAnchor constraintEqualToAnchor:self.produceTextView.bottomAnchor constant:5].active = YES;
+    [self.directionsButton.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-20].active = YES;
+    
+    
 }
 
 -(void)hideButtonPressed {
@@ -150,6 +165,7 @@
     NSValue *regionStruct = [NSValue value:&region withObjCType:@encode(MKCoordinateRegion)];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ZoomBackOutKThxBai" object:regionStruct];
+    
 }
 
 -(void)hideDetailView {
@@ -179,6 +195,19 @@
     [UIView animateWithDuration:0.25 animations:^{
         self.transform = CGAffineTransformIdentity;
     } completion:nil];
+}
+
+-(void)yelpButtonPressed {
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.yelp.com"]];
+}
+
+-(void)directionsButtonPressed {
+    
+    CLLocationCoordinate2D currentLocation = self.locationManager.location.coordinate;
+    
+    NSString *directionsURL = [NSString stringWithFormat:@"http://maps.apple.com/maps?saddr=%f,%f&daddr=%f,%f", currentLocation.latitude, currentLocation.longitude, self.selectedLatitude, self.selectedLongitude];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:directionsURL]];
 }
 
 /*
