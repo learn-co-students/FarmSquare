@@ -10,13 +10,14 @@
 
 @implementation Annotation
 
-- (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate title:(NSString *)title subtitle:(NSString *)subtitle andTag:(NSUInteger)tag {
+- (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate title:(NSString *)title subtitle:(NSString *)subtitle andTag:(NSUInteger)tag Market:(FMLMarket *)market {
     self = [super init];
     if (self) {
         _coordinate = coordinate;
         _title = title;
         _subtitle = subtitle;
         _tag = tag;
+        _market = market;
     }
     return self;
 }

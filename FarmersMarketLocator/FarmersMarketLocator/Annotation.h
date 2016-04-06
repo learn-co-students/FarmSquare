@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
+#import "FMLMarket.h"
 
 @interface Annotation : NSObject <MKAnnotation>
 
@@ -15,7 +16,8 @@
 @property(copy, nonatomic) NSString *title;
 @property(copy, nonatomic) NSString *subtitle;
 @property (assign, nonatomic) NSUInteger tag;
+@property (strong, nonatomic) FMLMarket *market;
 
-- (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate title:(NSString *)title subtitle:(NSString *)subtitle andTag:(NSUInteger)tag;
+- (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate title:(NSString *)title subtitle:(NSString *)subtitle andTag:(NSUInteger)tag Market:(FMLMarket *)market ;
 
 @end

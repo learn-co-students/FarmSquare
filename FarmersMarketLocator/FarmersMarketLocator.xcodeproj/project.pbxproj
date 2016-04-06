@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F1746951CB460C10018383B /* FMLPinAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1746941CB460C10018383B /* FMLPinAnnotationView.m */; };
 		1F3ED95E1CAB0AE50038F590 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3ED95D1CAB0AE50038F590 /* main.m */; };
 		1F3ED9611CAB0AE50038F590 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3ED9601CAB0AE50038F590 /* AppDelegate.m */; };
 		1F3ED9641CAB0AE50038F590 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3ED9631CAB0AE50038F590 /* ViewController.m */; };
@@ -52,6 +53,8 @@
 /* Begin PBXFileReference section */
 		02F904EDCF8946A897CA1C2A /* Pods-FarmersMarketLocator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FarmersMarketLocator.release.xcconfig"; path = "Pods/Target Support Files/Pods-FarmersMarketLocator/Pods-FarmersMarketLocator.release.xcconfig"; sourceTree = "<group>"; };
 		04CDB776E48FF26680E2F899 /* libPods-FarmersMarketLocator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FarmersMarketLocator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F1746931CB460C10018383B /* FMLPinAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLPinAnnotationView.h; sourceTree = "<group>"; };
+		1F1746941CB460C10018383B /* FMLPinAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLPinAnnotationView.m; sourceTree = "<group>"; };
 		1F3ED9591CAB0AE40038F590 /* FarmersMarketLocator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FarmersMarketLocator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F3ED95D1CAB0AE50038F590 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1F3ED95F1CAB0AE50038F590 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -264,6 +267,8 @@
 			children = (
 				8BBD400B1CAED53E00A1DB0E /* FMLDetailView.h */,
 				8BBD400C1CAED53E00A1DB0E /* FMLDetailView.m */,
+				1F1746931CB460C10018383B /* FMLPinAnnotationView.h */,
+				1F1746941CB460C10018383B /* FMLPinAnnotationView.m */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -348,7 +353,7 @@
 				TargetAttributes = {
 					1F3ED9581CAB0AE40038F590 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = TZJ7BHR5V6;
+						DevelopmentTeam = P6N4QU9C7Y;
 					};
 					1F3ED9711CAB0AE50038F590 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -475,6 +480,7 @@
 				8BC2BA3A1CADC8E6005DD7F3 /* Secrets.m in Sources */,
 				8B5635C11CAF0858007DC27E /* CoreDataStack.m in Sources */,
 				8B5635981CAF081A007DC27E /* DataModel.xcdatamodeld in Sources */,
+				1F1746951CB460C10018383B /* FMLPinAnnotationView.m in Sources */,
 				A38473B61CADAFC300ED08CA /* SampleZipCodes.m in Sources */,
 				8BBD400A1CAEB81700A1DB0E /* FMLLocationManagerDelegate.m in Sources */,
 			);
@@ -622,9 +628,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FarmersMarketLocator/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Flatiron-School.FarmersMarketLocator";
+				PRODUCT_BUNDLE_IDENTIFIER = com.flatironschool.FarmersMarketLocator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FarmersMarketLocator/FarmersMarketLocator-Bridging-Header.h";
@@ -641,9 +647,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FarmersMarketLocator/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Flatiron-School.FarmersMarketLocator";
+				PRODUCT_BUNDLE_IDENTIFIER = com.flatironschool.FarmersMarketLocator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FarmersMarketLocator/FarmersMarketLocator-Bridging-Header.h";
