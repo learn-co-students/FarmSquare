@@ -45,6 +45,7 @@
         detailView.addressLabel.text = [NSString stringWithFormat:@"ADDRESS: %@", market.address];
         detailView.produceTextView.text = [NSString stringWithFormat:@"AVAILABLE PRODUCE: %@", market.produceList];
         detailView.scheduleLabel.text = [NSString stringWithFormat:@"SCHEDULE: %@", market.scheduleString];
+        //to use in maps URL for directions:
         detailView.selectedLatitude = [market.latitude floatValue];
         detailView.selectedLongitude = [market.longitude floatValue];
         

@@ -27,7 +27,7 @@
         _arrowDownButton = [self setUpButtonWithImageName:@"arrowdown" action:@selector(hideButtonPressed)];
         _arrowUpButton = [self setUpButtonWithImageName:@"arrowup" action:@selector(expandButtonPressed)];
         _yelpButton = [self setUpButtonWithImageName:@"yelp_review_btn_red" action:@selector(yelpButtonPressed)];
-        _directionsButton = [self setUpButtonWithImageName:@"map-directions-btn" action:@selector(directionsButtonPressed)];
+        _directionsButton = [self setUpButtonWithImageName:@"direction24px" action:@selector(directionsButtonPressed)];
         
     }
     [self addSubview:_nameLabel];
@@ -130,7 +130,7 @@
     [self.scheduleLabel.leftAnchor constraintEqualToAnchor:self.leftAnchor constant:20].active = YES;
     [self.scheduleLabel.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-20].active = YES;
     
-    CGFloat textViewPadding = 30; //30 here, makes it perfectly alligned with text labels
+    CGFloat textViewPadding = 30; //30 here, makes it perfectly alligned with text labels!!!
     CGFloat textViewWidth = self.bounds.size.width - textViewPadding;
     CGFloat textViewHeight = self.bounds.size.height * 0.3;
     [self.produceTextView.topAnchor constraintEqualToAnchor:self.scheduleLabel.bottomAnchor constant:3].active = YES;
@@ -189,7 +189,7 @@
     NSString *nameForSearch = [self.nameLabel.text.lowercaseString stringByReplacingOccurrencesOfString:@" " withString:@"+"];
     
     //http://www.yelp.com/search?find_desc=hernandez+farmer%27s+market&find_loc=10004
-    NSString *yelpSearchURL = [NSString stringWithFormat:@"http://www.yelp.com/search?find_desc=%@&find_loc=New+York", nameForSearch];
+    NSString *yelpSearchURL = [NSString stringWithFormat:@"http://www.yelp.com/search?find_desc=%@&find_loc=New+York", nameForSearch]; //for location I put just New York here for now
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:yelpSearchURL]];
 }
 
