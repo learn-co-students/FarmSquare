@@ -10,6 +10,7 @@
 #import "FMLMapViewController.h"
 
 
+
 @implementation FMLDetailView
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -92,19 +93,6 @@
     return button;
 }
 
-//-(UIButton *)setUpUpButton{
-//    
-//    //create button with up arrow image
-//    UIButton *upButton = [[UIButton alloc]init];
-//    UIImage *arrowImage = [UIImage imageNamed:@"arrowup"];
-//    [upButton setImage:arrowImage forState:UIControlStateNormal];
-//    [upButton addTarget:self action:@selector(expandButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-//    upButton.translatesAutoresizingMaskIntoConstraints = NO;
-//    
-//    return upButton;
-//}
-
-
 -(void)constrainViews {
     self.translatesAutoresizingMaskIntoConstraints = NO;
     self.arrowDownButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -156,7 +144,6 @@
     [self.directionsButton.topAnchor constraintEqualToAnchor:self.produceTextView.bottomAnchor constant:5].active = YES;
     [self.directionsButton.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-20].active = YES;
     
-    
 }
 
 -(void)hideButtonPressed {
@@ -199,7 +186,11 @@
 
 -(void)yelpButtonPressed {
     
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.yelp.com"]];
+    NSString *nameForSearch = [self.nameLabel.text.lowercaseString stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    
+    //http://www.yelp.com/search?find_desc=hernandez+farmer%27s+market&find_loc=10004
+    NSString *yelpSearchURL = [NSString stringWithFormat:@"http://www.yelp.com/search?find_desc=%@&find_loc=New+York", nameForSearch];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:yelpSearchURL]];
 }
 
 -(void)directionsButtonPressed {

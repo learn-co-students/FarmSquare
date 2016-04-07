@@ -118,7 +118,7 @@
 -(void)saveUserCoordinates:(CLLocationCoordinate2D)coordinates {
     [[NSUserDefaults standardUserDefaults] setFloat:coordinates.latitude forKey:@"latitude"];
     [[NSUserDefaults standardUserDefaults] setFloat:coordinates.longitude forKey:@"longitude"];
-    
+
     [[NSNotificationCenter defaultCenter] postNotificationName:@"GotUserCoordinates" object:nil];
 }
 

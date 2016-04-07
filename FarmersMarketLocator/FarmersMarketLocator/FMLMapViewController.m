@@ -89,6 +89,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomBackOut:) name:@"ZoomBackOutKThxBai" object:nil];
     
     self.detailView.transform = CGAffineTransformMakeTranslation(0, self.detailView.frame.size.height);
+    
 }
 
 -(void)zoomBackOut:(NSNotification *)notification {
@@ -144,7 +145,7 @@
     NSUInteger index = 0;
     for (FMLMarket *farmersMarket in marketsArray) {
         CLLocationCoordinate2D location;
-        NSLog(@"%f", location.latitude);
+        NSLog(@"%f, %f", location.latitude, location.longitude);
         location.latitude = [farmersMarket.latitude floatValue];
         location.longitude = [farmersMarket.longitude floatValue];
         

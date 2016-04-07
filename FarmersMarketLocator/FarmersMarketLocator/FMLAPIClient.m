@@ -87,6 +87,7 @@
         sessionManagerDetails.responseSerializer = [[AFJSONResponseSerializer alloc]init];
         // Get dictionary of market details
         NSDictionary *marketDetails = responseObject[@"marketdetails"];
+        
         // Pass the dictionary to the completion block
         idCompletion(marketDetails);
         
