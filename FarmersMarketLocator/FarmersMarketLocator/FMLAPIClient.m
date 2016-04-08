@@ -157,7 +157,7 @@
         market.city = data[@"city"];
         market.state = data[@"State"];
         market.street = data[@"street"];
-        market.zipCode = data[@"city"];
+        market.zipCode = data[@"zip"];
         market.updateTime = data[@"updateTime"];
 
         
