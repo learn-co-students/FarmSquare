@@ -42,7 +42,6 @@
     self.mapDelegate = [[FMLMapViewDelegate alloc] initWithTarget:self];
     self.locationDelegate = [[FMLLocationManagerDelegate alloc] initWithTarget:self];
     
-    
     // Create and customize map view
     self.mapView = [[MKMapView alloc]initWithFrame:CGRectMake(0, 50, self.view.frame.size.width, self.view.frame.size.height - 50)];
     self.mapView.mapType = MKMapTypeStandard;
@@ -55,7 +54,7 @@
     
     // Create detail view
     CGFloat width = self.view.frame.size.width;
-    CGFloat height = self.view.frame.size.height / 5;
+    CGFloat height = self.view.frame.size.height * 0.4;
     CGFloat yCoordinateOfMarketView = self.view.frame.size.height - height;
     
     //define detail view (property)
@@ -63,9 +62,11 @@
     [self.view addSubview:self.detailView];
     [self.detailView constrainViews];
     
+    
     self.manager = [[CLLocationManager alloc] init];
     self.manager.delegate = self.locationDelegate;
-    
+    self.detailView.locationManager = self.manager;
+
     
     // Grab data from Managed Context Object
     NSManagedObjectContext *context = [[CoreDataStack sharedStack] managedObjectContext];
@@ -89,6 +90,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomBackOut:) name:@"ZoomBackOutKThxBai" object:nil];
     
     self.detailView.transform = CGAffineTransformMakeTranslation(0, self.detailView.frame.size.height);
+    
 }
 
 -(void)zoomBackOut:(NSNotification *)notification {
@@ -144,11 +146,17 @@
     NSUInteger index = 0;
     for (FMLMarket *farmersMarket in marketsArray) {
         CLLocationCoordinate2D location;
+<<<<<<< HEAD
+=======
+        NSLog(@"%f, %f", location.latitude, location.longitude);
+>>>>>>> 8eea26d4754354f5120a86e6569422d53d154522
         location.latitude = [farmersMarket.latitude floatValue];
         location.longitude = [farmersMarket.longitude floatValue];
         
         Annotation *annotation = [[Annotation alloc] initWithCoordinate:location
-                                                                  title:farmersMarket.name subtitle:farmersMarket.address andTag:index];
+                                                                  title:farmersMarket.name
+                                                               subtitle:farmersMarket.address
+                                                                 andTag:index];
         index++;
         
         [self.mapView addAnnotation:annotation];

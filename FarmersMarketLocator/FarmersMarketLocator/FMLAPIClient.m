@@ -88,6 +88,7 @@
         sessionManagerDetails.responseSerializer = [[AFJSONResponseSerializer alloc]init];
         // Get dictionary of market details
         NSDictionary *marketDetails = responseObject[@"marketdetails"];
+        
         // Pass the dictionary to the completion block
         idCompletion(marketDetails);
         
@@ -128,6 +129,7 @@
         FMLMarket *market = (FMLMarket *)[NSEntityDescription insertNewObjectForEntityForName:@"FMLMarket" inManagedObjectContext:context];
         
         market.name = [market nameFromString:nameString];
+<<<<<<< HEAD
         
         // Get data from JSON Dump file
         NSDictionary *data = [FMLJSONDictionary dictionaryForMarketWithId:marketID];
@@ -158,6 +160,8 @@
         market.street = data[@"street"];
         market.zipCode = data[@"city"];
         market.updateTime = data[@"updateTime"];
+=======
+>>>>>>> 8eea26d4754354f5120a86e6569422d53d154522
         
         // Now to give it its properties (other than name), call getDetails... to make the API call that gets the dictionary of details.
         [FMLAPIClient getDetailsForMarketWithId:marketID withCompletion:^(NSDictionary *marketDetails) {
@@ -169,7 +173,11 @@
             //Converting products string into an array of products
             NSString *productsString = marketDetails[@"Products"];
             market.produceList = productsString;
-            market.scheduleString = marketDetails[@"Schedule"];
+
+            //erasing the <br><br><br> at the end of schedule strings
+            NSString *cleanScheduleString = [marketDetails[@"Schedule"] stringByReplacingOccurrencesOfString:@"<br>" withString:@""];
+            market.scheduleString = cleanScheduleString;
+            
             // (Use the Google link to get the coordinates before setting them.)
             NSDictionary *marketCoordinates = [FMLAPIClient getCoordinatesFromGoogleMapsLink:market.googleMapLink];
             market.latitude = marketCoordinates[@"latitude"];

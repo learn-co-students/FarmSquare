@@ -42,19 +42,18 @@
         Annotation *annotation = (Annotation *)view.annotation;
         FMLMarket *market = self.viewController.marketsArray[ annotation.tag ];
         FMLDetailView *detailView = self.viewController.detailView;
-        detailView.nameLabel.text = market.name;
         
-        NSLog(@"market name fromm market is: %@", market.name);
-        NSLog(@"market name is: %@", detailView.nameLabel.text);
-        
-        detailView.addressLabel.text = market.address;
-        
-        NSLog(@"market name fromm market is: %@", market.name);
+        detailView.nameLabel.text = market.name.uppercaseString;
+        detailView.addressLabel.text = [NSString stringWithFormat:@"ADDRESS: %@", market.address];
+        detailView.produceTextView.text = [NSString stringWithFormat:@"AVAILABLE PRODUCE: %@", market.produceList];
+        detailView.scheduleLabel.text = [NSString stringWithFormat:@"SCHEDULE: %@", market.scheduleString];
+        //to use in maps URL for directions:
+        detailView.selectedLatitude = [market.latitude floatValue];
+        detailView.selectedLongitude = [market.longitude floatValue];
         
         if (mapView.region.span.longitudeDelta != detailView.previousRegion.span.longitudeDelta) {
             detailView.previousRegion = mapView.region;
         }
-        
         
         [self.viewController zoomMaptoLatitude:[market.latitude floatValue]  longitude:[market.longitude floatValue] withLatitudeSpan:0.01 longitudeSpan:0.01];
         

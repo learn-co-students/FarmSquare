@@ -8,13 +8,23 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface FMLDetailView : UIView
 
 @property (strong, nonatomic) UILabel *nameLabel;
 @property (strong, nonatomic) UILabel *addressLabel;
-@property (strong, nonatomic) UIButton *arrowButton;
+@property (strong, nonatomic) UITextView *produceTextView;
+@property (strong, nonatomic) UILabel *scheduleLabel;
+@property (strong, nonatomic) UIButton *arrowDownButton;
+@property (strong, nonatomic) UIButton *arrowUpButton;
+@property (strong, nonatomic) UIButton *yelpButton;
+@property (strong, nonatomic) UIButton *directionsButton;
 @property (assign, nonatomic) MKCoordinateRegion previousRegion;
+@property (strong, nonatomic) CLLocationManager *locationManager;
+@property (assign, nonatomic) CGFloat selectedLatitude;
+@property (assign, nonatomic) CGFloat selectedLongitude;
+@property (strong, nonatomic) NSString *zip;
 
 -(void)constrainViews;
 -(void)showDetailView;
