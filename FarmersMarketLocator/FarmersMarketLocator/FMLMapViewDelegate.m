@@ -21,6 +21,7 @@
     return self;
 }
 
+// Initializes with view controller so it's methods and properties can be accessed
 - (instancetype)initWithTarget:(FMLMapViewController *)target
 {
     self = [super init];
@@ -33,6 +34,7 @@
 
 #pragma mark - MKMapView Delegate Methods
 
+//
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     self.selectedAnnotationView = view;
     
