@@ -129,7 +129,6 @@
         FMLMarket *market = (FMLMarket *)[NSEntityDescription insertNewObjectForEntityForName:@"FMLMarket" inManagedObjectContext:context];
         
         market.name = [market nameFromString:nameString];
-<<<<<<< HEAD
         
         // Get data from JSON Dump file
         NSDictionary *data = [FMLJSONDictionary dictionaryForMarketWithId:marketID];
@@ -160,8 +159,7 @@
         market.street = data[@"street"];
         market.zipCode = data[@"city"];
         market.updateTime = data[@"updateTime"];
-=======
->>>>>>> 8eea26d4754354f5120a86e6569422d53d154522
+
         
         // Now to give it its properties (other than name), call getDetails... to make the API call that gets the dictionary of details.
         [FMLAPIClient getDetailsForMarketWithId:marketID withCompletion:^(NSDictionary *marketDetails) {

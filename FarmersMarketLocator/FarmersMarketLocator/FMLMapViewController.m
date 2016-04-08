@@ -146,10 +146,6 @@
     NSUInteger index = 0;
     for (FMLMarket *farmersMarket in marketsArray) {
         CLLocationCoordinate2D location;
-<<<<<<< HEAD
-=======
-        NSLog(@"%f, %f", location.latitude, location.longitude);
->>>>>>> 8eea26d4754354f5120a86e6569422d53d154522
         location.latitude = [farmersMarket.latitude floatValue];
         location.longitude = [farmersMarket.longitude floatValue];
         

@@ -16,7 +16,6 @@
 		1F3ED9821CAB0AE50038F590 /* FarmersMarketLocatorUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3ED9811CAB0AE50038F590 /* FarmersMarketLocatorUITests.m */; };
 		8B5635981CAF081A007DC27E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B5635961CAF081A007DC27E /* DataModel.xcdatamodeld */; };
 		8B5635C11CAF0858007DC27E /* CoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5635C01CAF0858007DC27E /* CoreDataStack.m */; };
-		8B9E5A7E1CB2F3730050915D /* Secrets.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E5A7D1CB2F3730050915D /* Secrets.m */; };
 		8B9E5A811CB2F7DA0050915D /* FMLJSONDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E5A801CB2F7DA0050915D /* FMLJSONDictionary.m */; };
 		8B9E5A831CB2F7E80050915D /* farmers-markets.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B9E5A821CB2F7E80050915D /* farmers-markets.json */; };
 		8BAC6A891CB7E615001EEDE1 /* farmers-markets-0.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BAC6A7F1CB7E615001EEDE1 /* farmers-markets-0.json */; };
@@ -29,6 +28,7 @@
 		8BAC6A901CB7E615001EEDE1 /* farmers-markets-7.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BAC6A861CB7E615001EEDE1 /* farmers-markets-7.json */; };
 		8BAC6A911CB7E615001EEDE1 /* farmers-markets-8.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BAC6A871CB7E615001EEDE1 /* farmers-markets-8.json */; };
 		8BAC6A921CB7E615001EEDE1 /* farmers-markets-9.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BAC6A881CB7E615001EEDE1 /* farmers-markets-9.json */; };
+		8BAC6A941CB7F648001EEDE1 /* Secrets.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAC6A931CB7F648001EEDE1 /* Secrets.m */; };
 		8BBD3FFE1CAEA8AB00A1DB0E /* FMLMapViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD3FFD1CAEA8AB00A1DB0E /* FMLMapViewDelegate.m */; };
 		8BBD400A1CAEB81700A1DB0E /* FMLLocationManagerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD40091CAEB81700A1DB0E /* FMLLocationManagerDelegate.m */; };
 		8BBD400D1CAED53E00A1DB0E /* FMLDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD400C1CAED53E00A1DB0E /* FMLDetailView.m */; };
@@ -81,7 +81,6 @@
 		8B5635971CAF081A007DC27E /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		8B5635BF1CAF0858007DC27E /* CoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataStack.h; sourceTree = "<group>"; };
 		8B5635C01CAF0858007DC27E /* CoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataStack.m; sourceTree = "<group>"; };
-		8B9E5A7D1CB2F3730050915D /* Secrets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secrets.m; sourceTree = "<group>"; };
 		8B9E5A7F1CB2F7DA0050915D /* FMLJSONDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLJSONDictionary.h; sourceTree = "<group>"; };
 		8B9E5A801CB2F7DA0050915D /* FMLJSONDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLJSONDictionary.m; sourceTree = "<group>"; };
 		8B9E5A821CB2F7E80050915D /* farmers-markets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "farmers-markets.json"; sourceTree = "<group>"; };
@@ -95,6 +94,7 @@
 		8BAC6A861CB7E615001EEDE1 /* farmers-markets-7.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "farmers-markets-7.json"; sourceTree = "<group>"; };
 		8BAC6A871CB7E615001EEDE1 /* farmers-markets-8.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "farmers-markets-8.json"; sourceTree = "<group>"; };
 		8BAC6A881CB7E615001EEDE1 /* farmers-markets-9.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "farmers-markets-9.json"; sourceTree = "<group>"; };
+		8BAC6A931CB7F648001EEDE1 /* Secrets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secrets.m; sourceTree = "<group>"; };
 		8BBD3FFC1CAEA8AB00A1DB0E /* FMLMapViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLMapViewDelegate.h; sourceTree = "<group>"; };
 		8BBD3FFD1CAEA8AB00A1DB0E /* FMLMapViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLMapViewDelegate.m; sourceTree = "<group>"; };
 		8BBD40081CAEB81700A1DB0E /* FMLLocationManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLLocationManagerDelegate.h; sourceTree = "<group>"; };
@@ -285,7 +285,7 @@
 				E1F95DCB1CAB12D6009DA977 /* FMLAPIClient.h */,
 				E1F95DCC1CAB12D6009DA977 /* FMLAPIClient.m */,
 				1F3ED98F1CAB0C990038F590 /* Secrets.h */,
-				8B9E5A7D1CB2F3730050915D /* Secrets.m */,
+				8BAC6A931CB7F648001EEDE1 /* Secrets.m */,
 				8B9E5A7F1CB2F7DA0050915D /* FMLJSONDictionary.h */,
 				8B9E5A801CB2F7DA0050915D /* FMLJSONDictionary.m */,
 			);
@@ -520,7 +520,7 @@
 				A38473B61CADAFC300ED08CA /* SampleZipCodes.m in Sources */,
 				8B9E5A811CB2F7DA0050915D /* FMLJSONDictionary.m in Sources */,
 				8BBD400A1CAEB81700A1DB0E /* FMLLocationManagerDelegate.m in Sources */,
-				8B9E5A7E1CB2F3730050915D /* Secrets.m in Sources */,
+				8BAC6A941CB7F648001EEDE1 /* Secrets.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
