@@ -29,6 +29,7 @@
 @property (strong, nonatomic) FMLMapViewDelegate *mapDelegate;
 @property (strong, nonatomic) FMLLocationManagerDelegate *locationDelegate;
 @property (strong, nonatomic) UIView *dimView;
+@property (nonatomic) CGFloat animationSpeed;
 
 @end
 
@@ -174,19 +175,22 @@
     
     NSString *annotationReuseID = @"PinWithDoubleTapGesture";
     
-    FMLPinAnnotationView *stockPinView = [mapView dequeueReusableAnnotationViewWithIdentifier:annotationReuseID];
+    // Dequeue a custom pin annotation view
+    FMLPinAnnotationView *stockPinView = (FMLPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:annotationReuseID];
     
+    // If you don't get one back, initialize one
     if (!stockPinView) {
         stockPinView = [[FMLPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:annotationReuseID];
     }
     
+    // If the pin doesn't have the double-tap gesture recognizer, add it
     if (stockPinView.gestureRecognizers.count == 0) {
         UITapGestureRecognizer *doubleTapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showProductsCircleForMarket:)];
         doubleTapRecognizer.numberOfTapsRequired = 2;
         doubleTapRecognizer.delegate = self;
         [stockPinView addGestureRecognizer:doubleTapRecognizer];
     }
-    
+
     return stockPinView;
     
 }
@@ -200,10 +204,10 @@
 -(void)showProductsCircleForMarket:(UITapGestureRecognizer *)gestureRecognizer {
 
     // To disable and dim the map/background, put a grayish transparent view over it
-    self.dimView = [[UIView alloc] initWithFrame:self.mapView.frame];
-    self.dimView.backgroundColor = [UIColor grayColor];
-    self.dimView.alpha = 0.6; // Could do a blur thing instead of a gray thing, might look nicer
-    [self.view addSubview:self.dimView];
+        self.dimView = [[UIView alloc] initWithFrame:self.mapView.frame];
+        self.dimView.backgroundColor = [UIColor grayColor];
+        self.dimView.alpha = 0.6; // Could do a blur thing instead of a gray thing, might look nicer
+        [self.view addSubview:self.dimView];
     
     // Create the view that holds the pin and its icons
     FMLPinAnnotationView *view = (FMLPinAnnotationView *)gestureRecognizer.view;
@@ -286,8 +290,8 @@
 //        
 //    }
     
-    // REMOVE THIS AFTER TEST
-    iconsArray = [@[@"Baked goods", @"Baked goods", @"Baked goods", @"Baked goods", @"Baked goods", @"Baked goods", @"Baked goods", @"Baked goods", @"Baked goods", @"Baked goods", @"Baked goods", @"Baked goods", @"Baked goods", @"Baked goods", @"Baked goods", @"Baked goods", @"Baked goods", @"Baked goods"] mutableCopy];
+    // TODO: REMOVE THIS AFTER TEST
+    iconsArray = [@[@"Baked goods", @"Baked goods", @"Baked goods", @"Baked goods", @"Baked goods", @"Baked goods"] mutableCopy];
     
     // Place the icons equidistant from each other along a circle around around the pin.
     // Figure out the position of each icon. Basically, divide 360 by the number of icons, and put an icon at a position that many degrees around the circle...?
@@ -295,6 +299,19 @@
     // index to multiply number of degrees by
     NSUInteger index = 0;
 
+    // ---------------- Duplicate pin view
+    // Add a duplicate pin view in the same place as the old one, so that it can be double-tapped again to get out of this view.
+    FMLPinAnnotationView *newPinView = [[FMLPinAnnotationView alloc] init];
+    newPinView.frame = view.frame;
+    newPinView.pinTintColor = [UIColor yellowColor];
+    [self.dimView addSubview:newPinView];
+    
+    // On second double-tap, get rid of the dim view (this will get rid of the icons and the duplicate pin, which are its subviews)
+    UITapGestureRecognizer *secondDoubleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(removeDimViewFromSuperView)];
+    secondDoubleTap.numberOfTapsRequired = 2;
+    secondDoubleTap.delegate = self;
+    [newPinView addGestureRecognizer:secondDoubleTap];
+    // ---------------
     
     // Make each icon appear at the center of the pin and animate out to its position.
     for (NSString *iconName in iconsArray) {
@@ -328,22 +345,6 @@
 //        iconView.frame = CGRectZero;
         iconView.center = view.center;
         
-        // ---------------- Duplicate pin view
-        // Add a duplicate pin view in the same place as the old one, so that it can be double-tapped again to get out of this view.
-        FMLPinAnnotationView *newPinView = [[FMLPinAnnotationView alloc] init];
-        newPinView.frame = view.frame;
-        newPinView.pinTintColor = [UIColor yellowColor];
-        [self.dimView addSubview:newPinView];
-        
-        // On second double-tap, get rid of the dim view (this will get rid of the icons and the duplicate pin, which are its subviews)
-        UITapGestureRecognizer *secondDoubleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(removeDimViewFromSuperView)];
-        secondDoubleTap.numberOfTapsRequired = 2;
-        secondDoubleTap.delegate = self;
-        [newPinView addGestureRecognizer:secondDoubleTap];
-                                                   
-        
-        // ---------------
-        
         [self.mapView layoutIfNeeded];
         
         
@@ -356,7 +357,8 @@
         CGPoint iconDestinationPosition = [self pointAroundCircumferenceFromCenter:view.center withRadius:50 andAngle:degreesForIcon];
         
         // Animate the icon moving to its position in the circle. Also make it opaque and have size (same size as pin).
-        [UIView animateWithDuration:0.25 animations:^{
+        self.animationSpeed = 0.25; // Change this to change the animation speed of both the appearance and disappearance of the icons.
+        [UIView animateWithDuration:self.animationSpeed animations:^{
             
             // position
             sameXAsPin.active = NO;
@@ -386,18 +388,73 @@
         // Increment index
         index++;
         
-        // ACCOUNT FOR THE SECOND DOUBLE-TAP making the icons go away.
-        
     }
     
 
 }
 
 -(void)removeDimViewFromSuperView{
+
+    // Array of the subviews. This includes both the icons and the pin in the middle.
+    NSArray *subviews = self.dimView.subviews;
     
-    [self.dimView removeFromSuperview];
+    // TODO: check if there's a better way to separate the icons (imageviews) from the pin (either MKPinAnnotationView or our subclass of it) than these for-loops and if-statements. NSPredicate? IndexOfObjectPassingTest?
     
+    // Capture the pin annotation view in a variable, so we can use its location as the point on which the icons should converge
+    MKAnnotationView *pinView;
+    for (UIView *subview in subviews) {
+        if (![subview isKindOfClass:UIImageView.class]) {
+            pinView = (MKAnnotationView *)subview;
+            break;
+        }
+    }
+    
+    // Animation of icons' disappearance: become transparent, shrink, move back to the center.
+    [UIView animateWithDuration:self.animationSpeed animations:^{
+        
+        for (UIView *subview in subviews) {
+            
+            if ([subview isKindOfClass:UIImageView.class]) {
+                
+                // Transparency/alpha
+                subview.alpha = 0;
+                // Size
+                subview.frame = CGRectZero;
+                // Position
+                subview.center = pinView.center;
+                
+                // Constraint version of size/position stuff--doesn't work.
+                // Remove all old constraints
+//                [subview removeConstraints:subview.constraints];
+                
+                // Size
+                //                NSLayoutConstraint *zeroHeight = [subview.heightAnchor constraintEqualToConstant:0];
+                //                NSLayoutConstraint *zeroWidth = [subview.widthAnchor constraintEqualToConstant:0];
+                //                zeroHeight.active = YES;
+                //                zeroWidth.active = YES;
+                //
+                //                // Position
+                //                NSLayoutConstraint *sameXAsPin = [NSLayoutConstraint constraintWithItem:subview attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:pinView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+                //                NSLayoutConstraint *sameYAsPin = [NSLayoutConstraint constraintWithItem:subview attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:pinView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+                //                sameXAsPin.active = YES;
+                //                sameYAsPin.active = YES;
+                
+
+                
+            }
+        }
+        
+    } completion:^(BOOL finished) {
+       
+        // After the animation, remove the pin. (Don't animate this: there's an identical one right underneath and it shouldn't look like there's two. The color/alpha could animate, though.)
+        [pinView removeFromSuperview];
+        
+        // After everything else, make dimView disappear
+        [self.dimView removeFromSuperview];
+        
+    }];
 }
+
 
 // Function to get points at a particular number of degrees around a circle
 // from Stack Overflow: http://stackoverflow.com/questions/17739397/get-end-points-of-circle-drawn-in-objectivec
