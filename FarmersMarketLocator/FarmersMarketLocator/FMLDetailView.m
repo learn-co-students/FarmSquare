@@ -163,7 +163,6 @@
 
 //shows the Detail View only up to half of its height
 -(void)showDetailView {
-    [NSNotificationCenter defaultCenter]
     [UIView animateWithDuration:0.25 animations:^{
         self.transform = CGAffineTransformMakeTranslation(0, self.frame.size.height/2);
         
