@@ -55,6 +55,10 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         detailView.addressLabel.text = [NSString stringWithFormat:@"ADDRESS: %@", market.address];
         detailView.produceTextView.text = [NSString stringWithFormat:@"AVAILABLE PRODUCE: %@", market.produceList];
         detailView.scheduleLabel.text = [NSString stringWithFormat:@"SCHEDULE: %@", market.scheduleString];
+        
+        //to use in yelp URL:
+        detailView.zip = market.zipCode;
+        
         //to use in maps URL for directions:
         detailView.selectedLatitude = [market.latitude floatValue];
         detailView.selectedLongitude = [market.longitude floatValue];
