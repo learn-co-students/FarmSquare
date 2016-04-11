@@ -19,6 +19,7 @@
 #import "FMLMarket+CoreDataProperties.h"
 #import "CoreDataStack.h"
 #import "FMLJSONDictionary.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 // TODO: When network connection is lost, Core Data misfunctions and saves 0 objects which shouldn't be ok
@@ -61,12 +62,22 @@
     self.detailView = [[FMLDetailView alloc] initWithFrame:CGRectMake(0, yCoordinateOfMarketView, width, height)];
     [self.view addSubview:self.detailView];
     [self.detailView constrainViews];
+
     
     
     self.manager = [[CLLocationManager alloc] init];
     self.manager.delegate = self.locationDelegate;
     self.detailView.locationManager = self.manager;
-
+    
+    
+    // Create and Add MoveToLocation Button
+    self.moveToLocationButton = [self setUpMoveToLocationButtonWithAction:@selector(moveToLocationButtonTapped)];
+    [self.view addSubview:self.moveToLocationButton];
+    // Set up constraints
+    [self.moveToLocationButton.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-20].active = YES;
+    [self.moveToLocationButton.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20].active = YES;
+    [self.moveToLocationButton.heightAnchor constraintEqualToConstant:32].active = YES;
+    [self.moveToLocationButton.widthAnchor constraintEqualToConstant:32].active = YES;
     
     // Grab data from Managed Context Object
     NSManagedObjectContext *context = [[CoreDataStack sharedStack] managedObjectContext];
@@ -90,7 +101,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomBackOut:) name:@"ZoomBackOutKThxBai" object:nil];
     
     self.detailView.transform = CGAffineTransformMakeTranslation(0, self.detailView.frame.size.height);
-    
 }
 
 -(void)zoomBackOut:(NSNotification *)notification {
@@ -161,7 +171,24 @@
 
 
 
+-(UIButton *)setUpMoveToLocationButtonWithAction:(SEL)action {
+    // Create and Add MoveToLocation button
+    UIButton *moveToLocationButton = [[UIButton alloc] init];
+    UIImage *buttonImage = [UIImage imageNamed:@"gps (1)"];
+    [moveToLocationButton setImage:buttonImage forState:UIControlStateNormal];
+    [moveToLocationButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    moveToLocationButton.layer.masksToBounds = YES;
+    
+    
+    moveToLocationButton.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    return moveToLocationButton;
+}
 
+-(void)moveToLocationButtonTapped {
+    CLLocationCoordinate2D currentLocation = self.manager.location.coordinate;
+    [self zoomMaptoLatitude:currentLocation.latitude longitude:currentLocation.longitude withLatitudeSpan:0.05 longitudeSpan:0.05];
+}
 
 
 

@@ -110,15 +110,6 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
                 break;
         }
         
-//        NSDate *date = [NSDate date]
-//        if ([dateString isEqualToString:@""]) {
-//            pepeLeView.image = [UIImage imageNamed:@"closingSoonPin"];
-//        } else {
-////            NSD
-//            pepeLeView.image = [UIImage imageNamed:@"openPin"];
-//
-//        }
-        
         pepeLeView.canShowCallout = YES;
         return pepeLeView;
     }
@@ -151,9 +142,6 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
             
             NSString *timeString = [market.season1Time stringByReplacingOccurrencesOfString:@" " withString:@""];
             NSArray *components = [timeString componentsSeparatedByString:@";"];
-            
-            NSDate *closingTime;
-            
             
             for (NSString *schedule in components) {
                 if (![schedule isEqualToString:@""]) {

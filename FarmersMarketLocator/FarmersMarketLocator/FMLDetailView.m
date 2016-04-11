@@ -28,7 +28,6 @@
         _arrowUpButton = [self setUpButtonWithImageName:@"arrowup" action:@selector(expandButtonPressed)];
         _yelpButton = [self setUpButtonWithImageName:@"yelp_review_btn_red" action:@selector(yelpButtonPressed)];
         _directionsButton = [self setUpButtonWithImageName:@"direction24px" action:@selector(directionsButtonPressed)];
-        
     }
     [self addSubview:_nameLabel];
     [self addSubview:_addressLabel];
@@ -164,6 +163,7 @@
 
 //shows the Detail View only up to half of its height
 -(void)showDetailView {
+    [NSNotificationCenter defaultCenter]
     [UIView animateWithDuration:0.25 animations:^{
         self.transform = CGAffineTransformMakeTranslation(0, self.frame.size.height/2);
         

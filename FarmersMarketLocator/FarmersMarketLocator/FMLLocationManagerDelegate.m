@@ -48,6 +48,8 @@
     }
     
     if (status == kCLAuthorizationStatusDenied) {
+        self.viewController.moveToLocationButton.hidden = YES;
+        
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"zipCodeSaved"]) {
             CGFloat latitude = [[NSUserDefaults standardUserDefaults] floatForKey:@"latitude"];
             CGFloat longitude = [[NSUserDefaults standardUserDefaults] floatForKey:@"longitude"];
