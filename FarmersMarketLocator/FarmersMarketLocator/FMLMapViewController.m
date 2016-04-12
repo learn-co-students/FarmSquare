@@ -19,6 +19,8 @@
 #import "FMLMarket+CoreDataProperties.h"
 #import "CoreDataStack.h"
 #import "FMLPinAnnotationView.h"
+#import "FMLJSONDictionary.h"
+#import <QuartzCore/QuartzCore.h>
 
 // TODO: When network connection is lost, Core Data misfunctions and saves 0 objects which shouldn't be ok
 
@@ -43,7 +45,6 @@
     self.mapDelegate = [[FMLMapViewDelegate alloc] initWithTarget:self];
     self.locationDelegate = [[FMLLocationManagerDelegate alloc] initWithTarget:self];
     
-    
     // Create and customize map view
     self.mapView = [[MKMapView alloc]initWithFrame:CGRectMake(0, 50, self.view.frame.size.width, self.view.frame.size.height - 50)];
     self.mapView.mapType = MKMapTypeStandard;
@@ -56,26 +57,37 @@
     
     // Create detail view
     CGFloat width = self.view.frame.size.width;
-    CGFloat height = self.view.frame.size.height / 5;
+    CGFloat height = self.view.frame.size.height * 0.4;
     CGFloat yCoordinateOfMarketView = self.view.frame.size.height - height;
     
     //define detail view (property)
     self.detailView = [[FMLDetailView alloc] initWithFrame:CGRectMake(0, yCoordinateOfMarketView, width, height)];
     [self.view addSubview:self.detailView];
     [self.detailView constrainViews];
+
+    
     
     self.manager = [[CLLocationManager alloc] init];
     self.manager.delegate = self.locationDelegate;
+    self.detailView.locationManager = self.manager;
     
     
-    // Show saved data
+    // Create and Add MoveToLocation Button
+    self.moveToLocationButton = [self setUpMoveToLocationButtonWithAction:@selector(moveToLocationButtonTapped)];
+    [self.view addSubview:self.moveToLocationButton];
+    // Set up constraints
+    [self.moveToLocationButton.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-20].active = YES;
+    [self.moveToLocationButton.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20].active = YES;
+    [self.moveToLocationButton.heightAnchor constraintEqualToConstant:32].active = YES;
+    [self.moveToLocationButton.widthAnchor constraintEqualToConstant:32].active = YES;
     
-    
+    // Grab data from Managed Context Object
     NSManagedObjectContext *context = [[CoreDataStack sharedStack] managedObjectContext];
     NSFetchRequest *getSavedLocationsFetch = [NSFetchRequest fetchRequestWithEntityName:@"FMLMarket"];
     
     self.marketsArray = [context executeFetchRequest:getSavedLocationsFetch error:nil];
     
+    // If there's saved data, show it
     if ([self.marketsArray count] > 0) {
         self.showingSavedData = YES;
         [self displayMarketObjects:self.marketsArray];
@@ -429,7 +441,24 @@
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
+-(UIButton *)setUpMoveToLocationButtonWithAction:(SEL)action {
+    // Create and Add MoveToLocation button
+    UIButton *moveToLocationButton = [[UIButton alloc] init];
+    UIImage *buttonImage = [UIImage imageNamed:@"gps (1)"];
+    [moveToLocationButton setImage:buttonImage forState:UIControlStateNormal];
+    [moveToLocationButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    moveToLocationButton.layer.masksToBounds = YES;
+    
+    
+    moveToLocationButton.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    return moveToLocationButton;
+}
 
+-(void)moveToLocationButtonTapped {
+    CLLocationCoordinate2D currentLocation = self.manager.location.coordinate;
+    [self zoomMaptoLatitude:currentLocation.latitude longitude:currentLocation.longitude withLatitudeSpan:0.05 longitudeSpan:0.05];
+}
 
 
 // ~ PICTURE CREDITS ~

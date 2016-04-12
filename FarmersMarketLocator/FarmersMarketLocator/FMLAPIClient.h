@@ -11,6 +11,8 @@
 
 @interface FMLAPIClient : NSObject
 
+@property (strong, nonatomic)NSString *zipCode;
+
 // API methods
 +(void)getMarketsForZip:(NSString *)zip
          withCompletion:(void (^)(NSMutableArray *marketsArray))zipCompletion;

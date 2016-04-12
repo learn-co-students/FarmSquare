@@ -48,6 +48,8 @@
     }
     
     if (status == kCLAuthorizationStatusDenied) {
+        self.viewController.moveToLocationButton.hidden = YES;
+        
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"zipCodeSaved"]) {
             CGFloat latitude = [[NSUserDefaults standardUserDefaults] floatForKey:@"latitude"];
             CGFloat longitude = [[NSUserDefaults standardUserDefaults] floatForKey:@"longitude"];
@@ -118,7 +120,7 @@
 -(void)saveUserCoordinates:(CLLocationCoordinate2D)coordinates {
     [[NSUserDefaults standardUserDefaults] setFloat:coordinates.latitude forKey:@"latitude"];
     [[NSUserDefaults standardUserDefaults] setFloat:coordinates.longitude forKey:@"longitude"];
-    
+
     [[NSNotificationCenter defaultCenter] postNotificationName:@"GotUserCoordinates" object:nil];
 }
 
