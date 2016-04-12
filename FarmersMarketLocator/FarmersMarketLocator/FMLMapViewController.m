@@ -249,7 +249,7 @@
         circleView.translatesAutoresizingMaskIntoConstraints = NO;
         circleView.backgroundColor = [UIColor brownColor];
         // Corner radius to 50 makes it a circle
-        circleView.layer.cornerRadius = 50;
+        circleView.layer.cornerRadius = 15;
         // Add to dimView
         [self.dimView addSubview:circleView];
         // Position constraints: center the circle at the center of the pin view
@@ -257,6 +257,11 @@
         NSLayoutConstraint *circleCenterY = [NSLayoutConstraint constraintWithItem:circleView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:newPinView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
         circleCenterX.active = YES;
         circleCenterY.active = YES;
+        NSLayoutConstraint *circleHeight = [circleView.heightAnchor constraintEqualToConstant:0];
+        NSLayoutConstraint *circleWidth = [circleView.widthAnchor constraintEqualToConstant:0];
+        circleHeight.active = YES;
+        circleWidth.active = YES;
+        circleView.alpha = 0;
         
         // Get the icon and put it on the circle:
         // Create an image view with the icon
@@ -267,27 +272,22 @@
         iconView.translatesAutoresizingMaskIntoConstraints = NO;
         // Put the icon on the circle
         [circleView addSubview:iconView];
+        
         // Constrain icon to center of circle
+        // Both the icons and the circles should start out sizeless and fully transparent
+        
         NSLayoutConstraint *iconAtCenterOfCircleX = [NSLayoutConstraint constraintWithItem:iconView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:circleView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
         NSLayoutConstraint *iconAtCenterOfCircleY = [NSLayoutConstraint constraintWithItem:iconView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:circleView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
         iconAtCenterOfCircleX.active = YES;
         iconAtCenterOfCircleY.active = YES;
-        
-        // Both the icons and the circles should start out sizeless and fully transparent
-        // ...icons
         NSLayoutConstraint *iconHeight = [iconView.heightAnchor constraintEqualToConstant:0];
         NSLayoutConstraint *iconWidth = [iconView.widthAnchor constraintEqualToConstant:0];
         iconHeight.active = YES;
         iconWidth.active = YES;
         iconView.alpha = 0;
-        // ...circles
-        NSLayoutConstraint *circleHeight = [circleView.heightAnchor constraintEqualToConstant:0];
-        NSLayoutConstraint *circleWidth = [circleView.widthAnchor constraintEqualToConstant:0];
-        circleHeight.active = YES;
-        circleWidth.active = YES;
-        circleView.alpha = 0;
         
-        [self.mapView layoutIfNeeded];
+        [self.dimView layoutSubviews];
+        [circleView layoutIfNeeded];
         
         
         // ~~~~~ ICONS: FINAL STATE ~~~~~
@@ -322,7 +322,7 @@
             iconHeight.constant = 15;
             iconWidth.constant = 15;
             
-            [self.mapView layoutIfNeeded];
+            [self.dimView layoutIfNeeded];
             
         } completion:^(BOOL finished) {
             if (finished) {
@@ -406,7 +406,6 @@
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  
  To-do:
- - Make all the icons circles of uniform size--they don't come as circles, so put them on colored circles. This will be much prettier.
  - Somehow make the center of the circle of icons be the actual location, not just the center of the pin view. More like, the bottom middle?
  - Remove green background from pin view.
  - Fix the frames thing: should be based on a calculation with screen size, not an absolute number
@@ -423,6 +422,8 @@
  - On second double-tap (and/or tap elsewhere), make the icons get sucked back into the pin and restore map functionality. (Do this last, because it has to reverse all the previous stuff.)
  - Issue: the dimView's alpha applies not to just the background, but to the pin and icons on top of it. Fix this. (Does the background itself have an alpha that can be set independently?)
  - Get actual icons (Noun Project, Flaticon, etc.), put them in Assets, give them the right names, and uncomment the code that adds to the iconsArray using the dictionary. (Could do it without the dictionary and just give them the same names as the strings, BUT there are slashes in some of the strings. Could just change them first though.)
+ - Make all the icons circles of uniform size--they don't come as circles, so put them on colored circles. This will be much prettier.
+
  
  
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
