@@ -159,15 +159,6 @@
         
         [self.mapView addAnnotation:annotation];
         
-// TODO: delete this
-//        // Capture the annotation view in a variable
-//        MKAnnotationView *annotationView = [self.mapView viewForAnnotation:annotation]; // coming back nil :\
-//        // Create a double-tap gesture recognizer that calls a method that makes the circle thing happen.
-//        UITapGestureRecognizer *doubleTapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showProductsCircleForMarket:)];
-//        doubleTapRecognizer.numberOfTapsRequired = 2;
-//        // Add the gesture recognizer to the annotation view.
-//        
-//        [annotationView addGestureRecognizer:doubleTapRecognizer];
     }
 }
 
@@ -195,160 +186,111 @@
     
 }
 
+#pragma mark - product icons methods
+
 // When a pin is double-tapped, don't also zoom in on the map.
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
     return NO;
 }
 
-// When a pin is double-tapped, shoot out an icon for each product available at that Farmer's Market. The icons should radiate out to form a circle around the pin. (If there's not enough room, maybe a spiral instead.)
+// Shoot out an icon for each product type available at that Farmer's Market. The icons should radiate out to equidistant positions around a circle centered on the pin. The Assets folder contains an icon for each product category.
 -(void)showProductsCircleForMarket:(UITapGestureRecognizer *)gestureRecognizer {
 
-    // To disable and dim the map/background, put a grayish transparent view over it
+    // ~ DIM VIEW ~ ------------------------
+    // To disable and dim the map/background, put a partially transparent view over it
+    // TODO: Could do a blur thing instead of a gray thing, might look nicer. Could also change the color.
         self.dimView = [[UIView alloc] initWithFrame:self.mapView.frame];
-        self.dimView.backgroundColor = [UIColor grayColor];
-        self.dimView.alpha = 0.6; // Could do a blur thing instead of a gray thing, might look nicer
+        self.dimView.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.6];
         [self.view addSubview:self.dimView];
     
-    // Create the view that holds the pin and its icons
+    // Change pin view's background color when tapped (for testing only, DELETE AFTER)
     FMLPinAnnotationView *view = (FMLPinAnnotationView *)gestureRecognizer.view;
-    // Turn off autoresizing thing (its constraints interfere with ours)
-//    view.translatesAutoresizingMaskIntoConstraints = NO;
-    // Make the pin's view (not the pin itself) big enough to hold the pin and all the icons that will be placed around it.
-//    [view.heightAnchor constraintEqualToConstant:150].active=YES;
-//    [view.widthAnchor constraintEqualToConstant:150].active=YES;
     view.backgroundColor = [UIColor greenColor];
+    // ------------------------
     
     
-    Annotation *annotation = view.annotation;
-    
-    // We're going to have a set of icons in assets that represent all of .
-    
-    // Each key in this dictionary is a product category. Each value is the name of an icon in Assets that represents that category.
-    // NOTE: right now I'm using dummy pictures to save time. Later we can pick actual icons (from the Noun Project or Flaticon or wherever).
-    NSDictionary *productIconsDictionary = @{@"Baked goods": @"Baked goods",
-                                            @"Cheese and/or dairy products": @"",
-                                            @"Crafts and/or woodworking items": @"Crafts and or woodworking items",
-                                            @"Cut flowers": @"",
-                                            @"Eggs": @"",
-                                            @"Fish and/or seafood": @"",
-                                            @"Fresh and/or dried herbs": @"",
-                                            @"Fresh vegetables": @"",
-                                            @"Honey": @"",
-                                            @"Canned or preserved fruits, vegetables, jams, jellies, preserves, salsas, pickles, dried fruit, etc.": @"",
-                                            @"Maple syrup and/or maple products": @"",
-                                            @"Meat": @"",
-                                            @"Nuts": @"",
-                                            @"Plants in containers": @"",
-                                            @"Poultry": @"",
-                                            @"Prepared foods (for immediate consumption)": @"",
-                                            @"Soap and/or body care products": @"",
-                                            @"Trees, shrubs": @"",
-                                            @"Wine, beer, hard cider": @"",
-                                            @"Coffee and or tea": @"",
-                                            @"Dry beans": @"",
-                                            @"Fresh fruits": @"",
-                                            @"Grains and or flour": @"",
-                                            @"Juices and or non-alcoholic ciders": @"",
-                                            @"Mushrooms": @"",
-                                            @"Pet food": @"",
-                                            @"Tofu and or non-animal protein": @"",
-                                            @"Wild harvested forest products: mushrooms, medicinal herbs, edible fruits and nuts, etc.": @""
-                                            };
-    
-    // Create an array to store the icons we want to pop out
-    NSMutableArray *iconsArray = [NSMutableArray new];
-    
-    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    
-     To-do:
-     - Get actual icons (Noun Project, Flaticon, etc.), put them in Assets, give them the right names, and uncomment the code that adds to the iconsArray using the dictionary. (Could do it without the dictionary and just give them the same names as the strings, BUT there are slashes in some of the strings. Could just change them first though.)
-     - Make all the icons circles of uniform size--they don't come as circles, so put them on colored circles. This will be much prettier.
-     - Somehow make the center of the circle be the actual location, not just the center of the pin view. More like, the bottom middle?
-     - Remove green background from pin view.
-     - Fix the frames thing: should be based on a calculation with screen size, not an absolute number
-     - What if there are too many items? Bigger circle? Spiral? A "..." icon that you can tap to expand more?
-     - Should it move the double-tapped pin to the center? Otherwise, if it's close to the side some of the icons will be offscreen.
-     - Should there be little text labels next to the icons? Maybe you can touch an icon to see the text
-     - On second double-tap (and/or tap elsewhere), make the icons get sucked back into the pin and restore map functionality. (Do this last, because it has to reverse all the previous stuff.)
-     - Instead of making new constraints in the animation, just reassign the values of the existing constraints. Rename appropriately.
-    
-     Done:
-     - Disable the map movement and make the background dim.
-     
-     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     */
-     
-    // Uncomment this after test ---->
-
-//    // Get the right icons
-//    for (NSString *product in annotation.market.productsArray) {
-//
-//        NSString *iconName = [NSString stringWithFormat:@"%@", product];
-//        [iconsArray addObject:productIconsDictionary[iconName]];
-//        
-//        
-//        
-//    }
-    
-    // TODO: REMOVE THIS AFTER TEST
-    iconsArray = [@[@"Baked goods", @"Baked goods", @"Baked goods", @"Baked goods", @"Baked goods", @"Baked goods"] mutableCopy];
-    
-    // Place the icons equidistant from each other along a circle around around the pin.
-    // Figure out the position of each icon. Basically, divide 360 by the number of icons, and put an icon at a position that many degrees around the circle...?
-    CGFloat degreesBetweenIcons = 360 / iconsArray.count;
-    // index to multiply number of degrees by
-    NSUInteger index = 0;
-
-    // ---------------- Duplicate pin view
-    // Add a duplicate pin view in the same place as the old one, so that it can be double-tapped again to get out of this view.
+    // ~ NEW PIN VIEW ~ ------------------------
+    // New pin on top of the old one. Necessary a) so the pin isn't blurred/dimmed, and b) to hold a gesture recognizer.
     FMLPinAnnotationView *newPinView = [[FMLPinAnnotationView alloc] init];
     newPinView.frame = view.frame;
     newPinView.pinTintColor = [UIColor yellowColor];
+    // Tag pinView so we can exclude it from the icon animations later
+    newPinView.tag = 1;
+    // Add as subview of dimView
     [self.dimView addSubview:newPinView];
     
-    // On second double-tap, get rid of the dim view (this will get rid of the icons and the duplicate pin, which are its subviews)
+    // Add double-tap recognizer to make the icons go away
     UITapGestureRecognizer *secondDoubleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(removeDimViewFromSuperView)];
     secondDoubleTap.numberOfTapsRequired = 2;
     secondDoubleTap.delegate = self;
     [newPinView addGestureRecognizer:secondDoubleTap];
-    // ---------------
+    // ------------------------
+    
+    
+    // ~ ICON CIRCLE ~ ------------------------
+    
+    // Get an array of the names of the icons we want. (Remove slashes because filenames can't have slashes.)
+    Annotation *annotation = view.annotation;
+    NSMutableArray *iconsArray = [[[annotation.market.produceList stringByReplacingOccurrencesOfString:@"/" withString:@"" ] componentsSeparatedByString:@"; "] mutableCopy];
+    
+    // Number of degrees separating icons
+    CGFloat degreesBetweenIcons = 360 / iconsArray.count;
+    // Index (to multiply number of degrees by)
+    NSUInteger index = 0;
     
     // Make each icon appear at the center of the pin and animate out to its position.
     for (NSString *iconName in iconsArray) {
         
-        // ~~~~~ INITIAL STATE OF ICONS ~~~~~
+        // ~~~~~ ICONS: INITIAL STATE ~~~~~
         
-        // Create the icon and a view for it.
+        // Create a circle:
+        // Make a view
+        UIView *circleView = [[UIView alloc] init];
+        circleView.translatesAutoresizingMaskIntoConstraints = NO;
+        circleView.backgroundColor = [UIColor brownColor];
+        // Corner radius to 50 makes it a circle
+        circleView.layer.cornerRadius = 50;
+        // Add to dimView
+        [self.dimView addSubview:circleView];
+        // Position constraints: center the circle at the center of the pin view
+        NSLayoutConstraint *circleCenterX = [NSLayoutConstraint constraintWithItem:circleView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:newPinView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+        NSLayoutConstraint *circleCenterY = [NSLayoutConstraint constraintWithItem:circleView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:newPinView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+        circleCenterX.active = YES;
+        circleCenterY.active = YES;
+        
+        // Get the icon and put it on the circle:
+        // Create an image view with the icon
         UIImage *icon = [UIImage imageNamed:iconName];
         UIImageView *iconView = [[UIImageView alloc] initWithImage:icon];
         iconView.contentMode = UIViewContentModeScaleAspectFit;
         iconView.clipsToBounds = YES;
         iconView.translatesAutoresizingMaskIntoConstraints = NO;
+        // Put the icon on the circle
+        [circleView addSubview:iconView];
+        // Constrain icon to center of circle
+        NSLayoutConstraint *iconAtCenterOfCircleX = [NSLayoutConstraint constraintWithItem:iconView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:circleView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+        NSLayoutConstraint *iconAtCenterOfCircleY = [NSLayoutConstraint constraintWithItem:iconView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:circleView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+        iconAtCenterOfCircleX.active = YES;
+        iconAtCenterOfCircleY.active = YES;
         
-        // Sizeless and fully transparent
-        NSLayoutConstraint *zeroHeight = [iconView.heightAnchor constraintEqualToConstant:0];
-        zeroHeight.identifier = @"zeroheight";
-        NSLayoutConstraint *zeroWidth = [iconView.widthAnchor constraintEqualToConstant:0];
-        zeroWidth.identifier = @"zeroWidth";
-        zeroHeight.active = YES;
-        zeroWidth.active = YES;
+        // Both the icons and the circles should start out sizeless and fully transparent
+        // ...icons
+        NSLayoutConstraint *iconHeight = [iconView.heightAnchor constraintEqualToConstant:0];
+        NSLayoutConstraint *iconWidth = [iconView.widthAnchor constraintEqualToConstant:0];
+        iconHeight.active = YES;
+        iconWidth.active = YES;
         iconView.alpha = 0;
-        
-        // Add the iconView to the dimView as a subview
-        [self.dimView addSubview:iconView];
-        
-        // Initial position: centered on the pin, using NSLayoutConstraints.
-        NSLayoutConstraint *sameXAsPin = [NSLayoutConstraint constraintWithItem:iconView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
-        NSLayoutConstraint *sameYAsPin = [NSLayoutConstraint constraintWithItem:iconView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
-        sameXAsPin.active = YES;
-        sameYAsPin.active = YES;
-//        iconView.frame = CGRectZero;
-        iconView.center = view.center;
+        // ...circles
+        NSLayoutConstraint *circleHeight = [circleView.heightAnchor constraintEqualToConstant:0];
+        NSLayoutConstraint *circleWidth = [circleView.widthAnchor constraintEqualToConstant:0];
+        circleHeight.active = YES;
+        circleWidth.active = YES;
+        circleView.alpha = 0;
         
         [self.mapView layoutIfNeeded];
         
         
-        // ~~~~~ FINAL STATE OF ICONS ~~~~~
+        // ~~~~~ ICONS: FINAL STATE ~~~~~
         
         // Calculate number of degrees around the circle that the icon should be
         CGFloat degreesForIcon = degreesBetweenIcons * index;
@@ -356,43 +298,49 @@
         // Get the coordinates of that position
         CGPoint iconDestinationPosition = [self pointAroundCircumferenceFromCenter:view.center withRadius:50 andAngle:degreesForIcon];
         
-        // Animate the icon moving to its position in the circle. Also make it opaque and have size (same size as pin).
-        self.animationSpeed = 0.25; // Change this to change the animation speed of both the appearance and disappearance of the icons.
+        // Animate the icon moving to its position in the circle.
+        self.animationSpeed = 0.25;
         [UIView animateWithDuration:self.animationSpeed animations:^{
             
-            // position
-            sameXAsPin.active = NO;
-            sameYAsPin.active = NO;
-            NSLayoutConstraint *xPosition = [iconView.centerXAnchor constraintEqualToAnchor:self.dimView.leftAnchor constant:iconDestinationPosition.x];
-            NSLayoutConstraint *yPosition = [iconView.centerYAnchor constraintEqualToAnchor:self.dimView.topAnchor constant:iconDestinationPosition.y];
-//            NSLayoutConstraint *xPosition = [NSLayoutConstraint constraintWithItem:iconView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterX multiplier:1 constant:iconDestinationPosition.x];
-//            NSLayoutConstraint *yPosition = [NSLayoutConstraint constraintWithItem:iconView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterY multiplier:1 constant:iconDestinationPosition.y];
+            // position (we move only the circle; the icon is constrained to it)
+            circleCenterX.active = NO;
+            circleCenterY.active = NO;
+            NSLayoutConstraint *xPosition = [circleView.centerXAnchor constraintEqualToAnchor:self.dimView.leftAnchor constant:iconDestinationPosition.x];
+            NSLayoutConstraint *yPosition = [circleView.centerYAnchor constraintEqualToAnchor:self.dimView.topAnchor constant:iconDestinationPosition.y];
+
             xPosition.active = YES;
             yPosition.active = YES;
             
             // alpha (opacity)
             iconView.alpha = 1;
+            circleView.alpha = 1;
             
             // size
-            zeroHeight.active = NO;
-            zeroWidth.active = NO;
-            [iconView.heightAnchor constraintEqualToConstant:30].active=YES;
-            [iconView.widthAnchor constraintEqualToConstant:30].active=YES;
-            // NOTE ON FRAMES: make the height and width a calculation based on the size of the view, so it works correctly regardless of device.
-//            iconView.frame = CGRectMake(0, 0, 30, 30);
-            iconView.center = iconDestinationPosition;
+            // TODO: make the height and width a calculation based on the size of the view, so it works correctly regardless of device. Or perhaps as a multiple of the size of the pinview or something.
+            circleHeight.constant = 30;
+            circleWidth.constant = 30;
+            iconHeight.constant = 15;
+            iconWidth.constant = 15;
+            
             [self.mapView layoutIfNeeded];
             
+        } completion:^(BOOL finished) {
+            if (finished) {
+                NSLog(@"Circle view %lu frame: %@", index, NSStringFromCGRect(circleView.frame));
+                
+            }
         }];
         
         // Increment index
         index++;
         
     }
-    
 
+    // ------------------------
+ 
 }
 
+// Remove dimView: animate the disappearance of the icons, then remove the view entirely.
 -(void)removeDimViewFromSuperView{
 
     // Array of the subviews. This includes both the icons and the pin in the middle.
@@ -403,18 +351,18 @@
     // Capture the pin annotation view in a variable, so we can use its location as the point on which the icons should converge
     MKAnnotationView *pinView;
     for (UIView *subview in subviews) {
-        if (![subview isKindOfClass:UIImageView.class]) {
+        if (subview.tag == 1) {
             pinView = (MKAnnotationView *)subview;
             break;
         }
     }
-    
+
     // Animation of icons' disappearance: become transparent, shrink, move back to the center.
     [UIView animateWithDuration:self.animationSpeed animations:^{
         
         for (UIView *subview in subviews) {
             
-            if ([subview isKindOfClass:UIImageView.class]) {
+            if (subview.tag != 1) {
                 
                 // Transparency/alpha
                 subview.alpha = 0;
@@ -422,24 +370,6 @@
                 subview.frame = CGRectZero;
                 // Position
                 subview.center = pinView.center;
-                
-                // Constraint version of size/position stuff--doesn't work.
-                // Remove all old constraints
-//                [subview removeConstraints:subview.constraints];
-                
-                // Size
-                //                NSLayoutConstraint *zeroHeight = [subview.heightAnchor constraintEqualToConstant:0];
-                //                NSLayoutConstraint *zeroWidth = [subview.widthAnchor constraintEqualToConstant:0];
-                //                zeroHeight.active = YES;
-                //                zeroWidth.active = YES;
-                //
-                //                // Position
-                //                NSLayoutConstraint *sameXAsPin = [NSLayoutConstraint constraintWithItem:subview attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:pinView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
-                //                NSLayoutConstraint *sameYAsPin = [NSLayoutConstraint constraintWithItem:subview attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:pinView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
-                //                sameXAsPin.active = YES;
-                //                sameYAsPin.active = YES;
-                
-
                 
             }
         }
@@ -454,7 +384,6 @@
         
     }];
 }
-
 
 // Function to get points at a particular number of degrees around a circle
 // from Stack Overflow: http://stackoverflow.com/questions/17739397/get-end-points-of-circle-drawn-in-objectivec
@@ -474,9 +403,68 @@
 
 
 
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+ To-do:
+ - Make all the icons circles of uniform size--they don't come as circles, so put them on colored circles. This will be much prettier.
+ - Somehow make the center of the circle of icons be the actual location, not just the center of the pin view. More like, the bottom middle?
+ - Remove green background from pin view.
+ - Fix the frames thing: should be based on a calculation with screen size, not an absolute number
+ - What if there are too many items? Bigger circle? Spiral? A "..." icon that you can tap to expand more?
+ - Should it move the double-tapped pin to the center? Otherwise, if it's close to the side some of the icons will be offscreen.
+ - Should there be little text labels next to the icons? Maybe you can touch an icon to see the text
+ - Instead of making new constraints in the animation, just reassign the values of the existing constraints. Rename appropriately.
+ - Account for what happens if we get a name of a product type that's not in the Assets
+ - ERROR: for the market near the Exploratorium in San Francisco, we get:
+        -[MKUserLocation market]: unrecognized selector sent to instance 0x7fafb0d02c00
+ 
+ Done:
+ - Disable the map movement and make the background dim.
+ - On second double-tap (and/or tap elsewhere), make the icons get sucked back into the pin and restore map functionality. (Do this last, because it has to reverse all the previous stuff.)
+ - Issue: the dimView's alpha applies not to just the background, but to the pin and icons on top of it. Fix this. (Does the background itself have an alpha that can be set independently?)
+ - Get actual icons (Noun Project, Flaticon, etc.), put them in Assets, give them the right names, and uncomment the code that adds to the iconsArray using the dictionary. (Could do it without the dictionary and just give them the same names as the strings, BUT there are slashes in some of the strings. Could just change them first though.)
+ 
+ 
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
 
 
 
 
+// ~ PICTURE CREDITS ~
+// (see https://thenounproject.zendesk.com/hc/en-us/articles/200509928-How-do-I-give-creators-credit-in-my-work-)
+// Tools for editing: http://www.networkworld.com/article/2602971/software/how-to-automate-image-editing-with-gimp.html and https://pixlr.com/editor/
+
+/*
+ baked goods -- ??
+ Cheese by Arthur Shlain from the Noun Project
+ wooden horse by Luis Rodrigues from the Noun Project
+ Rose by Juan Pablo Bravo from the Noun Project
+ eggs by Alex Bu from the Noun Project
+ Fish by Federico Panzano from the Noun Project
+ leaf by Ola Möller from the Noun Project
+ Broccoli by Creative Stall from the Noun Project
+ honey by Cassie McKown from the Noun Project
+ Strawberry Jam by Nikita Kozin from the Noun Project
+ maple syrup by Pumpkin Juice from the Noun Project
+ Steak by Blaise Sewell from the Noun Project
+ Peanut by Charlotte Gilissen from the Noun Project
+ (plant by Becky Warren: public domain)
+ Chicken by Elves Sousa from the Noun Project
+ Cafeteria Plate by Studio Fibonacci from the Noun Project
+ liquid soap by Arthur Shlain from the Noun Project
+ Tree by Edward Boatman from the Noun Project
+ Beer by Claire Jones from the Noun Project
+ Coffee by Grant Taylor from the Noun Project
+ beans by Anna Bearne from the Noun Project
+ Apple by Creative Stall from the Noun Project
+ Wheat by Creative Stall from the Noun Project
+ Cocktail by Виталий Плут from the Noun Project
+ Mushrooms by Creative Stall from the Noun Project
+ food bowl by Виталий Плут from the Noun Project
+ Tofu by Anna Bearne from the Noun Project
+ -----  (get rid of this one) fruit tree by Eugene Dobrik from the Noun Project
+ Pine Cone by Arthur Shlain from the Noun Project
+ */
 
 @end
