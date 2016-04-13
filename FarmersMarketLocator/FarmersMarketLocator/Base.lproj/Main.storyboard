@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Container View Controller-->
@@ -20,17 +21,27 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1PS-mv-YNR">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WUN-7w-LNO">
+                                <rect key="frame" x="20" y="-418" width="163" height="490"/>
+                                <state key="normal" image="VineSolid"/>
+                                <connections>
+                                    <action selector="vineButtonTapped:" destination="xKH-Vx-gBb" eventType="touchUpInside" id="Nbv-8t-CVQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="y0b-I0-NHa" firstAttribute="top" secondItem="1PS-mv-YNR" secondAttribute="bottom" id="0P8-Q7-Jdx"/>
                             <constraint firstAttribute="trailing" secondItem="1PS-mv-YNR" secondAttribute="trailing" id="1ay-4K-dBi"/>
+                            <constraint firstItem="WUN-7w-LNO" firstAttribute="top" secondItem="vrs-MM-VxV" secondAttribute="topMargin" constant="-418" id="G9Y-oZ-yzs"/>
                             <constraint firstItem="1PS-mv-YNR" firstAttribute="leading" secondItem="vrs-MM-VxV" secondAttribute="leading" id="Xs5-NP-QQF"/>
                             <constraint firstItem="1PS-mv-YNR" firstAttribute="top" secondItem="aQK-sm-OZK" secondAttribute="bottom" id="YsH-n1-0GO"/>
+                            <constraint firstItem="WUN-7w-LNO" firstAttribute="leading" secondItem="vrs-MM-VxV" secondAttribute="leadingMargin" id="qIy-mB-6Qq"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="containerView" destination="1PS-mv-YNR" id="Mom-Qo-osK"/>
+                        <outlet property="vineButton" destination="WUN-7w-LNO" id="A4n-B8-PIB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xp7-zR-IYz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -56,4 +67,7 @@
             <point key="canvasLocation" x="420" y="390"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="VineSolid" width="163" height="490"/>
+    </resources>
 </document>

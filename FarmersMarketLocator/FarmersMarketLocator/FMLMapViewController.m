@@ -46,7 +46,7 @@
     self.locationDelegate = [[FMLLocationManagerDelegate alloc] initWithTarget:self];
     
     // Create and customize map view
-    self.mapView = [[MKMapView alloc]initWithFrame:CGRectMake(0, 50, self.view.frame.size.width, self.view.frame.size.height - 50)];
+    self.mapView = [[MKMapView alloc]initWithFrame:self.view.frame];
     self.mapView.mapType = MKMapTypeStandard;
     self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self.mapDelegate;

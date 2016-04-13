@@ -79,7 +79,9 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
+    NSLog(@"\n\n\n\n\nView for annotation called\n\n\n\n\n");
     if ([Annotation isSubclassOfClass:annotation.class]  ) {
+        NSLog(@"in if statement");
         Annotation *annie = (Annotation *)annotation;
         NSUInteger tag = annie.tag;
         
@@ -90,6 +92,7 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         pepeLeView.enabled = YES;
                 
         FMLMarketStatus status = [self currentStatusForMarket:market];
+        NSLog(@"%li", status);
         switch (status) {
             case FMLMarketIsOpen:
                 pepeLeView.image = [UIImage imageNamed:@"openPin"];
