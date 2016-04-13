@@ -81,6 +81,15 @@
     [self.moveToLocationButton.heightAnchor constraintEqualToConstant:32].active = YES;
     [self.moveToLocationButton.widthAnchor constraintEqualToConstant:32].active = YES;
     
+    // Create and add redoSearchInMapArea button
+    self.redoSearchInMapAreaButton = [self createRedoSearchInCurrentMapAreaButtonWithAction:@selector(redoSearchInCurrentMapArea)];
+    [self.view addSubview:self.redoSearchInMapAreaButton];
+    [self.redoSearchInMapAreaButton.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-20].active = YES;
+    [self.redoSearchInMapAreaButton.rightAnchor constraintEqualToAnchor:self.view.rightAnchor constant:-20].active = YES;
+    [self.redoSearchInMapAreaButton.heightAnchor constraintEqualToConstant:32].active = YES;
+    [self.redoSearchInMapAreaButton.widthAnchor constraintEqualToConstant:32].active = YES;
+    
+    
     // Grab data from Managed Context Object
     NSManagedObjectContext *context = [[CoreDataStack sharedStack] managedObjectContext];
     NSFetchRequest *getSavedLocationsFetch = [NSFetchRequest fetchRequestWithEntityName:@"FMLMarket"];
@@ -195,6 +204,53 @@
     }
 
     return stockPinView;
+    
+}
+
+-(UIButton *)setUpMoveToLocationButtonWithAction:(SEL)action {
+    // Create and Add MoveToLocation button
+    UIButton *moveToLocationButton = [[UIButton alloc] init];
+    UIImage *buttonImage = [UIImage imageNamed:@"gps (1)"];
+    [moveToLocationButton setImage:buttonImage forState:UIControlStateNormal];
+    [moveToLocationButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    
+    moveToLocationButton.layer.masksToBounds = YES;
+    moveToLocationButton.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    return moveToLocationButton;
+}
+
+-(void)moveToLocationButtonTapped {
+    CLLocationCoordinate2D currentLocation = self.manager.location.coordinate;
+    [self zoomMaptoLatitude:currentLocation.latitude longitude:currentLocation.longitude withLatitudeSpan:0.05 longitudeSpan:0.05];
+}
+
+-(UIButton *)createRedoSearchInCurrentMapAreaButtonWithAction:(SEL)action {
+    
+    UIButton *button = [[UIButton alloc] init];
+    UIImage *buttonImage = [UIImage imageNamed:@"redoSearchButton"];
+    [button setImage:buttonImage forState:UIControlStateNormal];
+    [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    
+    button.layer.masksToBounds = YES;
+    button.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    return button;
+    
+}
+
+-(void)redoSearchInCurrentMapArea {
+    
+    MKCoordinateRegion currentRegion = self.mapView.region;
+    CLLocationDegrees latitude = currentRegion.center.latitude;
+    CLLocationDegrees longitude = currentRegion.center.longitude;
+
+    [FMLAPIClient getMarketsForLatitude:latitude longitude:longitude withCompletion:^(NSMutableArray *marketsArray) {
+        
+        [self displayMarketObjects:marketsArray];
+        
+    }];
+    
     
 }
 
@@ -338,7 +394,6 @@
             
         } completion:^(BOOL finished) {
             if (finished) {
-                NSLog(@"Circle view %lu frame: %@", index, NSStringFromCGRect(circleView.frame));
                 
             }
         }];
@@ -415,7 +470,8 @@
 
 
 
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Icons stuff
  
  To-do:
  - Somehow make the center of the circle of icons be the actual location, not just the center of the pin view. More like, the bottom middle?
@@ -427,7 +483,7 @@
  - Instead of making new constraints in the animation, just reassign the values of the existing constraints. Rename appropriately.
  - Account for what happens if we get a name of a product type that's not in the Assets
  - ERROR: for the market near the Exploratorium in San Francisco, we get:
-        -[MKUserLocation market]: unrecognized selector sent to instance 0x7fafb0d02c00
+ -[MKUserLocation market]: unrecognized selector sent to instance 0x7fafb0d02c00
  
  Done:
  - Disable the map movement and make the background dim.
@@ -435,31 +491,11 @@
  - Issue: the dimView's alpha applies not to just the background, but to the pin and icons on top of it. Fix this. (Does the background itself have an alpha that can be set independently?)
  - Get actual icons (Noun Project, Flaticon, etc.), put them in Assets, give them the right names, and uncomment the code that adds to the iconsArray using the dictionary. (Could do it without the dictionary and just give them the same names as the strings, BUT there are slashes in some of the strings. Could just change them first though.)
  - Make all the icons circles of uniform size--they don't come as circles, so put them on colored circles. This will be much prettier.
-
+ 
  
  
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
-
--(UIButton *)setUpMoveToLocationButtonWithAction:(SEL)action {
-    // Create and Add MoveToLocation button
-    UIButton *moveToLocationButton = [[UIButton alloc] init];
-    UIImage *buttonImage = [UIImage imageNamed:@"gps (1)"];
-    [moveToLocationButton setImage:buttonImage forState:UIControlStateNormal];
-    [moveToLocationButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
-    moveToLocationButton.layer.masksToBounds = YES;
-    
-    
-    moveToLocationButton.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    return moveToLocationButton;
-}
-
--(void)moveToLocationButtonTapped {
-    CLLocationCoordinate2D currentLocation = self.manager.location.coordinate;
-    [self zoomMaptoLatitude:currentLocation.latitude longitude:currentLocation.longitude withLatitudeSpan:0.05 longitudeSpan:0.05];
-}
-
 
 // ~ PICTURE CREDITS ~
 // (see https://thenounproject.zendesk.com/hc/en-us/articles/200509928-How-do-I-give-creators-credit-in-my-work-)
@@ -495,6 +531,10 @@
  Tofu by Anna Bearne from the Noun Project
  -----  (get rid of this one) fruit tree by Eugene Dobrik from the Noun Project
  Pine Cone by Arthur Shlain from the Noun Project
+ 
+ redoSearch button:
+ Icon made by Minh Hoang (http://www.flaticon.com/authors/minh-hoang) from www.flaticon.com
+
  */
 
 @end
