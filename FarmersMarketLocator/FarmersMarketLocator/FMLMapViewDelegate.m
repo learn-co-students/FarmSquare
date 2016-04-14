@@ -84,6 +84,7 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         [self showProductsCircleForMarket:view];
         NSLog(@"method should have been called\n\n\n");
         
+        self.viewController.
     }
    
 }
