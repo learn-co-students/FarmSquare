@@ -83,12 +83,17 @@ class FMLContainerViewController: UIViewController {
         }
     }
     
+    func cartTapped() {
+        print("cart tapped")
+    }
+    
     func showButtons() {
         //        button.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside
         
         vineOutline = UIImageView(frame: CGRectMake(20, 0, 163, 490))
         vineOutline.image = UIImage(named: "VineOutline")
         vineOutline.alpha = 0
+        vineOutline.userInteractionEnabled = true
         
         let mapButton = UIButton(type: UIButtonType.Custom) as UIButton
         mapButton.frame = CGRectMake(67, 70, 50, 50)
@@ -100,6 +105,7 @@ class FMLContainerViewController: UIViewController {
         groceryButton.frame = CGRectMake(60, 185, 50, 50)
         let groceryImage = UIImage(named: "cart")
         groceryButton.setImage(groceryImage, forState: UIControlState.Normal)
+        groceryButton.addTarget(self, action: #selector(FMLContainerViewController.cartTapped), forControlEvents: UIControlEvents.TouchUpInside)
         vineOutline.addSubview(groceryButton)
         
         let resourceButton = UIButton(type: UIButtonType.Custom) as UIButton
