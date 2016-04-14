@@ -11,6 +11,7 @@
 #import "FMLMarket+CoreDataProperties.h"
 #import "FMLDetailView.h"
 #import "Annotation.h"
+#import "FMLPinAnnotationView.h"
 
 typedef NS_ENUM(NSInteger, FMLMarketStatus) {
     FMLMarketHasNoInfo          = -1,
@@ -19,6 +20,14 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
     FMLMarketIsClosingSoon      = 2,
     FMLMarketIsClosed           = 3
 };
+
+@interface FMLMapViewDelegate()
+
+@property (nonatomic) CGFloat animationSpeed;
+@property (strong, nonatomic) NSMutableArray *currentProductsIcons;
+@property (strong, nonatomic) MKAnnotationView *annotationView;
+
+@end
 
 @implementation FMLMapViewDelegate
 
@@ -71,14 +80,13 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         
         [detailView showDetailView];
         
-        NSLog(@"%@", market.season1Time);
+        [self showProductsCircleForMarket:view];
+
     }
-    
    
 }
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    
     NSLog(@"\n\n\n\n\nView for annotation called\n\n\n\n\n");
     if ([Annotation isSubclassOfClass:annotation.class]  ) {
         NSLog(@"in if statement");
@@ -90,7 +98,7 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         
         MKAnnotationView *pepeLeView = [[MKAnnotationView alloc] initWithAnnotation:annie reuseIdentifier:@""];
         pepeLeView.enabled = YES;
-                
+        
         FMLMarketStatus status = [self currentStatusForMarket:market];
         NSLog(@"%li", status);
         switch (status) {
@@ -113,16 +121,147 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
                 break;
         }
         
-        pepeLeView.canShowCallout = YES;
+        pepeLeView.canShowCallout = NO;
         return pepeLeView;
     }
     return nil;
-    
 }
 
 -(void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
     [self.viewController.detailView hideDetailView];
+    
+    // Animation of icons' disappearance: become transparent, shrink, move back to the center.
+    [UIView animateWithDuration:self.animationSpeed animations:^{
+        
+        for (UIView *icon in self.currentProductsIcons) {
+            // Transparency/alpha
+            icon.alpha = 0;
+            // Size
+            icon.frame = CGRectZero;
+            // Position
+            icon.center = view.center;
+        }
+    }];
+    
+    self.annotationView = nil;
 }
+
+-(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    if (self.annotationView) {
+        [self showProductsCircleForMarket:self.annotationView];
+    }
+}
+
+
+#pragma mark - Helper Methods
+
+-(void)showProductsCircleForMarket:(MKAnnotationView *)annotationView {
+    // Empty the current products icon array before adding the circle views
+    self.currentProductsIcons = [@[] mutableCopy];
+    
+    // Get an array of the names of the icons we want. (Remove slashes because filenames can't have slashes.)
+    Annotation *annotation = annotationView.annotation;
+    NSMutableArray *iconsArray = [[[annotation.market.produceList stringByReplacingOccurrencesOfString:@"/" withString:@"" ] componentsSeparatedByString:@"; "] mutableCopy];
+    
+    // Number of degrees separating icons
+    CGFloat degreesBetweenIcons = 360 / iconsArray.count;
+    // Index (to multiply number of degrees by)
+    NSUInteger index = 0;
+    
+    // Make each icon appear at the center of the pin and animate out to its position.
+    for (NSString *iconName in iconsArray) {
+        
+        // ~~~~~ ICONS: INITIAL STATE ~~~~~
+        
+        // Create a circle:
+        // Make a view
+        UIView *circleView = [[UIView alloc] init];
+        circleView.translatesAutoresizingMaskIntoConstraints = NO;
+        circleView.backgroundColor = [UIColor brownColor];
+        // Corner radius to 50 makes it a circle
+        circleView.layer.cornerRadius = 15;
+        [annotationView addSubview:circleView];
+        [self.currentProductsIcons addObject:circleView];
+        // Position constraints: center the circle at the center of the pin view
+        NSLayoutConstraint *circleCenterX = [NSLayoutConstraint constraintWithItem:circleView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:annotationView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+        NSLayoutConstraint *circleCenterY = [NSLayoutConstraint constraintWithItem:circleView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:annotationView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+        circleCenterX.active = YES;
+        circleCenterY.active = YES;
+        NSLayoutConstraint *circleHeight = [circleView.heightAnchor constraintEqualToConstant:0];
+        NSLayoutConstraint *circleWidth = [circleView.widthAnchor constraintEqualToConstant:0];
+        circleHeight.active = YES;
+        circleWidth.active = YES;
+        circleView.alpha = 0;
+        
+        // Get the icon and put it on the circle:
+        // Create an image view with the icon
+        UIImage *icon = [UIImage imageNamed:iconName];
+        UIImageView *iconView = [[UIImageView alloc] initWithImage:icon];
+        iconView.contentMode = UIViewContentModeScaleAspectFit;
+        iconView.clipsToBounds = YES;
+        iconView.translatesAutoresizingMaskIntoConstraints = NO;
+        // Put the icon on the circle
+        [circleView addSubview:iconView];
+        
+        // Constrain icon to center of circle
+        // Both the icons and the circles should start out sizeless and fully transparent
+        
+        NSLayoutConstraint *iconAtCenterOfCircleX = [NSLayoutConstraint constraintWithItem:iconView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:circleView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+        NSLayoutConstraint *iconAtCenterOfCircleY = [NSLayoutConstraint constraintWithItem:iconView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:circleView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+        iconAtCenterOfCircleX.active = YES;
+        iconAtCenterOfCircleY.active = YES;
+        NSLayoutConstraint *iconHeight = [iconView.heightAnchor constraintEqualToConstant:0];
+        NSLayoutConstraint *iconWidth = [iconView.widthAnchor constraintEqualToConstant:0];
+        iconHeight.active = YES;
+        iconWidth.active = YES;
+        iconView.alpha = 0;
+        
+        [self.viewController.view layoutSubviews];
+        [circleView layoutIfNeeded];
+        
+        
+        // ~~~~~ ICONS: FINAL STATE ~~~~~
+        
+        // Calculate number of degrees around the circle that the icon should be
+        CGFloat degreesForIcon = degreesBetweenIcons * index;
+        
+        // Get the coordinates of that position
+        CGPoint iconDestinationPosition = [self pointAroundCircumferenceFromCenter:annotationView.center withRadius:50 andAngle:degreesForIcon];
+        
+        // Animate the icon moving to its position in the circle.
+        self.animationSpeed = 0.25;
+        [UIView animateWithDuration:self.animationSpeed animations:^{
+            
+            // position (we move only the circle; the icon is constrained to it)
+            circleCenterX.active = NO;
+            circleCenterY.active = NO;
+            NSLayoutConstraint *xPosition = [circleView.centerXAnchor constraintEqualToAnchor:self.viewController.view.leftAnchor constant:iconDestinationPosition.x];
+            NSLayoutConstraint *yPosition = [circleView.centerYAnchor constraintEqualToAnchor:self.viewController.view.topAnchor constant:iconDestinationPosition.y];
+            
+            xPosition.active = YES;
+            yPosition.active = YES;
+            
+            // alpha (opacity)
+            iconView.alpha = 1;
+            circleView.alpha = 1;
+            
+            // size
+            // TODO: make the height and width a calculation based on the size of the view, so it works correctly regardless of device. Or perhaps as a multiple of the size of the pinview or something.
+            circleHeight.constant = 30;
+            circleWidth.constant = 30;
+            iconHeight.constant = 15;
+            iconWidth.constant = 15;
+            
+            [self.viewController.view layoutIfNeeded];
+            
+        }];
+        
+        // Increment index
+        index++;
+        
+    }
+}
+
 
 
 -(FMLMarketStatus)currentStatusForMarket:(FMLMarket *)market {
@@ -200,5 +339,22 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
     
     return YES;
 }
+
+// Function to get points at a particular number of degrees around a circle
+// from Stack Overflow: http://stackoverflow.com/questions/17739397/get-end-points-of-circle-drawn-in-objectivec
+- (CGPoint)pointAroundCircumferenceFromCenter:(CGPoint)center withRadius:(CGFloat)radius andAngle:(CGFloat)theta
+{
+    
+    // Convert degrees to radians, which is the measure assumed by Objective-C's cosine, etc. functions
+    theta = theta * (M_PI / 180);
+    
+    CGPoint point = CGPointZero;
+    point.x = center.x + radius * cos(theta);
+    point.y = center.y + radius * sin(theta);
+    
+    return point;
+    
+}
+
 
 @end

@@ -19,6 +19,7 @@
 @property (assign, nonatomic) BOOL showingSavedData;
 @property (strong, nonatomic) UIButton *moveToLocationButton;
 @property (strong, nonatomic) UIButton *redoSearchInMapAreaButton;
+@property (strong, nonatomic) MKMapView *mapView;
 
 -(void)zoomMaptoLatitude:(CGFloat)latitude longitude:(CGFloat)longitude withLatitudeSpan:(CGFloat)latitudeSpan longitudeSpan:(CGFloat)longitudeSpan;
 

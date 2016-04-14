@@ -27,11 +27,9 @@
 @interface FMLMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate, UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) CLLocationManager *manager;
-@property (strong, nonatomic) MKMapView *mapView;
 @property (strong, nonatomic) FMLMapViewDelegate *mapDelegate;
 @property (strong, nonatomic) FMLLocationManagerDelegate *locationDelegate;
 @property (strong, nonatomic) UIView *dimView;
-@property (nonatomic) CGFloat animationSpeed;
 
 @end
 
@@ -113,7 +111,6 @@
     
     self.detailView.transform = CGAffineTransformMakeTranslation(0, self.detailView.frame.size.height);
     
-    self.mapView.delegate = self;
 }
 
 -(void)zoomBackOut:(NSNotification *)notification {
@@ -147,6 +144,7 @@
     region.center = center;
     region.span = span;
     [self.mapView setRegion:region animated:YES];
+    
 }
 
 
@@ -181,30 +179,6 @@
         [self.mapView addAnnotation:annotation];
         
     }
-}
-
--(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
-    
-    NSString *annotationReuseID = @"PinWithDoubleTapGesture";
-    
-    // Dequeue a custom pin annotation view
-    FMLPinAnnotationView *stockPinView = (FMLPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:annotationReuseID];
-    
-    // If you don't get one back, initialize one
-    if (!stockPinView) {
-        stockPinView = [[FMLPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:annotationReuseID];
-    }
-    
-    // If the pin doesn't have the double-tap gesture recognizer, add it
-    if (stockPinView.gestureRecognizers.count == 0) {
-        UITapGestureRecognizer *doubleTapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showProductsCircleForMarket:)];
-        doubleTapRecognizer.numberOfTapsRequired = 2;
-        doubleTapRecognizer.delegate = self;
-        [stockPinView addGestureRecognizer:doubleTapRecognizer];
-    }
-
-    return stockPinView;
-    
 }
 
 -(UIButton *)setUpMoveToLocationButtonWithAction:(SEL)action {
@@ -262,211 +236,10 @@
 }
 
 // Shoot out an icon for each product type available at that Farmer's Market. The icons should radiate out to equidistant positions around a circle centered on the pin. The Assets folder contains an icon for each product category.
--(void)showProductsCircleForMarket:(UITapGestureRecognizer *)gestureRecognizer {
-
-    // ~ DIM VIEW ~ ------------------------
-    // To disable and dim the map/background, put a partially transparent view over it
-    // TODO: Could do a blur thing instead of a gray thing, might look nicer. Could also change the color.
-        self.dimView = [[UIView alloc] initWithFrame:self.mapView.frame];
-        self.dimView.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.6];
-        [self.view addSubview:self.dimView];
-    
-    // Change pin view's background color when tapped (for testing only, DELETE AFTER)
-    FMLPinAnnotationView *view = (FMLPinAnnotationView *)gestureRecognizer.view;
-    view.backgroundColor = [UIColor greenColor];
-    // ------------------------
-    
-    
-    // ~ NEW PIN VIEW ~ ------------------------
-    // New pin on top of the old one. Necessary a) so the pin isn't blurred/dimmed, and b) to hold a gesture recognizer.
-    FMLPinAnnotationView *newPinView = [[FMLPinAnnotationView alloc] init];
-    newPinView.frame = view.frame;
-    newPinView.pinTintColor = [UIColor yellowColor];
-    // Tag pinView so we can exclude it from the icon animations later
-    newPinView.tag = 1;
-    // Add as subview of dimView
-    [self.dimView addSubview:newPinView];
-    
-    // Add double-tap recognizer to make the icons go away
-    UITapGestureRecognizer *secondDoubleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(removeDimViewFromSuperView)];
-    secondDoubleTap.numberOfTapsRequired = 2;
-    secondDoubleTap.delegate = self;
-    [newPinView addGestureRecognizer:secondDoubleTap];
-    // ------------------------
-    
-    
-    // ~ ICON CIRCLE ~ ------------------------
-    
-    // Get an array of the names of the icons we want. (Remove slashes because filenames can't have slashes.)
-    Annotation *annotation = view.annotation;
-    NSMutableArray *iconsArray = [[[annotation.market.produceList stringByReplacingOccurrencesOfString:@"/" withString:@"" ] componentsSeparatedByString:@"; "] mutableCopy];
-    
-    // Number of degrees separating icons
-    CGFloat degreesBetweenIcons = 360 / iconsArray.count;
-    // Index (to multiply number of degrees by)
-    NSUInteger index = 0;
-    
-    // Make each icon appear at the center of the pin and animate out to its position.
-    for (NSString *iconName in iconsArray) {
-        
-        // ~~~~~ ICONS: INITIAL STATE ~~~~~
-        
-        // Create a circle:
-        // Make a view
-        UIView *circleView = [[UIView alloc] init];
-        circleView.translatesAutoresizingMaskIntoConstraints = NO;
-        circleView.backgroundColor = [UIColor brownColor];
-        // Corner radius to 50 makes it a circle
-        circleView.layer.cornerRadius = 15;
-        // Add to dimView
-        [self.dimView addSubview:circleView];
-        // Position constraints: center the circle at the center of the pin view
-        NSLayoutConstraint *circleCenterX = [NSLayoutConstraint constraintWithItem:circleView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:newPinView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
-        NSLayoutConstraint *circleCenterY = [NSLayoutConstraint constraintWithItem:circleView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:newPinView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
-        circleCenterX.active = YES;
-        circleCenterY.active = YES;
-        NSLayoutConstraint *circleHeight = [circleView.heightAnchor constraintEqualToConstant:0];
-        NSLayoutConstraint *circleWidth = [circleView.widthAnchor constraintEqualToConstant:0];
-        circleHeight.active = YES;
-        circleWidth.active = YES;
-        circleView.alpha = 0;
-        
-        // Get the icon and put it on the circle:
-        // Create an image view with the icon
-        UIImage *icon = [UIImage imageNamed:iconName];
-        UIImageView *iconView = [[UIImageView alloc] initWithImage:icon];
-        iconView.contentMode = UIViewContentModeScaleAspectFit;
-        iconView.clipsToBounds = YES;
-        iconView.translatesAutoresizingMaskIntoConstraints = NO;
-        // Put the icon on the circle
-        [circleView addSubview:iconView];
-        
-        // Constrain icon to center of circle
-        // Both the icons and the circles should start out sizeless and fully transparent
-        
-        NSLayoutConstraint *iconAtCenterOfCircleX = [NSLayoutConstraint constraintWithItem:iconView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:circleView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
-        NSLayoutConstraint *iconAtCenterOfCircleY = [NSLayoutConstraint constraintWithItem:iconView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:circleView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
-        iconAtCenterOfCircleX.active = YES;
-        iconAtCenterOfCircleY.active = YES;
-        NSLayoutConstraint *iconHeight = [iconView.heightAnchor constraintEqualToConstant:0];
-        NSLayoutConstraint *iconWidth = [iconView.widthAnchor constraintEqualToConstant:0];
-        iconHeight.active = YES;
-        iconWidth.active = YES;
-        iconView.alpha = 0;
-        
-        [self.dimView layoutSubviews];
-        [circleView layoutIfNeeded];
-        
-        
-        // ~~~~~ ICONS: FINAL STATE ~~~~~
-        
-        // Calculate number of degrees around the circle that the icon should be
-        CGFloat degreesForIcon = degreesBetweenIcons * index;
-        
-        // Get the coordinates of that position
-        CGPoint iconDestinationPosition = [self pointAroundCircumferenceFromCenter:view.center withRadius:50 andAngle:degreesForIcon];
-        
-        // Animate the icon moving to its position in the circle.
-        self.animationSpeed = 0.25;
-        [UIView animateWithDuration:self.animationSpeed animations:^{
-            
-            // position (we move only the circle; the icon is constrained to it)
-            circleCenterX.active = NO;
-            circleCenterY.active = NO;
-            NSLayoutConstraint *xPosition = [circleView.centerXAnchor constraintEqualToAnchor:self.dimView.leftAnchor constant:iconDestinationPosition.x];
-            NSLayoutConstraint *yPosition = [circleView.centerYAnchor constraintEqualToAnchor:self.dimView.topAnchor constant:iconDestinationPosition.y];
-
-            xPosition.active = YES;
-            yPosition.active = YES;
-            
-            // alpha (opacity)
-            iconView.alpha = 1;
-            circleView.alpha = 1;
-            
-            // size
-            // TODO: make the height and width a calculation based on the size of the view, so it works correctly regardless of device. Or perhaps as a multiple of the size of the pinview or something.
-            circleHeight.constant = 30;
-            circleWidth.constant = 30;
-            iconHeight.constant = 15;
-            iconWidth.constant = 15;
-            
-            [self.dimView layoutIfNeeded];
-            
-        } completion:^(BOOL finished) {
-            if (finished) {
-                
-            }
-        }];
-        
-        // Increment index
-        index++;
-        
-    }
-
-    // ------------------------
- 
-}
 
 // Remove dimView: animate the disappearance of the icons, then remove the view entirely.
--(void)removeDimViewFromSuperView{
 
-    // Array of the subviews. This includes both the icons and the pin in the middle.
-    NSArray *subviews = self.dimView.subviews;
-    
-    // TODO: check if there's a better way to separate the icons (imageviews) from the pin (either MKPinAnnotationView or our subclass of it) than these for-loops and if-statements. NSPredicate? IndexOfObjectPassingTest?
-    
-    // Capture the pin annotation view in a variable, so we can use its location as the point on which the icons should converge
-    MKAnnotationView *pinView;
-    for (UIView *subview in subviews) {
-        if (subview.tag == 1) {
-            pinView = (MKAnnotationView *)subview;
-            break;
-        }
-    }
 
-    // Animation of icons' disappearance: become transparent, shrink, move back to the center.
-    [UIView animateWithDuration:self.animationSpeed animations:^{
-        
-        for (UIView *subview in subviews) {
-            
-            if (subview.tag != 1) {
-                
-                // Transparency/alpha
-                subview.alpha = 0;
-                // Size
-                subview.frame = CGRectZero;
-                // Position
-                subview.center = pinView.center;
-                
-            }
-        }
-        
-    } completion:^(BOOL finished) {
-       
-        // After the animation, remove the pin. (Don't animate this: there's an identical one right underneath and it shouldn't look like there's two. The color/alpha could animate, though.)
-        [pinView removeFromSuperview];
-        
-        // After everything else, make dimView disappear
-        [self.dimView removeFromSuperview];
-        
-    }];
-}
-
-// Function to get points at a particular number of degrees around a circle
-// from Stack Overflow: http://stackoverflow.com/questions/17739397/get-end-points-of-circle-drawn-in-objectivec
-- (CGPoint)pointAroundCircumferenceFromCenter:(CGPoint)center withRadius:(CGFloat)radius andAngle:(CGFloat)theta
-{
-    
-    // Convert degrees to radians, which is the measure assumed by Objective-C's cosine, etc. functions
-    theta = theta * (M_PI / 180);
-    
-    CGPoint point = CGPointZero;
-    point.x = center.x + radius * cos(theta);
-    point.y = center.y + radius * sin(theta);
-    
-    return point;
-    
-}
 
 
 
