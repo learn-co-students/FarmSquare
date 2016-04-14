@@ -25,7 +25,6 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
 
 @property (nonatomic) CGFloat animationSpeed;
 @property (strong, nonatomic) NSMutableArray *currentProductsIcons;
-@property (strong, nonatomic) MKAnnotationView *annotationView;
 
 @end
 
@@ -73,6 +72,8 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         detailView.selectedLatitude = [market.latitude floatValue];
         detailView.selectedLongitude = [market.longitude floatValue];
         
+        [detailView showDetailView];
+        
         if (mapView.region.span.longitudeDelta != detailView.previousRegion.span.longitudeDelta) {
             detailView.previousRegion = mapView.region;
         }
@@ -86,13 +87,21 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
             [self showProductsCircleForMarket:view];
 
         }
+                
+        UIView *cover = [[UIView alloc] initWithFrame:self.viewController.view.frame];
+        cover.backgroundColor = [UIColor clearColor];
+        UITapGestureRecognizer *onTapClear = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeCoverView:)];
+        [cover addGestureRecognizer:onTapClear];
+        [self.viewController.view addSubview:cover];
         
-        // FIXME: The problem is we're relying on this if-statement to tell if the pin is already at the center of the map, in which case we can't rely on regionDidChange to pop out the icons and have to do it ourselves, BUT the pin view center is off from the view center (by .5 for no apparent reason) and the mapView center (by 10, because of the status bar)
-//        [detailView showDetailView];
-//        if (view.center.x == self.viewController.mapView.center.x && view.center.y == self.viewController.mapView.center.y) {
-//
-//        }
+        [self.viewController.view bringSubviewToFront:self.viewController.detailView];
+        
     }
+}
+
+-(void)removeCoverView:(UITapGestureRecognizer *)sender {
+    [sender.view removeFromSuperview];
+    [self.viewController.mapView deselectAnnotation:self.viewController.mapView.selectedAnnotations.firstObject animated:YES];
 }
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
@@ -134,6 +143,7 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
 }
 
 -(void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
+    
     [self.viewController.detailView hideDetailView];
     
     // Animation of icons' disappearance: become transparent, shrink, move back into the pin.
@@ -154,10 +164,11 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
     
 
 
-    self.annotationView = nil;
+    self.selectedAnnotationView = nil;
 }
 
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    
     
     if (self.selectedAnnotationView) {
 
