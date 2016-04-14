@@ -56,6 +56,7 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
     self.selectedAnnotationView = view;
     
     if ([Annotation isSubclassOfClass:view.annotation.class]  ) {
+        
         Annotation *annotation = (Annotation *)view.annotation;
         FMLMarket *market = self.viewController.marketsArray[ annotation.tag ];
         FMLDetailView *detailView = self.viewController.detailView;
@@ -81,15 +82,14 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         [detailView showDetailView];
         
         [self showProductsCircleForMarket:view];
-
+        NSLog(@"method should have been called\n\n\n");
+        
     }
    
 }
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    NSLog(@"\n\n\n\n\nView for annotation called\n\n\n\n\n");
     if ([Annotation isSubclassOfClass:annotation.class]  ) {
-        NSLog(@"in if statement");
         Annotation *annie = (Annotation *)annotation;
         NSUInteger tag = annie.tag;
         
@@ -100,7 +100,6 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         pepeLeView.enabled = YES;
         
         FMLMarketStatus status = [self currentStatusForMarket:market];
-        NSLog(@"%li", status);
         switch (status) {
             case FMLMarketIsOpen:
                 pepeLeView.image = [UIImage imageNamed:@"openPin"];
@@ -130,19 +129,23 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
 -(void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
     [self.viewController.detailView hideDetailView];
     
-    // Animation of icons' disappearance: become transparent, shrink, move back to the center.
+    // Animation of icons' disappearance: become transparent, shrink, move back into the pin.
     [UIView animateWithDuration:self.animationSpeed animations:^{
         
         for (UIView *icon in self.currentProductsIcons) {
             // Transparency/alpha
             icon.alpha = 0;
-            // Size
+            // Size and position
             icon.frame = CGRectZero;
-            // Position
-            icon.center = view.center;
+        }
+    } completion:^(BOOL finished) {
+        for (UIView *icon in self.currentProductsIcons) {
+            [icon removeFromSuperview];
         }
     }];
     
+
+
     self.annotationView = nil;
 }
 
@@ -156,6 +159,8 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
 #pragma mark - Helper Methods
 
 -(void)showProductsCircleForMarket:(MKAnnotationView *)annotationView {
+    NSLog(@"Starting circle making");
+    
     // Empty the current products icon array before adding the circle views
     self.currentProductsIcons = [@[] mutableCopy];
     
@@ -260,6 +265,8 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         index++;
         
     }
+    
+    NSLog(@"circles should have been made");
 }
 
 

@@ -53,6 +53,26 @@
     [self.view addSubview:self.mapView];
     
     
+    // Create and Add MoveToLocation Button
+    self.moveToLocationButton = [self setUpMoveToLocationButtonWithAction:@selector(moveToLocationButtonTapped)];
+    [self.view addSubview:self.moveToLocationButton];
+    // Set up constraints
+    [self.moveToLocationButton.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-20].active = YES;
+    [self.moveToLocationButton.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20].active = YES;
+    [self.moveToLocationButton.heightAnchor constraintEqualToConstant:32].active = YES;
+    [self.moveToLocationButton.widthAnchor constraintEqualToConstant:32].active = YES;
+    
+    // Create and add redoSearchInMapArea button
+    self.redoSearchInMapAreaButton = [self createRedoSearchInCurrentMapAreaButtonWithAction:@selector(redoSearchInCurrentMapArea)];
+    [self.view addSubview:self.redoSearchInMapAreaButton];
+    [self.redoSearchInMapAreaButton.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-20].active = YES;
+    [self.redoSearchInMapAreaButton.rightAnchor constraintEqualToAnchor:self.view.rightAnchor constant:-20].active = YES;
+    [self.redoSearchInMapAreaButton.heightAnchor constraintEqualToConstant:32].active = YES;
+    [self.redoSearchInMapAreaButton.widthAnchor constraintEqualToConstant:32].active = YES;
+    
+    
+    
+    
     // Create detail view
     CGFloat width = self.view.frame.size.width;
     CGFloat height = self.view.frame.size.height * 0.4;
@@ -70,22 +90,7 @@
     self.detailView.locationManager = self.manager;
     
     
-    // Create and Add MoveToLocation Button
-    self.moveToLocationButton = [self setUpMoveToLocationButtonWithAction:@selector(moveToLocationButtonTapped)];
-    [self.view addSubview:self.moveToLocationButton];
-    // Set up constraints
-    [self.moveToLocationButton.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-20].active = YES;
-    [self.moveToLocationButton.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20].active = YES;
-    [self.moveToLocationButton.heightAnchor constraintEqualToConstant:32].active = YES;
-    [self.moveToLocationButton.widthAnchor constraintEqualToConstant:32].active = YES;
     
-    // Create and add redoSearchInMapArea button
-    self.redoSearchInMapAreaButton = [self createRedoSearchInCurrentMapAreaButtonWithAction:@selector(redoSearchInCurrentMapArea)];
-    [self.view addSubview:self.redoSearchInMapAreaButton];
-    [self.redoSearchInMapAreaButton.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-20].active = YES;
-    [self.redoSearchInMapAreaButton.rightAnchor constraintEqualToAnchor:self.view.rightAnchor constant:-20].active = YES;
-    [self.redoSearchInMapAreaButton.heightAnchor constraintEqualToConstant:32].active = YES;
-    [self.redoSearchInMapAreaButton.widthAnchor constraintEqualToConstant:32].active = YES;
     
     
     // Grab data from Managed Context Object
