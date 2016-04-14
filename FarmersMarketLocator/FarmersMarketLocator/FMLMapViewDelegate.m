@@ -77,15 +77,22 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
             detailView.previousRegion = mapView.region;
         }
         
+        CGPoint pinLocationBeforeZoom = view.center;
+        
         [self.viewController zoomMaptoLatitude:[market.latitude floatValue]  longitude:[market.longitude floatValue] withLatitudeSpan:0.01 longitudeSpan:0.01];
         
-        [detailView showDetailView];
+        if (view.center.x == pinLocationBeforeZoom.x && view.center.y == pinLocationBeforeZoom.y) {
+            NSLog(@"\n\nShow products is happening in DIDSELECT\n\n");
+            [self showProductsCircleForMarket:view];
+
+        }
         
-        [self showProductsCircleForMarket:view];
-        NSLog(@"method should have been called\n\n\n");
-        
+        // FIXME: The problem is we're relying on this if-statement to tell if the pin is already at the center of the map, in which case we can't rely on regionDidChange to pop out the icons and have to do it ourselves, BUT the pin view center is off from the view center (by .5 for no apparent reason) and the mapView center (by 10, because of the status bar)
+//        [detailView showDetailView];
+//        if (view.center.x == self.viewController.mapView.center.x && view.center.y == self.viewController.mapView.center.y) {
+//
+//        }
     }
-   
 }
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
@@ -135,6 +142,7 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         for (UIView *icon in self.currentProductsIcons) {
             // Transparency/alpha
             icon.alpha = 0;
+            
             // Size and position
             icon.frame = CGRectZero;
         }
@@ -150,8 +158,12 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
 }
 
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-    if (self.annotationView) {
-        [self showProductsCircleForMarket:self.annotationView];
+    
+    if (self.selectedAnnotationView) {
+
+        NSLog(@"\n\nShow products is happening in REGIONDIDCHANGE\n\n");
+        [self showProductsCircleForMarket:self.selectedAnnotationView];
+        
     }
 }
 
@@ -159,7 +171,7 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
 #pragma mark - Helper Methods
 
 -(void)showProductsCircleForMarket:(MKAnnotationView *)annotationView {
-    NSLog(@"Starting circle making");
+    NSLog(@"Annotation view's (%@) center: %f, %f", annotationView, annotationView.center.x, annotationView.center.y);
     
     // Empty the current products icon array before adding the circle views
     self.currentProductsIcons = [@[] mutableCopy];
@@ -183,7 +195,7 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         UIView *circleView = [[UIView alloc] init];
         circleView.translatesAutoresizingMaskIntoConstraints = NO;
         circleView.backgroundColor = [UIColor brownColor];
-        // Corner radius to 50 makes it a circle
+        // Corner radius to half of size makes it a circle
         circleView.layer.cornerRadius = 15;
         [annotationView addSubview:circleView];
         [self.currentProductsIcons addObject:circleView];
