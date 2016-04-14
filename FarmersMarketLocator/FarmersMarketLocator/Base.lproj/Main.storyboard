@@ -64,10 +64,100 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="420" y="390"/>
+            <point key="canvasLocation" x="300" y="-38"/>
+        </scene>
+        <!--Cart View Controller-->
+        <scene sceneID="qxQ-gR-icO">
+            <objects>
+                <viewController id="62e-1h-Gwb" customClass="CartViewController" customModule="FarmersMarketLocator" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="P5V-3Y-PgP"/>
+                        <viewControllerLayoutGuide type="bottom" id="2MX-tN-yNx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XqE-7d-3at">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="cart" translatesAutoresizingMaskIntoConstraints="NO" id="gu9-2f-9dT">
+                                <rect key="frame" x="186" y="236" width="240" height="128"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="gu9-2f-9dT" secondAttribute="trailing" id="4Bj-EA-Nc3"/>
+                            <constraint firstItem="gu9-2f-9dT" firstAttribute="top" secondItem="P5V-3Y-PgP" secondAttribute="bottom" id="GnC-UJ-Da0"/>
+                            <constraint firstItem="2MX-tN-yNx" firstAttribute="top" secondItem="gu9-2f-9dT" secondAttribute="bottom" id="cmW-rQ-Tw7"/>
+                            <constraint firstItem="gu9-2f-9dT" firstAttribute="leading" secondItem="XqE-7d-3at" secondAttribute="leadingMargin" id="oEI-qZ-SgZ"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NgH-0c-K61" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-391" y="1341"/>
+        </scene>
+        <!--Book View Controller-->
+        <scene sceneID="Jbd-tB-Ep9">
+            <objects>
+                <viewController id="1sa-3J-rCo" customClass="BookViewController" customModule="FarmersMarketLocator" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eZT-PP-eSd"/>
+                        <viewControllerLayoutGuide type="bottom" id="f32-PR-iPI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rpz-Ro-hwX">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="book" translatesAutoresizingMaskIntoConstraints="NO" id="eqL-x8-ewB">
+                                <rect key="frame" x="52" y="204" width="240" height="128"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="eqL-x8-ewB" secondAttribute="trailing" id="EBA-dJ-Rb4"/>
+                            <constraint firstItem="f32-PR-iPI" firstAttribute="top" secondItem="eqL-x8-ewB" secondAttribute="bottom" id="Lro-a8-gRc"/>
+                            <constraint firstItem="eqL-x8-ewB" firstAttribute="leading" secondItem="rpz-Ro-hwX" secondAttribute="leadingMargin" id="SrQ-nV-mXu"/>
+                            <constraint firstItem="eqL-x8-ewB" firstAttribute="top" secondItem="eZT-PP-eSd" secondAttribute="bottom" id="oeo-RH-C0N"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2wP-Da-gg6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="308" y="663"/>
+        </scene>
+        <!--Dog View Controller-->
+        <scene sceneID="cA7-Jw-Hfg">
+            <objects>
+                <viewController id="25f-VO-tCR" customClass="DogViewController" customModule="FarmersMarketLocator" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3e5-OF-YKJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="tbj-cc-OQz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="J7d-tO-NV1">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="dog" translatesAutoresizingMaskIntoConstraints="NO" id="xhV-p0-avO">
+                                <rect key="frame" x="269" y="93" width="240" height="128"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tbj-cc-OQz" firstAttribute="top" secondItem="xhV-p0-avO" secondAttribute="bottom" id="166-xd-duE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="xhV-p0-avO" secondAttribute="trailing" id="7ga-PC-JzW"/>
+                            <constraint firstItem="xhV-p0-avO" firstAttribute="leading" secondItem="J7d-tO-NV1" secondAttribute="leadingMargin" id="hPN-4s-aYa"/>
+                            <constraint firstItem="xhV-p0-avO" firstAttribute="top" secondItem="3e5-OF-YKJ" secondAttribute="bottom" id="yOH-TI-2La"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rzv-ld-NRz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="246" y="1341"/>
         </scene>
     </scenes>
     <resources>
         <image name="VineSolid" width="163" height="490"/>
+        <image name="book" width="128" height="128"/>
+        <image name="cart" width="128" height="128"/>
+        <image name="dog" width="128" height="128"/>
     </resources>
 </document>

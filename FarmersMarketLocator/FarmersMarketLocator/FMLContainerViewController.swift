@@ -12,6 +12,9 @@ import SnapKit
 class FMLContainerViewController: UIViewController {
     
     let mapViewController = FMLMapViewController()
+    let dogViewController = DogViewController()
+    let cartViewController = CartViewController()
+    let bookViewController = BookViewController()
 
     
     @IBOutlet weak var containerView: UIView!
@@ -43,7 +46,7 @@ class FMLContainerViewController: UIViewController {
         blurEffectView.frame = self.view.bounds
         blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: "emptySpaceTapped")
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(FMLContainerViewController.emptySpaceTapped))
         blurEffectView.addGestureRecognizer(tapGesture)
     }
     
@@ -83,9 +86,22 @@ class FMLContainerViewController: UIViewController {
         }
     }
     
-    func cartTapped() {
-        print("cart tapped")
+    func mapTapped() {
+        self.setEmbeddedViewController(mapViewController)
     }
+    
+    func cartTapped() {
+        self.setEmbeddedViewController(cartViewController)
+    }
+    
+    func bookTapped() {
+        self.setEmbeddedViewController(bookViewController)
+    }
+    
+    func dogTapped() {
+        self.setEmbeddedViewController(dogViewController)
+    }
+    
     
     func showButtons() {
         //        button.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside
@@ -99,6 +115,7 @@ class FMLContainerViewController: UIViewController {
         mapButton.frame = CGRectMake(67, 70, 50, 50)
         let mapImage = UIImage(named: "mappin")
         mapButton.setImage(mapImage, forState: UIControlState.Normal)
+        mapButton.addTarget(self, action: #selector(FMLContainerViewController.mapTapped), forControlEvents: UIControlEvents.TouchUpInside)
         vineOutline.addSubview(mapButton)
         
         let groceryButton = UIButton(type: UIButtonType.Custom) as UIButton
@@ -112,6 +129,7 @@ class FMLContainerViewController: UIViewController {
         resourceButton.frame = CGRectMake(70, 300, 50, 50)
         let resourceImage = UIImage(named: "book")
         resourceButton.setImage(resourceImage, forState: UIControlState.Normal)
+        resourceButton.addTarget(self, action: #selector(FMLContainerViewController.bookTapped), forControlEvents: UIControlEvents.TouchUpInside)
         vineOutline.addSubview(resourceButton)
         
         
@@ -119,6 +137,8 @@ class FMLContainerViewController: UIViewController {
         searchButton.frame = CGRectMake(70, 420, 50, 50)
         let searchImage = UIImage(named: "dog")
         searchButton.setImage(searchImage, forState: UIControlState.Normal)
+        searchButton.addTarget(self, action: #selector(FMLContainerViewController.dogTapped), forControlEvents: UIControlEvents.TouchUpInside)
+
         vineOutline.addSubview(searchButton)
         
         

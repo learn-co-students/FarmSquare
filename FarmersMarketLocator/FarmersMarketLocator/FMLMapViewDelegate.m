@@ -96,6 +96,7 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         
         [self.viewController.view bringSubviewToFront:self.viewController.detailView];
         
+        self.viewController.
     }
 }
 
