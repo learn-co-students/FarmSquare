@@ -30,6 +30,10 @@
     
     self.backgroundColor = [UIColor whiteColor];
     [self setBorder];
+    
+    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideButtonPressed)];
+    swipe.direction = UISwipeGestureRecognizerDirectionDown;
+    [self addGestureRecognizer:swipe];
     return self;
 }
 
