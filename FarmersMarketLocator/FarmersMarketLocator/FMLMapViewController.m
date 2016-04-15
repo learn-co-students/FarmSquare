@@ -32,8 +32,8 @@
 @property (strong, nonatomic) FMLLocationManagerDelegate *locationDelegate;
 @property (strong, nonatomic) FMLTextFieldDelegate *textFieldDelegate;
 @property (strong, nonatomic) UIView *dimView;
-@property (strong, nonatomic)  UITextField *searchBarTextField;
-@property (strong, nonatomic) IBOutlet UIButton *searchButton;
+@property (strong, nonatomic) UITextField *searchBarTextField;
+@property (strong, nonatomic) UIButton *searchButton;
 
 @end
 
@@ -78,11 +78,22 @@
     
     
     //set up search bar and search button view
-    self.searchBarTextField = [[UITextField alloc]initWithFrame:CGRectMake(40, 0, 50, 20)];
+    self.searchBarTextField = [[UITextField alloc]initWithFrame:CGRectMake(40, 0, 0, 0)];
+    self.searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    self.searchButton.imageView.image = [UIImage imageNamed:@"magnifying-glass"];
+    self.searchButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.searchButton.backgroundColor = [UIColor blackColor];
+    
+    
     self.searchBarTextField.layer.borderColor = [[UIColor blackColor] CGColor];
     self.searchBarTextField.layer.borderWidth = 1.0;
+    
+    
     self.searchBarTextField.translatesAutoresizingMaskIntoConstraints = NO;
     self.searchButton.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    
     [self.view addSubview:self.searchBarTextField];
     [self.view addSubview:self.searchButton];
     
@@ -90,17 +101,13 @@
     [self.searchBarTextField.leadingAnchor constraintEqualToAnchor:self.view.centerXAnchor constant:-65].active = YES;
     [self.searchBarTextField.heightAnchor constraintEqualToConstant:30].active = YES;
     [self.searchBarTextField.widthAnchor constraintEqualToConstant:200].active = YES;
-
-    
-//        [self.searchBarTextField.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor constant:100].active = YES;
     
     [self.searchButton.topAnchor constraintEqualToAnchor:self.searchBarTextField.topAnchor].active = YES;
     [self.searchButton.leadingAnchor constraintEqualToAnchor:self.searchBarTextField.trailingAnchor constant:10].active = YES;
-    [self.searchButton.heightAnchor constraintEqualToAnchor:self.searchBarTextField.heightAnchor constant:20].active = YES;
-    [self.searchButton.widthAnchor constraintEqualToConstant:45].active = YES;
+    [self.searchButton.heightAnchor constraintEqualToAnchor:self.searchBarTextField.heightAnchor].active = YES;
+    [self.searchButton.widthAnchor constraintEqualToConstant:30].active = YES;
 
-    //    self.searchBarTextField.layer = self.view.layer.
-//    [self.view updateConstraintsIfNeeded];
+
     
     
     // Create detail view
