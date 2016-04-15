@@ -39,9 +39,9 @@ class FMLContainerViewController: UIViewController {
         createBlurView()
         addHamburgerImage()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "makeVineDisappear", name: "LeafMeAlone", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FMLContainerViewController.makeVineDisappear), name: "LeafMeAlone", object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "makeVineReappear", name: "VineAndDine", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FMLContainerViewController.makeVineReappear), name: "VineAndDine", object: nil)
     }
     
     // MARK: Vine Menu Methods

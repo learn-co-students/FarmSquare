@@ -60,18 +60,17 @@ import UIKit
         self.topAnchor.constraintEqualToAnchor(self.superview?.topAnchor, constant: -20).active = true
         self.leadingAnchor.constraintEqualToAnchor(self.superview?.leadingAnchor).active = true
         self.widthAnchor.constraintEqualToAnchor(self.superview?.widthAnchor).active = true
-        self.heightAnchor.constraintEqualToConstant(120).active = true
+        self.heightAnchor.constraintEqualToConstant(130).active = true
     }
     
     func constrainLabels() {
-        
-        self.nameLabel.topAnchor.constraintEqualToAnchor(self.topAnchor, constant: 30).active = true
-        self.nameLabel.leadingAnchor.constraintEqualToAnchor(self.leadingAnchor, constant: 10).active = true
-        self.nameLabel.trailingAnchor.constraintEqualToAnchor(self.trailingAnchor, constant: 10).active = true
-        
-        self.addressLabel.topAnchor.constraintEqualToAnchor(self.nameLabel.bottomAnchor, constant: 7).active = true
+        self.addressLabel.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor, constant: -20).active = true
         self.addressLabel.leadingAnchor.constraintEqualToAnchor(self.leadingAnchor, constant: 10).active = true
         self.addressLabel.trailingAnchor.constraintEqualToAnchor(self.trailingAnchor, constant: 10).active = true
+        
+        self.nameLabel.bottomAnchor.constraintEqualToAnchor(self.addressLabel.topAnchor, constant: -7).active = true
+        self.nameLabel.leadingAnchor.constraintEqualToAnchor(self.leadingAnchor, constant: 10).active = true
+        self.nameLabel.trailingAnchor.constraintEqualToAnchor(self.trailingAnchor, constant: 10).active = true
     }
     
     func showTitleView() {

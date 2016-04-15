@@ -86,7 +86,7 @@
 
     
     // create Title View
-    self.titleView = [[FMLTitleView alloc] initWithFrame:CGRectMake(0, 0, width, 120)];
+    self.titleView = [[FMLTitleView alloc] initWithFrame:CGRectMake(0, 0, width, 130)];
     [self.view addSubview:self.titleView];
     [self.titleView constrainViews];
     
