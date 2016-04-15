@@ -10,6 +10,7 @@
 
 @implementation FMLGroceryCellView
 
+
 //if someone tries to make his view in Storyboard
 -(instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
@@ -21,15 +22,6 @@
     return self;
     
 }
-
-//if its in code
-//-(instancetype)initWithFrame:(CGRect)frame {
-//    self = [super initWithFrame:frame];
-//    if (self) {
-//        [self commonInit];
-//    }
-//    return self;
-//}
 
 - (void)commonInit {
     
@@ -50,34 +42,28 @@
 
 
 - (void)setGroceryItem:(FMLGroceryItem *)item {
-    NSLog(@"ARE YOU GETTING CALLED!!!!");
+    
     self.item = item;
     self.groceryName.text = self.item.name;
     self.numberOfItemsNeeded.text = [NSString stringWithFormat:@"%@", self.item.quantity];
-    if (!self.item.isChecked) {
-        [self.checkbox setImage:[UIImage imageNamed:@"uncheckedButton"] forState:UIControlStateNormal];
-    } else {
-        [self.checkbox setImage:[UIImage imageNamed:@"checkedButton"] forState:UIControlStateSelected];
-    }
+    
+    //default state for checkbox is unchecked
+    self.item.isChecked = @0;  //isChecked is NSNumber
+    [self.checkbox setImage:[UIImage imageNamed:@"uncheckedButton"] forState:UIControlStateNormal];
     
 }
 
-//-(UIButton *)setUpCheckboxButton {
-//    
-//    UIButton *checkbox = [[UIButton alloc]init];
-//    
-//    [checkbox setImage:[UIImage imageNamed:] forState:UIControlStateNormal];
-//    [checkbox setImage:[UIImage imageNamed:@"checkedButton"] forState:UIControlStateSelected];
-//    
-//    [checkbox addTarget:self action:@selector(checkUncheck) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    return checkbox;
-//}
-//
-//-(void)checkUncheck {
-//    
-//    
-//}
-
+- (IBAction)checkboxTapped:(id)sender {
+    
+        if ([self.item.isChecked  isEqual: @0]) {
+        
+        [self.checkbox setImage:[UIImage imageNamed:@"checkedButton"] forState:UIControlStateNormal];
+        self.item.isChecked = @1;
+            
+    } else {
+        [self.checkbox setImage:[UIImage imageNamed:@"uncheckedButton"] forState:UIControlStateNormal];
+        self.item.isChecked = @0;
+    }
+}
 
 @end

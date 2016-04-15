@@ -35,7 +35,7 @@
     
     [self.stack saveContext];
     
-    //[[NSNotificationCenter defaultCenter] postNotificationName:@"new item added" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"new item added" object:nil];
 
     
     [self dismissViewControllerAnimated:YES completion:nil];

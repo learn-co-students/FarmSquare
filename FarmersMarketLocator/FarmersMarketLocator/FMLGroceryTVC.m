@@ -10,6 +10,7 @@
 #import "FMLGroceryCell.h"
 #import "FMLNewItemViewController.h"
 #import "FMLGroceryItem.h"
+#import "CoreDataStack.h"
 
 @interface FMLGroceryTVC ()
 
@@ -24,18 +25,33 @@
     
     self.stack = [CoreDataStack sharedStack];
     
+    self.tableView.separatorColor = [UIColor greenColor];
     
+    //to allow left swipe delete of a cell
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
 }
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-//    [[NSNotificationCenter defaultCenter] addObserverForName:@"new item added" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-//        [self.tableView reloadData];
-//    }];
-    [self.tableView reloadData];
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"new item added" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        [self.tableView reloadData];
+    }];
+    
 }
 
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        //we need to delete the object from the array, but from core data so that the number of rows is updated with one less
+        [self.stack.managedObjectContext deleteObject:self.stack.groceryItems[indexPath.row]];
+
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        [tableView reloadData];
+    }
+}
 
 #pragma mark - Table view data source
 
@@ -52,11 +68,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FMLGroceryCell *cell = (FMLGroceryCell*)[tableView dequeueReusableCellWithIdentifier:@"groceryCell" forIndexPath:indexPath];
     
-    
-    
-   FMLGroceryItem *currentItem = self.stack.groceryItems[indexPath.row];
-    
-    NSLog(@"Current item: %@", currentItem.name);
+    FMLGroceryItem *currentItem = self.stack.groceryItems[indexPath.row];
     
     [cell.groceryView setGroceryItem:currentItem];
     

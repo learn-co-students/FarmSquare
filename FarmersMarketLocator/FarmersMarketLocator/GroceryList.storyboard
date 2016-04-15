@@ -109,10 +109,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="giL-Bc-6Ou" customClass="FMLNewItemView">
-                                <rect key="frame" x="48" y="142" width="224" height="284"/>
+                                <rect key="frame" x="48" y="99" width="224" height="228"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n4R-oJ-3TO">
-                                        <rect key="frame" x="40" y="80" width="144" height="30"/>
+                                        <rect key="frame" x="40" y="40" width="144" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -122,7 +122,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I need to buy:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pM4-eP-JdW">
-                                        <rect key="frame" x="40" y="51" width="105" height="21"/>
+                                        <rect key="frame" x="40" y="11" width="105" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -150,12 +150,12 @@
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.81659106752968569" blue="0.13041667198379148" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="vlb-QZ-JV8" firstAttribute="top" secondItem="n4R-oJ-3TO" secondAttribute="bottom" constant="46" id="1mJ-8z-OwN"/>
+                                    <constraint firstItem="vlb-QZ-JV8" firstAttribute="top" secondItem="n4R-oJ-3TO" secondAttribute="bottom" constant="60" id="1mJ-8z-OwN"/>
                                     <constraint firstAttribute="trailing" secondItem="n4R-oJ-3TO" secondAttribute="trailing" constant="40" id="5V9-ck-N4X"/>
-                                    <constraint firstItem="RRG-Mc-hOI" firstAttribute="top" secondItem="vlb-QZ-JV8" secondAttribute="bottom" constant="60" id="7Xl-ma-c3u"/>
-                                    <constraint firstItem="n4R-oJ-3TO" firstAttribute="top" secondItem="giL-Bc-6Ou" secondAttribute="top" constant="80" id="82N-a5-Ruj"/>
+                                    <constraint firstItem="RRG-Mc-hOI" firstAttribute="top" secondItem="vlb-QZ-JV8" secondAttribute="bottom" constant="30" id="7Xl-ma-c3u"/>
+                                    <constraint firstItem="n4R-oJ-3TO" firstAttribute="top" secondItem="giL-Bc-6Ou" secondAttribute="top" constant="40" id="82N-a5-Ruj"/>
                                     <constraint firstItem="n4R-oJ-3TO" firstAttribute="leading" secondItem="giL-Bc-6Ou" secondAttribute="leading" constant="40" id="BJh-J1-2wk"/>
-                                    <constraint firstItem="aGy-91-5PT" firstAttribute="top" secondItem="vlb-QZ-JV8" secondAttribute="bottom" constant="60" id="IvI-qb-g5V"/>
+                                    <constraint firstItem="aGy-91-5PT" firstAttribute="top" secondItem="vlb-QZ-JV8" secondAttribute="bottom" constant="30" id="IvI-qb-g5V"/>
                                     <constraint firstItem="vlb-QZ-JV8" firstAttribute="top" secondItem="muR-Fi-xUm" secondAttribute="bottom" constant="4" id="OME-Zp-wXp"/>
                                     <constraint firstItem="n4R-oJ-3TO" firstAttribute="top" secondItem="pM4-eP-JdW" secondAttribute="bottom" constant="8" id="Yvt-NY-hM1"/>
                                     <constraint firstItem="vlb-QZ-JV8" firstAttribute="height" secondItem="n4R-oJ-3TO" secondAttribute="height" id="drh-bb-4wJ"/>
@@ -169,8 +169,8 @@
                         </subviews>
                         <color key="backgroundColor" red="0.03125" green="0.03125" blue="0.03125" alpha="0.2841589095744681" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="giL-Bc-6Ou" firstAttribute="height" secondItem="Myn-V0-pIL" secondAttribute="height" multiplier="0.5" id="6A7-iZ-QFd"/>
-                            <constraint firstItem="giL-Bc-6Ou" firstAttribute="centerY" secondItem="Myn-V0-pIL" secondAttribute="centerY" id="9EA-Vs-ilo"/>
+                            <constraint firstItem="giL-Bc-6Ou" firstAttribute="height" secondItem="Myn-V0-pIL" secondAttribute="height" multiplier="0.4" id="6A7-iZ-QFd"/>
+                            <constraint firstItem="giL-Bc-6Ou" firstAttribute="centerY" secondItem="Myn-V0-pIL" secondAttribute="centerY" multiplier="0.75" id="9EA-Vs-ilo"/>
                             <constraint firstItem="giL-Bc-6Ou" firstAttribute="width" secondItem="Myn-V0-pIL" secondAttribute="width" multiplier="0.7" id="O8N-Ca-xk9"/>
                             <constraint firstItem="giL-Bc-6Ou" firstAttribute="centerX" secondItem="Myn-V0-pIL" secondAttribute="centerX" id="Uh0-jf-xhE"/>
                         </constraints>

@@ -101,17 +101,22 @@
     }
 }
 
-- (NSArray *)groceryItems {
+- (NSMutableArray *)groceryItems {
     NSFetchRequest *getAllItems = [NSFetchRequest fetchRequestWithEntityName:@"FMLGroceryItem"];
     
-    _groceryItems = [self.managedObjectContext executeFetchRequest:getAllItems error:nil];
+    _groceryItems = [[self.managedObjectContext executeFetchRequest:getAllItems error:nil]mutableCopy];
     
     return _groceryItems;
 }
 
+-(void)fetchData {
+    NSFetchRequest *groceryRequest = [NSFetchRequest fetchRequestWithEntityName:@"FMLGroceryItem"];
+    self.groceryItems = [[self.managedObjectContext executeFetchRequest:groceryRequest error:nil]mutableCopy];
+}
+
+
 - (FMLGroceryItem *)newGroceryItem {
    
-
     FMLGroceryItem *newItem = [NSEntityDescription insertNewObjectForEntityForName:@"FMLGroceryItem" inManagedObjectContext:self.managedObjectContext];
     
     [self saveContext];

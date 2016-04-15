@@ -26,7 +26,10 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="50" id="tkP-u2-hSe"/>
                             </constraints>
-                            <state key="normal" title="Button" image="uncheckedButton"/>
+                            <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="checkboxTapped:" destination="-1" eventType="touchUpInside" id="qoC-Ry-945"/>
+                            </connections>
                         </button>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Eqb-hQ-ITX">
                             <rect key="frame" x="54" y="0.0" width="581" height="185"/>
@@ -48,7 +51,7 @@
                     </subviews>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="0.94484603830000002" blue="0.25822400029999998" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="NWF-BK-HIZ" secondAttribute="trailing" id="5Kw-Y3-iLM"/>
                 <constraint firstAttribute="bottom" secondItem="NWF-BK-HIZ" secondAttribute="bottom" id="M2I-l4-HUA"/>
@@ -59,7 +62,4 @@
             <point key="canvasLocation" x="416.5" y="182.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="uncheckedButton" width="26" height="26"/>
-    </resources>
 </document>

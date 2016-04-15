@@ -17,11 +17,12 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-@property (strong, nonatomic) NSArray *groceryItems;
+@property (strong, nonatomic) NSMutableArray *groceryItems;
 
 + (instancetype)sharedStack;
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
+- (void) fetchData;
 
 - (FMLGroceryItem *)newGroceryItem;
 
