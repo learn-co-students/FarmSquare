@@ -20,11 +20,9 @@
         _produceTextView = [self setUpProduceTextViewWithText:@"Fruits and Vegetables"
                                                  textColor:[UIColor blackColor]];
         _scheduleLabel = [self setUpLabelWithText:@"Mon-Fri 7am-4pm" textColor:[UIColor blackColor]];
-        _arrowDownButton = [self setUpButtonWithImageName:@"arrowdown" action:@selector(hideButtonPressed)];
         _yelpButton = [self setUpButtonWithImageName:@"yelp_review_btn_red" action:@selector(yelpButtonPressed)];
         _directionsButton = [self setUpButtonWithImageName:@"direction24px" action:@selector(directionsButtonPressed)];
     }
-    [self addSubview:_arrowDownButton];
     [self addSubview:_produceTextView];
     [self addSubview:_scheduleLabel];
     [self addSubview:_yelpButton];
@@ -47,13 +45,17 @@ func setBorder() {
 */
 
 -(void)setBorder {
-    CGFloat width = 10.0;
-    self.border.borderColor = [UIColor redColor].CGColor;
-    //[UIColor colorWithRed:38/255.0 green:89/255.0 blue:15/255.0 alpha:1.0].CGColor;
-    self.border.frame = CGRectMake(10, 10, self.frame.size.width, self.frame.size.height);
-    self.border.borderWidth = width;
-    [self.layer addSublayer:self.border];
-    self.layer.masksToBounds = YES;
+    UIView *fauxBorder = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 10.0)];
+    fauxBorder.backgroundColor = [UIColor colorWithRed:38/255.0 green:89/255.0 blue:15/255.0 alpha:1.0];
+    fauxBorder.translatesAutoresizingMaskIntoConstraints = NO;
+    self.border = fauxBorder;
+
+    [self addSubview:self.border];
+    
+    [self.border.topAnchor constraintEqualToAnchor:self.topAnchor].active = YES;
+    [self.border.centerXAnchor constraintEqualToAnchor:self.centerXAnchor].active = YES;
+    [self.border.widthAnchor constraintEqualToAnchor:self.widthAnchor].active = YES;
+    [self.border.heightAnchor constraintEqualToConstant:10.0].active = YES;
 }
 
 
@@ -99,7 +101,6 @@ func setBorder() {
 
 -(void)constrainViews {
     self.translatesAutoresizingMaskIntoConstraints = NO;
-    self.arrowDownButton.translatesAutoresizingMaskIntoConstraints = NO;
     self.produceTextView.translatesAutoresizingMaskIntoConstraints = NO;
     self.scheduleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.yelpButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -109,12 +110,9 @@ func setBorder() {
     [self.bottomAnchor constraintEqualToAnchor:self.superview.bottomAnchor].active = YES;
     [self.centerXAnchor constraintEqualToAnchor:self.superview.centerXAnchor].active = YES;
     [self.heightAnchor constraintEqualToConstant:self.superview.frame.size.height * 0.3].active = YES;
-    
-    [self.arrowDownButton.topAnchor constraintEqualToAnchor:self.topAnchor constant:0].active = YES;
-    [self.arrowDownButton.centerXAnchor constraintGreaterThanOrEqualToAnchor:self.centerXAnchor].active = YES;
 
     
-    [self.scheduleLabel.topAnchor constraintEqualToAnchor:self.arrowDownButton.bottomAnchor constant:3].active = YES;
+    [self.scheduleLabel.topAnchor constraintEqualToAnchor:self.topAnchor constant:13].active = YES;
     [self.scheduleLabel.leftAnchor constraintEqualToAnchor:self.leftAnchor constant:20].active = YES;
     [self.scheduleLabel.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-20].active = YES;
     
