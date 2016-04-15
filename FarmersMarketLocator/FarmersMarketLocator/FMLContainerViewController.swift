@@ -24,6 +24,7 @@ class FMLContainerViewController: UIViewController {
     var blurEffectView = UIVisualEffectView()
     var vineImageView = UIImageView()
     var vineOutline = UIImageView()
+    var hamburger = UIImageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,7 @@ class FMLContainerViewController: UIViewController {
         self.vineButton.transform = CGAffineTransformMakeRotation(degrees)
         
         createBlurView()
+        addHamburgerImage()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "makeVineDisappear", name: "LeafMeAlone", object: nil)
         
@@ -44,15 +46,25 @@ class FMLContainerViewController: UIViewController {
     
     // MARK: Vine Menu Methods
     
+    func addHamburgerImage() {
+        hamburger = UIImageView(frame: CGRectMake(25, 35, 40, 40))
+        hamburger.image = UIImage(named: "three")
+        hamburger.alpha = 0.3
+        self.view.addSubview(hamburger)
+        print("done")
+    }
+
     func makeVineDisappear() {
         UIView.animateWithDuration(0.3) { 
             self.vineButton.alpha = 0
+            self.hamburger.alpha = 0
         }
     }
     
     func makeVineReappear() {
         UIView.animateWithDuration(0.3) { 
             self.vineButton.alpha = 1
+            self.hamburger.alpha = 1
         }
     }
     

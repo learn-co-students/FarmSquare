@@ -23,6 +23,7 @@
 @property (assign, nonatomic) CGFloat selectedLongitude;
 @property (weak, nonatomic) NSString *zip;
 @property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) CALayer *border;
 
 -(void)constrainViews;
 -(void)showDetailView;

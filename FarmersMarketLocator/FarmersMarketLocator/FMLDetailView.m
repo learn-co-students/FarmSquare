@@ -31,8 +31,29 @@
     [self addSubview:_directionsButton];
     
     self.backgroundColor = [UIColor whiteColor];
-    
+    [self setBorder];
     return self;
+}
+
+/*
+func setBorder() {
+    let width = CGFloat(10.0)
+    border.borderColor = UIColor(colorLiteralRed: 38/255.0, green: 89/255.0, blue: 15/255.0, alpha: 1.0).CGColor
+    border.frame = CGRect(x: -width, y:  self.frame.size.height-width, width: self.frame.size.width + 2*width, height: self.frame.size.height)
+    border.borderWidth = width
+    self.layer.addSublayer(border)
+    self.layer.masksToBounds = true
+}
+*/
+
+-(void)setBorder {
+    CGFloat width = 10.0;
+    self.border.borderColor = [UIColor redColor].CGColor;
+    //[UIColor colorWithRed:38/255.0 green:89/255.0 blue:15/255.0 alpha:1.0].CGColor;
+    self.border.frame = CGRectMake(10, 10, self.frame.size.width, self.frame.size.height);
+    self.border.borderWidth = width;
+    [self.layer addSublayer:self.border];
+    self.layer.masksToBounds = YES;
 }
 
 
