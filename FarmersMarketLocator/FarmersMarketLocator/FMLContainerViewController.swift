@@ -24,7 +24,6 @@ class FMLContainerViewController: UIViewController {
     var blurEffectView = UIVisualEffectView()
     var vineImageView = UIImageView()
     var vineOutline = UIImageView()
-    var menuShown = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,9 +36,25 @@ class FMLContainerViewController: UIViewController {
         self.vineButton.transform = CGAffineTransformMakeRotation(degrees)
         
         createBlurView()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "makeVineDisappear", name: "LeafMeAlone", object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "makeVineReappear", name: "VineAndDine", object: nil)
     }
     
     // MARK: Vine Menu Methods
+    
+    func makeVineDisappear() {
+        UIView.animateWithDuration(0.3) { 
+            self.vineButton.alpha = 0
+        }
+    }
+    
+    func makeVineReappear() {
+        UIView.animateWithDuration(0.3) { 
+            self.vineButton.alpha = 1
+        }
+    }
     
     func createBlurView() {
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
@@ -59,7 +74,6 @@ class FMLContainerViewController: UIViewController {
     // MARK: IBActions
     
     @IBAction func vineButtonTapped(sender: UIButton) {
-        self.menuShown = true
         self.view.addSubview(blurEffectView)
         self.vineButton.hidden = true
         
@@ -158,12 +172,7 @@ class FMLContainerViewController: UIViewController {
     }
     
     func emptySpaceTapped() {
-        
-//        if self.vineOutline == nil {
-//            self.menuShown = false
-//        } else {
-            self.vineOutline.alpha = 0
-//        }
+        self.vineOutline.alpha = 0
         self.vineImageView.alpha = 1
         
         UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
@@ -193,7 +202,6 @@ class FMLContainerViewController: UIViewController {
     
     // Thanks Tim Clem!
     func setEmbeddedViewController(controller: UIViewController?) {
-        print("Child view controllers: \(self.childViewControllers)")
         if self.childViewControllers.contains(controller!) {
             return
         }
@@ -224,9 +232,6 @@ class FMLContainerViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        print("container view frame: \(NSStringFromCGRect(self.containerView.frame))")
-        print("contained view frame: \(NSStringFromCGRect(self.containerView.subviews[0].frame))")
     }
 }
 

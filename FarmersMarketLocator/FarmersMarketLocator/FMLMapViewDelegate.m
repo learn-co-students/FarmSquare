@@ -12,6 +12,7 @@
 #import "FMLDetailView.h"
 #import "Annotation.h"
 #import "FMLPinAnnotationView.h"
+#import "FarmersMarketLocator-Swift.h"
 
 typedef NS_ENUM(NSInteger, FMLMarketStatus) {
     FMLMarketHasNoInfo          = -1,
@@ -78,6 +79,11 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
             detailView.previousRegion = mapView.region;
         }
         
+        FMLTitleView *titleView = self.viewController.titleView;
+        titleView.nameLabel.text = market.name.uppercaseString;
+        titleView.addressLabel.text = [NSString stringWithFormat:@"ADDRESS: %@", market.address];
+        [titleView showTitleView];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"LeafMeAlone" object:nil];
         CGPoint pinLocationBeforeZoom = view.center;
         
         [self.viewController zoomMaptoLatitude:[market.latitude floatValue]  longitude:[market.longitude floatValue] withLatitudeSpan:0.01 longitudeSpan:0.01];
@@ -114,7 +120,7 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         MKAnnotationView *pepeLeView = [[MKAnnotationView alloc] initWithAnnotation:annie reuseIdentifier:@""];
         pepeLeView.enabled = YES;
         
-        FMLMarketStatus status = [self currentStatusForMarket:market];
+        enum FMLMarketStatus status = [self currentStatusForMarket:market];
         switch (status) {
             case FMLMarketIsOpen:
                 pepeLeView.image = [UIImage imageNamed:@"openPin"];
@@ -144,6 +150,8 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
 -(void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
     
     [self.viewController.detailView hideDetailView];
+    [self.viewController.titleView hideTitleView];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"VineAndDine" object:nil];
     
     // Animation of icons' disappearance: become transparent, shrink, move back into the pin.
     [UIView animateWithDuration:self.animationSpeed animations:^{

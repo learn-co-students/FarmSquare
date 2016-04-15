@@ -21,6 +21,7 @@
 #import "FMLPinAnnotationView.h"
 #import "FMLJSONDictionary.h"
 #import <QuartzCore/QuartzCore.h>
+#import "FarmersMarketLocator-Swift.h"
 
 // TODO: When network connection is lost, Core Data misfunctions and saves 0 objects which shouldn't be ok
 
@@ -84,6 +85,10 @@
     [self.detailView constrainViews];
 
     
+    // create Title View
+    self.titleView = [[FMLTitleView alloc] initWithFrame:CGRectMake(0, 0, width, 120)];
+    [self.view addSubview:self.titleView];
+    [self.titleView constrainViews];
     
     self.manager = [[CLLocationManager alloc] init];
     self.manager.delegate = self.locationDelegate;
