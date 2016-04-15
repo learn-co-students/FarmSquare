@@ -27,7 +27,7 @@ class FMLContainerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.layer.masksToBounds = false
         self.setEmbeddedViewController(mapViewController)
 
         

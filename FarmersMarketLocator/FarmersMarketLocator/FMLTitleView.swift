@@ -36,7 +36,7 @@ import UIKit
     func setBorder() {
         let width = CGFloat(10.0)
         border.borderColor = UIColor(colorLiteralRed: 38/255.0, green: 89/255.0, blue: 15/255.0, alpha: 1.0).CGColor
-        border.frame = CGRect(x: -width, y:  90, width: self.frame.size.width + 2*width, height: self.frame.size.height)
+        border.frame = CGRect(x: -width, y:  self.frame.size.height-width, width: self.frame.size.width + 2*width, height: self.frame.size.height)
         border.borderWidth = width
         self.layer.addSublayer(border)
         self.layer.masksToBounds = true
@@ -57,19 +57,19 @@ import UIKit
     }
     
     func constrainToTop() {
-        self.topAnchor.constraintEqualToAnchor(self.superview?.topAnchor).active = true
+        self.topAnchor.constraintEqualToAnchor(self.superview?.topAnchor, constant: -20).active = true
         self.leadingAnchor.constraintEqualToAnchor(self.superview?.leadingAnchor).active = true
         self.widthAnchor.constraintEqualToAnchor(self.superview?.widthAnchor).active = true
-        self.heightAnchor.constraintEqualToConstant(100).active = true
+        self.heightAnchor.constraintEqualToConstant(120).active = true
     }
     
     func constrainLabels() {
         
-        self.nameLabel.topAnchor.constraintEqualToAnchor(self.topAnchor, constant: 10).active = true
+        self.nameLabel.topAnchor.constraintEqualToAnchor(self.topAnchor, constant: 30).active = true
         self.nameLabel.leadingAnchor.constraintEqualToAnchor(self.leadingAnchor, constant: 10).active = true
         self.nameLabel.trailingAnchor.constraintEqualToAnchor(self.trailingAnchor, constant: 10).active = true
         
-        self.addressLabel.topAnchor.constraintEqualToAnchor(self.nameLabel.bottomAnchor, constant: 10).active = true
+        self.addressLabel.topAnchor.constraintEqualToAnchor(self.nameLabel.bottomAnchor, constant: 7).active = true
         self.addressLabel.leadingAnchor.constraintEqualToAnchor(self.leadingAnchor, constant: 10).active = true
         self.addressLabel.trailingAnchor.constraintEqualToAnchor(self.trailingAnchor, constant: 10).active = true
     }
