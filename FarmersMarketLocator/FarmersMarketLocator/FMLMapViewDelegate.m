@@ -83,7 +83,6 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         [self.viewController zoomMaptoLatitude:[market.latitude floatValue]  longitude:[market.longitude floatValue] withLatitudeSpan:0.01 longitudeSpan:0.01];
         
         if (view.center.x == pinLocationBeforeZoom.x && view.center.y == pinLocationBeforeZoom.y) {
-            NSLog(@"\n\nShow products is happening in DIDSELECT\n\n");
             [self showProductsCircleForMarket:view];
 
         }
@@ -172,7 +171,6 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
     
     if (self.selectedAnnotationView) {
 
-        NSLog(@"\n\nShow products is happening in REGIONDIDCHANGE\n\n");
         [self showProductsCircleForMarket:self.selectedAnnotationView];
         
     }
@@ -182,7 +180,6 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
 #pragma mark - Helper Methods
 
 -(void)showProductsCircleForMarket:(MKAnnotationView *)annotationView {
-    NSLog(@"Annotation view's (%@) center: %f, %f", annotationView, annotationView.center.x, annotationView.center.y);
     
     // Empty the current products icon array before adding the circle views
     self.currentProductsIcons = [@[] mutableCopy];
@@ -289,7 +286,6 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         
     }
     
-    NSLog(@"circles should have been made");
 }
 
 

@@ -12,7 +12,7 @@ import SnapKit
 class FMLContainerViewController: UIViewController {
     
     let mapViewController = FMLMapViewController()
-    let dogViewController = DogViewController()
+    var dogViewController = DogViewController()
     let cartViewController = CartViewController()
     let bookViewController = BookViewController()
 
@@ -27,7 +27,10 @@ class FMLContainerViewController: UIViewController {
     var menuShown = false
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         self.setEmbeddedViewController(mapViewController)
+
         
         let value: Double = ((20 * M_PI)/180.0)
         let degrees: CGFloat = CGFloat(value)
@@ -88,18 +91,22 @@ class FMLContainerViewController: UIViewController {
     
     func mapTapped() {
         self.setEmbeddedViewController(mapViewController)
+        self.emptySpaceTapped()
     }
     
     func cartTapped() {
         self.setEmbeddedViewController(cartViewController)
+        self.emptySpaceTapped()
     }
     
     func bookTapped() {
         self.setEmbeddedViewController(bookViewController)
+        self.emptySpaceTapped()
     }
     
     func dogTapped() {
         self.setEmbeddedViewController(dogViewController)
+        self.emptySpaceTapped()
     }
     
     
@@ -186,12 +193,13 @@ class FMLContainerViewController: UIViewController {
     
     // Thanks Tim Clem!
     func setEmbeddedViewController(controller: UIViewController?) {
-        
+        print("Child view controllers: \(self.childViewControllers)")
         if self.childViewControllers.contains(controller!) {
             return
         }
         
         for vc in self.childViewControllers {
+            vc.willMoveToParentViewController(nil)
             
             if vc.isViewLoaded() {
                 vc.view.removeFromSuperview()
@@ -200,17 +208,46 @@ class FMLContainerViewController: UIViewController {
             vc.removeFromParentViewController()
         }
         
-        if controller == nil {
+        if (controller == nil) {
             return
         }
         
         self.addChildViewController(controller!)
         self.containerView.addSubview(controller!.view)
-        controller!.view.snp_updateConstraints { (make) in
+        controller!.view.snp_makeConstraints { (make) in
             make.edges.equalTo(0)
         }
         
         controller?.didMoveToParentViewController(self)
         
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        print("container view frame: \(NSStringFromCGRect(self.containerView.frame))")
+        print("contained view frame: \(NSStringFromCGRect(self.containerView.subviews[0].frame))")
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
