@@ -11,6 +11,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "FMLMapViewDelegate.h"
 #import "FMLLocationManagerDelegate.h"
+#import "FMLTextFieldDelegate.h"
 #import "SampleZipCodes.h"
 #import "FMLAPIClient.h"
 #import "Annotation.h"
@@ -29,7 +30,10 @@
 @property (strong, nonatomic) CLLocationManager *manager;
 @property (strong, nonatomic) FMLMapViewDelegate *mapDelegate;
 @property (strong, nonatomic) FMLLocationManagerDelegate *locationDelegate;
+@property (strong, nonatomic) FMLTextFieldDelegate *textFieldDelegate;
 @property (strong, nonatomic) UIView *dimView;
+@property (strong, nonatomic)  UITextField *searchBarTextField;
+@property (strong, nonatomic) IBOutlet UIButton *searchButton;
 
 @end
 
@@ -38,13 +42,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view.translatesAutoresizingMaskIntoConstraints = NO;
     // Init delegates
     self.mapDelegate = [[FMLMapViewDelegate alloc] initWithTarget:self];
     self.locationDelegate = [[FMLLocationManagerDelegate alloc] initWithTarget:self];
+    //self.textFieldDelegate = [[FMLTextFieldDelegate alloc]initWithTarget:self]; //or searchBarTF?
     
     // Create and customize map view
-    self.mapView = [[MKMapView alloc]initWithFrame:self.view.frame];
+//    self.mapView = [[MKMapView alloc]initWithFrame:self.view.frame];
+    self.mapView = [[MKMapView alloc]initWithFrame:CGRectMake(0, 30, self.view.frame.size.width, self.view.frame.size.height - 30)];
     self.mapView.mapType = MKMapTypeStandard;
     self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self.mapDelegate;
@@ -71,6 +77,28 @@
     [self.redoSearchInMapAreaButton.widthAnchor constraintEqualToConstant:32].active = YES;
     
     
+    //set up search bar and search button view
+    self.searchBarTextField = [[UITextField alloc]initWithFrame:CGRectMake(40, 0, 200, 100)];
+    self.searchBarTextField.layer.borderColor = [[UIColor redColor] CGColor];
+    self.searchBarTextField.layer.borderWidth = 1.0;
+    self.searchBarTextField.translatesAutoresizingMaskIntoConstraints = NO;
+//    self.searchButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:self.searchBarTextField];
+//    [self.view addSubview:self.searchButton];
+    
+    [self.searchBarTextField.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:20].active = YES;
+    [self.searchBarTextField.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:20].active = YES;
+    [self.searchBarTextField.heightAnchor constraintEqualToConstant:100].active = YES;
+    [self.searchBarTextField.widthAnchor constraintEqualToAnchor:self.view.widthAnchor constant:-50].active = YES;
+//    [self.searchBarTextField.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor constant:100].active = YES;
+    
+//    [self.searchButton.topAnchor constraintEqualToAnchor:self.searchBarTextField.topAnchor].active = YES;
+//    [self.searchButton.leadingAnchor constraintEqualToAnchor:self.searchBarTextField.trailingAnchor constant:10].active = YES;
+//    [self.searchButton.heightAnchor constraintEqualToAnchor:self.searchBarTextField.heightAnchor constant:20].active = YES;
+//    [self.searchButton.widthAnchor constraintEqualToConstant:45].active = YES;
+
+    //    self.searchBarTextField.layer = self.view.layer.
+//    [self.view updateConstraintsIfNeeded];
     
     
     // Create detail view
