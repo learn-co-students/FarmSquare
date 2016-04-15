@@ -1,45 +1,40 @@
 //
-//  GroceryTVC.m
+//  FMLGroceryTVC.m
 //  GroceryList
 //
 //  Created by Slobodan Kovrlija on 4/12/16.
 //  Copyright © 2016 Slobodan Kovrlija. All rights reserved.
 //
 
-#import "GroceryTVC.h"
-#import "GroceryCell.h"
-#import "NewItemViewController.h"
+#import "FMLGroceryTVC.h"
+#import "FMLGroceryCell.h"
+#import "FMLNewItemViewController.h"
 #import "FMLGroceryItem.h"
 
-@interface GroceryTVC ()
+@interface FMLGroceryTVC ()
 
 @property (nonatomic, strong) NSMutableArray *items;
 
 @end
 
-@implementation GroceryTVC
+@implementation FMLGroceryTVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSManagedObjectContext *context = [[CoreDataStack sharedStack] managedObjectContext];
-    NSManagedObjectModel *model = [[CoreDataStack sharedStack] managedObjectModel];
+    self.stack = [CoreDataStack sharedStack];
     
-    NSFetchRequest *getGroceryItems = [NSFetchRequest fetchRequestWithEntityName:@"FMLGroceryItem"];
-    self.items = [[context executeFetchRequest:getGroceryItems error:nil]mutableCopy];
     
 }
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:@"new item added" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-        [self.tableView reloadData];
-    }];
-    
+//    [[NSNotificationCenter defaultCenter] addObserverForName:@"new item added" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+//        [self.tableView reloadData];
+//    }];
+    [self.tableView reloadData];
 }
-
-
 
 
 #pragma mark - Table view data source
@@ -50,16 +45,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSLog(@"Items count: %lu", self.items.count);
-    return self.items.count;
+    return self.stack.groceryItems.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    GroceryCell *cell = (GroceryCell*)[tableView dequeueReusableCellWithIdentifier:@"groceryCell" forIndexPath:indexPath];
+    FMLGroceryCell *cell = (FMLGroceryCell*)[tableView dequeueReusableCellWithIdentifier:@"groceryCell" forIndexPath:indexPath];
     
     
     
-   FMLGroceryItem *currentItem = self.items[indexPath.row];
+   FMLGroceryItem *currentItem = self.stack.groceryItems[indexPath.row];
     
     NSLog(@"Current item: %@", currentItem.name);
     

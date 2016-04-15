@@ -1,5 +1,5 @@
 //
-//  NewItemView.h
+//  FMLNewItemView.h
 //  GroceryList
 //
 //  Created by Slobodan Kovrlija on 4/13/16.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewItemView : UIView
+@interface FMLNewItemView : UIView
 
 @end

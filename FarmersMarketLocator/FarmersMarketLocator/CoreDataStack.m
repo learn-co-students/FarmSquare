@@ -21,6 +21,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _sharedStack = [[CoreDataStack alloc] init];
+        _sharedStack.groceryItems = [NSMutableArray new];
     });
     
     return _sharedStack;
@@ -99,5 +100,24 @@
         }
     }
 }
+
+- (NSArray *)groceryItems {
+    NSFetchRequest *getAllItems = [NSFetchRequest fetchRequestWithEntityName:@"FMLGroceryItem"];
+    
+    _groceryItems = [self.managedObjectContext executeFetchRequest:getAllItems error:nil];
+    
+    return _groceryItems;
+}
+
+- (FMLGroceryItem *)newGroceryItem {
+   
+
+    FMLGroceryItem *newItem = [NSEntityDescription insertNewObjectForEntityForName:@"FMLGroceryItem" inManagedObjectContext:self.managedObjectContext];
+    
+    [self saveContext];
+
+    return newItem;
+}
+
 
 @end

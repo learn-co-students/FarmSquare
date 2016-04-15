@@ -1,5 +1,5 @@
 //
-//  GroceryCellView.h
+//  FMLGroceryCellView.h
 //  GroceryList
 //
 //  Created by Slobodan Kovrlija on 4/12/16.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FMLGroceryItem.h"
 
-@interface GroceryCellView : UIView
+@interface FMLGroceryCellView : UIView
 
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UILabel *groceryName;

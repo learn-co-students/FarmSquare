@@ -47,20 +47,20 @@
         <!--NEW ITEMS-->
         <scene sceneID="JlF-gG-ENW">
             <objects>
-                <tableViewController id="8Bg-lH-Rb2" customClass="GroceryTVC" sceneMemberID="viewController">
+                <tableViewController id="8Bg-lH-Rb2" customClass="FMLGroceryTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="m6g-8u-xz0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="groceryCell" id="gbK-py-PTY" customClass="GroceryCell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="groceryCell" id="gbK-py-PTY" customClass="FMLGroceryCell">
                                 <rect key="frame" x="0.0" y="92" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gbK-py-PTY" id="ROr-sV-tjG">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Unn-8l-nG3" customClass="GroceryCellView">
+                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Unn-8l-nG3" customClass="FMLGroceryCellView">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <accessibility key="accessibilityConfiguration" identifier="itemCell"/>
@@ -99,16 +99,16 @@
         <!--New Item View Controller-->
         <scene sceneID="AUO-xP-sS8">
             <objects>
-                <viewController extendedLayoutIncludesOpaqueBars="YES" id="Bk3-76-zup" customClass="NewItemViewController" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" id="Bk3-76-zup" customClass="FMLNewItemViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kZc-2P-8B1"/>
                         <viewControllerLayoutGuide type="bottom" id="cCO-UT-7bf"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Myn-V0-pIL">
+                    <view key="view" alpha="0.5" contentMode="scaleToFill" id="Myn-V0-pIL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="giL-Bc-6Ou" customClass="NewItemView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="giL-Bc-6Ou" customClass="FMLNewItemView">
                                 <rect key="frame" x="48" y="142" width="224" height="284"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n4R-oJ-3TO">

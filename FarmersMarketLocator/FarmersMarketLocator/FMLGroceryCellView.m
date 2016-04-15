@@ -1,14 +1,14 @@
 //
-//  GroceryCellView.m
+//  FMLGroceryCellView.m
 //  GroceryList
 //
 //  Created by Slobodan Kovrlija on 4/12/16.
 //  Copyright © 2016 Slobodan Kovrlija. All rights reserved.
 //
 
-#import "GroceryCellView.h"
+#import "FMLGroceryCellView.h"
 
-@implementation GroceryCellView
+@implementation FMLGroceryCellView
 
 //if someone tries to make his view in Storyboard
 -(instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -33,7 +33,7 @@
 
 - (void)commonInit {
     
-    [[NSBundle mainBundle] loadNibNamed:@"GroceryCellView"
+    [[NSBundle mainBundle] loadNibNamed:@"FMLGroceryCellView"
                                   owner:self
                                 options:nil];
     

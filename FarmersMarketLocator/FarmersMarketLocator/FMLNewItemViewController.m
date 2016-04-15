@@ -1,19 +1,19 @@
 //
-//  NewItemViewController.m
+//  FMLNewItemViewController.m
 //  GroceryList
 //
 //  Created by Slobodan Kovrlija on 4/13/16.
 //  Copyright © 2016 Slobodan Kovrlija. All rights reserved.
 //
 
-#import "NewItemViewController.h"
+#import "FMLNewItemViewController.h"
 #import "FMLGroceryItem.h"
 
-@interface NewItemViewController ()
+@interface FMLNewItemViewController ()
 
 @end
 
-@implementation NewItemViewController
+@implementation FMLNewItemViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,7 +35,7 @@
     
     [self.stack saveContext];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"new item added" object:nil];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"new item added" object:nil];
 
     
     [self dismissViewControllerAnimated:YES completion:nil];

@@ -1,5 +1,5 @@
 //
-//  NewItemViewController.h
+//  FMLNewItemViewController.h
 //  GroceryList
 //
 //  Created by Slobodan Kovrlija on 4/13/16.
@@ -10,7 +10,7 @@
 
 #import "CoreDataStack.h"
 
-@interface NewItemViewController : UIViewController
+@interface FMLNewItemViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITextField *itemQuantTextField;
 @property (weak, nonatomic) IBOutlet UITextField *itemNameTextField;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;

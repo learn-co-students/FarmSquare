@@ -29,15 +29,14 @@
 		A38473B61CADAFC300ED08CA /* SampleZipCodes.m in Sources */ = {isa = PBXBuildFile; fileRef = A38473B51CADAFC300ED08CA /* SampleZipCodes.m */; };
 		E112CE9CB833D7D11064E042 /* libPods-FarmersMarketLocator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CDB776E48FF26680E2F899 /* libPods-FarmersMarketLocator.a */; };
 		E1D1AF2F1CBFE93400183165 /* FMLGroceryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF1E1CBFE93400183165 /* FMLGroceryListViewController.m */; };
-		E1D1AF301CBFE93400183165 /* GroceryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF201CBFE93400183165 /* GroceryCell.m */; };
-		E1D1AF311CBFE93400183165 /* GroceryCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF221CBFE93400183165 /* GroceryCellView.m */; };
-		E1D1AF321CBFE93400183165 /* GroceryCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D1AF231CBFE93400183165 /* GroceryCellView.xib */; };
-		E1D1AF331CBFE93400183165 /* GroceryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF251CBFE93400183165 /* GroceryItem.m */; };
+		E1D1AF301CBFE93400183165 /* FMLGroceryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF201CBFE93400183165 /* FMLGroceryCell.m */; };
+		E1D1AF311CBFE93400183165 /* FMLGroceryCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF221CBFE93400183165 /* FMLGroceryCellView.m */; };
+		E1D1AF321CBFE93400183165 /* FMLGroceryCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D1AF231CBFE93400183165 /* FMLGroceryCellView.xib */; };
 		E1D1AF341CBFE93400183165 /* FMLGroceryList.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF271CBFE93400183165 /* FMLGroceryList.m */; };
 		E1D1AF351CBFE93400183165 /* GroceryList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1D1AF281CBFE93400183165 /* GroceryList.storyboard */; };
-		E1D1AF361CBFE93400183165 /* GroceryTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF2A1CBFE93400183165 /* GroceryTVC.m */; };
-		E1D1AF371CBFE93400183165 /* NewItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF2C1CBFE93400183165 /* NewItemView.m */; };
-		E1D1AF381CBFE93400183165 /* NewItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF2E1CBFE93400183165 /* NewItemViewController.m */; };
+		E1D1AF361CBFE93400183165 /* FMLGroceryTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF2A1CBFE93400183165 /* FMLGroceryTVC.m */; };
+		E1D1AF371CBFE93400183165 /* FMLNewItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF2C1CBFE93400183165 /* FMLNewItemView.m */; };
+		E1D1AF381CBFE93400183165 /* FMLNewItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF2E1CBFE93400183165 /* FMLNewItemViewController.m */; };
 		E1D1AF3D1CC01B4200183165 /* FMLGroceryItem+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF3A1CC01B4200183165 /* FMLGroceryItem+CoreDataProperties.m */; };
 		E1D1AF3E1CC01B4200183165 /* FMLGroceryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF3C1CC01B4200183165 /* FMLGroceryItem.m */; };
 		E1F95DCD1CAB12D6009DA977 /* FMLAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F95DCC1CAB12D6009DA977 /* FMLAPIClient.m */; };
@@ -102,22 +101,20 @@
 		A38473B51CADAFC300ED08CA /* SampleZipCodes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleZipCodes.m; sourceTree = "<group>"; };
 		E1D1AF1D1CBFE93400183165 /* FMLGroceryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryListViewController.h; sourceTree = "<group>"; };
 		E1D1AF1E1CBFE93400183165 /* FMLGroceryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryListViewController.m; sourceTree = "<group>"; };
-		E1D1AF1F1CBFE93400183165 /* GroceryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroceryCell.h; sourceTree = "<group>"; };
-		E1D1AF201CBFE93400183165 /* GroceryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroceryCell.m; sourceTree = "<group>"; };
-		E1D1AF211CBFE93400183165 /* GroceryCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroceryCellView.h; sourceTree = "<group>"; };
-		E1D1AF221CBFE93400183165 /* GroceryCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroceryCellView.m; sourceTree = "<group>"; };
-		E1D1AF231CBFE93400183165 /* GroceryCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroceryCellView.xib; sourceTree = "<group>"; };
-		E1D1AF241CBFE93400183165 /* GroceryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroceryItem.h; sourceTree = "<group>"; };
-		E1D1AF251CBFE93400183165 /* GroceryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroceryItem.m; sourceTree = "<group>"; };
+		E1D1AF1F1CBFE93400183165 /* FMLGroceryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryCell.h; sourceTree = "<group>"; };
+		E1D1AF201CBFE93400183165 /* FMLGroceryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryCell.m; sourceTree = "<group>"; };
+		E1D1AF211CBFE93400183165 /* FMLGroceryCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryCellView.h; sourceTree = "<group>"; };
+		E1D1AF221CBFE93400183165 /* FMLGroceryCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryCellView.m; sourceTree = "<group>"; };
+		E1D1AF231CBFE93400183165 /* FMLGroceryCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FMLGroceryCellView.xib; sourceTree = "<group>"; };
 		E1D1AF261CBFE93400183165 /* FMLGroceryList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryList.h; sourceTree = "<group>"; };
 		E1D1AF271CBFE93400183165 /* FMLGroceryList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryList.m; sourceTree = "<group>"; };
 		E1D1AF281CBFE93400183165 /* GroceryList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GroceryList.storyboard; sourceTree = "<group>"; };
-		E1D1AF291CBFE93400183165 /* GroceryTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroceryTVC.h; sourceTree = "<group>"; };
-		E1D1AF2A1CBFE93400183165 /* GroceryTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroceryTVC.m; sourceTree = "<group>"; };
-		E1D1AF2B1CBFE93400183165 /* NewItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewItemView.h; sourceTree = "<group>"; };
-		E1D1AF2C1CBFE93400183165 /* NewItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewItemView.m; sourceTree = "<group>"; };
-		E1D1AF2D1CBFE93400183165 /* NewItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewItemViewController.h; sourceTree = "<group>"; };
-		E1D1AF2E1CBFE93400183165 /* NewItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewItemViewController.m; sourceTree = "<group>"; };
+		E1D1AF291CBFE93400183165 /* FMLGroceryTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryTVC.h; sourceTree = "<group>"; };
+		E1D1AF2A1CBFE93400183165 /* FMLGroceryTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryTVC.m; sourceTree = "<group>"; };
+		E1D1AF2B1CBFE93400183165 /* FMLNewItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLNewItemView.h; sourceTree = "<group>"; };
+		E1D1AF2C1CBFE93400183165 /* FMLNewItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLNewItemView.m; sourceTree = "<group>"; };
+		E1D1AF2D1CBFE93400183165 /* FMLNewItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLNewItemViewController.h; sourceTree = "<group>"; };
+		E1D1AF2E1CBFE93400183165 /* FMLNewItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLNewItemViewController.m; sourceTree = "<group>"; };
 		E1D1AF391CC01B4200183165 /* FMLGroceryItem+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FMLGroceryItem+CoreDataProperties.h"; sourceTree = "<group>"; };
 		E1D1AF3A1CC01B4200183165 /* FMLGroceryItem+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMLGroceryItem+CoreDataProperties.m"; sourceTree = "<group>"; };
 		E1D1AF3B1CC01B4200183165 /* FMLGroceryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryItem.h; sourceTree = "<group>"; };
@@ -310,19 +307,17 @@
 				E1D1AF271CBFE93400183165 /* FMLGroceryList.m */,
 				E1D1AF1D1CBFE93400183165 /* FMLGroceryListViewController.h */,
 				E1D1AF1E1CBFE93400183165 /* FMLGroceryListViewController.m */,
-				E1D1AF241CBFE93400183165 /* GroceryItem.h */,
-				E1D1AF251CBFE93400183165 /* GroceryItem.m */,
-				E1D1AF211CBFE93400183165 /* GroceryCellView.h */,
-				E1D1AF221CBFE93400183165 /* GroceryCellView.m */,
-				E1D1AF231CBFE93400183165 /* GroceryCellView.xib */,
-				E1D1AF1F1CBFE93400183165 /* GroceryCell.h */,
-				E1D1AF201CBFE93400183165 /* GroceryCell.m */,
-				E1D1AF291CBFE93400183165 /* GroceryTVC.h */,
-				E1D1AF2A1CBFE93400183165 /* GroceryTVC.m */,
-				E1D1AF2B1CBFE93400183165 /* NewItemView.h */,
-				E1D1AF2C1CBFE93400183165 /* NewItemView.m */,
-				E1D1AF2D1CBFE93400183165 /* NewItemViewController.h */,
-				E1D1AF2E1CBFE93400183165 /* NewItemViewController.m */,
+				E1D1AF211CBFE93400183165 /* FMLGroceryCellView.h */,
+				E1D1AF221CBFE93400183165 /* FMLGroceryCellView.m */,
+				E1D1AF231CBFE93400183165 /* FMLGroceryCellView.xib */,
+				E1D1AF1F1CBFE93400183165 /* FMLGroceryCell.h */,
+				E1D1AF201CBFE93400183165 /* FMLGroceryCell.m */,
+				E1D1AF291CBFE93400183165 /* FMLGroceryTVC.h */,
+				E1D1AF2A1CBFE93400183165 /* FMLGroceryTVC.m */,
+				E1D1AF2B1CBFE93400183165 /* FMLNewItemView.h */,
+				E1D1AF2C1CBFE93400183165 /* FMLNewItemView.m */,
+				E1D1AF2D1CBFE93400183165 /* FMLNewItemViewController.h */,
+				E1D1AF2E1CBFE93400183165 /* FMLNewItemViewController.m */,
 			);
 			name = "Grocery List";
 			sourceTree = "<group>";
@@ -448,7 +443,7 @@
 			files = (
 				1F3ED96C1CAB0AE50038F590 /* LaunchScreen.storyboard in Resources */,
 				1F3ED9691CAB0AE50038F590 /* Assets.xcassets in Resources */,
-				E1D1AF321CBFE93400183165 /* GroceryCellView.xib in Resources */,
+				E1D1AF321CBFE93400183165 /* FMLGroceryCellView.xib in Resources */,
 				1F3ED9671CAB0AE50038F590 /* Main.storyboard in Resources */,
 				E1D1AF351CBFE93400183165 /* GroceryList.storyboard in Resources */,
 			);
@@ -524,15 +519,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BBD3FFE1CAEA8AB00A1DB0E /* FMLMapViewDelegate.m in Sources */,
-				E1D1AF371CBFE93400183165 /* NewItemView.m in Sources */,
+				E1D1AF371CBFE93400183165 /* FMLNewItemView.m in Sources */,
 				E1D1AF2F1CBFE93400183165 /* FMLGroceryListViewController.m in Sources */,
-				E1D1AF331CBFE93400183165 /* GroceryItem.m in Sources */,
 				E1F95DCD1CAB12D6009DA977 /* FMLAPIClient.m in Sources */,
-				E1D1AF301CBFE93400183165 /* GroceryCell.m in Sources */,
+				E1D1AF301CBFE93400183165 /* FMLGroceryCell.m in Sources */,
 				8BE219A71CAF0A980014D046 /* FMLMarket+CoreDataProperties.m in Sources */,
 				8BBD400D1CAED53E00A1DB0E /* FMLDetailView.m in Sources */,
-				E1D1AF381CBFE93400183165 /* NewItemViewController.m in Sources */,
-				E1D1AF311CBFE93400183165 /* GroceryCellView.m in Sources */,
+				E1D1AF381CBFE93400183165 /* FMLNewItemViewController.m in Sources */,
+				E1D1AF311CBFE93400183165 /* FMLGroceryCellView.m in Sources */,
 				8BE219AA1CAF1D610014D046 /* FMLMarket.m in Sources */,
 				1F3ED9611CAB0AE50038F590 /* AppDelegate.m in Sources */,
 				E1D1AF3E1CC01B4200183165 /* FMLGroceryItem.m in Sources */,
@@ -546,7 +540,7 @@
 				E1D1AF341CBFE93400183165 /* FMLGroceryList.m in Sources */,
 				A38473B61CADAFC300ED08CA /* SampleZipCodes.m in Sources */,
 				8BBD400A1CAEB81700A1DB0E /* FMLLocationManagerDelegate.m in Sources */,
-				E1D1AF361CBFE93400183165 /* GroceryTVC.m in Sources */,
+				E1D1AF361CBFE93400183165 /* FMLGroceryTVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

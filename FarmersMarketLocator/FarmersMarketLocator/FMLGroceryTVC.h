@@ -1,5 +1,5 @@
 //
-//  GroceryCell.h
+//  FMLGroceryTVC.h
 //  GroceryList
 //
 //  Created by Slobodan Kovrlija on 4/12/16.
@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GroceryCellView.h"
+#import "CoreDataStack.h"
 
-@interface GroceryCell : UITableViewCell
+@interface FMLGroceryTVC : UITableViewController
 
-@property (weak, nonatomic) IBOutlet GroceryCellView *groceryView;
+@property(strong, nonatomic)CoreDataStack *stack;
 
 @end
