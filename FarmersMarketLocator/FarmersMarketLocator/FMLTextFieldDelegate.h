@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "FMLMapViewController.h"
 
 @interface FMLTextFieldDelegate : NSObject <UITextFieldDelegate>
 
-//- (instancetype)initWithTarget:(FMLMapViewController *)target;
+- (instancetype)initWithTarget:(FMLMapViewController *)target;
 
 @end

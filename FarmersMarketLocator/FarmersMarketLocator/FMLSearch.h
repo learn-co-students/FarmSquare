@@ -10,4 +10,7 @@
 
 @interface FMLSearch : NSObject
 
++(void)searchForNewLocation:(NSString *)location;
+  
+
 @end

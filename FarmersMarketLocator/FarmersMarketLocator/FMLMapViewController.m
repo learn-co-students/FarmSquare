@@ -15,6 +15,7 @@
 #import "SampleZipCodes.h"
 #import "FMLAPIClient.h"
 #import "Annotation.h"
+#import "FMLSearch.h"
 #import "FMLMarket.h"
 #import "FMLDetailView.h"
 #import "FMLMarket+CoreDataProperties.h"
@@ -46,7 +47,7 @@
     // Init delegates
     self.mapDelegate = [[FMLMapViewDelegate alloc] initWithTarget:self];
     self.locationDelegate = [[FMLLocationManagerDelegate alloc] initWithTarget:self];
-    //self.textFieldDelegate = [[FMLTextFieldDelegate alloc]initWithTarget:self]; //or searchBarTF?
+    self.textFieldDelegate = [[FMLTextFieldDelegate alloc]initWithTarget:self]; //or searchBarTF?
     
     // Create and customize map view
 //    self.mapView = [[MKMapView alloc]initWithFrame:self.view.frame];
@@ -79,11 +80,15 @@
     
     //set up search bar and search button view
     self.searchBarTextField = [[UITextField alloc]initWithFrame:CGRectMake(40, 0, 0, 0)];
+    self.searchBarTextField.delegate = self.textFieldDelegate;
     self.searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     self.searchButton.imageView.image = [UIImage imageNamed:@"magnifying-glass"];
-    self.searchButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    self.searchButton.backgroundColor = [UIColor blackColor];
+    self.searchButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
+////    self.searchButton.backgroundColor = [UIColor blackColor];
+//    self.searchButton.image = @[[UIImage imageNamed:@"magnifying-glass"]];
+    
+    [self.searchButton addTarget:self action:@selector(callSearchMethod) forControlEvents:UIControlEventTouchUpInside];
     
     
     self.searchBarTextField.layer.borderColor = [[UIColor blackColor] CGColor];
@@ -150,6 +155,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMarketObjects) name:@"GotUserCoordinates" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomBackOut:) name:@"ZoomBackOutKThxBai" object:nil];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(zoomMapToNewLocation) name:@"ZoomToNewLocation" object:nil];
     
     self.detailView.transform = CGAffineTransformMakeTranslation(0, self.detailView.frame.size.height);
     
@@ -268,6 +275,14 @@
     }];
     
     
+}
+
+-(void)callSearchMethod{
+    [FMLSearch searchForNewLocation:self.searchBarTextField.text];
+}
+
+-(void)zoomMapToNewLocation{
+    [self zoomMaptoLatitude:[[NSUserDefaults standardUserDefaults] floatForKey:@"latitude"] longitude:[[NSUserDefaults standardUserDefaults] floatForKey:@"longitude"] withLatitudeSpan:0.05 longitudeSpan:0.05];
 }
 
 #pragma mark - product icons methods

@@ -7,7 +7,25 @@
 //
 
 #import "FMLSearch.h"
+#import "GeocodeLocation.h"
+#import "FMLAPIClient.h"
+#import "FMLMapViewController.h"
+
 
 @implementation FMLSearch
+
++(void)searchForNewLocation:(NSString *)location{
+    [GeocodeLocation getCoordinateForLocation:location withCompletion:^(CLLocationCoordinate2D coordinate) {
+        
+        [[NSUserDefaults standardUserDefaults] setFloat:coordinate.latitude forKey:@"latitude"];
+        [[NSUserDefaults standardUserDefaults] setFloat:coordinate.longitude forKey:@"longitude"];
+        //this will call the API and then display results
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"GotUserCoordinates" object:nil];
+        //this will zoom to the new location
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"ZoomToNewLocation" object:nil];
+    }];
+    
+    
+}
 
 @end

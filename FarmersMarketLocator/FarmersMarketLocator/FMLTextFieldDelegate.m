@@ -7,22 +7,36 @@
 //
 
 #import "FMLTextFieldDelegate.h"
+#import "FMLSearch.h"
+
+@interface FMLTextFieldDelegate ()
+
+@property (strong, nonatomic) FMLMapViewController *viewController;
+
+@end
 
 @implementation FMLTextFieldDelegate
 
-//- (instancetype)init
-//{
-//    self = [self initWithTarget:nil];
-//    return self;
-//}
+- (instancetype)init
+{
+    self = [self initWithTarget:nil];
+    return self;
+}
 
-//- (instancetype)initWithTarget:(FMLMapViewController *)target
-//{
-//    self = [super init];
-//    if (self) {
-//        _viewController = target;
-//    }
-//    return self;
-//}
+- (instancetype)initWithTarget:(FMLMapViewController *)target
+{
+    self = [super init];
+    if (self) {
+        _viewController = target;
+    }
+    return self;
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField endEditing:YES];
+    //and set new coordinates
+    [FMLSearch searchForNewLocation:textField.text];
+    return YES;
+}
 
 @end
