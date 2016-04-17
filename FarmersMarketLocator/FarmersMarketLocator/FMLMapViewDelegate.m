@@ -197,6 +197,9 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
     // Index (to multiply number of degrees by)
     NSUInteger index = 0;
     
+    // Remove any empty strings from iconsArray, so we don't get blank circles. (Not doing this earlier to avoid a dividing-by-zero problem or having to use an if-statement.)
+        [iconsArray removeObject:@""];
+    
     // Make each icon appear at the center of the pin and animate out to its position.
     for (NSString *iconName in iconsArray) {
         
@@ -206,7 +209,7 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         // Make a view
         UIView *circleView = [[UIView alloc] init];
         circleView.translatesAutoresizingMaskIntoConstraints = NO;
-        circleView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.2];
+        circleView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
         [annotationView addSubview:circleView];
         [self.currentProductsIcons addObject:circleView];
         // Position constraints: center the circle at the center of the pin view
