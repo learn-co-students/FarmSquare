@@ -1,5 +1,5 @@
 //
-//  FMLGroceryListViewController.h
+//  FMLGroceryListsTVC.h
 //  FarmersMarketLocator
 //
 //  Created by Slobodan Kovrlija on 4/7/16.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FMLGroceryListViewController : UITableViewController
+@interface FMLGroceryListsTVC : UITableViewController
 
 @end

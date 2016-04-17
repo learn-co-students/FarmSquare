@@ -1,28 +1,39 @@
 //
-//  FMLGroceryListViewController.m
+//  FMLGroceryListsTVC.m
 //  FarmersMarketLocator
 //
 //  Created by Slobodan Kovrlija on 4/7/16.
 //  Copyright © 2016 Jeff Spingeld. All rights reserved.
 //
 
-#import "FMLGroceryListViewController.h"
+#import "FMLGroceryListsTVC.h"
 
-@interface FMLGroceryListViewController ()
+@interface FMLGroceryListsTVC ()
 
 @end
 
-@implementation FMLGroceryListViewController
+@implementation FMLGroceryListsTVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    return 1;
 }
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return 5;
+}
+
+- (IBAction)doneTapped:(id)sender {
+    
+    
+}
+
 
 /*
 #pragma mark - Navigation

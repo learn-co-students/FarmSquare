@@ -33,10 +33,12 @@
     addedItem.name = itemName;
     addedItem.quantity = itemQuantity;
     
+    
     [self.stack saveContext];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"new item added" object:nil];
-
+    
+    
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }

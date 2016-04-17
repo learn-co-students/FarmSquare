@@ -28,11 +28,13 @@
 		A38473B31CADAF7200ED08CA /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A38473B21CADAF7200ED08CA /* Annotation.m */; };
 		A38473B61CADAFC300ED08CA /* SampleZipCodes.m in Sources */ = {isa = PBXBuildFile; fileRef = A38473B51CADAFC300ED08CA /* SampleZipCodes.m */; };
 		E112CE9CB833D7D11064E042 /* libPods-FarmersMarketLocator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CDB776E48FF26680E2F899 /* libPods-FarmersMarketLocator.a */; };
-		E1D1AF2F1CBFE93400183165 /* FMLGroceryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF1E1CBFE93400183165 /* FMLGroceryListViewController.m */; };
+		E18965C81CC425FD00D8A488 /* FMLGroceryList+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E18965C51CC425FD00D8A488 /* FMLGroceryList+CoreDataProperties.m */; };
+		E18965C91CC425FD00D8A488 /* FMLGroceryList.m in Sources */ = {isa = PBXBuildFile; fileRef = E18965C71CC425FD00D8A488 /* FMLGroceryList.m */; };
+		E1D1AF2F1CBFE93400183165 /* FMLGroceryListsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF1E1CBFE93400183165 /* FMLGroceryListsTVC.m */; };
 		E1D1AF301CBFE93400183165 /* FMLGroceryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF201CBFE93400183165 /* FMLGroceryCell.m */; };
 		E1D1AF311CBFE93400183165 /* FMLGroceryCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF221CBFE93400183165 /* FMLGroceryCellView.m */; };
 		E1D1AF321CBFE93400183165 /* FMLGroceryCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D1AF231CBFE93400183165 /* FMLGroceryCellView.xib */; };
-		E1D1AF341CBFE93400183165 /* FMLGroceryList.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF271CBFE93400183165 /* FMLGroceryList.m */; };
+		E1D1AF341CBFE93400183165 /* FMLGroceryListOLD.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF271CBFE93400183165 /* FMLGroceryListOLD.m */; };
 		E1D1AF351CBFE93400183165 /* GroceryList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1D1AF281CBFE93400183165 /* GroceryList.storyboard */; };
 		E1D1AF361CBFE93400183165 /* FMLGroceryTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF2A1CBFE93400183165 /* FMLGroceryTVC.m */; };
 		E1D1AF371CBFE93400183165 /* FMLNewItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF2C1CBFE93400183165 /* FMLNewItemView.m */; };
@@ -99,15 +101,19 @@
 		A38473B21CADAF7200ED08CA /* Annotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Annotation.m; sourceTree = "<group>"; };
 		A38473B41CADAFC300ED08CA /* SampleZipCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleZipCodes.h; sourceTree = "<group>"; };
 		A38473B51CADAFC300ED08CA /* SampleZipCodes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleZipCodes.m; sourceTree = "<group>"; };
-		E1D1AF1D1CBFE93400183165 /* FMLGroceryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryListViewController.h; sourceTree = "<group>"; };
-		E1D1AF1E1CBFE93400183165 /* FMLGroceryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryListViewController.m; sourceTree = "<group>"; };
+		E18965C41CC425FD00D8A488 /* FMLGroceryList+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FMLGroceryList+CoreDataProperties.h"; sourceTree = "<group>"; };
+		E18965C51CC425FD00D8A488 /* FMLGroceryList+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMLGroceryList+CoreDataProperties.m"; sourceTree = "<group>"; };
+		E18965C61CC425FD00D8A488 /* FMLGroceryList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryList.h; sourceTree = "<group>"; };
+		E18965C71CC425FD00D8A488 /* FMLGroceryList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryList.m; sourceTree = "<group>"; };
+		E1D1AF1D1CBFE93400183165 /* FMLGroceryListsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryListsTVC.h; sourceTree = "<group>"; };
+		E1D1AF1E1CBFE93400183165 /* FMLGroceryListsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryListsTVC.m; sourceTree = "<group>"; };
 		E1D1AF1F1CBFE93400183165 /* FMLGroceryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryCell.h; sourceTree = "<group>"; };
 		E1D1AF201CBFE93400183165 /* FMLGroceryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryCell.m; sourceTree = "<group>"; };
 		E1D1AF211CBFE93400183165 /* FMLGroceryCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryCellView.h; sourceTree = "<group>"; };
 		E1D1AF221CBFE93400183165 /* FMLGroceryCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryCellView.m; sourceTree = "<group>"; };
 		E1D1AF231CBFE93400183165 /* FMLGroceryCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FMLGroceryCellView.xib; sourceTree = "<group>"; };
-		E1D1AF261CBFE93400183165 /* FMLGroceryList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryList.h; sourceTree = "<group>"; };
-		E1D1AF271CBFE93400183165 /* FMLGroceryList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryList.m; sourceTree = "<group>"; };
+		E1D1AF261CBFE93400183165 /* FMLGroceryListOLD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryListOLD.h; sourceTree = "<group>"; };
+		E1D1AF271CBFE93400183165 /* FMLGroceryListOLD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryListOLD.m; sourceTree = "<group>"; };
 		E1D1AF281CBFE93400183165 /* GroceryList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GroceryList.storyboard; sourceTree = "<group>"; };
 		E1D1AF291CBFE93400183165 /* FMLGroceryTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryTVC.h; sourceTree = "<group>"; };
 		E1D1AF2A1CBFE93400183165 /* FMLGroceryTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryTVC.m; sourceTree = "<group>"; };
@@ -262,14 +268,18 @@
 		8BBD40051CAEADA200A1DB0E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E18965C41CC425FD00D8A488 /* FMLGroceryList+CoreDataProperties.h */,
+				E18965C51CC425FD00D8A488 /* FMLGroceryList+CoreDataProperties.m */,
+				E18965C61CC425FD00D8A488 /* FMLGroceryList.h */,
+				E18965C71CC425FD00D8A488 /* FMLGroceryList.m */,
 				E1D1AF391CC01B4200183165 /* FMLGroceryItem+CoreDataProperties.h */,
 				E1D1AF3A1CC01B4200183165 /* FMLGroceryItem+CoreDataProperties.m */,
 				E1D1AF3B1CC01B4200183165 /* FMLGroceryItem.h */,
 				E1D1AF3C1CC01B4200183165 /* FMLGroceryItem.m */,
-				8BE219A81CAF1D610014D046 /* FMLMarket.h */,
-				8BE219A91CAF1D610014D046 /* FMLMarket.m */,
 				8BE219A51CAF0A980014D046 /* FMLMarket+CoreDataProperties.h */,
 				8BE219A61CAF0A980014D046 /* FMLMarket+CoreDataProperties.m */,
+				8BE219A81CAF1D610014D046 /* FMLMarket.h */,
+				8BE219A91CAF1D610014D046 /* FMLMarket.m */,
 				8B5635961CAF081A007DC27E /* DataModel.xcdatamodeld */,
 			);
 			name = Models;
@@ -303,10 +313,10 @@
 			isa = PBXGroup;
 			children = (
 				E1D1AF281CBFE93400183165 /* GroceryList.storyboard */,
-				E1D1AF261CBFE93400183165 /* FMLGroceryList.h */,
-				E1D1AF271CBFE93400183165 /* FMLGroceryList.m */,
-				E1D1AF1D1CBFE93400183165 /* FMLGroceryListViewController.h */,
-				E1D1AF1E1CBFE93400183165 /* FMLGroceryListViewController.m */,
+				E1D1AF261CBFE93400183165 /* FMLGroceryListOLD.h */,
+				E1D1AF271CBFE93400183165 /* FMLGroceryListOLD.m */,
+				E1D1AF1D1CBFE93400183165 /* FMLGroceryListsTVC.h */,
+				E1D1AF1E1CBFE93400183165 /* FMLGroceryListsTVC.m */,
 				E1D1AF211CBFE93400183165 /* FMLGroceryCellView.h */,
 				E1D1AF221CBFE93400183165 /* FMLGroceryCellView.m */,
 				E1D1AF231CBFE93400183165 /* FMLGroceryCellView.xib */,
@@ -520,7 +530,8 @@
 			files = (
 				8BBD3FFE1CAEA8AB00A1DB0E /* FMLMapViewDelegate.m in Sources */,
 				E1D1AF371CBFE93400183165 /* FMLNewItemView.m in Sources */,
-				E1D1AF2F1CBFE93400183165 /* FMLGroceryListViewController.m in Sources */,
+				E18965C91CC425FD00D8A488 /* FMLGroceryList.m in Sources */,
+				E1D1AF2F1CBFE93400183165 /* FMLGroceryListsTVC.m in Sources */,
 				E1F95DCD1CAB12D6009DA977 /* FMLAPIClient.m in Sources */,
 				E1D1AF301CBFE93400183165 /* FMLGroceryCell.m in Sources */,
 				8BE219A71CAF0A980014D046 /* FMLMarket+CoreDataProperties.m in Sources */,
@@ -533,11 +544,12 @@
 				A38473B31CADAF7200ED08CA /* Annotation.m in Sources */,
 				8BC2BA411CADD02E005DD7F3 /* FMLMapViewController.m in Sources */,
 				1F3ED95E1CAB0AE50038F590 /* main.m in Sources */,
+				E18965C81CC425FD00D8A488 /* FMLGroceryList+CoreDataProperties.m in Sources */,
 				8BC2BA3A1CADC8E6005DD7F3 /* Secrets.m in Sources */,
 				E1D1AF3D1CC01B4200183165 /* FMLGroceryItem+CoreDataProperties.m in Sources */,
 				8B5635C11CAF0858007DC27E /* CoreDataStack.m in Sources */,
 				8B5635981CAF081A007DC27E /* DataModel.xcdatamodeld in Sources */,
-				E1D1AF341CBFE93400183165 /* FMLGroceryList.m in Sources */,
+				E1D1AF341CBFE93400183165 /* FMLGroceryListOLD.m in Sources */,
 				A38473B61CADAFC300ED08CA /* SampleZipCodes.m in Sources */,
 				8BBD400A1CAEB81700A1DB0E /* FMLLocationManagerDelegate.m in Sources */,
 				E1D1AF361CBFE93400183165 /* FMLGroceryTVC.m in Sources */,

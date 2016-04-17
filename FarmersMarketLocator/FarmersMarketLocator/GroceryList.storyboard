@@ -9,7 +9,7 @@
         <!--GROCERY LIST-->
         <scene sceneID="Xcq-aa-1NW">
             <objects>
-                <tableViewController id="rxt-1i-01x" customClass="FMLGroceryListViewController" sceneMemberID="viewController">
+                <tableViewController id="rxt-1i-01x" customClass="FMLGroceryListsTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="UxP-y0-xiz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -31,7 +31,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="GROCERY LIST" id="x5q-f9-0Yw">
-                        <barButtonItem key="backBarButtonItem" title="NavBar" id="5JH-fP-0QB"/>
+                        <barButtonItem key="backBarButtonItem" title="DONE" id="5JH-fP-0QB">
+                            <connections>
+                                <action selector="doneTapped:" destination="rxt-1i-01x" id="kKM-Al-w9o"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" systemItem="add" id="bnc-PS-5Vl">
                             <connections>
                                 <segue destination="8Bg-lH-Rb2" kind="show" id="JlL-Mf-toL"/>
@@ -44,7 +48,7 @@
             </objects>
             <point key="canvasLocation" x="-714" y="-264"/>
         </scene>
-        <!--NEW ITEMS-->
+        <!--NEW GROCERY LIST-->
         <scene sceneID="JlF-gG-ENW">
             <objects>
                 <tableViewController id="8Bg-lH-Rb2" customClass="FMLGroceryTVC" sceneMemberID="viewController">
@@ -83,7 +87,7 @@
                             <outlet property="delegate" destination="8Bg-lH-Rb2" id="3yn-LY-iea"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="NEW ITEMS" id="1f2-q1-Zof">
+                    <navigationItem key="navigationItem" title="NEW GROCERY LIST" id="1f2-q1-Zof">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="4Ge-Dm-n1Q">
                             <connections>
                                 <segue destination="Bk3-76-zup" kind="presentation" modalTransitionStyle="crossDissolve" id="UmG-bH-ghh"/>

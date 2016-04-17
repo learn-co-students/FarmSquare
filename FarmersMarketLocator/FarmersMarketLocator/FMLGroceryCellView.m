@@ -44,7 +44,7 @@
 - (void)setGroceryItem:(FMLGroceryItem *)item {
     
     self.item = item;
-    self.groceryName.text = self.item.name;
+    self.groceryName.text = item.name;
     self.numberOfItemsNeeded.text = [NSString stringWithFormat:@"%@", self.item.quantity];
     
     //default state for checkbox is unchecked
@@ -55,7 +55,7 @@
 
 - (IBAction)checkboxTapped:(id)sender {
     
-        if ([self.item.isChecked  isEqual: @0]) {
+        if ([self.item.isChecked isEqual: @0]) {
         
         [self.checkbox setImage:[UIImage imageNamed:@"checkedButton"] forState:UIControlStateNormal];
         self.item.isChecked = @1;

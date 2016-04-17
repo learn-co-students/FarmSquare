@@ -5,6 +5,12 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="quantity" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="FMLGroceryList" representedClassName="FMLGroceryList" syncable="YES">
+        <attribute name="dateModified" optional="YES" attributeType="Date" minDateTimeInterval="482616060" syncable="YES"/>
+        <attribute name="listName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="numberOfItems" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="totalCost" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+    </entity>
     <entity name="FMLMarket" representedClassName="FMLMarket" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="googleMapLink" optional="YES" attributeType="String" syncable="YES"/>
@@ -15,7 +21,8 @@
         <attribute name="scheduleString" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="FMLMarket" positionX="-63" positionY="-18" width="128" height="150"/>
         <element name="FMLGroceryItem" positionX="-63" positionY="36" width="128" height="90"/>
+        <element name="FMLMarket" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="FMLGroceryList" positionX="-63" positionY="36" width="128" height="105"/>
     </elements>
 </model>

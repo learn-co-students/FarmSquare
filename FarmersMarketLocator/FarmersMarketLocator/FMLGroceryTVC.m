@@ -69,6 +69,7 @@
     FMLGroceryCell *cell = (FMLGroceryCell*)[tableView dequeueReusableCellWithIdentifier:@"groceryCell" forIndexPath:indexPath];
     
     FMLGroceryItem *currentItem = self.stack.groceryItems[indexPath.row];
+    NSLog(@"%lu%@", indexPath.row, ((FMLGroceryItem *)self.stack.groceryItems[indexPath.row]).name);
     
     [cell.groceryView setGroceryItem:currentItem];
     
