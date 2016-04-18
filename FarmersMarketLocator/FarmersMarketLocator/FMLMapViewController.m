@@ -219,7 +219,7 @@
 
 -(void)displayMarketObjects:(NSArray *)marketsArray {
     NSUInteger index = 0;
-    
+    //FILTERS!
     
     //before for loop, have a predicate run through the array, if any filters are applied
     
@@ -233,6 +233,8 @@
     //sfmnp -- "self.sfmnp = 1"
     
     //organic -- "self.organic = 1"
+    
+    
     
     for (FMLMarket *farmersMarket in marketsArray) {
         CLLocationCoordinate2D location;
