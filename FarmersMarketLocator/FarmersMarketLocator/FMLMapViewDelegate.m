@@ -78,11 +78,6 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         if (mapView.region.span.longitudeDelta != detailView.previousRegion.span.longitudeDelta) {
             detailView.previousRegion = mapView.region;
         }
-        
-<<<<<<< HEAD
-        // Zoom into map with pin at center.
-        CGPoint pinLocationBeforeZoom = view.center;
-=======
 
         // Set and show title view. Also, move up map
         FMLTitleView *titleView = self.viewController.titleView;
@@ -98,20 +93,12 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         [titleView showTitleView];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"LeafMeAlone" object:nil];
         CGPoint pinLocationBeforeZoom = view.center;
-        
-        
-        
-        
-        
->>>>>>> master
+
         [self.viewController zoomMaptoLatitude:[market.latitude floatValue]  longitude:[market.longitude floatValue] withLatitudeSpan:0.01 longitudeSpan:0.01];
         
         // If the map hasn't moved, show the product icons. (If it has, we still want to show them, but the regionDidChange method will notice the zooming and take care of displaying the icons.)
         if (view.center.x == pinLocationBeforeZoom.x && view.center.y == pinLocationBeforeZoom.y) {
-<<<<<<< HEAD
-            
-=======
->>>>>>> master
+
             [self showProductsCircleForMarket:view];
 
         }
