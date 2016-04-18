@@ -30,11 +30,13 @@
 		E112CE9CB833D7D11064E042 /* libPods-FarmersMarketLocator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CDB776E48FF26680E2F899 /* libPods-FarmersMarketLocator.a */; };
 		E18965C81CC425FD00D8A488 /* FMLGroceryList+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E18965C51CC425FD00D8A488 /* FMLGroceryList+CoreDataProperties.m */; };
 		E18965C91CC425FD00D8A488 /* FMLGroceryList.m in Sources */ = {isa = PBXBuildFile; fileRef = E18965C71CC425FD00D8A488 /* FMLGroceryList.m */; };
+		E18965CC1CC42A1B00D8A488 /* FMLGroceryListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E18965CB1CC42A1B00D8A488 /* FMLGroceryListCell.m */; };
+		E18965D01CC42B5400D8A488 /* FMLGroceryListCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E18965CE1CC42B5400D8A488 /* FMLGroceryListCellView.m */; };
+		E18965D11CC42B5400D8A488 /* FMLGroceryListCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E18965CF1CC42B5400D8A488 /* FMLGroceryListCellView.xib */; };
 		E1D1AF2F1CBFE93400183165 /* FMLGroceryListsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF1E1CBFE93400183165 /* FMLGroceryListsTVC.m */; };
 		E1D1AF301CBFE93400183165 /* FMLGroceryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF201CBFE93400183165 /* FMLGroceryCell.m */; };
 		E1D1AF311CBFE93400183165 /* FMLGroceryCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF221CBFE93400183165 /* FMLGroceryCellView.m */; };
 		E1D1AF321CBFE93400183165 /* FMLGroceryCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D1AF231CBFE93400183165 /* FMLGroceryCellView.xib */; };
-		E1D1AF341CBFE93400183165 /* FMLGroceryListOLD.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF271CBFE93400183165 /* FMLGroceryListOLD.m */; };
 		E1D1AF351CBFE93400183165 /* GroceryList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1D1AF281CBFE93400183165 /* GroceryList.storyboard */; };
 		E1D1AF361CBFE93400183165 /* FMLGroceryTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF2A1CBFE93400183165 /* FMLGroceryTVC.m */; };
 		E1D1AF371CBFE93400183165 /* FMLNewItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF2C1CBFE93400183165 /* FMLNewItemView.m */; };
@@ -105,6 +107,11 @@
 		E18965C51CC425FD00D8A488 /* FMLGroceryList+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMLGroceryList+CoreDataProperties.m"; sourceTree = "<group>"; };
 		E18965C61CC425FD00D8A488 /* FMLGroceryList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryList.h; sourceTree = "<group>"; };
 		E18965C71CC425FD00D8A488 /* FMLGroceryList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryList.m; sourceTree = "<group>"; };
+		E18965CA1CC42A1B00D8A488 /* FMLGroceryListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryListCell.h; sourceTree = "<group>"; };
+		E18965CB1CC42A1B00D8A488 /* FMLGroceryListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryListCell.m; sourceTree = "<group>"; };
+		E18965CD1CC42B5400D8A488 /* FMLGroceryListCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryListCellView.h; sourceTree = "<group>"; };
+		E18965CE1CC42B5400D8A488 /* FMLGroceryListCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryListCellView.m; sourceTree = "<group>"; };
+		E18965CF1CC42B5400D8A488 /* FMLGroceryListCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FMLGroceryListCellView.xib; sourceTree = "<group>"; };
 		E1D1AF1D1CBFE93400183165 /* FMLGroceryListsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryListsTVC.h; sourceTree = "<group>"; };
 		E1D1AF1E1CBFE93400183165 /* FMLGroceryListsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryListsTVC.m; sourceTree = "<group>"; };
 		E1D1AF1F1CBFE93400183165 /* FMLGroceryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryCell.h; sourceTree = "<group>"; };
@@ -112,8 +119,6 @@
 		E1D1AF211CBFE93400183165 /* FMLGroceryCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryCellView.h; sourceTree = "<group>"; };
 		E1D1AF221CBFE93400183165 /* FMLGroceryCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryCellView.m; sourceTree = "<group>"; };
 		E1D1AF231CBFE93400183165 /* FMLGroceryCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FMLGroceryCellView.xib; sourceTree = "<group>"; };
-		E1D1AF261CBFE93400183165 /* FMLGroceryListOLD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryListOLD.h; sourceTree = "<group>"; };
-		E1D1AF271CBFE93400183165 /* FMLGroceryListOLD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryListOLD.m; sourceTree = "<group>"; };
 		E1D1AF281CBFE93400183165 /* GroceryList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GroceryList.storyboard; sourceTree = "<group>"; };
 		E1D1AF291CBFE93400183165 /* FMLGroceryTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryTVC.h; sourceTree = "<group>"; };
 		E1D1AF2A1CBFE93400183165 /* FMLGroceryTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryTVC.m; sourceTree = "<group>"; };
@@ -313,8 +318,11 @@
 			isa = PBXGroup;
 			children = (
 				E1D1AF281CBFE93400183165 /* GroceryList.storyboard */,
-				E1D1AF261CBFE93400183165 /* FMLGroceryListOLD.h */,
-				E1D1AF271CBFE93400183165 /* FMLGroceryListOLD.m */,
+				E18965CD1CC42B5400D8A488 /* FMLGroceryListCellView.h */,
+				E18965CE1CC42B5400D8A488 /* FMLGroceryListCellView.m */,
+				E18965CF1CC42B5400D8A488 /* FMLGroceryListCellView.xib */,
+				E18965CA1CC42A1B00D8A488 /* FMLGroceryListCell.h */,
+				E18965CB1CC42A1B00D8A488 /* FMLGroceryListCell.m */,
 				E1D1AF1D1CBFE93400183165 /* FMLGroceryListsTVC.h */,
 				E1D1AF1E1CBFE93400183165 /* FMLGroceryListsTVC.m */,
 				E1D1AF211CBFE93400183165 /* FMLGroceryCellView.h */,
@@ -453,6 +461,7 @@
 			files = (
 				1F3ED96C1CAB0AE50038F590 /* LaunchScreen.storyboard in Resources */,
 				1F3ED9691CAB0AE50038F590 /* Assets.xcassets in Resources */,
+				E18965D11CC42B5400D8A488 /* FMLGroceryListCellView.xib in Resources */,
 				E1D1AF321CBFE93400183165 /* FMLGroceryCellView.xib in Resources */,
 				1F3ED9671CAB0AE50038F590 /* Main.storyboard in Resources */,
 				E1D1AF351CBFE93400183165 /* GroceryList.storyboard in Resources */,
@@ -528,6 +537,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E18965CC1CC42A1B00D8A488 /* FMLGroceryListCell.m in Sources */,
 				8BBD3FFE1CAEA8AB00A1DB0E /* FMLMapViewDelegate.m in Sources */,
 				E1D1AF371CBFE93400183165 /* FMLNewItemView.m in Sources */,
 				E18965C91CC425FD00D8A488 /* FMLGroceryList.m in Sources */,
@@ -549,7 +559,7 @@
 				E1D1AF3D1CC01B4200183165 /* FMLGroceryItem+CoreDataProperties.m in Sources */,
 				8B5635C11CAF0858007DC27E /* CoreDataStack.m in Sources */,
 				8B5635981CAF081A007DC27E /* DataModel.xcdatamodeld in Sources */,
-				E1D1AF341CBFE93400183165 /* FMLGroceryListOLD.m in Sources */,
+				E18965D01CC42B5400D8A488 /* FMLGroceryListCellView.m in Sources */,
 				A38473B61CADAFC300ED08CA /* SampleZipCodes.m in Sources */,
 				8BBD400A1CAEB81700A1DB0E /* FMLLocationManagerDelegate.m in Sources */,
 				E1D1AF361CBFE93400183165 /* FMLGroceryTVC.m in Sources */,

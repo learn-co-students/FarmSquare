@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CoreDataStack.h"
 
 @interface FMLGroceryListsTVC : UITableViewController
+
+@property(strong, nonatomic)CoreDataStack *stack;
 
 @end

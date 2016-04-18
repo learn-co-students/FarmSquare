@@ -15,14 +15,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="d0z-Is-sdl">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="listCell" id="d0z-Is-sdl" customClass="FMLGroceryListCell">
                                 <rect key="frame" x="0.0" y="92" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="d0z-Is-sdl" id="59S-Zj-duS">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ttn-G5-vtj" customClass="FMLGroceryListCellView">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="ttn-G5-vtj" secondAttribute="bottom" id="Ch1-UU-BIi"/>
+                                        <constraint firstItem="ttn-G5-vtj" firstAttribute="top" secondItem="59S-Zj-duS" secondAttribute="top" id="IJ8-UM-qab"/>
+                                        <constraint firstItem="ttn-G5-vtj" firstAttribute="leading" secondItem="59S-Zj-duS" secondAttribute="leading" id="X2P-kP-hve"/>
+                                        <constraint firstAttribute="trailing" secondItem="ttn-G5-vtj" secondAttribute="trailing" id="fDZ-lQ-gPL"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <accessibility key="accessibilityConfiguration" identifier="listCell"/>
+                                <connections>
+                                    <outlet property="groceryListView" destination="ttn-G5-vtj" id="5zg-I6-TW4"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -31,14 +46,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="GROCERY LIST" id="x5q-f9-0Yw">
-                        <barButtonItem key="backBarButtonItem" title="DONE" id="5JH-fP-0QB">
-                            <connections>
-                                <action selector="doneTapped:" destination="rxt-1i-01x" id="kKM-Al-w9o"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="backBarButtonItem" title="DONE" id="5JH-fP-0QB"/>
                         <barButtonItem key="rightBarButtonItem" title="Item" systemItem="add" id="bnc-PS-5Vl">
                             <connections>
-                                <segue destination="8Bg-lH-Rb2" kind="show" id="JlL-Mf-toL"/>
+                                <segue destination="8Bg-lH-Rb2" kind="presentation" id="IUG-qN-bbc"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -48,17 +59,36 @@
             </objects>
             <point key="canvasLocation" x="-714" y="-264"/>
         </scene>
-        <!--NEW GROCERY LIST-->
+        <!--GroceryTVC-->
         <scene sceneID="JlF-gG-ENW">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z8w-7f-H8J" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="8Bg-lH-Rb2" customClass="FMLGroceryTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="m6g-8u-xz0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="g14-uD-wOy">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <items>
+                                <navigationItem title="Add" id="fn1-67-w09">
+                                    <barButtonItem key="leftBarButtonItem" systemItem="done" id="J8P-Hs-RIW">
+                                        <connections>
+                                            <action selector="doneButtonTapped:" destination="8Bg-lH-Rb2" id="vWm-wL-UWP"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem key="rightBarButtonItem" systemItem="add" id="Wps-Ja-qlN">
+                                        <connections>
+                                            <segue destination="Bk3-76-zup" kind="presentation" id="iy2-9b-h8o"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </navigationItem>
+                            </items>
+                        </navigationBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="groceryCell" id="gbK-py-PTY" customClass="FMLGroceryCell">
-                                <rect key="frame" x="0.0" y="92" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="72" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gbK-py-PTY" id="ROr-sV-tjG">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -87,16 +117,8 @@
                             <outlet property="delegate" destination="8Bg-lH-Rb2" id="3yn-LY-iea"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="NEW GROCERY LIST" id="1f2-q1-Zof">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="4Ge-Dm-n1Q">
-                            <connections>
-                                <segue destination="Bk3-76-zup" kind="presentation" modalTransitionStyle="crossDissolve" id="UmG-bH-ghh"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Z8w-7f-H8J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-204" y="-264"/>
         </scene>

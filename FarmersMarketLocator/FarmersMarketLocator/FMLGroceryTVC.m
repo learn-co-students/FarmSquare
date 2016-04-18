@@ -20,6 +20,19 @@
 
 @implementation FMLGroceryTVC
 
+- (IBAction)doneButtonTapped:(id)sender {
+    FMLGroceryList *addedList = [NSEntityDescription insertNewObjectForEntityForName:@"FMLGroceryList" inManagedObjectContext:self.stack.managedObjectContext];
+    addedList.listName = @"New grocery list";
+    
+    addedList.dateModified = [NSDate date];
+    
+    [self.stack saveContext];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"new list created" object:nil];
+    NSLog(@"does this get called at all..???");
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -29,6 +42,8 @@
     
     //to allow left swipe delete of a cell
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
+    
+    NSLog(@"when do I get called???????");
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -38,6 +53,14 @@
         [self.tableView reloadData];
     }];
     
+}
+
+-(void) viewWillDisappear:(BOOL)animated {
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        // back button was pressed.  We know this is true because self is no longer
+        // in the navigation stack.
+    }
+    [super viewWillDisappear:animated];
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -66,6 +89,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     FMLGroceryCell *cell = (FMLGroceryCell*)[tableView dequeueReusableCellWithIdentifier:@"groceryCell" forIndexPath:indexPath];
     
     FMLGroceryItem *currentItem = self.stack.groceryItems[indexPath.row];
@@ -81,6 +105,10 @@
     
     return 80;
 }
+
+
+
+
 /*
  // Override to support conditional editing of the table view.
  - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

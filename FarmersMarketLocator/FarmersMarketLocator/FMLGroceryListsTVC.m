@@ -7,6 +7,8 @@
 //
 
 #import "FMLGroceryListsTVC.h"
+#import "FMLGroceryListCell.h"
+#import "FMLGroceryList.h"
 
 @interface FMLGroceryListsTVC ()
 
@@ -16,8 +18,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.stack = [CoreDataStack sharedStack];
+    
 }
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"new list created" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        [self.tableView reloadData];
+    }];
+    
+}
+
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
@@ -26,12 +40,32 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 5;
+    return self.stack.groceryLists.count;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    FMLGroceryListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"listCell" forIndexPath:indexPath];
+    
+    FMLGroceryList *currentList = self.stack.groceryLists[indexPath.row];
+    
+    [cell.groceryListView setGroceryList:currentList];
+//    cell.textLabel.text = currentList.listName;
+    
+    return cell;
 }
 
 - (IBAction)doneTapped:(id)sender {
     
+    FMLGroceryList *addedList = [NSEntityDescription insertNewObjectForEntityForName:@"FMLGroceryList" inManagedObjectContext:self.stack.managedObjectContext];
+    addedList.listName = @"New grocery list";
     
+    addedList.dateModified = [NSDate date];
+    
+    [self.stack saveContext];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"new list created" object:nil];
+    NSLog(@"does this get called at all..???");
 }
 
 
