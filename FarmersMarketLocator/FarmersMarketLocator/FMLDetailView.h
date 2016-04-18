@@ -12,12 +12,8 @@
 
 @interface FMLDetailView : UIView
 
-@property (strong, nonatomic) UILabel *nameLabel;
-@property (strong, nonatomic) UILabel *addressLabel;
 @property (strong, nonatomic) UITextView *produceTextView;
 @property (strong, nonatomic) UILabel *scheduleLabel;
-@property (strong, nonatomic) UIButton *arrowDownButton;
-@property (strong, nonatomic) UIButton *arrowUpButton;
 @property (strong, nonatomic) UIButton *yelpButton;
 @property (strong, nonatomic) UIButton *directionsButton;
 @property (assign, nonatomic) MKCoordinateRegion previousRegion;
@@ -25,6 +21,8 @@
 @property (assign, nonatomic) CGFloat selectedLatitude;
 @property (assign, nonatomic) CGFloat selectedLongitude;
 @property (weak, nonatomic) NSString *zip;
+@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) UIView *border;
 
 -(void)constrainViews;
 -(void)showDetailView;

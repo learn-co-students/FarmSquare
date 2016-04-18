@@ -12,6 +12,7 @@
 #import "FMLDetailView.h"
 #import "Annotation.h"
 #import "FMLPinAnnotationView.h"
+#import "FarmersMarketLocator-Swift.h"
 
 typedef NS_ENUM(NSInteger, FMLMarketStatus) {
     FMLMarketHasNoInfo          = -1,
@@ -25,7 +26,7 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
 
 @property (nonatomic) CGFloat animationSpeed;
 @property (strong, nonatomic) NSMutableArray *currentProductsIcons;
-
+@property (assign, nonatomic) CGFloat offset;
 @end
 
 @implementation FMLMapViewDelegate
@@ -60,8 +61,7 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         FMLMarket *market = self.viewController.marketsArray[ annotation.tag ];
         FMLDetailView *detailView = self.viewController.detailView;
         
-        detailView.nameLabel.text = market.name.uppercaseString;
-        detailView.addressLabel.text = [NSString stringWithFormat:@"ADDRESS: %@", market.address];
+        detailView.name = market.name.uppercaseString;
         detailView.produceTextView.text = [NSString stringWithFormat:@"AVAILABLE PRODUCE: %@", market.produceList];
         detailView.scheduleLabel.text = [NSString stringWithFormat:@"SCHEDULE: %@", market.scheduleString];
         
@@ -78,12 +78,29 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
             detailView.previousRegion = mapView.region;
         }
         
+
+        // Set and show title view. Also, move up map
+        FMLTitleView *titleView = self.viewController.titleView;
+        
+        CGFloat distance = detailView.frame.size.height - titleView.frame.origin.y;
+        CGFloat halfway = detailView.frame.size.height + distance/2;
+        self.offset = halfway - self.viewController.view.frame.size.height/2;
+        [UIView animateWithDuration:0.25 animations:^{
+            self.viewController.mapView.transform = CGAffineTransformMakeTranslation(0, -self.offset);
+        }];
+        titleView.nameLabel.text = market.name.uppercaseString;
+        titleView.addressLabel.text = [NSString stringWithFormat:@"%@\n%@, %@ %@", market.street, market.city, market.state, market.zipCode];
+        [titleView showTitleView];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"LeafMeAlone" object:nil];
         CGPoint pinLocationBeforeZoom = view.center;
+        
+        
+        
+        
         
         [self.viewController zoomMaptoLatitude:[market.latitude floatValue]  longitude:[market.longitude floatValue] withLatitudeSpan:0.01 longitudeSpan:0.01];
         
         if (view.center.x == pinLocationBeforeZoom.x && view.center.y == pinLocationBeforeZoom.y) {
-            NSLog(@"\n\nShow products is happening in DIDSELECT\n\n");
             [self showProductsCircleForMarket:view];
 
         }
@@ -115,7 +132,7 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         MKAnnotationView *pepeLeView = [[MKAnnotationView alloc] initWithAnnotation:annie reuseIdentifier:@""];
         pepeLeView.enabled = YES;
         
-        FMLMarketStatus status = [self currentStatusForMarket:market];
+        enum FMLMarketStatus status = [self currentStatusForMarket:market];
         switch (status) {
             case FMLMarketIsOpen:
                 pepeLeView.image = [UIImage imageNamed:@"openPin"];
@@ -145,6 +162,12 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
 -(void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
     
     [self.viewController.detailView hideDetailView];
+    [self.viewController.titleView hideTitleView];
+    [UIView animateWithDuration:0.25 animations:^{
+        self.viewController.mapView.transform = CGAffineTransformIdentity;
+    }];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"VineAndDine" object:nil];
     
     // Animation of icons' disappearance: become transparent, shrink, move back into the pin.
     [UIView animateWithDuration:self.animationSpeed animations:^{
@@ -172,7 +195,6 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
     
     if (self.selectedAnnotationView) {
 
-        NSLog(@"\n\nShow products is happening in REGIONDIDCHANGE\n\n");
         [self showProductsCircleForMarket:self.selectedAnnotationView];
         
     }
@@ -182,7 +204,6 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
 #pragma mark - Helper Methods
 
 -(void)showProductsCircleForMarket:(MKAnnotationView *)annotationView {
-    NSLog(@"Annotation view's (%@) center: %f, %f", annotationView, annotationView.center.x, annotationView.center.y);
     
     // Empty the current products icon array before adding the circle views
     self.currentProductsIcons = [@[] mutableCopy];
@@ -289,7 +310,6 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         
     }
     
-    NSLog(@"circles should have been made");
 }
 
 

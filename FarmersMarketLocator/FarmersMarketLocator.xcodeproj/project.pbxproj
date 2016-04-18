@@ -22,6 +22,7 @@
 		8B356E9D1CBFF88B00AEEB11 /* BookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B356E9C1CBFF88B00AEEB11 /* BookViewController.swift */; };
 		8B5635981CAF081A007DC27E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B5635961CAF081A007DC27E /* DataModel.xcdatamodeld */; };
 		8B5635C11CAF0858007DC27E /* CoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5635C01CAF0858007DC27E /* CoreDataStack.m */; };
+		8B8C59D01CC10983009BE852 /* FMLTitleView.swift in Resources */ = {isa = PBXBuildFile; fileRef = 8B8C59CF1CC10983009BE852 /* FMLTitleView.swift */; };
 		8B9E5A811CB2F7DA0050915D /* FMLJSONDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E5A801CB2F7DA0050915D /* FMLJSONDictionary.m */; };
 		8B9E5A831CB2F7E80050915D /* farmers-markets.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B9E5A821CB2F7E80050915D /* farmers-markets.json */; };
 		8BAC6A891CB7E615001EEDE1 /* farmers-markets-0.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BAC6A7F1CB7E615001EEDE1 /* farmers-markets-0.json */; };
@@ -48,6 +49,7 @@
 		A38CD0D41CC0393800A0590C /* GeocodeLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A38CD0D31CC0393800A0590C /* GeocodeLocation.m */; };
 		A38CD0D71CC0394A00A0590C /* FMLSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = A38CD0D61CC0394A00A0590C /* FMLSearch.m */; };
 		A38CD0DA1CC039B600A0590C /* FMLTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A38CD0D91CC039B600A0590C /* FMLTextFieldDelegate.m */; };
+		A3BF3C941CC56FD1004E4942 /* FMLTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8C59CF1CC10983009BE852 /* FMLTitleView.swift */; };
 		E1F95DCD1CAB12D6009DA977 /* FMLAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F95DCC1CAB12D6009DA977 /* FMLAPIClient.m */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +98,7 @@
 		8B5635971CAF081A007DC27E /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		8B5635BF1CAF0858007DC27E /* CoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataStack.h; sourceTree = "<group>"; };
 		8B5635C01CAF0858007DC27E /* CoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataStack.m; sourceTree = "<group>"; };
+		8B8C59CF1CC10983009BE852 /* FMLTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMLTitleView.swift; sourceTree = "<group>"; };
 		8B9E5A7F1CB2F7DA0050915D /* FMLJSONDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLJSONDictionary.h; sourceTree = "<group>"; };
 		8B9E5A801CB2F7DA0050915D /* FMLJSONDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLJSONDictionary.m; sourceTree = "<group>"; };
 		8B9E5A821CB2F7E80050915D /* farmers-markets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "farmers-markets.json"; sourceTree = "<group>"; };
@@ -329,6 +332,7 @@
 			children = (
 				8BBD400B1CAED53E00A1DB0E /* FMLDetailView.h */,
 				8BBD400C1CAED53E00A1DB0E /* FMLDetailView.m */,
+				8B8C59CF1CC10983009BE852 /* FMLTitleView.swift */,
 				1F1746931CB460C10018383B /* FMLPinAnnotationView.h */,
 				1F1746941CB460C10018383B /* FMLPinAnnotationView.m */,
 			);
@@ -468,6 +472,7 @@
 				8BAC6A901CB7E615001EEDE1 /* farmers-markets-7.json in Resources */,
 				8BAC6A921CB7E615001EEDE1 /* farmers-markets-9.json in Resources */,
 				8BAC6A8D1CB7E615001EEDE1 /* farmers-markets-4.json in Resources */,
+				8B8C59D01CC10983009BE852 /* FMLTitleView.swift in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,6 +545,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3BF3C941CC56FD1004E4942 /* FMLTitleView.swift in Sources */,
 				8BBD3FFE1CAEA8AB00A1DB0E /* FMLMapViewDelegate.m in Sources */,
 				E1F95DCD1CAB12D6009DA977 /* FMLAPIClient.m in Sources */,
 				A38CD0DA1CC039B600A0590C /* FMLTextFieldDelegate.m in Sources */,

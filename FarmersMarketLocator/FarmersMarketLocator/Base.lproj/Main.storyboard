@@ -21,8 +21,8 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1PS-mv-YNR">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WUN-7w-LNO">
-                                <rect key="frame" x="20" y="-418" width="163" height="490"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WUN-7w-LNO">
+                                <rect key="frame" x="20" y="-330" width="163" height="490"/>
                                 <state key="normal" image="VineSolid"/>
                                 <connections>
                                     <action selector="vineButtonTapped:" destination="xKH-Vx-gBb" eventType="touchUpInside" id="Nbv-8t-CVQ"/>
@@ -33,7 +33,7 @@
                         <constraints>
                             <constraint firstItem="y0b-I0-NHa" firstAttribute="top" secondItem="1PS-mv-YNR" secondAttribute="bottom" id="0P8-Q7-Jdx"/>
                             <constraint firstAttribute="trailing" secondItem="1PS-mv-YNR" secondAttribute="trailing" id="1ay-4K-dBi"/>
-                            <constraint firstItem="WUN-7w-LNO" firstAttribute="top" secondItem="vrs-MM-VxV" secondAttribute="topMargin" constant="-418" id="G9Y-oZ-yzs"/>
+                            <constraint firstItem="WUN-7w-LNO" firstAttribute="top" secondItem="vrs-MM-VxV" secondAttribute="topMargin" constant="-390" id="G9Y-oZ-yzs"/>
                             <constraint firstItem="1PS-mv-YNR" firstAttribute="leading" secondItem="vrs-MM-VxV" secondAttribute="leading" id="Xs5-NP-QQF"/>
                             <constraint firstItem="1PS-mv-YNR" firstAttribute="top" secondItem="aQK-sm-OZK" secondAttribute="bottom" id="YsH-n1-0GO"/>
                             <constraint firstItem="WUN-7w-LNO" firstAttribute="leading" secondItem="vrs-MM-VxV" secondAttribute="leadingMargin" id="qIy-mB-6Qq"/>
@@ -78,8 +78,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="cart" translatesAutoresizingMaskIntoConstraints="NO" id="gu9-2f-9dT">
-                                <rect key="frame" x="186" y="236" width="240" height="128"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart" translatesAutoresizingMaskIntoConstraints="NO" id="gu9-2f-9dT">
+                                <rect key="frame" x="20" y="20" width="560" height="580"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -107,8 +107,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="book" translatesAutoresizingMaskIntoConstraints="NO" id="eqL-x8-ewB">
-                                <rect key="frame" x="52" y="204" width="240" height="128"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="book" translatesAutoresizingMaskIntoConstraints="NO" id="eqL-x8-ewB">
+                                <rect key="frame" x="20" y="20" width="560" height="580"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -127,7 +127,7 @@
         <!--Dog View Controller-->
         <scene sceneID="cA7-Jw-Hfg">
             <objects>
-                <viewController id="25f-VO-tCR" customClass="DogViewController" customModule="FarmersMarketLocator" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DogViewController" id="25f-VO-tCR" customClass="DogViewController" customModule="FarmersMarketLocator" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3e5-OF-YKJ"/>
                         <viewControllerLayoutGuide type="bottom" id="tbj-cc-OQz"/>
@@ -136,8 +136,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="dog" translatesAutoresizingMaskIntoConstraints="NO" id="xhV-p0-avO">
-                                <rect key="frame" x="269" y="93" width="240" height="128"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dog" translatesAutoresizingMaskIntoConstraints="NO" id="xhV-p0-avO">
+                                <rect key="frame" x="20" y="20" width="560" height="580"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

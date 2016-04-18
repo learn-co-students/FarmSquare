@@ -23,6 +23,7 @@
 #import "FMLPinAnnotationView.h"
 #import "FMLJSONDictionary.h"
 #import <QuartzCore/QuartzCore.h>
+#import "FarmersMarketLocator-Swift.h"
 
 // TODO: When network connection is lost, Core Data misfunctions and saves 0 objects which shouldn't be ok
 
@@ -126,6 +127,10 @@
     [self.detailView constrainViews];
 
     
+    // create Title View
+    self.titleView = [[FMLTitleView alloc] initWithFrame:CGRectMake(0, 0, width, 130)];
+    [self.view addSubview:self.titleView];
+    [self.titleView constrainViews];
     
     self.manager = [[CLLocationManager alloc] init];
     self.manager.delegate = self.locationDelegate;
@@ -214,6 +219,20 @@
 
 -(void)displayMarketObjects:(NSArray *)marketsArray {
     NSUInteger index = 0;
+    
+    
+    //before for loop, have a predicate run through the array, if any filters are applied
+    
+    //snap -- "self.snap = 1"
+    
+    //wic -- "self.wic = 1"
+    //wicCash -- "self.wicCash = 1"
+    
+    //credit -- "self.credit = 1"
+    
+    //sfmnp -- "self.sfmnp = 1"
+    
+    //organic -- "self.organic = 1"
     
     for (FMLMarket *farmersMarket in marketsArray) {
         CLLocationCoordinate2D location;
