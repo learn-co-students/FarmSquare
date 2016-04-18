@@ -37,9 +37,7 @@
     }];
 }
 
-+(void)getMarketsForLatitude:(CGFloat)latitude longitude:(CGFloat)longitude withCompletion:(void (^)(NSMutableArray *marketsArray))coordinatesCompletion {
-    
-    NSLog(@"Making an API Call");
++(void)getMarketsForLatitude:(CGFloat)latitude longitude:(CGFloat)longitude withCompletion:(void (^)(NSMutableArray *marketsArray, NSError *error))coordinatesCompletion {
     
     //http://search.ams.usda.gov/farmersmarkets/v1/data.svc/locSearch?lat=" + lat + "&lng=" + lng
     //http://search.ams.usda.gov/farmersmarkets/v1/svcdesc.html
@@ -54,18 +52,17 @@
     AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
     [sessionManager GET:finalCoordinatesURLString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-//        NSLog(@"response object: %@", responseObject);
-        
         // Plug that response object into a method that gets details for all of those markets.
         [FMLAPIClient marketsArrayForListOfMarkets:responseObject withCompletion:^(NSMutableArray *marketsArray) {
             
             // Now we have an array of market objects. All we do with it is pass it to the completion block.
-            coordinatesCompletion(marketsArray);
+            coordinatesCompletion(marketsArray, nil);
             
         }];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
+        coordinatesCompletion(nil, error);
         NSLog(@"\nerror: %@\n", error);
     }];
 }
@@ -88,7 +85,6 @@
         sessionManagerDetails.responseSerializer = [[AFJSONResponseSerializer alloc]init];
         // Get dictionary of market details
         NSDictionary *marketDetails = responseObject[@"marketdetails"];
-        NSLog(@"Market JSON: %@", marketDetails);
         // Pass the dictionary to the completion block
         idCompletion(marketDetails);
         
@@ -114,7 +110,7 @@
      4) Add the FMLMarket object to an array
      4) Pass that array to the completion block.
      */
-    NSLog(@"About to start for loop");
+
     for (NSDictionary *marketDict in marketDictionariesArray) {
         
         NSString *marketID = marketDict[@"id"];
@@ -227,7 +223,7 @@
     NSRange rangeOfComma = [coordinatesAndName rangeOfString:@","];
     NSRange rangeOfLatitude = NSMakeRange(0, rangeOfComma.location);
     NSString *latitude = [coordinatesAndName substringWithRange:rangeOfLatitude];
-//    NSLog(@"latitude: %@", latitude);
+
     
     // Get the longitude (bounded by spaces)
     NSArray *junkArray = [coordinatesAndName componentsSeparatedByString:@" "];
@@ -241,7 +237,7 @@
     coordinatesDictionary[@"latitude"] = latitude;
     coordinatesDictionary[@"longitude"] = longitude;
 
-//    NSLog(@"Coordinates dictionary: \n%@", coordinatesDictionary);
+
     return coordinatesDictionary;
 }
 

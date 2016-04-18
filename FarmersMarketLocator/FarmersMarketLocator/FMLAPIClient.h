@@ -18,7 +18,7 @@
          withCompletion:(void (^)(NSMutableArray *marketsArray))zipCompletion;
 +(void)getMarketsForLatitude:(CGFloat)latitude
                    longitude:(CGFloat)longitude
-              withCompletion:(void (^)(NSMutableArray *marketsArray))coordinatesCompletion;
+              withCompletion:(void (^)(NSMutableArray *marketsArray, NSError *error))coordinatesCompletion;
 +(void)getDetailsForMarketWithId:(NSString *)idNumber
                   withCompletion:(void (^)(NSDictionary *marketDetails))idCompletion;
 +(void)marketsArrayForListOfMarkets:(NSDictionary *)marketsDict

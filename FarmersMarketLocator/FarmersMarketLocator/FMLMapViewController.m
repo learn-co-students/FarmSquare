@@ -163,13 +163,44 @@
     CGFloat latitude = [[NSUserDefaults standardUserDefaults] floatForKey:@"latitude"];
     CGFloat longitude = [[NSUserDefaults standardUserDefaults] floatForKey:@"longitude"];
     
-    [FMLAPIClient getMarketsForLatitude:latitude longitude:longitude withCompletion:^(NSMutableArray *marketsArray) {
+    [FMLAPIClient getMarketsForLatitude:latitude longitude:longitude withCompletion:^(NSMutableArray *marketsArray, NSError *error) {
         
-        self.marketsArray = marketsArray;
-        // Plot a pin for the coordinates of each FMLMarket object in marketsArray.
-        [self displayMarketObjects:marketsArray];
+        if (error) {
+            
+            [self showErrorAlert];
+            
+        } else {
+            self.marketsArray = marketsArray;
+            // Plot a pin for the coordinates of each FMLMarket object in marketsArray.
+            [self displayMarketObjects:marketsArray];
+        }
+        
         
     }];
+    
+}
+
+-(void)showErrorAlert {
+    
+    // Create alert controller
+    UIAlertController *apiCallFailedAlert = [UIAlertController
+                                             alertControllerWithTitle:@"Could not connect"
+                                             message:@"We could not connect to the data source. Please check your Internet connection."
+                                             preferredStyle:UIAlertControllerStyleAlert];
+    
+    // Create action
+    UIAlertAction *okAction = [UIAlertAction
+                               actionWithTitle:@"Ok"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * _Nonnull action) {
+                                   [apiCallFailedAlert dismissViewControllerAnimated:YES completion:nil];
+                               }];
+    
+    // Add action to controller
+    [apiCallFailedAlert addAction:okAction];
+    
+    // Present alert controller
+    [self presentViewController:apiCallFailedAlert animated:YES completion:nil];
     
 }
 
@@ -229,7 +260,7 @@
     CLLocationDegrees latitude = currentRegion.center.latitude;
     CLLocationDegrees longitude = currentRegion.center.longitude;
 
-    [FMLAPIClient getMarketsForLatitude:latitude longitude:longitude withCompletion:^(NSMutableArray *marketsArray) {
+    [FMLAPIClient getMarketsForLatitude:latitude longitude:longitude withCompletion:^(NSMutableArray *marketsArray, NSError *error) {
         
         [self displayMarketObjects:marketsArray];
         
