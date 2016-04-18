@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FMLGroceryItem.h"
+#import "FMLGroceryItem2.h"
 
 @interface FMLGroceryCellView : UIView
 
@@ -17,9 +17,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *checkbox;
 
 
-@property (nonatomic, strong) FMLGroceryItem *item;
+@property (nonatomic, strong) FMLGroceryItem2 *item;
 
-- (void)setGroceryItem:(FMLGroceryItem *)item;
+- (void)setGroceryItem:(FMLGroceryItem2 *)item;
 
 
 @end

@@ -12,5 +12,8 @@
 @interface FMLGroceryTVC : UITableViewController
 
 @property(strong, nonatomic)CoreDataStack *stack;
+@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *quantity;
+@property (nonatomic) BOOL *isChecked;
 
 @end

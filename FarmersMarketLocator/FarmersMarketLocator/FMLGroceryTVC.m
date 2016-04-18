@@ -9,16 +9,31 @@
 #import "FMLGroceryTVC.h"
 #import "FMLGroceryCell.h"
 #import "FMLNewItemViewController.h"
-#import "FMLGroceryItem.h"
+#import "FMLGroceryItem2.h"
 #import "CoreDataStack.h"
 
-@interface FMLGroceryTVC ()
+@interface FMLGroceryTVC () <NewItemDelegate>
 
 @property (nonatomic, strong) NSMutableArray *items;
 
 @end
 
 @implementation FMLGroceryTVC
+
+
+
+-(void)newItemViewControllerDismissed:(FMLGroceryItem2 *)newItem {
+    
+    NSLog(@"newItem is: %@", newItem.name);
+    
+    [self.items addObject:newItem];
+    
+    NSLog(@"items array's count is:  %lu", self.items.count);
+    
+    [self.tableView reloadData];
+    
+}
+
 
 - (IBAction)doneButtonTapped:(id)sender {
     FMLGroceryList *addedList = [NSEntityDescription insertNewObjectForEntityForName:@"FMLGroceryList" inManagedObjectContext:self.stack.managedObjectContext];
@@ -29,12 +44,14 @@
     [self.stack saveContext];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"new list created" object:nil];
-    NSLog(@"does this get called at all..???");
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.items = [[NSMutableArray alloc]init];
     
     self.stack = [CoreDataStack sharedStack];
     
@@ -43,7 +60,6 @@
     //to allow left swipe delete of a cell
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
     
-    NSLog(@"when do I get called???????");
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -83,8 +99,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"Items count: %lu", self.items.count);
-    return self.stack.groceryItems.count;
+    return self.items.count;
+    //NSLog(@"self.items.count is %lu", self.items.count);
 }
 
 
@@ -92,8 +108,7 @@
     
     FMLGroceryCell *cell = (FMLGroceryCell*)[tableView dequeueReusableCellWithIdentifier:@"groceryCell" forIndexPath:indexPath];
     
-    FMLGroceryItem *currentItem = self.stack.groceryItems[indexPath.row];
-    NSLog(@"%lu%@", indexPath.row, ((FMLGroceryItem *)self.stack.groceryItems[indexPath.row]).name);
+    FMLGroceryItem2 *currentItem = self.items[indexPath.row];
     
     [cell.groceryView setGroceryItem:currentItem];
     
@@ -104,6 +119,13 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     return 80;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"makeNewItem"]) {
+        FMLNewItemViewController *destVC = segue.destinationViewController;
+        destVC.delegate = self;
+    }
 }
 
 

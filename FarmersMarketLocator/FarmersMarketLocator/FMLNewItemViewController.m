@@ -7,7 +7,7 @@
 //
 
 #import "FMLNewItemViewController.h"
-#import "FMLGroceryItem.h"
+
 
 @interface FMLNewItemViewController ()
 
@@ -19,7 +19,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.stack = [CoreDataStack sharedStack];
+    //self.stack = [CoreDataStack sharedStack];
 }
 
 
@@ -29,16 +29,17 @@
     NSString *itemName = self.itemNameTextField.text;
     NSString *itemQuantity = self.itemQuantTextField.text;
     
-    FMLGroceryItem *addedItem = (FMLGroceryItem *)[NSEntityDescription insertNewObjectForEntityForName:@"FMLGroceryItem" inManagedObjectContext:self.stack.managedObjectContext];
+    FMLGroceryItem2 *addedItem = [FMLGroceryItem2 new];
+//    FMLGroceryItem *addedItem = (FMLGroceryItem *)[NSEntityDescription insertNewObjectForEntityForName:@"FMLGroceryItem" inManagedObjectContext:self.stack.managedObjectContext];
     addedItem.name = itemName;
     addedItem.quantity = itemQuantity;
     
     
-    [self.stack saveContext];
+    //[self.stack saveContext];
+    
+    [self.delegate newItemViewControllerDismissed:addedItem];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"new item added" object:nil];
-    
-    
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }

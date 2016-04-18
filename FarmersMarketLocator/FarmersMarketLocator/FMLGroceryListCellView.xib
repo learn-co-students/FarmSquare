@@ -18,25 +18,39 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iGY-PK-rSE">
-                    <rect key="frame" x="252" y="25" width="97" height="30"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0TE-Ew-wLF">
-                    <rect key="frame" x="279" y="104" width="80" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ZkD-0D-sdz">
+                    <rect key="frame" x="20" y="0.0" width="300" height="150"/>
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iGY-PK-rSE">
+                            <rect key="frame" x="274" y="0.0" width="26" height="73"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0TE-Ew-wLF">
+                            <rect key="frame" x="262" y="78" width="38" height="72"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ugu-jj-0ou">
+                    <rect key="frame" x="340" y="23" width="210" height="105"/>
+                    <color key="backgroundColor" red="0.067066928028027759" green="0.97629662958115182" blue="0.4369226163543205" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="VIEW / MODIFY"/>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.057573846504568309" green="0.83810536649214662" blue="0.37507779747784853" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="iGY-PK-rSE" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="22H-Ic-Egu"/>
-                <constraint firstAttribute="bottom" secondItem="0TE-Ew-wLF" secondAttribute="bottom" constant="25" id="4eC-b0-NgA"/>
-                <constraint firstItem="iGY-PK-rSE" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="0.7" constant="-12.5" id="Jwv-bz-I4F"/>
-                <constraint firstItem="iGY-PK-rSE" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.6" constant="-263" id="bGn-Qm-FqD"/>
-                <constraint firstItem="0TE-Ew-wLF" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="19" id="d3X-5l-eFs"/>
+                <constraint firstItem="ZkD-0D-sdz" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.5" id="0uP-06-T0z"/>
+                <constraint firstItem="ugu-jj-0ou" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="9Ai-Sd-JEc"/>
+                <constraint firstItem="ZkD-0D-sdz" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="AVK-7l-apK"/>
+                <constraint firstItem="ZkD-0D-sdz" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="J3K-Xy-Bbi"/>
+                <constraint firstItem="ugu-jj-0ou" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.7" id="Nmp-lb-Daz"/>
+                <constraint firstAttribute="trailing" secondItem="ugu-jj-0ou" secondAttribute="trailing" constant="50" id="PXC-py-XAa"/>
+                <constraint firstItem="ugu-jj-0ou" firstAttribute="leading" secondItem="ZkD-0D-sdz" secondAttribute="trailing" constant="20" id="Qs4-7P-L9e"/>
+                <constraint firstItem="ZkD-0D-sdz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="qja-h6-1cT"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>

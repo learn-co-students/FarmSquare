@@ -7,14 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "FMLGroceryItem2.h"
 #import "CoreDataStack.h"
+
+@protocol NewItemDelegate <NSObject>
+
+-(void)newItemViewControllerDismissed:(FMLGroceryItem2 *)newItem;
+
+@end
 
 @interface FMLNewItemViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITextField *itemQuantTextField;
 @property (weak, nonatomic) IBOutlet UITextField *itemNameTextField;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property (weak, nonatomic) id <NewItemDelegate> delegate;
 
 //@property (strong, nonatomic) GroceryItem *addedGroceryItem;
 

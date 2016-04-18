@@ -6,7 +6,7 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--GROCERY LIST-->
+        <!--GROCERY LISTS-->
         <scene sceneID="Xcq-aa-1NW">
             <objects>
                 <tableViewController id="rxt-1i-01x" customClass="FMLGroceryListsTVC" sceneMemberID="viewController">
@@ -45,11 +45,11 @@
                             <outlet property="delegate" destination="rxt-1i-01x" id="FIO-Vf-Ppy"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="GROCERY LIST" id="x5q-f9-0Yw">
-                        <barButtonItem key="backBarButtonItem" title="DONE" id="5JH-fP-0QB"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" systemItem="add" id="bnc-PS-5Vl">
+                    <navigationItem key="navigationItem" title="GROCERY LISTS" id="x5q-f9-0Yw">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="5JH-fP-0QB"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="dUc-Te-oFo">
                             <connections>
-                                <segue destination="8Bg-lH-Rb2" kind="presentation" id="IUG-qN-bbc"/>
+                                <segue destination="8Bg-lH-Rb2" kind="presentation" id="sie-wI-qkv"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -80,7 +80,7 @@
                                     </barButtonItem>
                                     <barButtonItem key="rightBarButtonItem" systemItem="add" id="Wps-Ja-qlN">
                                         <connections>
-                                            <segue destination="Bk3-76-zup" kind="presentation" id="iy2-9b-h8o"/>
+                                            <segue destination="Bk3-76-zup" kind="presentation" identifier="makeNewItem" id="iy2-9b-h8o"/>
                                         </connections>
                                     </barButtonItem>
                                 </navigationItem>
@@ -94,8 +94,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Unn-8l-nG3" customClass="FMLGroceryCellView">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Unn-8l-nG3" customClass="FMLGroceryCellView">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <accessibility key="accessibilityConfiguration" identifier="itemCell"/>
                                         </view>
@@ -125,7 +125,7 @@
         <!--New Item View Controller-->
         <scene sceneID="AUO-xP-sS8">
             <objects>
-                <viewController extendedLayoutIncludesOpaqueBars="YES" id="Bk3-76-zup" customClass="FMLNewItemViewController" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" modalTransitionStyle="crossDissolve" id="Bk3-76-zup" customClass="FMLNewItemViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kZc-2P-8B1"/>
                         <viewControllerLayoutGuide type="bottom" id="cCO-UT-7bf"/>
@@ -142,8 +142,8 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vlb-QZ-JV8">
-                                        <rect key="frame" x="40" y="156" width="144" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vlb-QZ-JV8">
+                                        <rect key="frame" x="40" y="130" width="144" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -153,21 +153,21 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="In the amount of:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="muR-Fi-xUm">
-                                        <rect key="frame" x="40" y="131" width="130" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In the amount of:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="muR-Fi-xUm">
+                                        <rect key="frame" x="40" y="105" width="130" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RRG-Mc-hOI">
-                                        <rect key="frame" x="125" y="224" width="59" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RRG-Mc-hOI">
+                                        <rect key="frame" x="125" y="190" width="59" height="30"/>
                                         <state key="normal" title="CANCEL"/>
                                         <connections>
                                             <action selector="cancelTapped:" destination="Bk3-76-zup" eventType="touchUpInside" id="Ghl-6V-0Qi"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aGy-91-5PT">
-                                        <rect key="frame" x="40" y="224" width="59" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aGy-91-5PT">
+                                        <rect key="frame" x="40" y="190" width="37" height="30"/>
                                         <state key="normal" title="SAVE"/>
                                         <connections>
                                             <action selector="saveTapped:" destination="Bk3-76-zup" eventType="touchUpInside" id="Kf5-LJ-uRO"/>
@@ -183,6 +183,7 @@
                                     <constraint firstItem="n4R-oJ-3TO" firstAttribute="leading" secondItem="giL-Bc-6Ou" secondAttribute="leading" constant="40" id="BJh-J1-2wk"/>
                                     <constraint firstItem="aGy-91-5PT" firstAttribute="top" secondItem="vlb-QZ-JV8" secondAttribute="bottom" constant="30" id="IvI-qb-g5V"/>
                                     <constraint firstItem="vlb-QZ-JV8" firstAttribute="top" secondItem="muR-Fi-xUm" secondAttribute="bottom" constant="4" id="OME-Zp-wXp"/>
+                                    <constraint firstItem="vlb-QZ-JV8" firstAttribute="leading" secondItem="giL-Bc-6Ou" secondAttribute="leading" constant="40" id="TtO-Gu-E8g"/>
                                     <constraint firstItem="n4R-oJ-3TO" firstAttribute="top" secondItem="pM4-eP-JdW" secondAttribute="bottom" constant="8" id="Yvt-NY-hM1"/>
                                     <constraint firstItem="vlb-QZ-JV8" firstAttribute="height" secondItem="n4R-oJ-3TO" secondAttribute="height" id="drh-bb-4wJ"/>
                                     <constraint firstItem="muR-Fi-xUm" firstAttribute="leading" secondItem="vlb-QZ-JV8" secondAttribute="leading" id="jMb-Aq-fWt"/>
