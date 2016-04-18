@@ -295,7 +295,6 @@
     
     
 }
-
 -(void)callSearchMethod{
     [FMLSearch searchForNewLocation:self.searchBarTextField.text];
 }
@@ -327,21 +326,11 @@
  - Remove green background from pin view.
  - Fix the frames thing: should be based on a calculation with screen size, not an absolute number
  - What if there are too many items? Bigger circle? Spiral? A "..." icon that you can tap to expand more?
- - Should it move the double-tapped pin to the center? Otherwise, if it's close to the side some of the icons will be offscreen.
  - Should there be little text labels next to the icons? Maybe you can touch an icon to see the text
  - Instead of making new constraints in the animation, just reassign the values of the existing constraints. Rename appropriately.
  - Account for what happens if we get a name of a product type that's not in the Assets
  - ERROR: for the market near the Exploratorium in San Francisco, we get:
  -[MKUserLocation market]: unrecognized selector sent to instance 0x7fafb0d02c00
- 
- Done:
- - Disable the map movement and make the background dim.
- - On second double-tap (and/or tap elsewhere), make the icons get sucked back into the pin and restore map functionality. (Do this last, because it has to reverse all the previous stuff.)
- - Issue: the dimView's alpha applies not to just the background, but to the pin and icons on top of it. Fix this. (Does the background itself have an alpha that can be set independently?)
- - Get actual icons (Noun Project, Flaticon, etc.), put them in Assets, give them the right names, and uncomment the code that adds to the iconsArray using the dictionary. (Could do it without the dictionary and just give them the same names as the strings, BUT there are slashes in some of the strings. Could just change them first though.)
- - Make all the icons circles of uniform size--they don't come as circles, so put them on colored circles. This will be much prettier.
- 
- 
  
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */

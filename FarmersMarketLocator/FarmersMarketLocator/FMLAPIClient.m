@@ -88,7 +88,7 @@
         sessionManagerDetails.responseSerializer = [[AFJSONResponseSerializer alloc]init];
         // Get dictionary of market details
         NSDictionary *marketDetails = responseObject[@"marketdetails"];
-        
+        NSLog(@"Market JSON: %@", marketDetails);
         // Pass the dictionary to the completion block
         idCompletion(marketDetails);
         
@@ -255,12 +255,9 @@
                 [marketsWithSearchedProducts addObject:market];
                 break;
             }
-        }    }
-    NSLog(@"\n\n SEARCH RESULTS:\n");
-    for (FMLMarket *market in marketsWithSearchedProducts) {
-        NSLog(@"The market named %@ at %@ has some stuff.", market.name, market.address);
+        }
     }
-    
+
     return marketsWithSearchedProducts;
 }
 

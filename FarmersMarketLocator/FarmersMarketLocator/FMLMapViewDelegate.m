@@ -51,10 +51,10 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
 
 #pragma mark - MKMapView Delegate Methods
 
-//
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     self.selectedAnnotationView = view;
     
+    // Show the detail label; show the circle of product category icons
     if ([Annotation isSubclassOfClass:view.annotation.class]  ) {
         
         Annotation *annotation = (Annotation *)view.annotation;
@@ -74,10 +74,10 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         
         [detailView showDetailView];
         
+        // Center pin in map
         if (mapView.region.span.longitudeDelta != detailView.previousRegion.span.longitudeDelta) {
             detailView.previousRegion = mapView.region;
         }
-        
 
         // Set and show title view. Also, move up map
         FMLTitleView *titleView = self.viewController.titleView;
@@ -93,25 +93,25 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         [titleView showTitleView];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"LeafMeAlone" object:nil];
         CGPoint pinLocationBeforeZoom = view.center;
-        
-        
-        
-        
-        
+
         [self.viewController zoomMaptoLatitude:[market.latitude floatValue]  longitude:[market.longitude floatValue] withLatitudeSpan:0.01 longitudeSpan:0.01];
         
+        // If the map hasn't moved, show the product icons. (If it has, we still want to show them, but the regionDidChange method will notice the zooming and take care of displaying the icons.)
         if (view.center.x == pinLocationBeforeZoom.x && view.center.y == pinLocationBeforeZoom.y) {
+
             [self showProductsCircleForMarket:view];
 
         }
-                
+        
+        // Cover mapView to prevent map interaction
         UIView *cover = [[UIView alloc] initWithFrame:self.viewController.view.frame];
         cover.backgroundColor = [UIColor clearColor];
         UITapGestureRecognizer *onTapClear = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeCoverView:)];
         [cover addGestureRecognizer:onTapClear];
         [self.viewController.view addSubview:cover];
-        
+        // Bring forward the detail view and the annotation view with icons to allow interaction
         [self.viewController.view bringSubviewToFront:self.viewController.detailView];
+        [self.viewController.view bringSubviewToFront:view];
         
     }
 }
@@ -159,6 +159,7 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
     return nil;
 }
 
+// Animate icons' disappearance: become transparent, shrink, move back into the pin, and disappear.
 -(void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
     
     [self.viewController.detailView hideDetailView];
@@ -169,7 +170,6 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"VineAndDine" object:nil];
     
-    // Animation of icons' disappearance: become transparent, shrink, move back into the pin.
     [UIView animateWithDuration:self.animationSpeed animations:^{
         
         for (UIView *icon in self.currentProductsIcons) {
@@ -194,15 +194,14 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
     
     
     if (self.selectedAnnotationView) {
-
         [self showProductsCircleForMarket:self.selectedAnnotationView];
-        
     }
 }
 
 
 #pragma mark - Helper Methods
 
+// Shoot out an icon for each product type available at a given Farmer's Market. The icons should radiate out to equidistant positions around a circle centered on the pin. The Assets folder contains an icon for each product category.
 -(void)showProductsCircleForMarket:(MKAnnotationView *)annotationView {
     
     // Empty the current products icon array before adding the circle views
@@ -217,6 +216,9 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
     // Index (to multiply number of degrees by)
     NSUInteger index = 0;
     
+    // Remove any empty strings from iconsArray, so we don't get blank circles. (Not doing this earlier to avoid a dividing-by-zero problem or having to use an if-statement.)
+        [iconsArray removeObject:@""];
+    
     // Make each icon appear at the center of the pin and animate out to its position.
     for (NSString *iconName in iconsArray) {
         
@@ -226,9 +228,7 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         // Make a view
         UIView *circleView = [[UIView alloc] init];
         circleView.translatesAutoresizingMaskIntoConstraints = NO;
-        circleView.backgroundColor = [UIColor brownColor];
-        // Corner radius to half of size makes it a circle
-        circleView.layer.cornerRadius = 15;
+        circleView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
         [annotationView addSubview:circleView];
         [self.currentProductsIcons addObject:circleView];
         // Position constraints: center the circle at the center of the pin view
@@ -275,7 +275,7 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         CGFloat degreesForIcon = degreesBetweenIcons * index;
         
         // Get the coordinates of that position
-        CGPoint iconDestinationPosition = [self pointAroundCircumferenceFromCenter:annotationView.center withRadius:50 andAngle:degreesForIcon];
+        CGPoint iconDestinationPosition = [self pointAroundCircumferenceFromCenter:annotationView.center withRadius:100 andAngle:degreesForIcon];
         
         // Animate the icon moving to its position in the circle.
         self.animationSpeed = 0.25;
@@ -296,10 +296,12 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
             
             // size
             // TODO: make the height and width a calculation based on the size of the view, so it works correctly regardless of device. Or perhaps as a multiple of the size of the pinview or something.
-            circleHeight.constant = 30;
-            circleWidth.constant = 30;
-            iconHeight.constant = 15;
-            iconWidth.constant = 15;
+            circleHeight.constant = 45;
+            circleWidth.constant = 45;
+            // Corner radius to half of size makes it a circle
+            circleView.layer.cornerRadius = 0.5 * circleHeight.constant;
+            iconHeight.constant = circleHeight.constant * 0.75;
+            iconWidth.constant = circleWidth.constant * 0.75;
             
             [self.viewController.view layoutIfNeeded];
             
