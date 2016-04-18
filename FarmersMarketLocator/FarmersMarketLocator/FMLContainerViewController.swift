@@ -12,7 +12,7 @@ import SnapKit
 class FMLContainerViewController: UIViewController {
     
     let mapViewController = FMLMapViewController()
-    let dogViewController = DogViewController()
+    var dogViewController = DogViewController()
     let cartViewController = CartViewController()
     let bookViewController = BookViewController()
 
@@ -24,19 +24,49 @@ class FMLContainerViewController: UIViewController {
     var blurEffectView = UIVisualEffectView()
     var vineImageView = UIImageView()
     var vineOutline = UIImageView()
-    var menuShown = false
+    var hamburger = UIImageView()
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.layer.masksToBounds = false
         self.setEmbeddedViewController(mapViewController)
+
         
         let value: Double = ((20 * M_PI)/180.0)
         let degrees: CGFloat = CGFloat(value)
         self.vineButton.transform = CGAffineTransformMakeRotation(degrees)
         
         createBlurView()
+        addHamburgerImage()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FMLContainerViewController.makeVineDisappear), name: "LeafMeAlone", object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FMLContainerViewController.makeVineReappear), name: "VineAndDine", object: nil)
     }
     
     // MARK: Vine Menu Methods
+    
+    func addHamburgerImage() {
+        hamburger = UIImageView(frame: CGRectMake(25, 35, 40, 40))
+        hamburger.image = UIImage(named: "three")
+        hamburger.alpha = 0.3
+        self.view.addSubview(hamburger)
+        print("done")
+    }
+
+    func makeVineDisappear() {
+        UIView.animateWithDuration(0.3) { 
+            self.vineButton.alpha = 0
+            self.hamburger.alpha = 0
+        }
+    }
+    
+    func makeVineReappear() {
+        UIView.animateWithDuration(0.3) { 
+            self.vineButton.alpha = 1
+            self.hamburger.alpha = 1
+        }
+    }
     
     func createBlurView() {
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
@@ -56,7 +86,6 @@ class FMLContainerViewController: UIViewController {
     // MARK: IBActions
     
     @IBAction func vineButtonTapped(sender: UIButton) {
-        self.menuShown = true
         self.view.addSubview(blurEffectView)
         self.vineButton.hidden = true
         
@@ -88,18 +117,22 @@ class FMLContainerViewController: UIViewController {
     
     func mapTapped() {
         self.setEmbeddedViewController(mapViewController)
+        self.emptySpaceTapped()
     }
     
     func cartTapped() {
         self.setEmbeddedViewController(cartViewController)
+        self.emptySpaceTapped()
     }
     
     func bookTapped() {
         self.setEmbeddedViewController(bookViewController)
+        self.emptySpaceTapped()
     }
     
     func dogTapped() {
         self.setEmbeddedViewController(dogViewController)
+        self.emptySpaceTapped()
     }
     
     
@@ -151,12 +184,7 @@ class FMLContainerViewController: UIViewController {
     }
     
     func emptySpaceTapped() {
-        
-//        if self.vineOutline == nil {
-//            self.menuShown = false
-//        } else {
-            self.vineOutline.alpha = 0
-//        }
+        self.vineOutline.alpha = 0
         self.vineImageView.alpha = 1
         
         UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
@@ -186,12 +214,12 @@ class FMLContainerViewController: UIViewController {
     
     // Thanks Tim Clem!
     func setEmbeddedViewController(controller: UIViewController?) {
-        
         if self.childViewControllers.contains(controller!) {
             return
         }
         
         for vc in self.childViewControllers {
+            vc.willMoveToParentViewController(nil)
             
             if vc.isViewLoaded() {
                 vc.view.removeFromSuperview()
@@ -200,17 +228,43 @@ class FMLContainerViewController: UIViewController {
             vc.removeFromParentViewController()
         }
         
-        if controller == nil {
+        if (controller == nil) {
             return
         }
         
         self.addChildViewController(controller!)
         self.containerView.addSubview(controller!.view)
-        controller!.view.snp_updateConstraints { (make) in
+        controller!.view.snp_makeConstraints { (make) in
             make.edges.equalTo(0)
         }
         
         controller?.didMoveToParentViewController(self)
         
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

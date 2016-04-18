@@ -23,6 +23,7 @@
 		8B5635981CAF081A007DC27E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B5635961CAF081A007DC27E /* DataModel.xcdatamodeld */; };
 		8B5635C11CAF0858007DC27E /* CoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5635C01CAF0858007DC27E /* CoreDataStack.m */; };
 		8B74C3041CBEECA6006634A8 /* Secrets.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B74C3031CBEECA6006634A8 /* Secrets.m */; };
+		8B8C59D01CC10983009BE852 /* FMLTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8C59CF1CC10983009BE852 /* FMLTitleView.swift */; };
 		8B9E5A811CB2F7DA0050915D /* FMLJSONDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E5A801CB2F7DA0050915D /* FMLJSONDictionary.m */; };
 		8B9E5A831CB2F7E80050915D /* farmers-markets.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B9E5A821CB2F7E80050915D /* farmers-markets.json */; };
 		8BAC6A891CB7E615001EEDE1 /* farmers-markets-0.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BAC6A7F1CB7E615001EEDE1 /* farmers-markets-0.json */; };
@@ -94,6 +95,7 @@
 		8B5635BF1CAF0858007DC27E /* CoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataStack.h; sourceTree = "<group>"; };
 		8B5635C01CAF0858007DC27E /* CoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataStack.m; sourceTree = "<group>"; };
 		8B74C3031CBEECA6006634A8 /* Secrets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secrets.m; sourceTree = "<group>"; };
+		8B8C59CF1CC10983009BE852 /* FMLTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMLTitleView.swift; sourceTree = "<group>"; };
 		8B9E5A7F1CB2F7DA0050915D /* FMLJSONDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLJSONDictionary.h; sourceTree = "<group>"; };
 		8B9E5A801CB2F7DA0050915D /* FMLJSONDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLJSONDictionary.m; sourceTree = "<group>"; };
 		8B9E5A821CB2F7E80050915D /* farmers-markets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "farmers-markets.json"; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 			children = (
 				8BBD400B1CAED53E00A1DB0E /* FMLDetailView.h */,
 				8BBD400C1CAED53E00A1DB0E /* FMLDetailView.m */,
+				8B8C59CF1CC10983009BE852 /* FMLTitleView.swift */,
 				1F1746931CB460C10018383B /* FMLPinAnnotationView.h */,
 				1F1746941CB460C10018383B /* FMLPinAnnotationView.m */,
 			);
@@ -545,6 +548,7 @@
 				8B356E9D1CBFF88B00AEEB11 /* BookViewController.swift in Sources */,
 				8B9E5A811CB2F7DA0050915D /* FMLJSONDictionary.m in Sources */,
 				8BBD400A1CAEB81700A1DB0E /* FMLLocationManagerDelegate.m in Sources */,
+				8B8C59D01CC10983009BE852 /* FMLTitleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
