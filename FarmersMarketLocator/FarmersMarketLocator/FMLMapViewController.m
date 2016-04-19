@@ -211,7 +211,6 @@
 }
 
 -(void)hideSearchFilters{
-    NSLog(@"hiding search filters");
     self.wicFilter.alpha = 0;
     self.snapFilter.alpha = 0;
 }
@@ -325,11 +324,11 @@
     }
     
     if (filterBySNAP && filterByWIC){
-        NSPredicate *filterBySNAPPredicate = [NSPredicate predicateWithFormat:@"%K = %@", @"self.snap", @1];
+        NSPredicate *filterBySNAPPredicate = [NSPredicate predicateWithFormat:@"%K = %@", @"snap", @1];
         filteredArray = [filteredArray filteredArrayUsingPredicate:filterBySNAPPredicate];
   
     } else if (filterBySNAP) {
-        NSPredicate *filterBySNAPPredicate = [NSPredicate predicateWithFormat:@"%K = %@", @"self.snap", @1];
+        NSPredicate *filterBySNAPPredicate = [NSPredicate predicateWithFormat:@"%K = %@", @"snap", @1];
         filteredArray = [marketsArray filteredArrayUsingPredicate:filterBySNAPPredicate];
   
     }
