@@ -262,7 +262,12 @@
 
     [FMLAPIClient getMarketsForLatitude:latitude longitude:longitude withCompletion:^(NSMutableArray *marketsArray, NSError *error) {
         
-        [self displayMarketObjects:marketsArray];
+        // If error, show error alert. If not, display markets.
+        if (error) {
+            [self showErrorAlert];
+        } else {
+            [self displayMarketObjects:marketsArray];
+        }
         
     }];
     

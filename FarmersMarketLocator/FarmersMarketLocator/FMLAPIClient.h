@@ -15,14 +15,14 @@
 
 // API methods
 +(void)getMarketsForZip:(NSString *)zip
-         withCompletion:(void (^)(NSMutableArray *marketsArray))zipCompletion;
+         withCompletion:(void (^)(NSMutableArray *marketsArray, NSError *error))zipCompletion;
 +(void)getMarketsForLatitude:(CGFloat)latitude
                    longitude:(CGFloat)longitude
               withCompletion:(void (^)(NSMutableArray *marketsArray, NSError *error))coordinatesCompletion;
 +(void)getDetailsForMarketWithId:(NSString *)idNumber
-                  withCompletion:(void (^)(NSDictionary *marketDetails))idCompletion;
+                  withCompletion:(void (^)(NSDictionary *marketDetails, NSError *error))idCompletion;
 +(void)marketsArrayForListOfMarkets:(NSDictionary *)marketsDict
-                     withCompletion:(void (^)(NSMutableArray *marketsArray))listMarketsCompletion;
+                     withCompletion:(void (^)(NSMutableArray *marketsArray, NSError *error))listMarketsCompletion;
 
 // Non-internet helper methods
 +(NSDictionary *)getCoordinatesFromGoogleMapsLink:(NSString *)googleMapsLink;

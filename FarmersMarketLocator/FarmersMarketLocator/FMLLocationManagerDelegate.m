@@ -75,7 +75,6 @@
     UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"Please enter your zip code" message:@"Make it zippity zip" preferredStyle:UIAlertControllerStyleAlert];
     
     [controller addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        NSLog(@"Call me maybe?");
     }];
     
     UIAlertAction *enter = [UIAlertAction actionWithTitle:@"Enter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
