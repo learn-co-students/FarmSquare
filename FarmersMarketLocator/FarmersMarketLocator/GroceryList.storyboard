@@ -63,7 +63,6 @@
         <!--GroceryTVC-->
         <scene sceneID="JlF-gG-ENW">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Z8w-7f-H8J" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="8Bg-lH-Rb2" customClass="FMLGroceryTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="m6g-8u-xz0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -123,6 +122,7 @@
                     </tableView>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z8w-7f-H8J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-204" y="-264"/>
         </scene>

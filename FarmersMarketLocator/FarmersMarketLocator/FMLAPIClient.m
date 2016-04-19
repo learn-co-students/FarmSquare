@@ -10,6 +10,7 @@
 #import "FMLMarket.h"
 #import "CoreDataStack.h"
 #import "FMLMarket+CoreDataProperties.h"
+#import "FMLJSONDictionary.h"
 
 @implementation FMLAPIClient
 
@@ -113,7 +114,7 @@
      4) Add the FMLMarket object to an array
      4) Pass that array to the completion block.
      */
-    
+    NSLog(@"About to start for loop");
     for (NSDictionary *marketDict in marketDictionariesArray) {
         
         NSString *marketID = marketDict[@"id"];
@@ -128,6 +129,37 @@
         FMLMarket *market = (FMLMarket *)[NSEntityDescription insertNewObjectForEntityForName:@"FMLMarket" inManagedObjectContext:context];
         
         market.name = [market nameFromString:nameString];
+        
+        // Get data from JSON Dump file
+        NSDictionary *data = [FMLJSONDictionary dictionaryForMarketWithId:marketID];
+        market.season1Date = data[@"Season1Date"];
+        market.season2Date = data[@"Season2Date"];
+        market.season3Date = data[@"Season3Date"];
+        market.season4Date = data[@"Season4Date"];
+        market.season1Time = data[@"Season1Time"];
+        market.season2Time = data[@"Season2Time"];
+        market.season3Time = data[@"Season3Time"];
+        market.season4Time = data[@"Season4Time"];
+        NSString *isOrganic = data[@"Organic"];
+        if ([isOrganic isEqualToString:@"-"]) {
+            market.organic = @(0);
+        } else {
+            market.organic = [isOrganic isEqualToString:@"Y"] ? @1 : @-1;
+        }
+        market.snap = data[@"Snap"];
+        market.wic = [data[@"WIC"] isEqualToString:@"Y"] ? @1 : @0;
+        market.wicCash = [data[@"WICcash"] isEqualToString:@"Y"] ? @1 : @0;
+        market.sfmnp = [data[@"SFMNP"] isEqualToString:@"Y"] ? @1 : @0;
+        market.credit = [data[@"Credit"] isEqualToString:@"Y"] ? @1 : @0;
+        market.website = data[@"Website"];
+        market.facebook = data[@"Facebook"];
+        market.twitter = data[@"Twitter"];
+        market.city = data[@"city"];
+        market.state = data[@"State"];
+        market.street = data[@"street"];
+        market.zipCode = data[@"zip"];
+        market.updateTime = data[@"updateTime"];
+
         
         // Now to give it its properties (other than name), call getDetails... to make the API call that gets the dictionary of details.
         [FMLAPIClient getDetailsForMarketWithId:marketID withCompletion:^(NSDictionary *marketDetails) {

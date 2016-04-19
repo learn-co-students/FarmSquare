@@ -18,6 +18,8 @@
 #import "FMLDetailView.h"
 #import "FMLMarket+CoreDataProperties.h"
 #import "CoreDataStack.h"
+#import "FMLJSONDictionary.h"
+
 
 // TODO: When network connection is lost, Core Data misfunctions and saves 0 objects which shouldn't be ok
 
@@ -66,14 +68,13 @@
     self.detailView.locationManager = self.manager;
 
     
-    // Show saved data
-    
-    
+    // Grab data from Managed Context Object
     NSManagedObjectContext *context = [[CoreDataStack sharedStack] managedObjectContext];
     NSFetchRequest *getSavedLocationsFetch = [NSFetchRequest fetchRequestWithEntityName:@"FMLMarket"];
     
     self.marketsArray = [context executeFetchRequest:getSavedLocationsFetch error:nil];
     
+    // If there's saved data, show it
     if ([self.marketsArray count] > 0) {
         self.showingSavedData = YES;
         [self displayMarketObjects:self.marketsArray];
@@ -145,7 +146,6 @@
     NSUInteger index = 0;
     for (FMLMarket *farmersMarket in marketsArray) {
         CLLocationCoordinate2D location;
-        NSLog(@"%f, %f", location.latitude, location.longitude);
         location.latitude = [farmersMarket.latitude floatValue];
         location.longitude = [farmersMarket.longitude floatValue];
         

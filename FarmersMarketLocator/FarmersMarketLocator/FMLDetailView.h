@@ -24,7 +24,7 @@
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (assign, nonatomic) CGFloat selectedLatitude;
 @property (assign, nonatomic) CGFloat selectedLongitude;
-@property (strong, nonatomic) NSString *zip;
+@property (weak, nonatomic) NSString *zip;
 
 -(void)constrainViews;
 -(void)showDetailView;

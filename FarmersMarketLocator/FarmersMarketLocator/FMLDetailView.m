@@ -189,7 +189,7 @@
     NSString *nameForSearch = [self.nameLabel.text.lowercaseString stringByReplacingOccurrencesOfString:@" " withString:@"+"];
     
     //http://www.yelp.com/search?find_desc=hernandez+farmer%27s+market&find_loc=10004
-    NSString *yelpSearchURL = [NSString stringWithFormat:@"http://www.yelp.com/search?find_desc=%@&find_loc=New+York", nameForSearch]; //for location I put just New York here for now
+    NSString *yelpSearchURL = [NSString stringWithFormat:@"http://www.yelp.com/search?find_desc=%@&find_loc=%@", nameForSearch, self.zip];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:yelpSearchURL]];
 }
 

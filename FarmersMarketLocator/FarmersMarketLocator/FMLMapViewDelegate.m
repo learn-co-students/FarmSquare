@@ -21,6 +21,7 @@
     return self;
 }
 
+// Initializes with view controller so it's methods and properties can be accessed
 - (instancetype)initWithTarget:(FMLMapViewController *)target
 {
     self = [super init];
@@ -33,6 +34,7 @@
 
 #pragma mark - MKMapView Delegate Methods
 
+//
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     self.selectedAnnotationView = view;
     
@@ -45,6 +47,10 @@
         detailView.addressLabel.text = [NSString stringWithFormat:@"ADDRESS: %@", market.address];
         detailView.produceTextView.text = [NSString stringWithFormat:@"AVAILABLE PRODUCE: %@", market.produceList];
         detailView.scheduleLabel.text = [NSString stringWithFormat:@"SCHEDULE: %@", market.scheduleString];
+        
+        //to use in yelp URL:
+        detailView.zip = market.zipCode;
+        
         //to use in maps URL for directions:
         detailView.selectedLatitude = [market.latitude floatValue];
         detailView.selectedLongitude = [market.longitude floatValue];
