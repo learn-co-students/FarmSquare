@@ -9,8 +9,9 @@
 #import "FMLGroceryTVC.h"
 #import "FMLGroceryCell.h"
 #import "FMLNewItemViewController.h"
-#import "FMLGroceryItem2.h"
+#import "FMLGroceryItem.h"
 #import "CoreDataStack.h"
+#import "FMLGroceryList.h"
 
 @interface FMLGroceryTVC () <NewItemDelegate>
 
@@ -22,7 +23,7 @@
 
 
 
--(void)newItemViewControllerDismissed:(FMLGroceryItem2 *)newItem {
+-(void)newItemViewControllerDismissed:(FMLGroceryItem *)newItem {
     
     NSLog(@"newItem is: %@", newItem.name);
     
@@ -40,8 +41,16 @@
     if (self.items.count > 0) {
         FMLGroceryList *addedList = [NSEntityDescription insertNewObjectForEntityForName:@"FMLGroceryList" inManagedObjectContext:self.stack.managedObjectContext];
         addedList.listName = @"New grocery list";
-        //addedList.itemsInList = (NSOrderedSet *)self.items;
         addedList.dateModified = [NSDate date];
+        
+        //adding groceryItems to the new grocery list (its NSOrderedSet property)
+        NSMutableOrderedSet *mutableItems = addedList.itemsInList.mutableCopy;
+        
+        for (NSUInteger i = 0; i < self.items.count; i++) {
+            
+            [mutableItems addObject:self.items[i]];
+        }
+        addedList.itemsInList = mutableItems.copy;
         
         [self.stack saveContext];
         
@@ -102,8 +111,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.items.count;
-    //NSLog(@"self.items.count is %lu", self.items.count);
+    
+    //number of rows depending on whether we are displaying an already saved grocery list or the new list being created
+    if (self.segueIsViewList) {
+        return self.groceryListToDisplay.itemsInList.count;
+    } else {
+        return self.items.count;
+    }
 }
 
 
@@ -111,11 +125,19 @@
     
     FMLGroceryCell *cell = (FMLGroceryCell*)[tableView dequeueReusableCellWithIdentifier:@"groceryCell" forIndexPath:indexPath];
     
-    FMLGroceryItem2 *currentItem = self.items[indexPath.row];
-    
+    //cell content can come from either a saved list (itemsInList property of FMLGroceryList) or from a new item view controller (saved in "items")
+    if (self.segueIsViewList) {
+        
+        FMLGroceryItem *currentItem = self.groceryListToDisplay.itemsInList[indexPath.row];
+        [cell.groceryView setGroceryItem:currentItem];
+        return cell;
+        
+    } else {
+        
+    FMLGroceryItem *currentItem = self.items[indexPath.row];
     [cell.groceryView setGroceryItem:currentItem];
-    
     return cell;
+    }
 }
 
 
@@ -129,10 +151,9 @@
     if ([segue.identifier isEqualToString:@"makeNewItem"]) {
         FMLNewItemViewController *destVC = segue.destinationViewController;
         destVC.delegate = self;
+        self.segueIsViewList = NO; //so that the if statements above execute loading appropriate data
     }
 }
-
-
 
 
 /*

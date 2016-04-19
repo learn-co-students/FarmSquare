@@ -131,7 +131,7 @@
 - (FMLGroceryList *)newGroceryList {
     
     FMLGroceryList *newList = [NSEntityDescription insertNewObjectForEntityForName:@"FMLGroceryList" inManagedObjectContext:self.managedObjectContext];
-    
+    NSLog(@"does a new list ever get created????");
     [self saveContext];
     
     return newList;

@@ -41,7 +41,7 @@
 }
 
 
-- (void)setGroceryItem:(FMLGroceryItem2 *)item {
+- (void)setGroceryItem:(FMLGroceryItem *)item {
     
     self.item = item;
     self.groceryName.text = item.name;

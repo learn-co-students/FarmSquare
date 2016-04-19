@@ -19,7 +19,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    //self.stack = [CoreDataStack sharedStack];
+    self.stack = [CoreDataStack sharedStack];
 }
 
 
@@ -29,13 +29,13 @@
     NSString *itemName = self.itemNameTextField.text;
     NSString *itemQuantity = self.itemQuantTextField.text;
     
-    FMLGroceryItem2 *addedItem = [FMLGroceryItem2 new];
-//    FMLGroceryItem *addedItem = (FMLGroceryItem *)[NSEntityDescription insertNewObjectForEntityForName:@"FMLGroceryItem" inManagedObjectContext:self.stack.managedObjectContext];
+    //FMLGroceryItem *addedItem = [FMLGroceryItem new];
+    FMLGroceryItem *addedItem = (FMLGroceryItem *)[NSEntityDescription insertNewObjectForEntityForName:@"FMLGroceryItem" inManagedObjectContext:self.stack.managedObjectContext];
     addedItem.name = itemName;
     addedItem.quantity = itemQuantity;
     
     
-    //[self.stack saveContext];
+    [self.stack saveContext];
     
     [self.delegate newItemViewControllerDismissed:addedItem];
     

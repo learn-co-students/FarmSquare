@@ -10,6 +10,7 @@
 //
 
 #import "FMLGroceryList.h"
+#import "FMLGroceryItem.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

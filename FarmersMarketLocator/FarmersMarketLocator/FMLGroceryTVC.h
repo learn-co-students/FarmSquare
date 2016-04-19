@@ -12,8 +12,15 @@
 @interface FMLGroceryTVC : UITableViewController
 
 @property(strong, nonatomic)CoreDataStack *stack;
-@property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSString *quantity;
-@property (nonatomic) BOOL *isChecked;
+@property (strong, nonatomic)NSString *name;
+@property (strong, nonatomic)NSString *quantity;
+@property (nonatomic)BOOL isChecked;
+
+@property (nonatomic, strong)FMLGroceryList *groceryListToDisplay;
+
+//BOOL property to distinguish for cells what to show when viewing a saved grocery list
+@property (nonatomic) BOOL segueIsViewList;
+
+
 
 @end

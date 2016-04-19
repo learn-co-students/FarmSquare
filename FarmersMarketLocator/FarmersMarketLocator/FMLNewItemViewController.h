@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FMLGroceryItem2.h"
+#import "FMLGroceryItem.h"
 #import "CoreDataStack.h"
 
 @protocol NewItemDelegate <NSObject>
 
--(void)newItemViewControllerDismissed:(FMLGroceryItem2 *)newItem;
+-(void)newItemViewControllerDismissed:(FMLGroceryItem *)newItem;
 
 @end
 

@@ -75,22 +75,17 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"viewList"]) {
+    
+if ([segue.identifier isEqualToString:@"viewList"]) {
         FMLGroceryTVC *destVC = segue.destinationViewController;
-//        
-//        NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
-//        FISLocation *selectedLocation = self.locations[selectedIndexPath.row];
-//        
+    
 //        destinationTrivia.allTriviaForTappedLocation = selectedLocation.trivia;
         
         NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
-        FMLGroceryList *selectedGroceryList = self.stack[selectedIndexPath.row];
-        destVC.name = selectedGroceryList.nam
+        FMLGroceryList *selectedGroceryList = self.stack.groceryLists[selectedIndexPath.row];
+        destVC.groceryListToDisplay = selectedGroceryList;
+        destVC.segueIsViewList = YES;
     }
-    
-    
 }
 
 
