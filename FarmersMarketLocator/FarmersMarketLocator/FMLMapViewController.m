@@ -216,37 +216,6 @@
     
 }
 
-//-(void)displayMarketObjects:(NSArray *)marketsArray {
-//    NSUInteger index = 0;
-//    
-//    
-//    //before for loop, have a predicate run through the array, if any filters are applied
-//    
-//    //snap -- "self.snap = 1"
-//    
-//    //wic -- "self.wic = 1"
-//    //wicCash -- "self.wicCash = 1"
-//    
-//    //credit -- "self.credit = 1"
-//    
-//    //sfmnp -- "self.sfmnp = 1"
-//    
-//    //organic -- "self.organic = 1"
-//    
-//    for (FMLMarket *farmersMarket in marketsArray) {
-//        CLLocationCoordinate2D location;
-//        location.latitude = [farmersMarket.latitude floatValue];
-//        location.longitude = [farmersMarket.longitude floatValue];
-//        
-//        Annotation *annotation = [[Annotation alloc] initWithCoordinate:location
-//                                                                  title:farmersMarket.name subtitle:farmersMarket.address andTag:index
-//                                                                 Market:farmersMarket];
-//        index++;
-//        
-//        [self.mapView addAnnotation:annotation];
-//        
-//    }
-//}
 
 -(void)displayMarketObjects:(NSArray *)marketsArray FromIndex:(NSUInteger)index {
     
