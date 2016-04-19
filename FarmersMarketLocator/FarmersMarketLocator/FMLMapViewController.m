@@ -160,6 +160,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomBackOut:) name:@"ZoomBackOutKThxBai" object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNewMarketObjects) name:@"Search for new location" object:nil];
+    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(zoomMapToNewLocation) name:@"ZoomToNewLocation" object:nil];
     
     self.detailView.transform = CGAffineTransformMakeTranslation(0, self.detailView.frame.size.height);
@@ -214,6 +216,18 @@
         
     }];
     
+}
+
+-(void)getNewMarketObjects {
+    CGFloat latitude = [[NSUserDefaults standardUserDefaults] floatForKey:@"latitude"];
+    CGFloat longitude = [[NSUserDefaults standardUserDefaults] floatForKey:@"longitude"];
+    
+    [FMLAPIClient getMarketsForLatitude:latitude longitude:longitude withCompletion:^(NSMutableArray *marketsArray) {
+        NSUInteger index = self.marketsArray.count;
+        self.marketsArray = [self.marketsArray arrayByAddingObjectsFromArray:marketsArray];
+        // Plot a pin for the coordinates of each FMLMarket object in marketsArray.
+        [self displayMarketObjects:marketsArray FromIndex:index];
+    }];
 }
 
 
