@@ -105,14 +105,16 @@ class FMLContainerViewController: UIViewController {
     }
     
     func showVineImage() {
+        let animationDuration: NSTimeInterval = 0.6
         
-        UIView.animateWithDuration(0.6, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+        UIView.animateWithDuration(animationDuration, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             
             self.vineImageView.transform = CGAffineTransformConcat(CGAffineTransformMakeTranslation(0, 418), CGAffineTransformIdentity)
             
         }) { (bool) -> Void in
-            self.showButtons()
         }
+        
+        performSelector(#selector(FMLContainerViewController.showButtons), withObject: nil, afterDelay: animationDuration/2)
     }
     
     func mapTapped() {

@@ -51,8 +51,7 @@
     self.textFieldDelegate = [[FMLTextFieldDelegate alloc]initWithTarget:self]; //or searchBarTF?
     
     // Create and customize map view
-//    self.mapView = [[MKMapView alloc]initWithFrame:self.view.frame];
-    self.mapView = [[MKMapView alloc]initWithFrame:CGRectMake(0, 30, self.view.frame.size.width, self.view.frame.size.height - 30)];
+    self.mapView = [[MKMapView alloc]initWithFrame:self.view.frame];
     self.mapView.mapType = MKMapTypeStandard;
     self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self.mapDelegate;
@@ -86,7 +85,7 @@
     
     self.searchButton.imageView.image = [UIImage imageNamed:@"magnifying-glass"];
     self.searchButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
-////    self.searchButton.backgroundColor = [UIColor blackColor];
+//    self.searchButton.backgroundColor = [UIColor blackColor];
 //    self.searchButton.image = @[[UIImage imageNamed:@"magnifying-glass"]];
     
     [self.searchButton addTarget:self action:@selector(callSearchMethod) forControlEvents:UIControlEventTouchUpInside];
@@ -103,7 +102,7 @@
     [self.view addSubview:self.searchBarTextField];
     [self.view addSubview:self.searchButton];
     
-    [self.searchBarTextField.topAnchor constraintEqualToAnchor:self.view.topAnchor].active = YES;
+    [self.searchBarTextField.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:15].active = YES;
     [self.searchBarTextField.leadingAnchor constraintEqualToAnchor:self.view.centerXAnchor constant:-65].active = YES;
     [self.searchBarTextField.heightAnchor constraintEqualToConstant:30].active = YES;
     [self.searchBarTextField.widthAnchor constraintEqualToConstant:200].active = YES;
