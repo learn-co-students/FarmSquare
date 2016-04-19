@@ -17,39 +17,49 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        _nameLabel = [self setUpLabelWithText:@"Greenhouse Farmer's Market"
-                                    textColor:[UIColor blackColor]];
-        _addressLabel = [self setUpLabelWithText:@"123 Easy Street, Manhattan, NY, 11002"
-                                       textColor:[UIColor blackColor]];
         _produceTextView = [self setUpProduceTextViewWithText:@"Fruits and Vegetables"
                                                  textColor:[UIColor blackColor]];
         _scheduleLabel = [self setUpLabelWithText:@"Mon-Fri 7am-4pm" textColor:[UIColor blackColor]];
-        _arrowDownButton = [self setUpButtonWithImageName:@"arrowdown" action:@selector(hideButtonPressed)];
-        _arrowUpButton = [self setUpButtonWithImageName:@"arrowup" action:@selector(expandButtonPressed)];
         _yelpButton = [self setUpButtonWithImageName:@"yelp_review_btn_red" action:@selector(yelpButtonPressed)];
         _directionsButton = [self setUpButtonWithImageName:@"direction24px" action:@selector(directionsButtonPressed)];
-        
     }
-    [self addSubview:_nameLabel];
-    [self addSubview:_addressLabel];
-    [self addSubview:_arrowDownButton];
-    [self addSubview:_arrowUpButton];
     [self addSubview:_produceTextView];
     [self addSubview:_scheduleLabel];
     [self addSubview:_yelpButton];
     [self addSubview:_directionsButton];
     
-    if (!UIAccessibilityIsReduceTransparencyEnabled()) {
-        UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-        UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:blur];
-        blurView.frame = self.bounds;
-        blurView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        [self addSubview:blurView];
-        [self sendSubviewToBack:blurView];
-    } else {
-        self.backgroundColor = [UIColor whiteColor];
-    }
+    self.backgroundColor = [UIColor whiteColor];
+    [self setBorder];
+    
+    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideButtonPressed)];
+    swipe.direction = UISwipeGestureRecognizerDirectionDown;
+    [self addGestureRecognizer:swipe];
     return self;
+}
+
+/*
+func setBorder() {
+    let width = CGFloat(10.0)
+    border.borderColor = UIColor(colorLiteralRed: 38/255.0, green: 89/255.0, blue: 15/255.0, alpha: 1.0).CGColor
+    border.frame = CGRect(x: -width, y:  self.frame.size.height-width, width: self.frame.size.width + 2*width, height: self.frame.size.height)
+    border.borderWidth = width
+    self.layer.addSublayer(border)
+    self.layer.masksToBounds = true
+}
+*/
+
+-(void)setBorder {
+    UIView *fauxBorder = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 10.0)];
+    fauxBorder.backgroundColor = [UIColor colorWithRed:38/255.0 green:89/255.0 blue:15/255.0 alpha:1.0];
+    fauxBorder.translatesAutoresizingMaskIntoConstraints = NO;
+    self.border = fauxBorder;
+
+    [self addSubview:self.border];
+    
+    [self.border.topAnchor constraintEqualToAnchor:self.topAnchor].active = YES;
+    [self.border.centerXAnchor constraintEqualToAnchor:self.centerXAnchor].active = YES;
+    [self.border.widthAnchor constraintEqualToAnchor:self.widthAnchor].active = YES;
+    [self.border.heightAnchor constraintEqualToConstant:10.0].active = YES;
 }
 
 
@@ -95,10 +105,6 @@
 
 -(void)constrainViews {
     self.translatesAutoresizingMaskIntoConstraints = NO;
-    self.arrowDownButton.translatesAutoresizingMaskIntoConstraints = NO;
-    self.arrowUpButton.translatesAutoresizingMaskIntoConstraints = NO;
-    self.nameLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    self.addressLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.produceTextView.translatesAutoresizingMaskIntoConstraints = NO;
     self.scheduleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.yelpButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -107,26 +113,10 @@
     [self.widthAnchor constraintEqualToAnchor:self.superview.widthAnchor].active = YES;
     [self.bottomAnchor constraintEqualToAnchor:self.superview.bottomAnchor].active = YES;
     [self.centerXAnchor constraintEqualToAnchor:self.superview.centerXAnchor].active = YES;
-    [self.heightAnchor constraintEqualToConstant:self.superview.frame.size.height * 0.4].active = YES;  //full Detail View is 2/5 of the frame size height
-    
-    
-    [self.arrowUpButton.topAnchor constraintEqualToAnchor:self.topAnchor constant:0].active = YES;
-    [self.arrowUpButton.centerXAnchor constraintLessThanOrEqualToAnchor:self.centerXAnchor constant:-20].active = YES;
-    
-    [self.arrowDownButton.topAnchor constraintEqualToAnchor:self.topAnchor constant:0].active = YES;
-    [self.arrowDownButton.centerXAnchor constraintGreaterThanOrEqualToAnchor:self.centerXAnchor constant:20].active = YES;
+    [self.heightAnchor constraintEqualToConstant:self.superview.frame.size.height * 0.3].active = YES;
 
     
-    [self.nameLabel.topAnchor constraintEqualToAnchor:self.arrowDownButton.bottomAnchor constant:3].active = YES;
-    self.nameLabel.textAlignment = NSTextAlignmentCenter; //to center the text
-    [self.nameLabel.leftAnchor constraintEqualToAnchor:self.leftAnchor constant:20].active = YES;
-    [self.nameLabel.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-20].active = YES;
-    
-    [self.addressLabel.topAnchor constraintEqualToAnchor:self.nameLabel.bottomAnchor constant:5].active = YES;
-    [self.addressLabel.leftAnchor constraintEqualToAnchor:self.leftAnchor constant:20].active = YES;
-    [self.addressLabel.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-20].active = YES;
-    
-    [self.scheduleLabel.topAnchor constraintEqualToAnchor:self.addressLabel.bottomAnchor constant:5].active = YES;
+    [self.scheduleLabel.topAnchor constraintEqualToAnchor:self.topAnchor constant:13].active = YES;
     [self.scheduleLabel.leftAnchor constraintEqualToAnchor:self.leftAnchor constant:20].active = YES;
     [self.scheduleLabel.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-20].active = YES;
     
@@ -162,23 +152,7 @@
     } completion:nil];
 }
 
-//shows the Detail View only up to half of its height
 -(void)showDetailView {
-    [UIView animateWithDuration:0.25 animations:^{
-        self.transform = CGAffineTransformMakeTranslation(0, self.frame.size.height/2);
-        
-    } completion:nil];
-}
-
-//pressing Up Arrow calls this method to expand the Detail View
--(void)expandButtonPressed {
-    
-    [self showFullDetailView];
-}
-
-//shows full Detail View
--(void)showFullDetailView {
- 
     [UIView animateWithDuration:0.25 animations:^{
         self.transform = CGAffineTransformIdentity;
     } completion:nil];
@@ -186,7 +160,7 @@
 
 -(void)yelpButtonPressed {
     
-    NSString *nameForSearch = [self.nameLabel.text.lowercaseString stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    NSString *nameForSearch = [self.name.lowercaseString stringByReplacingOccurrencesOfString:@" " withString:@"+"];
     
     //http://www.yelp.com/search?find_desc=hernandez+farmer%27s+market&find_loc=10004
     NSString *yelpSearchURL = [NSString stringWithFormat:@"http://www.yelp.com/search?find_desc=%@&find_loc=%@", nameForSearch, self.zip];

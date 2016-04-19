@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 #import "FMLMapViewController.h"
+@class FMLTitleView;
 
 @interface FMLMapViewDelegate : NSObject <MKMapViewDelegate>
 

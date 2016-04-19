@@ -9,6 +9,7 @@
 #import "FMLLocationManagerDelegate.h"
 #import <UIKit/UIKit.h>
 #import "SampleZipCodes.h"
+#import "GeocodeLocation.h"
 
 // TODO: Handle Zip Codes not in New York - EDGE CASE
 
@@ -48,6 +49,8 @@
     }
     
     if (status == kCLAuthorizationStatusDenied) {
+        self.viewController.moveToLocationButton.enabled = NO;
+        
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"zipCodeSaved"]) {
             CGFloat latitude = [[NSUserDefaults standardUserDefaults] floatForKey:@"latitude"];
             CGFloat longitude = [[NSUserDefaults standardUserDefaults] floatForKey:@"longitude"];
@@ -70,34 +73,38 @@
 #pragma mark - Helper Methods 
 
 -(void)displayZipCodeAlert {
-    UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"Please enter your zip code" message:@"Make it zippity zip" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"Please enter your location" message:@"Ex: 123 Rockaway Ave, Brooklyn or Brooklyn, NY" preferredStyle:UIAlertControllerStyleAlert];
     
     [controller addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        NSLog(@"Call me maybe?");
+        UIAlertAction *enter = [UIAlertAction actionWithTitle:@"Enter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+//            NSString *input = controller.textFields.firstObject.text;
+            NSString *input = textField.text;
+            
+//            
+//            if ([self stringIsNumber:input] && input.length == 5) {
+//                // Get coordinates and save it
+//                CLLocationCoordinate2D coordinates = [self coordinatesForZipCode:input];
+            [GeocodeLocation getCoordinateForLocation:input withCompletion:^(CLLocationCoordinate2D coordinate) {
+                    [self saveUserCoordinates:coordinate];
+                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"zipCodeSaved"];
+                    
+                    // Zoom into it
+                    [self.viewController zoomMaptoLatitude:coordinate.latitude longitude:coordinate.longitude withLatitudeSpan:0.05 longitudeSpan:0.05];
+                
+
+            }];
+//                        } else {
+//                [self.viewController presentViewController:controller animated:YES completion:nil];
+////            }
+        }];
+        
+        [controller addAction:enter];
+        
+        [self.viewController presentViewController:controller animated:YES completion:nil];
     }];
     
-    UIAlertAction *enter = [UIAlertAction actionWithTitle:@"Enter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        NSString *input = controller.textFields.firstObject.text;
-        
-        
-        if ([self stringIsNumber:input] && input.length == 5) {
-            // Get coordinates and save it
-            CLLocationCoordinate2D coordinates = [self coordinatesForZipCode:input];
-            [self saveUserCoordinates:coordinates];
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"zipCodeSaved"];
-             
-             // Zoom into it
-             [self.viewController zoomMaptoLatitude:coordinates.latitude longitude:coordinates.longitude withLatitudeSpan:0.05 longitudeSpan:0.05];
-             
-             } else {
-                 [self.viewController presentViewController:controller animated:YES completion:nil];
-             }
-             }];
-            
-            [controller addAction:enter];
-            
-            [self.viewController presentViewController:controller animated:YES completion:nil];
+    
 }
 
 -(BOOL)stringIsNumber:(NSString *)string {
