@@ -239,7 +239,7 @@
     // Now we have a string of the form "LAT, LONG (name)".
     // Example: "40.704587, -74.014313 (\"Bowling+Green+Greenmarket\")"
     
-    // Get the latitude (from 0 to the comma)
+    // Get the latitude (from 0 to the comma).
     NSRange rangeOfComma = [coordinatesAndName rangeOfString:@","];
     NSRange rangeOfLatitude = NSMakeRange(0, rangeOfComma.location);
     NSString *latitude = [coordinatesAndName substringWithRange:rangeOfLatitude];
