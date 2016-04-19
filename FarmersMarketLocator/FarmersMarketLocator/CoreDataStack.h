@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
 #import "FMLGroceryItem.h"
 #import "FMLGroceryList.h"
 

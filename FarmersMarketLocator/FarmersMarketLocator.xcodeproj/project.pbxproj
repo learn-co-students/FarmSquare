@@ -22,7 +22,6 @@
 		8B356E9B1CBFF87100AEEB11 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B356E9A1CBFF87100AEEB11 /* CartViewController.swift */; };
 		8B356E9D1CBFF88B00AEEB11 /* BookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B356E9C1CBFF88B00AEEB11 /* BookViewController.swift */; };
 		8B5635981CAF081A007DC27E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B5635961CAF081A007DC27E /* DataModel.xcdatamodeld */; };
-		8B5635C11CAF0858007DC27E /* CoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5635C01CAF0858007DC27E /* CoreDataStack.m */; };
 		8B8C59D01CC10983009BE852 /* FMLTitleView.swift in Resources */ = {isa = PBXBuildFile; fileRef = 8B8C59CF1CC10983009BE852 /* FMLTitleView.swift */; };
 		8B9E5A811CB2F7DA0050915D /* FMLJSONDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E5A801CB2F7DA0050915D /* FMLJSONDictionary.m */; };
 		8B9E5A831CB2F7E80050915D /* farmers-markets.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B9E5A821CB2F7E80050915D /* farmers-markets.json */; };
@@ -46,7 +45,11 @@
 		8BE219AA1CAF1D610014D046 /* FMLMarket.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE219A91CAF1D610014D046 /* FMLMarket.m */; };
 		A38473B31CADAF7200ED08CA /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A38473B21CADAF7200ED08CA /* Annotation.m */; };
 		A38473B61CADAFC300ED08CA /* SampleZipCodes.m in Sources */ = {isa = PBXBuildFile; fileRef = A38473B51CADAFC300ED08CA /* SampleZipCodes.m */; };
-		E112CE9CB833D7D11064E042 /* libPods-FarmersMarketLocator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CDB776E48FF26680E2F899 /* libPods-FarmersMarketLocator.a */; };
+		A38CD0D41CC0393800A0590C /* GeocodeLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A38CD0D31CC0393800A0590C /* GeocodeLocation.m */; };
+		A38CD0D71CC0394A00A0590C /* FMLSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = A38CD0D61CC0394A00A0590C /* FMLSearch.m */; };
+		A38CD0DA1CC039B600A0590C /* FMLTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A38CD0D91CC039B600A0590C /* FMLTextFieldDelegate.m */; };
+		A3BF3C941CC56FD1004E4942 /* FMLTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8C59CF1CC10983009BE852 /* FMLTitleView.swift */; };
+		E10650791CC6DF9200B33FF2 /* CoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5635C01CAF0858007DC27E /* CoreDataStack.m */; };
 		E18965C81CC425FD00D8A488 /* FMLGroceryList+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E18965C51CC425FD00D8A488 /* FMLGroceryList+CoreDataProperties.m */; };
 		E18965C91CC425FD00D8A488 /* FMLGroceryList.m in Sources */ = {isa = PBXBuildFile; fileRef = E18965C71CC425FD00D8A488 /* FMLGroceryList.m */; };
 		E18965CC1CC42A1B00D8A488 /* FMLGroceryListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E18965CB1CC42A1B00D8A488 /* FMLGroceryListCell.m */; };
@@ -62,10 +65,6 @@
 		E1D1AF381CBFE93400183165 /* FMLNewItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF2E1CBFE93400183165 /* FMLNewItemViewController.m */; };
 		E1D1AF3D1CC01B4200183165 /* FMLGroceryItem+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF3A1CC01B4200183165 /* FMLGroceryItem+CoreDataProperties.m */; };
 		E1D1AF3E1CC01B4200183165 /* FMLGroceryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF3C1CC01B4200183165 /* FMLGroceryItem.m */; };
-		A38CD0D41CC0393800A0590C /* GeocodeLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A38CD0D31CC0393800A0590C /* GeocodeLocation.m */; };
-		A38CD0D71CC0394A00A0590C /* FMLSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = A38CD0D61CC0394A00A0590C /* FMLSearch.m */; };
-		A38CD0DA1CC039B600A0590C /* FMLTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A38CD0D91CC039B600A0590C /* FMLTextFieldDelegate.m */; };
-		A3BF3C941CC56FD1004E4942 /* FMLTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8C59CF1CC10983009BE852 /* FMLTitleView.swift */; };
 		E1F95DCD1CAB12D6009DA977 /* FMLAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F95DCC1CAB12D6009DA977 /* FMLAPIClient.m */; };
 /* End PBXBuildFile section */
 
@@ -147,6 +146,12 @@
 		A38473B21CADAF7200ED08CA /* Annotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Annotation.m; sourceTree = "<group>"; };
 		A38473B41CADAFC300ED08CA /* SampleZipCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleZipCodes.h; sourceTree = "<group>"; };
 		A38473B51CADAFC300ED08CA /* SampleZipCodes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleZipCodes.m; sourceTree = "<group>"; };
+		A38CD0D21CC0393800A0590C /* GeocodeLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeocodeLocation.h; sourceTree = "<group>"; };
+		A38CD0D31CC0393800A0590C /* GeocodeLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeocodeLocation.m; sourceTree = "<group>"; };
+		A38CD0D51CC0394A00A0590C /* FMLSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLSearch.h; sourceTree = "<group>"; };
+		A38CD0D61CC0394A00A0590C /* FMLSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLSearch.m; sourceTree = "<group>"; };
+		A38CD0D81CC039B600A0590C /* FMLTextFieldDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLTextFieldDelegate.h; sourceTree = "<group>"; };
+		A38CD0D91CC039B600A0590C /* FMLTextFieldDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLTextFieldDelegate.m; sourceTree = "<group>"; };
 		E18965C41CC425FD00D8A488 /* FMLGroceryList+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FMLGroceryList+CoreDataProperties.h"; sourceTree = "<group>"; };
 		E18965C51CC425FD00D8A488 /* FMLGroceryList+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMLGroceryList+CoreDataProperties.m"; sourceTree = "<group>"; };
 		E18965C61CC425FD00D8A488 /* FMLGroceryList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryList.h; sourceTree = "<group>"; };
@@ -174,12 +179,6 @@
 		E1D1AF3A1CC01B4200183165 /* FMLGroceryItem+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMLGroceryItem+CoreDataProperties.m"; sourceTree = "<group>"; };
 		E1D1AF3B1CC01B4200183165 /* FMLGroceryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryItem.h; sourceTree = "<group>"; };
 		E1D1AF3C1CC01B4200183165 /* FMLGroceryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryItem.m; sourceTree = "<group>"; };
-		A38CD0D21CC0393800A0590C /* GeocodeLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeocodeLocation.h; sourceTree = "<group>"; };
-		A38CD0D31CC0393800A0590C /* GeocodeLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeocodeLocation.m; sourceTree = "<group>"; };
-		A38CD0D51CC0394A00A0590C /* FMLSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLSearch.h; sourceTree = "<group>"; };
-		A38CD0D61CC0394A00A0590C /* FMLSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLSearch.m; sourceTree = "<group>"; };
-		A38CD0D81CC039B600A0590C /* FMLTextFieldDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLTextFieldDelegate.h; sourceTree = "<group>"; };
-		A38CD0D91CC039B600A0590C /* FMLTextFieldDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLTextFieldDelegate.m; sourceTree = "<group>"; };
 		E1F95DCB1CAB12D6009DA977 /* FMLAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLAPIClient.h; sourceTree = "<group>"; };
 		E1F95DCC1CAB12D6009DA977 /* FMLAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLAPIClient.m; sourceTree = "<group>"; };
 		E426A69268E3DA9622C8E051 /* Pods-FarmersMarketLocator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FarmersMarketLocator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FarmersMarketLocator/Pods-FarmersMarketLocator.debug.xcconfig"; sourceTree = "<group>"; };
@@ -648,11 +647,9 @@
 				1F3ED95E1CAB0AE50038F590 /* main.m in Sources */,
 				E18965C81CC425FD00D8A488 /* FMLGroceryList+CoreDataProperties.m in Sources */,
 				E1D1AF3D1CC01B4200183165 /* FMLGroceryItem+CoreDataProperties.m in Sources */,
-				8B5635C11CAF0858007DC27E /* CoreDataStack.m in Sources */,
 				8B5635981CAF081A007DC27E /* DataModel.xcdatamodeld in Sources */,
 				E18965D01CC42B5400D8A488 /* FMLGroceryListCellView.m in Sources */,
 				8B356E9B1CBFF87100AEEB11 /* CartViewController.swift in Sources */,
-				8B5635C11CAF0858007DC27E /* CoreDataStack.m in Sources */,
 				8B5635981CAF081A007DC27E /* DataModel.xcdatamodeld in Sources */,
 				A38CD0D71CC0394A00A0590C /* FMLSearch.m in Sources */,
 				8B356E991CBFF86700AEEB11 /* DogViewController.swift in Sources */,
@@ -661,10 +658,10 @@
 				A38CD0D41CC0393800A0590C /* GeocodeLocation.m in Sources */,
 				8B0548B51CBEBEFA00843CB4 /* FMLContainerViewController.swift in Sources */,
 				8B356E9D1CBFF88B00AEEB11 /* BookViewController.swift in Sources */,
+				E10650791CC6DF9200B33FF2 /* CoreDataStack.m in Sources */,
 				8B9E5A811CB2F7DA0050915D /* FMLJSONDictionary.m in Sources */,
 				8BBD400A1CAEB81700A1DB0E /* FMLLocationManagerDelegate.m in Sources */,
 				E1D1AF361CBFE93400183165 /* FMLGroceryTVC.m in Sources */,
-				8BAC6A941CB7F648001EEDE1 /* Secrets.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
