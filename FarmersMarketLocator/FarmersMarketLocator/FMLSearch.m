@@ -16,11 +16,10 @@
 
 +(void)searchForNewLocation:(NSString *)location{
     [GeocodeLocation getCoordinateForLocation:location withCompletion:^(CLLocationCoordinate2D coordinate) {
-        
         [[NSUserDefaults standardUserDefaults] setFloat:coordinate.latitude forKey:@"latitude"];
         [[NSUserDefaults standardUserDefaults] setFloat:coordinate.longitude forKey:@"longitude"];
         //this will call the API and then display results
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"GotUserCoordinates" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Search for new location" object:nil];
         //this will zoom to the new location
         [[NSNotificationCenter defaultCenter]postNotificationName:@"ZoomToNewLocation" object:nil];
     }];
