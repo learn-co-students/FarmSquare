@@ -34,22 +34,12 @@
                         </label>
                     </subviews>
                 </stackView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ugu-jj-0ou">
-                    <rect key="frame" x="340" y="23" width="210" height="105"/>
-                    <color key="backgroundColor" red="0.067066928028027759" green="0.97629662958115182" blue="0.4369226163543205" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <state key="normal" title="VIEW / MODIFY"/>
-                </button>
             </subviews>
             <color key="backgroundColor" red="0.057573846504568309" green="0.83810536649214662" blue="0.37507779747784853" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="ZkD-0D-sdz" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.5" id="0uP-06-T0z"/>
-                <constraint firstItem="ugu-jj-0ou" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="9Ai-Sd-JEc"/>
                 <constraint firstItem="ZkD-0D-sdz" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="AVK-7l-apK"/>
                 <constraint firstItem="ZkD-0D-sdz" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="J3K-Xy-Bbi"/>
-                <constraint firstItem="ugu-jj-0ou" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.7" id="Nmp-lb-Daz"/>
-                <constraint firstAttribute="trailing" secondItem="ugu-jj-0ou" secondAttribute="trailing" constant="50" id="PXC-py-XAa"/>
-                <constraint firstItem="ugu-jj-0ou" firstAttribute="leading" secondItem="ZkD-0D-sdz" secondAttribute="trailing" constant="20" id="Qs4-7P-L9e"/>
                 <constraint firstItem="ZkD-0D-sdz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="qja-h6-1cT"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

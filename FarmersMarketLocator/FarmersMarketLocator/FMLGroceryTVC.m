@@ -36,15 +36,17 @@
 
 
 - (IBAction)doneButtonTapped:(id)sender {
-    FMLGroceryList *addedList = [NSEntityDescription insertNewObjectForEntityForName:@"FMLGroceryList" inManagedObjectContext:self.stack.managedObjectContext];
-    addedList.listName = @"New grocery list";
     
-    addedList.dateModified = [NSDate date];
-    
-    [self.stack saveContext];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"new list created" object:nil];
-    
+    if (self.items.count > 0) {
+        FMLGroceryList *addedList = [NSEntityDescription insertNewObjectForEntityForName:@"FMLGroceryList" inManagedObjectContext:self.stack.managedObjectContext];
+        addedList.listName = @"New grocery list";
+        //addedList.itemsInList = (NSOrderedSet *)self.items;
+        addedList.dateModified = [NSDate date];
+        
+        [self.stack saveContext];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"new list created" object:nil];
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -84,8 +86,9 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
         //we need to delete the object from the array, but from core data so that the number of rows is updated with one less
-        [self.stack.managedObjectContext deleteObject:self.stack.groceryItems[indexPath.row]];
+//        [self.stack.managedObjectContext deleteObject:self.stack.groceryItems[indexPath.row]];
 
+        // TODO: swipe delete breaks here
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         
         [tableView reloadData];
@@ -122,6 +125,7 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
     if ([segue.identifier isEqualToString:@"makeNewItem"]) {
         FMLNewItemViewController *destVC = segue.destinationViewController;
         destVC.delegate = self;

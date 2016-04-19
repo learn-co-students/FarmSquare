@@ -2,7 +2,7 @@
 //  FMLGroceryList+CoreDataProperties.m
 //  FarmersMarketLocator
 //
-//  Created by Slobodan Kovrlija on 4/17/16.
+//  Created by Slobodan Kovrlija on 4/18/16.
 //  Copyright © 2016 Jeff Spingeld. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -17,5 +17,6 @@
 @dynamic dateModified;
 @dynamic numberOfItems;
 @dynamic totalCost;
+@dynamic itemsInList;
 
 @end

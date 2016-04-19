@@ -9,6 +9,7 @@
 #import "FMLGroceryListsTVC.h"
 #import "FMLGroceryListCell.h"
 #import "FMLGroceryList.h"
+#import "FMLGroceryTVC.h"
 
 @interface FMLGroceryListsTVC ()
 
@@ -55,28 +56,42 @@
     return cell;
 }
 
-- (IBAction)doneTapped:(id)sender {
-    
-    FMLGroceryList *addedList = [NSEntityDescription insertNewObjectForEntityForName:@"FMLGroceryList" inManagedObjectContext:self.stack.managedObjectContext];
-    addedList.listName = @"New grocery list";
-    
-    addedList.dateModified = [NSDate date];
-    
-    [self.stack saveContext];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"new list created" object:nil];
-    NSLog(@"does this get called at all..???");
-}
+//- (IBAction)doneTapped:(id)sender {
+//    
+//    FMLGroceryList *addedList = [NSEntityDescription insertNewObjectForEntityForName:@"FMLGroceryList" inManagedObjectContext:self.stack.managedObjectContext];
+//    addedList.listName = @"New grocery list";
+//    
+//    addedList.dateModified = [NSDate date];
+//    
+//    [self.stack saveContext];
+//    
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"new list created" object:nil];
+//    NSLog(@"does this get called at all..???");
+//}
 
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"viewList"]) {
+        FMLGroceryTVC *destVC = segue.destinationViewController;
+//        
+//        NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+//        FISLocation *selectedLocation = self.locations[selectedIndexPath.row];
+//        
+//        destinationTrivia.allTriviaForTappedLocation = selectedLocation.trivia;
+        
+        NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+        FMLGroceryList *selectedGroceryList = self.stack[selectedIndexPath.row];
+        destVC.name = selectedGroceryList.nam
+    }
+    
+    
 }
-*/
+
 
 @end

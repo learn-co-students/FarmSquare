@@ -37,6 +37,7 @@
                                 <accessibility key="accessibilityConfiguration" identifier="listCell"/>
                                 <connections>
                                     <outlet property="groceryListView" destination="ttn-G5-vtj" id="5zg-I6-TW4"/>
+                                    <segue destination="8Bg-lH-Rb2" kind="presentation" identifier="viewList" id="96X-Ep-tGR"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -49,7 +50,7 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="5JH-fP-0QB"/>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="dUc-Te-oFo">
                             <connections>
-                                <segue destination="8Bg-lH-Rb2" kind="presentation" id="sie-wI-qkv"/>
+                                <segue destination="8Bg-lH-Rb2" kind="presentation" identifier="makeNewList" id="sie-wI-qkv"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -71,6 +72,9 @@
                         <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="g14-uD-wOy">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textAttributes key="titleTextAttributes">
+                                <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
+                            </textAttributes>
                             <items>
                                 <navigationItem title="Add" id="fn1-67-w09">
                                     <barButtonItem key="leftBarButtonItem" systemItem="done" id="J8P-Hs-RIW">
@@ -232,4 +236,7 @@
             <point key="canvasLocation" x="-1196" y="-264"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="96X-Ep-tGR"/>
+    </inferredMetricsTieBreakers>
 </document>
