@@ -34,9 +34,14 @@
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField endEditing:YES];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"Hide search filters" object:nil];
     //and set new coordinates
     [FMLSearch searchForNewLocation:textField.text];
     return YES;
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"Show search filters" object:nil];
 }
 
 @end

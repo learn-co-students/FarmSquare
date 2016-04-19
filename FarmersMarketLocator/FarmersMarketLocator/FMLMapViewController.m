@@ -37,6 +37,9 @@
 @property (strong, nonatomic) UITextField *searchBarTextField;
 @property (strong, nonatomic) UIButton *searchButton;
 
+@property (strong, nonatomic) UIButton *snapFilter;
+@property (strong, nonatomic) UIButton *wicFilter;
+
 @end
 
 @implementation FMLMapViewController
@@ -51,7 +54,7 @@
     self.textFieldDelegate = [[FMLTextFieldDelegate alloc]initWithTarget:self]; //or searchBarTF?
     
     // Create and customize map view
-//    self.mapView = [[MKMapView alloc]initWithFrame:self.view.frame];
+    //    self.mapView = [[MKMapView alloc]initWithFrame:self.view.frame];
     self.mapView = [[MKMapView alloc]initWithFrame:CGRectMake(0, 30, self.view.frame.size.width, self.view.frame.size.height - 30)];
     self.mapView.mapType = MKMapTypeStandard;
     self.mapView.showsUserLocation = YES;
@@ -86,8 +89,8 @@
     
     self.searchButton.imageView.image = [UIImage imageNamed:@"magnifying-glass"];
     self.searchButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
-////    self.searchButton.backgroundColor = [UIColor blackColor];
-//    self.searchButton.image = @[[UIImage imageNamed:@"magnifying-glass"]];
+    ////    self.searchButton.backgroundColor = [UIColor blackColor];
+    //    self.searchButton.image = @[[UIImage imageNamed:@"magnifying-glass"]];
     
     [self.searchButton addTarget:self action:@selector(callSearchMethod) forControlEvents:UIControlEventTouchUpInside];
     
@@ -112,8 +115,8 @@
     [self.searchButton.leadingAnchor constraintEqualToAnchor:self.searchBarTextField.trailingAnchor constant:10].active = YES;
     [self.searchButton.heightAnchor constraintEqualToAnchor:self.searchBarTextField.heightAnchor].active = YES;
     [self.searchButton.widthAnchor constraintEqualToConstant:30].active = YES;
-
-
+    
+    
     
     
     // Create detail view
@@ -125,7 +128,7 @@
     self.detailView = [[FMLDetailView alloc] initWithFrame:CGRectMake(0, yCoordinateOfMarketView, width, height)];
     [self.view addSubview:self.detailView];
     [self.detailView constrainViews];
-
+    
     
     // create Title View
     self.titleView = [[FMLTitleView alloc] initWithFrame:CGRectMake(0, 0, width, 130)];
@@ -149,7 +152,7 @@
     // If there's saved data, show it
     if ([self.marketsArray count] > 0) {
         self.showingSavedData = YES;
-        [self displayMarketObjects:self.marketsArray];
+        [self displayMarketObjects:self.marketsArray FromIndex:0];
     } else {
         self.showingSavedData = NO;
     }
@@ -163,7 +166,66 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(zoomMapToNewLocation) name:@"ZoomToNewLocation" object:nil];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showSearchFilters) name:@"Show search filters" object:nil];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(hideSearchFilters) name:@"Hide search filters" object:nil];
+    
     self.detailView.transform = CGAffineTransformMakeTranslation(0, self.detailView.frame.size.height);
+    
+}
+
+
+-(void)showSearchFilters{
+    NSLog(@"show dem filters");
+    
+    //snap -- "self.snap = 1"
+    
+    //wic -- "self.wic = 1"
+    //wicCash -- "self.wicCash = 1"
+    
+    //credit -- "self.credit = 1"
+    
+    //sfmnp -- "self.sfmnp = 1"
+    
+    //organic -- "self.organic = 1"
+    
+    
+    self.snapFilter = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.snapFilter.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.snapFilter setTitle:@"SNAP" forState:UIControlStateNormal];
+    self.snapFilter.backgroundColor = [UIColor colorWithWhite:1 alpha:0.8];
+    [self.snapFilter addTarget:self action:@selector(selectOrDeselectFilterButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.snapFilter setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [self.view addSubview:self.snapFilter];
+    [self.snapFilter.topAnchor constraintEqualToAnchor:self.searchBarTextField.bottomAnchor constant:8].active = YES;
+    [self.snapFilter.leadingAnchor constraintEqualToAnchor:self.searchBarTextField.leadingAnchor].active = YES;
+    
+    self.wicFilter = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.wicFilter setTitle:@"WIC" forState:UIControlStateNormal];
+    self.wicFilter.translatesAutoresizingMaskIntoConstraints = NO;
+    self.wicFilter.backgroundColor = [UIColor colorWithWhite:1 alpha:0.8];
+    [self.wicFilter addTarget:self action:@selector(selectOrDeselectFilterButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.wicFilter setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [self.view addSubview:self.wicFilter];
+    [self.wicFilter.topAnchor constraintEqualToAnchor:self.snapFilter.topAnchor].active = YES;
+    [self.wicFilter.leadingAnchor constraintEqualToAnchor:self.snapFilter.trailingAnchor constant:8].active = YES;
+    
+}
+
+-(void)hideSearchFilters{
+    [self.snapFilter.heightAnchor constraintEqualToConstant:0].active = YES;
+    [self.wicFilter.heightAnchor constraintEqualToConstant:0].active = YES;
+    
+}
+
+-(void)selectOrDeselectFilterButton:(UIButton *)selector{
+    if (!([[NSUserDefaults standardUserDefaults]boolForKey:[NSString stringWithFormat:@"%@ Filter Enabled", selector.titleLabel.text]])){
+        [selector setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [[NSUserDefaults standardUserDefaults]setBool:YES forKey:[NSString stringWithFormat:@"%@ Filter Enabled", selector.titleLabel.text]];
+    } else {
+        [selector setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [[NSUserDefaults standardUserDefaults]setBool:NO forKey:[NSString stringWithFormat:@"%@ Filter Enabled", selector.titleLabel.text]];
+    }
     
 }
 
@@ -211,15 +273,15 @@
         
         self.marketsArray = marketsArray;
         // Plot a pin for the coordinates of each FMLMarket object in marketsArray.
-        [self displayMarketObjects:marketsArray];
+        [self displayMarketObjects:marketsArray FromIndex:0];
         
     }];
     
 }
 
--(void)displayMarketObjects:(NSArray *)marketsArray {
-    NSUInteger index = 0;
+-(void)displayMarketObjects:(NSArray *)marketsArray FromIndex:(NSUInteger)index {
     
+    //FILTERS!
     
     //before for loop, have a predicate run through the array, if any filters are applied
     
@@ -234,6 +296,36 @@
     
     //organic -- "self.organic = 1"
     
+    //how to handle which filters have been selected...
+    
+    NSLog(@"%@", marketsArray);
+    
+    //    marketsArray = [self filterMarketObjects:marketsArray];
+    
+    BOOL filterBySNAP = [[NSUserDefaults standardUserDefaults]boolForKey:@"SNAP Filter Enabled"];
+    BOOL filterByWIC = [[NSUserDefaults standardUserDefaults]boolForKey:@"WIC Filter Enabled"];
+    NSArray *filteredArray = [[NSArray alloc]init];
+    
+    if (filterByWIC){
+        NSPredicate *filterByWICPredicate = [NSPredicate predicateWithFormat:@"%K = %@", @"self.wic", @1];
+        filteredArray = [marketsArray filteredArrayUsingPredicate:filterByWICPredicate];
+        NSLog(@"%@",filteredArray);
+    }
+    
+    if (filterBySNAP && filterByWIC){
+        NSPredicate *filterBySNAPPredicate = [NSPredicate predicateWithFormat:@"%K = %@", @"snap", @1];
+        filteredArray = [filteredArray filteredArrayUsingPredicate:filterBySNAPPredicate];
+        NSLog(@"%@",filteredArray);
+    } else if (filterBySNAP) {
+        NSPredicate *filterBySNAPPredicate = [NSPredicate predicateWithFormat:@"%K = %@", @"snap", @1];
+        filteredArray = [marketsArray filteredArrayUsingPredicate:filterBySNAPPredicate];
+        NSLog(@"%@",filteredArray);
+    }
+    
+    marketsArray = filteredArray;
+    
+    //    NSLog(@"%@", marketsArray);
+    
     for (FMLMarket *farmersMarket in marketsArray) {
         CLLocationCoordinate2D location;
         location.latitude = [farmersMarket.latitude floatValue];
@@ -247,6 +339,34 @@
         [self.mapView addAnnotation:annotation];
         
     }
+}
+
+-(NSArray *)filterMarketObjects:(NSArray *)marketObjects{
+    //just doing SNAP and WIC for now
+    
+    
+    
+    BOOL filterBySNAP = [[NSUserDefaults standardUserDefaults]boolForKey:@"SNAP Filter Enabled"];
+    BOOL filterByWIC = [[NSUserDefaults standardUserDefaults]boolForKey:@"WIC Filter Enabled"];
+    NSArray *filteredArray = [[NSArray alloc]init];
+    
+    if (filterByWIC){
+        NSPredicate *filterByWICPredicate = [NSPredicate predicateWithFormat:@"%K = %@", @"wic", @1];
+        filteredArray = [marketObjects filteredArrayUsingPredicate:filterByWICPredicate];
+        NSLog(@"%@",filteredArray);
+    }
+    
+    if (filterBySNAP && filterByWIC){
+        NSPredicate *filterBySNAPPredicate = [NSPredicate predicateWithFormat:@"%K = %@", @"snap", @1];
+        filteredArray = [filteredArray filteredArrayUsingPredicate:filterBySNAPPredicate];
+        NSLog(@"%@",filteredArray);
+    } else if (filterBySNAP) {
+        NSPredicate *filterBySNAPPredicate = [NSPredicate predicateWithFormat:@"%K = %@", @"snap", @1];
+        filteredArray = [marketObjects filteredArrayUsingPredicate:filterBySNAPPredicate];
+        NSLog(@"%@",filteredArray);
+    }
+    
+    return filteredArray;
 }
 
 -(UIButton *)setUpMoveToLocationButtonWithAction:(SEL)action {
@@ -286,11 +406,11 @@
     MKCoordinateRegion currentRegion = self.mapView.region;
     CLLocationDegrees latitude = currentRegion.center.latitude;
     CLLocationDegrees longitude = currentRegion.center.longitude;
-
+    
     [FMLAPIClient getMarketsForLatitude:latitude longitude:longitude withCompletion:^(NSMutableArray *marketsArray) {
-        
-        [self displayMarketObjects:marketsArray];
-        
+        NSUInteger index = [self.marketsArray count];
+        self.marketsArray = [self.marketsArray arrayByAddingObjectsFromArray:marketsArray];
+        [self displayMarketObjects:marketsArray FromIndex:index];
     }];
     
     
@@ -372,7 +492,7 @@
  
  redoSearch button:
  Icon made by Minh Hoang (http://www.flaticon.com/authors/minh-hoang) from www.flaticon.com
-
+ 
  */
 
 @end
