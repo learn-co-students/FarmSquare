@@ -15,7 +15,12 @@ class FMLContainerViewController: UIViewController {
     var dogViewController = DogViewController()
     let cartViewController = CartViewController()
     let bookViewController = BookViewController()
-
+    var petals = [UIImageView]()
+    let petalLeft = UIImageView(image: UIImage(named: "Petal"))
+    let petalRight = UIImageView(image: UIImage(named: "Petal"))
+    let infoImage = UIImageView(image: UIImage(named: "Receptacle"))
+    
+    @IBOutlet weak var receptacleButton: UIButton!
     
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var vineButton: UIButton!
@@ -30,7 +35,7 @@ class FMLContainerViewController: UIViewController {
         super.viewDidLoad()
         self.view.layer.masksToBounds = false
         self.setEmbeddedViewController(mapViewController)
-
+        self.receptacleButton.transform = CGAffineTransformConcat(CGAffineTransformMakeRotation(120),          CGAffineTransformMakeTranslation(0, 250))
         
         let value: Double = ((20 * M_PI)/180.0)
         let degrees: CGFloat = CGFloat(value)
@@ -38,7 +43,8 @@ class FMLContainerViewController: UIViewController {
         
         createBlurView()
         addHamburgerImage()
-        
+        addFlower()
+
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FMLContainerViewController.makeVineDisappear), name: "LeafMeAlone", object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FMLContainerViewController.makeVineReappear), name: "VineAndDine", object: nil)
@@ -91,6 +97,7 @@ class FMLContainerViewController: UIViewController {
         
         addVineImage()
         showVineImage()
+        showFlowerButton()
     }
     
     func addVineImage() {
@@ -188,9 +195,16 @@ class FMLContainerViewController: UIViewController {
     func emptySpaceTapped() {
         self.vineOutline.alpha = 0
         self.vineImageView.alpha = 1
+        for i in (0..<self.petals.count) {
+            UIView.animateWithDuration(0.2) {
+                self.petals[i].transform = CGAffineTransformIdentity
+            }
+            
+        }
         
         UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
             self.vineImageView.transform = CGAffineTransformMakeTranslation(0, 100)
+            self.receptacleButton.transform = CGAffineTransformConcat(CGAffineTransformMakeRotation(120),          CGAffineTransformMakeTranslation(0, 250))
         }) { (bool) -> Void in
             
             UIView.animateWithDuration(0.1, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
@@ -204,11 +218,94 @@ class FMLContainerViewController: UIViewController {
                 self.vineImageView.removeFromSuperview()
                 self.blurEffectView.removeFromSuperview()
                 self.vineButton.hidden = false
+                self.petalRight.alpha = 1
+                self.petalLeft.alpha = 1
+                self.infoImage.alpha = 0
             }
             
         }
         
         
+    }
+    
+    // Flower
+    func addFlower() {
+        let stem = UIImageView(image: UIImage(named: "Stem"))
+        self.receptacleButton.addSubview(stem)
+        stem.snp_makeConstraints { (make) in
+            make.height.equalTo(191)
+            make.width.equalTo(42)
+            make.left.equalTo(self.receptacleButton).offset(-29)
+            make.top.equalTo(self.receptacleButton).offset(35)
+        }
+        
+        for i in (1...20) {
+            let petal = UIImageView(image: UIImage(named: "Petal"))
+            self.receptacleButton.addSubview(petal)
+            self.petals.append(petal)
+            petal.snp_makeConstraints { (make) in
+                make.height.equalTo(85)
+                make.width.equalTo(40)
+                make.centerX.equalTo(self.receptacleButton.snp_centerX)
+                make.bottom.equalTo(self.receptacleButton.snp_centerY).offset(42)
+            }
+            petal.layer.anchorPoint = CGPointMake(0.5, 1.0)
+            
+        }
+        
+        self.receptacleButton.addSubview(petalLeft)
+        petalLeft.snp_makeConstraints { (make) in
+            make.height.equalTo(85)
+            make.width.equalTo(40)
+            make.centerX.equalTo(self.receptacleButton.snp_centerX)
+            make.bottom.equalTo(self.receptacleButton.snp_centerY).offset(42)
+        }
+        petalLeft.layer.anchorPoint = CGPointMake(0.5, 1.0)
+        petalLeft.transform = CGAffineTransformConcat(CGAffineTransformMakeRotation(100), CGAffineTransformMakeTranslation(0, 21))
+        
+        
+        self.receptacleButton.addSubview(petalRight)
+        petalRight.snp_makeConstraints { (make) in
+            make.height.equalTo(85)
+            make.width.equalTo(40)
+            make.centerX.equalTo(self.receptacleButton.snp_centerX)
+            make.bottom.equalTo(self.receptacleButton.snp_centerY).offset(42)
+        }
+        petalRight.layer.anchorPoint = CGPointMake(0.5, 1.0)
+        petalRight.transform = CGAffineTransformConcat(CGAffineTransformMakeRotation(120), CGAffineTransformMakeTranslation(0, 21))
+        
+        
+        self.receptacleButton.addSubview(infoImage)
+        infoImage.snp_makeConstraints { (make) in
+            make.height.equalTo(42)
+            make.width.equalTo(42)
+            make.centerX.equalTo(self.receptacleButton.snp_centerX)
+            make.centerY.equalTo(self.receptacleButton.snp_centerY)
+        }
+        infoImage.alpha = 0
+    }
+    
+    func showFlowerButton() {
+        self.view.bringSubviewToFront(self.receptacleButton)
+        self.performSelector(#selector(FMLContainerViewController.rotatePetals), withObject: nil, afterDelay: 0.2)
+        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+            self.receptacleButton.transform = CGAffineTransformIdentity
+        }) { (bool) in
+            UIView.animateWithDuration(0.5) {
+                self.petalLeft.alpha = 0
+                self.petalRight.alpha = 0
+                self.infoImage.alpha = 1
+            }
+        }
+        
+    }
+    
+    func rotatePetals() {
+        for i in (0..<self.petals.count) {
+            UIView.animateWithDuration(0.8) {
+                self.petals[i].transform = CGAffineTransformMakeRotation(10 * CGFloat((i+1)*2))
+            }
+        }
     }
 
     
