@@ -364,7 +364,7 @@
 -(UIButton *)setUpMoveToLocationButtonWithAction:(SEL)action {
     // Create and Add MoveToLocation button
     UIButton *moveToLocationButton = [[UIButton alloc] init];
-    UIImage *buttonImage = [UIImage imageNamed:@"gps (1)"];
+    UIImage *buttonImage = [UIImage imageNamed:@"gps"];
     [moveToLocationButton setImage:buttonImage forState:UIControlStateNormal];
     [moveToLocationButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
     
@@ -376,7 +376,22 @@
 
 -(void)moveToLocationButtonTapped {
     CLLocationCoordinate2D currentLocation = self.manager.location.coordinate;
-    [self zoomMaptoLatitude:currentLocation.latitude longitude:currentLocation.longitude withLatitudeSpan:0.05 longitudeSpan:0.05];
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        CGSize size = self.view.frame.size;
+        self.moveToLocationButton.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(10.0, 10.0), CGAffineTransformMakeTranslation(size.width/2 - self.moveToLocationButton.frame.size.width - 5, -(size.height/2 - self.moveToLocationButton.frame.size.height - 5)));
+    } completion:^(BOOL finished) {
+        [self zoomMaptoLatitude:currentLocation.latitude longitude:currentLocation.longitude withLatitudeSpan:0.05 longitudeSpan:0.05];
+        [self returnMoveToLocationButton];
+    }];
+    
+}
+
+-(void)returnMoveToLocationButton {
+    [UIView animateWithDuration:0.5 delay:1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.moveToLocationButton.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished) {
+
+    }];
 }
 
 -(UIButton *)createRedoSearchInCurrentMapAreaButtonWithAction:(SEL)action {
