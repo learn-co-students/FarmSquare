@@ -224,6 +224,7 @@
         [[NSUserDefaults standardUserDefaults]setBool:NO forKey:[NSString stringWithFormat:@"%@ Filter Enabled", selector.titleLabel.text]];
     }
     
+    NSLog(@"%d", [[NSUserDefaults standardUserDefaults]boolForKey:[NSString stringWithFormat:@"%@ Filter Enabled", selector.titleLabel.text]]);
 }
 
 -(void)zoomBackOut:(NSNotification *)notification {
@@ -336,7 +337,6 @@
     if (filterByWIC || filterBySNAP){
         return filteredArray;
     } else {
-        NSLog(@"?");
         return marketsArray;
     }
     
