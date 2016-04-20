@@ -81,9 +81,26 @@
     [self.redoSearchInMapAreaButton.heightAnchor constraintEqualToConstant:32].active = YES;
     [self.redoSearchInMapAreaButton.widthAnchor constraintEqualToConstant:32].active = YES;
     
+    // Set up search bar background image
+    CGFloat signWidth = self.view.frame.size.width - 120 - 20;
+    UIImageView *signBoard = [[UIImageView alloc] initWithFrame:CGRectMake(120, 10, signWidth, 60)];
+    signBoard.image = [UIImage imageNamed:@"SignBoard"];
+    [self.view addSubview:signBoard];
+    
+//    [signBoard.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:15].active = YES;
+//    [signBoard.leadingAnchor constraintEqualToAnchor:self.view.centerXAnchor constant:-65].active = YES;
+//    [signBoard.heightAnchor constraintEqualToConstant:30].active = YES;
+//    [signBoard.widthAnchor constraintEqualToConstant:200].active = YES;
+    
+    UIImageView *signPost = [[UIImageView alloc] initWithFrame:CGRectMake(signBoard.frame.origin.x + signBoard.frame.size.width, 0, 5, 80)];
+    signPost.image = [UIImage imageNamed:@"SignPost"];
+    [self.view addSubview:signPost];
+
     
     //set up search bar and search button view
     self.searchBarTextField = [[UITextField alloc]initWithFrame:CGRectMake(40, 0, 0, 0)];
+    self.searchBarTextField.textColor = [UIColor whiteColor];
+    self.searchBarTextField.placeholder = @"Enter Address Here";
     self.searchBarTextField.delegate = self.textFieldDelegate;
     self.searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -94,8 +111,8 @@
     [self.searchButton addTarget:self action:@selector(callSearchMethod) forControlEvents:UIControlEventTouchUpInside];
     
     
-    self.searchBarTextField.layer.borderColor = [[UIColor blackColor] CGColor];
-    self.searchBarTextField.layer.borderWidth = 1.0;
+//    self.searchBarTextField.layer.borderColor = [[UIColor blackColor] CGColor];
+//    self.searchBarTextField.layer.borderWidth = 1.0;
     
     
     self.searchBarTextField.translatesAutoresizingMaskIntoConstraints = NO;
@@ -105,10 +122,10 @@
     [self.view addSubview:self.searchBarTextField];
     [self.view addSubview:self.searchButton];
     
-    [self.searchBarTextField.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:15].active = YES;
-    [self.searchBarTextField.leadingAnchor constraintEqualToAnchor:self.view.centerXAnchor constant:-65].active = YES;
-    [self.searchBarTextField.heightAnchor constraintEqualToConstant:30].active = YES;
-    [self.searchBarTextField.widthAnchor constraintEqualToConstant:200].active = YES;
+    [self.searchBarTextField.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:30].active = YES;
+    [self.searchBarTextField.leadingAnchor constraintEqualToAnchor:self.view.centerXAnchor constant:-40].active = YES;
+    [self.searchBarTextField.heightAnchor constraintEqualToConstant:40].active = YES;
+    [self.searchBarTextField.widthAnchor constraintEqualToConstant:215].active = YES;
     
     [self.searchButton.topAnchor constraintEqualToAnchor:self.searchBarTextField.topAnchor].active = YES;
     [self.searchButton.leadingAnchor constraintEqualToAnchor:self.searchBarTextField.trailingAnchor constant:10].active = YES;

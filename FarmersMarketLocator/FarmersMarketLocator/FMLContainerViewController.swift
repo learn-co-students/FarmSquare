@@ -53,7 +53,7 @@ class FMLContainerViewController: UIViewController {
     // MARK: Vine Menu Methods
     
     func addHamburgerImage() {
-        hamburger = UIImageView(frame: CGRectMake(25, 35, 40, 40))
+        hamburger = UIImageView(frame: CGRectMake(25, 40, 40, 40))
         hamburger.image = UIImage(named: "three")
         hamburger.alpha = 0.3
         self.view.addSubview(hamburger)
