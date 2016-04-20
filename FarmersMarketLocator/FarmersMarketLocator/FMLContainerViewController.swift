@@ -14,7 +14,7 @@ class FMLContainerViewController: UIViewController {
     let mapViewController = FMLMapViewController()
     var dogViewController = DogViewController()
     let cartViewController = CartViewController()
-    let bookViewController = BookViewController()
+    let resourcesViewController = FMLResourcesViewController()
     var petals = [UIImageView]()
     let petalLeft = UIImageView(image: UIImage(named: "Petal"))
     let petalRight = UIImageView(image: UIImage(named: "Petal"))
@@ -135,7 +135,7 @@ class FMLContainerViewController: UIViewController {
     }
     
     func bookTapped() {
-        self.setEmbeddedViewController(bookViewController)
+        self.setEmbeddedViewController(resourcesViewController)
         self.emptySpaceTapped()
     }
     
