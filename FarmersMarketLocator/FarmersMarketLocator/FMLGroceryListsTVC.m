@@ -22,6 +22,9 @@
     
     self.stack = [CoreDataStack sharedStack];
     
+    //to allow left swipe delete of a cell
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -68,6 +71,20 @@ if ([segue.identifier isEqualToString:@"viewList"]) {
         destVC.segueIsViewList = YES;
     }
 }
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        //we need to delete the object from the array, but from core data so that the number of rows is updated with one less
+        [self.stack.managedObjectContext deleteObject:self.stack.groceryLists[indexPath.row]];
+        
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        [tableView reloadData];
+    }
+}
+
 
 
 @end
