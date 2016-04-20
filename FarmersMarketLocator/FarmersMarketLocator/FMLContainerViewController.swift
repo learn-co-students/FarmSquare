@@ -241,7 +241,7 @@ class FMLContainerViewController: UIViewController {
             make.top.equalTo(self.receptacleButton).offset(35)
         }
         
-        for i in (1...20) {
+        for _ in (1...20) {
             let petal = UIImageView(image: UIImage(named: "Petal"))
             self.receptacleButton.addSubview(petal)
             self.petals.append(petal)
@@ -276,6 +276,7 @@ class FMLContainerViewController: UIViewController {
         petalRight.layer.anchorPoint = CGPointMake(0.5, 1.0)
         petalRight.transform = CGAffineTransformConcat(CGAffineTransformMakeRotation(120), CGAffineTransformMakeTranslation(0, 21))
         
+        let openDisclaimerGesture = UITapGestureRecognizer(target: self, action: #selector(FMLContainerViewController.openDisclaimer))
         
         self.receptacleButton.addSubview(infoImage)
         infoImage.snp_makeConstraints { (make) in
@@ -284,7 +285,16 @@ class FMLContainerViewController: UIViewController {
             make.centerX.equalTo(self.receptacleButton.snp_centerX)
             make.centerY.equalTo(self.receptacleButton.snp_centerY)
         }
+        infoImage.addGestureRecognizer(openDisclaimerGesture)
         infoImage.alpha = 0
+    }
+    
+    func openDisclaimer() {
+        print("test")
+        let vc = DogViewController()
+        self.presentViewController(vc, animated: true) {
+            
+        }
     }
     
     func showFlowerButton() {

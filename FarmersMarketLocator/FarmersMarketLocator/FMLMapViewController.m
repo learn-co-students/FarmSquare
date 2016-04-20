@@ -33,7 +33,7 @@
 @property (strong, nonatomic) FMLMapViewDelegate *mapDelegate;
 @property (strong, nonatomic) FMLLocationManagerDelegate *locationDelegate;
 @property (strong, nonatomic) FMLTextFieldDelegate *textFieldDelegate;
-@property (strong, nonatomic) UIView *dimView;
+//@property (strong, nonatomic) UIView *dimView;
 @property (strong, nonatomic) UITextField *searchBarTextField;
 @property (strong, nonatomic) UIButton *searchButton;
 @property (assign, nonatomic) BOOL keepRotating;
@@ -59,7 +59,7 @@
 
    // Create and customize map view
     self.mapView = [[MKMapView alloc]initWithFrame:self.view.frame];
-
+    self.mapView.showsCompass = NO;
     self.mapView.mapType = MKMapTypeStandard;
     self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self.mapDelegate;
@@ -90,11 +90,7 @@
     UIImageView *signBoard = [[UIImageView alloc] initWithFrame:CGRectMake(120, 10, signWidth, 60)];
     signBoard.image = [UIImage imageNamed:@"SignBoard"];
     [self.view addSubview:signBoard];
-    
-//    [signBoard.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:15].active = YES;
-//    [signBoard.leadingAnchor constraintEqualToAnchor:self.view.centerXAnchor constant:-65].active = YES;
-//    [signBoard.heightAnchor constraintEqualToConstant:30].active = YES;
-//    [signBoard.widthAnchor constraintEqualToConstant:200].active = YES;
+
     
     UIImageView *signPost = [[UIImageView alloc] initWithFrame:CGRectMake(signBoard.frame.origin.x + signBoard.frame.size.width, 0, 5, 80)];
     signPost.image = [UIImage imageNamed:@"SignPost"];
@@ -113,10 +109,6 @@
 
     
     [self.searchButton addTarget:self action:@selector(callSearchMethod) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-//    self.searchBarTextField.layer.borderColor = [[UIColor blackColor] CGColor];
-//    self.searchBarTextField.layer.borderWidth = 1.0;
     
     
     self.searchBarTextField.translatesAutoresizingMaskIntoConstraints = NO;
@@ -381,23 +373,9 @@
 
 -(void)moveToLocationButtonTapped {
     CLLocationCoordinate2D currentLocation = self.manager.location.coordinate;
-    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        CGSize size = self.view.frame.size;
-        self.moveToLocationButton.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(10.0, 10.0), CGAffineTransformMakeTranslation(size.width/2 - self.moveToLocationButton.frame.size.width - 5, -(size.height/2 - self.moveToLocationButton.frame.size.height - 5)));
-    } completion:^(BOOL finished) {
-        [self zoomMaptoLatitude:currentLocation.latitude longitude:currentLocation.longitude withLatitudeSpan:0.05 longitudeSpan:0.05];
-        [self returnMoveToLocationButton];
-    }];
-    
+    [self zoomMaptoLatitude:currentLocation.latitude longitude:currentLocation.longitude withLatitudeSpan:0.05 longitudeSpan:0.05];
 }
 
--(void)returnMoveToLocationButton {
-    [UIView animateWithDuration:0.5 delay:1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.moveToLocationButton.transform = CGAffineTransformIdentity;
-    } completion:^(BOOL finished) {
-
-    }];
-}
 
 -(UIButton *)createRedoSearchInCurrentMapAreaButtonWithAction:(SEL)action {
     
