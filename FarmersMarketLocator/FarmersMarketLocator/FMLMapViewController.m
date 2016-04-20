@@ -40,6 +40,7 @@
 @property (assign, nonatomic) NSUInteger timerCount;
 @property (strong, nonatomic) UIButton *snapFilter;
 @property (strong, nonatomic) UIButton *wicFilter;
+@property (strong, nonatomic) UIButton *creditFilter;
 @property (strong, nonatomic) NSTimer *rotationTimer;
 
 @end
@@ -221,11 +222,28 @@
     [self.wicFilter.topAnchor constraintEqualToAnchor:self.snapFilter.topAnchor].active = YES;
     [self.wicFilter.leadingAnchor constraintEqualToAnchor:self.snapFilter.trailingAnchor constant:8].active = YES;
     
+    self.creditFilter = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.creditFilter.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.creditFilter setTitle:@"Credit Card" forState:UIControlStateNormal];
+    self.creditFilter.backgroundColor = [UIColor colorWithWhite:1 alpha:0.8];
+    [self.creditFilter addTarget:self action:@selector(selectOrDeselectFilterButton:) forControlEvents:UIControlEventTouchUpInside];
+    if (!([[NSUserDefaults standardUserDefaults]boolForKey:@"Credit Card Filter Enabled"])){
+        [self.creditFilter setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    } else {
+        [self.creditFilter setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    }
+    
+    
+    [self.view addSubview:self.creditFilter];
+    [self.creditFilter.topAnchor constraintEqualToAnchor:self.snapFilter.topAnchor].active = YES;
+    [self.creditFilter.leadingAnchor constraintEqualToAnchor:self.wicFilter.trailingAnchor constant:8].active = YES;
+    
 }
 
 -(void)hideSearchFilters{
     self.wicFilter.alpha = 0;
     self.snapFilter.alpha = 0;
+    self.creditFilter.alpha = 0;
 }
 
 -(void)selectOrDeselectFilterButton:(UIButton *)selector{
@@ -359,32 +377,30 @@
     
     BOOL filterBySNAP = [[NSUserDefaults standardUserDefaults]boolForKey:@"SNAP Filter Enabled"];
     BOOL filterByWIC = [[NSUserDefaults standardUserDefaults]boolForKey:@"WIC Filter Enabled"];
-    NSArray *filteredArray = [[NSArray alloc]init];
+    BOOL filterByCredit = [[NSUserDefaults standardUserDefaults]boolForKey:@"Credit Card Filter Enabled"];
     
     if (filterByWIC){
         NSPredicate *filterByWICPredicate = [NSPredicate predicateWithFormat:@"%K = %@", @"wic", @1];
-        filteredArray = [marketsArray filteredArrayUsingPredicate:filterByWICPredicate];
-   
+        marketsArray = [self filterArray:marketsArray usingPredicate:filterByWICPredicate];
     }
     
-    if (filterBySNAP && filterByWIC){
+    if (filterBySNAP){
         NSPredicate *filterBySNAPPredicate = [NSPredicate predicateWithFormat:@"%K = %@", @"snap", @1];
-        filteredArray = [filteredArray filteredArrayUsingPredicate:filterBySNAPPredicate];
-  
-    } else if (filterBySNAP) {
-        NSPredicate *filterBySNAPPredicate = [NSPredicate predicateWithFormat:@"%K = %@", @"snap", @1];
-        filteredArray = [marketsArray filteredArrayUsingPredicate:filterBySNAPPredicate];
-  
+        marketsArray = [self filterArray:marketsArray usingPredicate:filterBySNAPPredicate];
     }
     
-    if (filterByWIC || filterBySNAP){
-        return filteredArray;
-    } else {
-        NSLog(@"?");
-        return marketsArray;
+    if (filterByCredit){
+        NSPredicate *filterByCreditPredicate = [NSPredicate predicateWithFormat:@"%K = %@", @"credit", @1];
+        marketsArray = [self filterArray:marketsArray usingPredicate:filterByCreditPredicate];
     }
     
     
+    return marketsArray;
+    
+}
+
+-(NSArray *)filterArray:(NSArray *)array usingPredicate:(NSPredicate *)predicate{
+    return [array filteredArrayUsingPredicate:predicate];
 }
 
 
