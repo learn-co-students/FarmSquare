@@ -35,6 +35,8 @@ class FMLContainerViewController: UIViewController {
         super.viewDidLoad()
         self.view.layer.masksToBounds = false
         self.setEmbeddedViewController(mapViewController)
+        
+        self.view.backgroundColor = UIColor(colorLiteralRed: 118/255.0, green: 78/255.0, blue: 47/255.0, alpha: 1)
         self.receptacleButton.transform = CGAffineTransformConcat(CGAffineTransformMakeRotation(120),          CGAffineTransformMakeTranslation(0, 250))
         
         let value: Double = ((20 * M_PI)/180.0)
@@ -343,6 +345,10 @@ class FMLContainerViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
     }
 }
 
