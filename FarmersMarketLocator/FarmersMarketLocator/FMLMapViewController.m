@@ -36,9 +36,11 @@
 @property (strong, nonatomic) UIView *dimView;
 @property (strong, nonatomic) UITextField *searchBarTextField;
 @property (strong, nonatomic) UIButton *searchButton;
-
+@property (assign, nonatomic) BOOL keepRotating;
+@property (assign, nonatomic) NSUInteger timerCount;
 @property (strong, nonatomic) UIButton *snapFilter;
 @property (strong, nonatomic) UIButton *wicFilter;
+@property (strong, nonatomic) NSTimer *rotationTimer;
 
 @end
 
@@ -48,6 +50,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    self.timerCount = 0;
     // Init delegates
     self.mapDelegate = [[FMLMapViewDelegate alloc] initWithTarget:self];
     self.locationDelegate = [[FMLLocationManagerDelegate alloc] initWithTarget:self];
@@ -308,6 +312,7 @@
 }
 
 -(void)displayMarketObjects:(NSArray *)marketsArray FromIndex:(NSUInteger)index {
+    self.keepRotating = NO;
     marketsArray = [self filterMarkets:marketsArray];
     
     for (FMLMarket *farmersMarket in marketsArray) {
@@ -409,6 +414,10 @@
 }
 
 -(void)redoSearchInCurrentMapArea {
+    self.keepRotating = YES;
+//    self.rotationTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(rotateRedoSearchButton) userInfo:nil repeats:YES];
+    [self rotateRedoSearchButton];
+    
     
     MKCoordinateRegion currentRegion = self.mapView.region;
     CLLocationDegrees latitude = currentRegion.center.latitude;
@@ -419,9 +428,23 @@
         self.marketsArray = [self.marketsArray arrayByAddingObjectsFromArray:marketsArray];
         [self displayMarketObjects:marketsArray FromIndex:index];
     }];
+}
+
+-(void)rotateRedoSearchButton {
+    if (self.keepRotating) {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.redoSearchInMapAreaButton.transform = CGAffineTransformMakeRotation(self.timerCount/-0.1);
+            self.timerCount += 50;        } completion:^(BOOL finished) {
+            [self rotateRedoSearchButton];
+        }];
+    }
     
+    
+
+
     
 }
+
 -(void)callSearchMethod{
     [FMLSearch searchForNewLocation:self.searchBarTextField.text];
 }
