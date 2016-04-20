@@ -15,7 +15,6 @@ class FMLContainerViewController: UIViewController {
     let mapViewController = FMLMapViewController()
     var dogViewController = DogViewController()
     let cartViewController = CartViewController()
-    let resourcesViewController = FMLResourcesViewController()
     var petals = [UIImageView]()
     let petalLeft = UIImageView(image: UIImage(named: "Petal"))
     let petalRight = UIImageView(image: UIImage(named: "Petal"))
@@ -279,7 +278,7 @@ class FMLContainerViewController: UIViewController {
         petalRight.layer.anchorPoint = CGPointMake(0.5, 1.0)
         petalRight.transform = CGAffineTransformConcat(CGAffineTransformMakeRotation(120), CGAffineTransformMakeTranslation(0, 21))
         
-        let openDisclaimerGesture = UITapGestureRecognizer(target: self, action: #selector(FMLContainerViewController.openDisclaimer))
+        let openDisclaimerGesture = UITapGestureRecognizer(target: self, action: #selector(openDisclaimer))
         
         self.receptacleButton.addSubview(infoImage)
         infoImage.snp_makeConstraints { (make) in
@@ -289,7 +288,7 @@ class FMLContainerViewController: UIViewController {
             make.centerY.equalTo(self.receptacleButton.snp_centerY)
         }
         infoImage.addGestureRecognizer(openDisclaimerGesture)
-        infoImage.alpha = 0
+//        infoImage.alpha = 0
     }
     
     func openDisclaimer() {
