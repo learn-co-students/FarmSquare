@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import SafariServices
 
 class FMLContainerViewController: UIViewController {
     
@@ -137,7 +138,9 @@ class FMLContainerViewController: UIViewController {
     }
     
     func bookTapped() {
-        self.setEmbeddedViewController(resourcesViewController)
+        
+        let vc = SFSafariViewController(URL: NSURL(string: "http://www.fns.usda.gov/snap/supplemental-nutrition-assistance-program-snap")!, entersReaderIfAvailable: true)
+        self.setEmbeddedViewController(vc)
         self.emptySpaceTapped()
     }
     
