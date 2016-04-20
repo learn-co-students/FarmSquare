@@ -52,3 +52,5 @@ fastlane/report.xml
 fastlane/screenshots
 
 Secrets.m
+
+.DS_Store

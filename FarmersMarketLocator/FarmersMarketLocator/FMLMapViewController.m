@@ -11,9 +11,11 @@
 #import <CoreLocation/CoreLocation.h>
 #import "FMLMapViewDelegate.h"
 #import "FMLLocationManagerDelegate.h"
+#import "FMLTextFieldDelegate.h"
 #import "SampleZipCodes.h"
 #import "FMLAPIClient.h"
 #import "Annotation.h"
+#import "FMLSearch.h"
 #import "FMLMarket.h"
 #import "FMLDetailView.h"
 #import "FMLMarket+CoreDataProperties.h"
@@ -30,7 +32,15 @@
 @property (strong, nonatomic) CLLocationManager *manager;
 @property (strong, nonatomic) FMLMapViewDelegate *mapDelegate;
 @property (strong, nonatomic) FMLLocationManagerDelegate *locationDelegate;
-@property (strong, nonatomic) UIView *dimView;
+@property (strong, nonatomic) FMLTextFieldDelegate *textFieldDelegate;
+//@property (strong, nonatomic) UIView *dimView;
+@property (strong, nonatomic) UITextField *searchBarTextField;
+@property (strong, nonatomic) UIButton *searchButton;
+@property (assign, nonatomic) BOOL keepRotating;
+@property (assign, nonatomic) NSUInteger timerCount;
+@property (strong, nonatomic) UIButton *snapFilter;
+@property (strong, nonatomic) UIButton *wicFilter;
+@property (strong, nonatomic) NSTimer *rotationTimer;
 
 @end
 
@@ -39,13 +49,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.translatesAutoresizingMaskIntoConstraints = NO;
     
+    self.timerCount = 0;
     // Init delegates
     self.mapDelegate = [[FMLMapViewDelegate alloc] initWithTarget:self];
     self.locationDelegate = [[FMLLocationManagerDelegate alloc] initWithTarget:self];
-    
-    // Create and customize map view
+    self.textFieldDelegate = [[FMLTextFieldDelegate alloc]initWithTarget:self]; //or searchBarTF?
+
+   // Create and customize map view
     self.mapView = [[MKMapView alloc]initWithFrame:self.view.frame];
+    self.mapView.showsCompass = NO;
     self.mapView.mapType = MKMapTypeStandard;
     self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self.mapDelegate;
@@ -71,6 +85,49 @@
     [self.redoSearchInMapAreaButton.heightAnchor constraintEqualToConstant:32].active = YES;
     [self.redoSearchInMapAreaButton.widthAnchor constraintEqualToConstant:32].active = YES;
     
+    // Set up search bar background image
+    CGFloat signWidth = self.view.frame.size.width - 120 - 20;
+    UIImageView *signBoard = [[UIImageView alloc] initWithFrame:CGRectMake(120, 10, signWidth, 60)];
+    signBoard.image = [UIImage imageNamed:@"SignBoard"];
+    [self.view addSubview:signBoard];
+
+    
+    UIImageView *signPost = [[UIImageView alloc] initWithFrame:CGRectMake(signBoard.frame.origin.x + signBoard.frame.size.width, 0, 5, 80)];
+    signPost.image = [UIImage imageNamed:@"SignPost"];
+    [self.view addSubview:signPost];
+
+    
+    //set up search bar and search button view
+    self.searchBarTextField = [[UITextField alloc]initWithFrame:CGRectMake(40, 0, 0, 0)];
+    self.searchBarTextField.textColor = [UIColor whiteColor];
+    self.searchBarTextField.placeholder = @"Enter Address Here";
+    self.searchBarTextField.delegate = self.textFieldDelegate;
+    self.searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    self.searchButton.imageView.image = [UIImage imageNamed:@"magnifying-glass"];
+    self.searchButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
+
+    
+    [self.searchButton addTarget:self action:@selector(callSearchMethod) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    self.searchBarTextField.translatesAutoresizingMaskIntoConstraints = NO;
+    self.searchButton.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    
+    [self.view addSubview:self.searchBarTextField];
+    [self.view addSubview:self.searchButton];
+    
+    [self.searchBarTextField.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:30].active = YES;
+    [self.searchBarTextField.leadingAnchor constraintEqualToAnchor:self.view.centerXAnchor constant:-40].active = YES;
+    [self.searchBarTextField.heightAnchor constraintEqualToConstant:40].active = YES;
+    [self.searchBarTextField.widthAnchor constraintEqualToConstant:215].active = YES;
+    
+    [self.searchButton.topAnchor constraintEqualToAnchor:self.searchBarTextField.topAnchor].active = YES;
+    [self.searchButton.leadingAnchor constraintEqualToAnchor:self.searchBarTextField.trailingAnchor constant:10].active = YES;
+    [self.searchButton.heightAnchor constraintEqualToAnchor:self.searchBarTextField.heightAnchor].active = YES;
+    [self.searchButton.widthAnchor constraintEqualToConstant:30].active = YES;
+    
     
     
     
@@ -83,7 +140,7 @@
     self.detailView = [[FMLDetailView alloc] initWithFrame:CGRectMake(0, yCoordinateOfMarketView, width, height)];
     [self.view addSubview:self.detailView];
     [self.detailView constrainViews];
-
+    
     
     // create Title View
     self.titleView = [[FMLTitleView alloc] initWithFrame:CGRectMake(0, 0, width, 130)];
@@ -107,7 +164,7 @@
     // If there's saved data, show it
     if ([self.marketsArray count] > 0) {
         self.showingSavedData = YES;
-        [self displayMarketObjects:self.marketsArray];
+        [self displayMarketObjects:self.marketsArray FromIndex:0];
     } else {
         self.showingSavedData = NO;
     }
@@ -119,7 +176,66 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomBackOut:) name:@"ZoomBackOutKThxBai" object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNewMarketObjects) name:@"Search for new location" object:nil];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(zoomMapToNewLocation) name:@"ZoomToNewLocation" object:nil];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showSearchFilters) name:@"Show search filters" object:nil];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(hideSearchFilters) name:@"Hide search filters" object:nil];
+    
     self.detailView.transform = CGAffineTransformMakeTranslation(0, self.detailView.frame.size.height);
+    
+}
+
+
+-(void)showSearchFilters{
+    
+    self.snapFilter = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.snapFilter.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.snapFilter setTitle:@"SNAP" forState:UIControlStateNormal];
+    self.snapFilter.backgroundColor = [UIColor colorWithWhite:1 alpha:0.8];
+    [self.snapFilter addTarget:self action:@selector(selectOrDeselectFilterButton:) forControlEvents:UIControlEventTouchUpInside];
+    if (!([[NSUserDefaults standardUserDefaults]boolForKey:@"SNAP Filter Enabled"])){
+        [self.snapFilter setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    } else {
+        [self.snapFilter setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    }
+    
+    
+    [self.view addSubview:self.snapFilter];
+    [self.snapFilter.topAnchor constraintEqualToAnchor:self.searchBarTextField.bottomAnchor constant:8].active = YES;
+    [self.snapFilter.leadingAnchor constraintEqualToAnchor:self.searchBarTextField.leadingAnchor].active = YES;
+    
+    self.wicFilter = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.wicFilter setTitle:@"WIC" forState:UIControlStateNormal];
+    self.wicFilter.translatesAutoresizingMaskIntoConstraints = NO;
+    self.wicFilter.backgroundColor = [UIColor colorWithWhite:1 alpha:0.8];
+    [self.wicFilter addTarget:self action:@selector(selectOrDeselectFilterButton:) forControlEvents:UIControlEventTouchUpInside];
+    if (!([[NSUserDefaults standardUserDefaults]boolForKey:@"WIC Filter Enabled"])){
+        [self.wicFilter setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    } else {
+        [self.wicFilter setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    }
+    [self.view addSubview:self.wicFilter];
+    [self.wicFilter.topAnchor constraintEqualToAnchor:self.snapFilter.topAnchor].active = YES;
+    [self.wicFilter.leadingAnchor constraintEqualToAnchor:self.snapFilter.trailingAnchor constant:8].active = YES;
+    
+}
+
+-(void)hideSearchFilters{
+    self.wicFilter.alpha = 0;
+    self.snapFilter.alpha = 0;
+}
+
+-(void)selectOrDeselectFilterButton:(UIButton *)selector{
+    if (!([[NSUserDefaults standardUserDefaults]boolForKey:[NSString stringWithFormat:@"%@ Filter Enabled", selector.titleLabel.text]])){
+        [selector setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [[NSUserDefaults standardUserDefaults]setBool:YES forKey:[NSString stringWithFormat:@"%@ Filter Enabled", selector.titleLabel.text]];
+    } else {
+        [selector setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [[NSUserDefaults standardUserDefaults]setBool:NO forKey:[NSString stringWithFormat:@"%@ Filter Enabled", selector.titleLabel.text]];
+    }
     
 }
 
@@ -172,9 +288,9 @@
         } else {
             self.marketsArray = marketsArray;
             // Plot a pin for the coordinates of each FMLMarket object in marketsArray.
-            [self displayMarketObjects:marketsArray];
+            [self displayMarketObjects:self.marketsArray FromIndex:0];
         }
-        
+
         
     }];
     
@@ -204,8 +320,22 @@
     
 }
 
--(void)displayMarketObjects:(NSArray *)marketsArray {
-    NSUInteger index = 0;
+-(void)getNewMarketObjects {
+    CGFloat latitude = [[NSUserDefaults standardUserDefaults] floatForKey:@"latitude"];
+    CGFloat longitude = [[NSUserDefaults standardUserDefaults] floatForKey:@"longitude"];
+    
+    [FMLAPIClient getMarketsForLatitude:latitude longitude:longitude withCompletion:^(NSMutableArray *marketsArray, NSError *error) {
+        NSUInteger index = self.marketsArray.count;
+        self.marketsArray = [self.marketsArray arrayByAddingObjectsFromArray:marketsArray];
+        // Plot a pin for the coordinates of each FMLMarket object in marketsArray.
+        [self displayMarketObjects:marketsArray FromIndex:index];
+    }];
+    
+}
+
+-(void)displayMarketObjects:(NSArray *)marketsArray FromIndex:(NSUInteger)index {
+    self.keepRotating = NO;
+    marketsArray = [self filterMarkets:marketsArray];
     
     for (FMLMarket *farmersMarket in marketsArray) {
         CLLocationCoordinate2D location;
@@ -220,12 +350,48 @@
         [self.mapView addAnnotation:annotation];
         
     }
+    
 }
+
+
+
+-(NSArray *)filterMarkets:(NSArray *)marketsArray{
+    
+    BOOL filterBySNAP = [[NSUserDefaults standardUserDefaults]boolForKey:@"SNAP Filter Enabled"];
+    BOOL filterByWIC = [[NSUserDefaults standardUserDefaults]boolForKey:@"WIC Filter Enabled"];
+    NSArray *filteredArray = [[NSArray alloc]init];
+    
+    if (filterByWIC){
+        NSPredicate *filterByWICPredicate = [NSPredicate predicateWithFormat:@"%K = %@", @"wic", @1];
+        filteredArray = [marketsArray filteredArrayUsingPredicate:filterByWICPredicate];
+   
+    }
+    
+    if (filterBySNAP && filterByWIC){
+        NSPredicate *filterBySNAPPredicate = [NSPredicate predicateWithFormat:@"%K = %@", @"snap", @1];
+        filteredArray = [filteredArray filteredArrayUsingPredicate:filterBySNAPPredicate];
+  
+    } else if (filterBySNAP) {
+        NSPredicate *filterBySNAPPredicate = [NSPredicate predicateWithFormat:@"%K = %@", @"snap", @1];
+        filteredArray = [marketsArray filteredArrayUsingPredicate:filterBySNAPPredicate];
+  
+    }
+    
+    if (filterByWIC || filterBySNAP){
+        return filteredArray;
+    } else {
+        NSLog(@"?");
+        return marketsArray;
+    }
+    
+    
+}
+
 
 -(UIButton *)setUpMoveToLocationButtonWithAction:(SEL)action {
     // Create and Add MoveToLocation button
     UIButton *moveToLocationButton = [[UIButton alloc] init];
-    UIImage *buttonImage = [UIImage imageNamed:@"gps (1)"];
+    UIImage *buttonImage = [UIImage imageNamed:@"gps"];
     [moveToLocationButton setImage:buttonImage forState:UIControlStateNormal];
     [moveToLocationButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
     
@@ -239,6 +405,7 @@
     CLLocationCoordinate2D currentLocation = self.manager.location.coordinate;
     [self zoomMaptoLatitude:currentLocation.latitude longitude:currentLocation.longitude withLatitudeSpan:0.05 longitudeSpan:0.05];
 }
+
 
 -(UIButton *)createRedoSearchInCurrentMapAreaButtonWithAction:(SEL)action {
     
@@ -255,6 +422,10 @@
 }
 
 -(void)redoSearchInCurrentMapArea {
+    self.keepRotating = YES;
+//    self.rotationTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(rotateRedoSearchButton) userInfo:nil repeats:YES];
+    [self rotateRedoSearchButton];
+    
     
     MKCoordinateRegion currentRegion = self.mapView.region;
     CLLocationDegrees latitude = currentRegion.center.latitude;
@@ -266,13 +437,54 @@
         if (error) {
             [self showErrorAlert];
         } else {
-            [self displayMarketObjects:marketsArray];
+            
+            [FMLAPIClient getMarketsForLatitude:latitude longitude:longitude withCompletion:^(NSMutableArray *marketsArray, NSError *error) {
+                NSUInteger index = [self.marketsArray count];
+                self.marketsArray = [self.marketsArray arrayByAddingObjectsFromArray:marketsArray];
+                [self displayMarketObjects:marketsArray FromIndex:index];
+            }];
         }
-        
     }];
+}
+
+-(void)rotateRedoSearchButton {
+    if (self.keepRotating) {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.redoSearchInMapAreaButton.transform = CGAffineTransformMakeRotation(self.timerCount/-0.1);
+            self.timerCount += 50;        } completion:^(BOOL finished) {
+            [self rotateRedoSearchButton];
+        }];
+    }
     
+    
+
+
     
 }
+
+-(void)callSearchMethod{
+    [FMLSearch searchForNewLocation:self.searchBarTextField.text];
+}
+
+-(void)zoomMapToNewLocation{
+    [self zoomMaptoLatitude:[[NSUserDefaults standardUserDefaults] floatForKey:@"latitude"] longitude:[[NSUserDefaults standardUserDefaults] floatForKey:@"longitude"] withLatitudeSpan:0.05 longitudeSpan:0.05];
+}
+
+#pragma mark - product icons methods
+
+// When a pin is double-tapped, don't also zoom in on the map.
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
+    return NO;
+}
+
+// Shoot out an icon for each product type available at that Farmer's Market. The icons should radiate out to equidistant positions around a circle centered on the pin. The Assets folder contains an icon for each product category.
+
+// Remove dimView: animate the disappearance of the icons, then remove the view entirely.
+
+
+
+
+
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Icons stuff
  
@@ -327,7 +539,7 @@
  
  redoSearch button:
  Icon made by Minh Hoang (http://www.flaticon.com/authors/minh-hoang) from www.flaticon.com
-
+ 
  */
 
 @end

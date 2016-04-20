@@ -27,6 +27,9 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
 @property (nonatomic) CGFloat animationSpeed;
 @property (strong, nonatomic) NSMutableArray *currentProductsIcons;
 @property (assign, nonatomic) CGFloat offset;
+@property (strong, nonatomic) UIView *cover;
+
+
 @end
 
 @implementation FMLMapViewDelegate
@@ -104,21 +107,22 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         }
         
         // Cover mapView to prevent map interaction
-        UIView *cover = [[UIView alloc] initWithFrame:self.viewController.view.frame];
-        cover.backgroundColor = [UIColor clearColor];
+        self.cover = [[UIView alloc] initWithFrame:self.viewController.view.frame];
+        self.cover.backgroundColor = [UIColor clearColor];
         UITapGestureRecognizer *onTapClear = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeCoverView:)];
-        [cover addGestureRecognizer:onTapClear];
-        [self.viewController.view addSubview:cover];
+        [self.cover addGestureRecognizer:onTapClear];
+        [self.viewController.view addSubview:self.cover];
         // Bring forward the detail view and the annotation view with icons to allow interaction
         [self.viewController.view bringSubviewToFront:self.viewController.detailView];
         [self.viewController.view bringSubviewToFront:view];
-        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeCoverView:) name:@"SwiperNoSwiping" object:nil];
     }
 }
 
 -(void)removeCoverView:(UITapGestureRecognizer *)sender {
-    [sender.view removeFromSuperview];
+    [self.cover removeFromSuperview];
     [self.viewController.mapView deselectAnnotation:self.viewController.mapView.selectedAnnotations.firstObject animated:YES];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"SwiperNoSwiping" object:nil];
 }
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {

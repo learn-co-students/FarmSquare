@@ -7,6 +7,7 @@ use_frameworks!
 target 'FarmersMarketLocator' do
 
 pod 'AFNetworking'
+pod ‘FontAwesomeKit’
 pod 'SnapKit', '~> 0.15.0'
 
 end

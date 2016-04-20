@@ -148,8 +148,8 @@ func setBorder() {
 -(void)hideDetailView {
     [UIView animateWithDuration:0.25 animations:^{
         self.transform = CGAffineTransformMakeTranslation(0, self.frame.size.height);
-        
     } completion:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SwiperNoSwiping" object:nil];
 }
 
 -(void)showDetailView {

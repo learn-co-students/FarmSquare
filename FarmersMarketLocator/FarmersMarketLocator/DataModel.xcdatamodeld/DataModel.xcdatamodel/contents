@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15B42" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15E65" minimumToolsVersion="Xcode 7.0">
+    <entity name="FMLGroceryItem" representedClassName="FMLGroceryItem" syncable="YES">
+        <attribute name="isChecked" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="quantity" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="FMLGroceryList" representedClassName="FMLGroceryList" syncable="YES">
+        <attribute name="dateModified" optional="YES" attributeType="Date" minDateTimeInterval="482616060" syncable="YES"/>
+        <attribute name="listName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="numberOfItems" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="totalCost" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="itemsInList" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="FMLGroceryItem" syncable="YES"/>
+    </entity>
     <entity name="FMLMarket" representedClassName="FMLMarket" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
@@ -32,6 +44,8 @@
         <attribute name="zipCode" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="FMLMarket" positionX="-63" positionY="-18" width="128" height="480"/>
+        <element name="FMLGroceryItem" positionX="-63" positionY="36" width="128" height="90"/>
+        <element name="FMLMarket" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="FMLGroceryList" positionX="-63" positionY="36" width="128" height="120"/>
     </elements>
 </model>
