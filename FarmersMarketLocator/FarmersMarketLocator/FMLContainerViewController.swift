@@ -19,6 +19,7 @@ class FMLContainerViewController: UIViewController {
     let petalLeft = UIImageView(image: UIImage(named: "Petal"))
     let petalRight = UIImageView(image: UIImage(named: "Petal"))
     let infoImage = UIImageView(image: UIImage(named: "Receptacle"))
+    var degrees: CGFloat = 0
     
     @IBOutlet weak var receptacleButton: UIButton!
     
@@ -40,7 +41,7 @@ class FMLContainerViewController: UIViewController {
         self.receptacleButton.transform = CGAffineTransformConcat(CGAffineTransformMakeRotation(120),          CGAffineTransformMakeTranslation(0, 250))
         
         let value: Double = ((20 * M_PI)/180.0)
-        let degrees: CGFloat = CGFloat(value)
+        degrees = CGFloat(value)
         self.vineButton.transform = CGAffineTransformMakeRotation(degrees)
         
         createBlurView()
@@ -94,6 +95,8 @@ class FMLContainerViewController: UIViewController {
     // MARK: IBActions
     
     @IBAction func vineButtonTapped(sender: UIButton) {
+        self.vineButton.transform = CGAffineTransformMakeRotation(degrees)
+        self.hamburger.transform = CGAffineTransformIdentity
         self.view.addSubview(blurEffectView)
         self.vineButton.hidden = true
         
@@ -137,7 +140,8 @@ class FMLContainerViewController: UIViewController {
     }
     
     func bookTapped() {
-        
+        self.vineButton.transform = CGAffineTransformConcat(CGAffineTransformMakeRotation(degrees), CGAffineTransformMakeTranslation(-50, 0))
+        self.hamburger.transform = CGAffineTransformMakeTranslation(-50, 0);
         let vc = SFSafariViewController(URL: NSURL(string: "http://www.fns.usda.gov/snap/supplemental-nutrition-assistance-program-snap")!, entersReaderIfAvailable: true)
         self.setEmbeddedViewController(vc)
         self.emptySpaceTapped()
