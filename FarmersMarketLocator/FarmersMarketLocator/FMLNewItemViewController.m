@@ -23,7 +23,6 @@
 
 
 - (IBAction)saveTapped:(id)sender {
-    NSLog(@"saveTapped!");
     
     NSString *itemName = self.itemNameTextField.text;
     NSString *itemQuantity = self.itemQuantTextField.text;
@@ -31,7 +30,6 @@
     FMLGroceryItem *addedItem = (FMLGroceryItem *)[NSEntityDescription insertNewObjectForEntityForName:@"FMLGroceryItem" inManagedObjectContext:self.stack.managedObjectContext];
     addedItem.name = itemName;
     addedItem.quantity = itemQuantity;
-    
     
     [self.stack saveContext];
     

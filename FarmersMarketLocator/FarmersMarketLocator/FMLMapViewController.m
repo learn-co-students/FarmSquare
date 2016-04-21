@@ -382,6 +382,7 @@
     BOOL filterByWIC = [[NSUserDefaults standardUserDefaults]boolForKey:@"WIC Filter Enabled"];
     BOOL filterByCredit = [[NSUserDefaults standardUserDefaults]boolForKey:@"Credit Card Filter Enabled"];
     
+
     if (!(filterByCredit && filterBySNAP && filterByWIC)){
         return marketsArray;
     } else {
@@ -406,12 +407,6 @@
         return mMarketsArray;
     }
     
-}
-
--(NSArray *)filterArray:(NSMutableArray *)mArray usingPredicate:(NSPredicate *)predicate{
-    //    return [array filterUsingPredicate:predicate];
-    [mArray filterUsingPredicate:predicate];
-    return mArray;
 }
 
 
