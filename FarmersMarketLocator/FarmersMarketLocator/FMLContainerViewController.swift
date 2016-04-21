@@ -15,6 +15,8 @@ class FMLContainerViewController: UIViewController {
     let mapViewController = FMLMapViewController()
     var dogViewController = DogViewController()
     let cartViewController = CartViewController()
+    var settingsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Settings")
+    var groceryList = UIStoryboard(name: "GroceryList", bundle: nil).instantiateViewControllerWithIdentifier("Grocery")
     var petals = [UIImageView]()
     let petalLeft = UIImageView(image: UIImage(named: "Petal"))
     let petalRight = UIImageView(image: UIImage(named: "Petal"))
@@ -35,6 +37,8 @@ class FMLContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.layer.masksToBounds = false
+        settingsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Settings")
+        groceryList = UIStoryboard(name: "GroceryList", bundle: nil).instantiateViewControllerWithIdentifier("Grocery")
         self.setEmbeddedViewController(mapViewController)
         
         self.view.backgroundColor = UIColor(colorLiteralRed: 118/255.0, green: 78/255.0, blue: 47/255.0, alpha: 1)
@@ -135,7 +139,7 @@ class FMLContainerViewController: UIViewController {
     }
     
     func cartTapped() {
-        self.setEmbeddedViewController(cartViewController)
+        self.setEmbeddedViewController(groceryList)
         self.emptySpaceTapped()
     }
     
@@ -148,7 +152,7 @@ class FMLContainerViewController: UIViewController {
     }
     
     func dogTapped() {
-        self.setEmbeddedViewController(dogViewController)
+        self.setEmbeddedViewController(settingsViewController)
         self.emptySpaceTapped()
     }
     
