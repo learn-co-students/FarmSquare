@@ -7,6 +7,8 @@
 //
 
 #import "FMLMapViewController.h"
+#import "CoreDataStack.h"
+#import "FMLMarket.h"
 
 #ifndef FarmersMarketLocator_Bridging_Header_h
 #define FarmersMarketLocator_Bridging_Header_h

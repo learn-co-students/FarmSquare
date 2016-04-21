@@ -185,10 +185,14 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(hideSearchFilters) name:@"Hide search filters" object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeAllPins) name:@"GetRidOfTheEvidence!" object:nil];
     self.detailView.transform = CGAffineTransformMakeTranslation(0, self.detailView.frame.size.height);
     
 }
 
+-(void)removeAllPins {
+    [self.mapView removeAnnotations:self.mapView.annotations];
+}
 
 -(void)showSearchFilters{
     
