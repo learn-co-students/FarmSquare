@@ -21,6 +21,7 @@
 +(NSArray *)jsonDataForKey:(NSString *)key {
     
     NSString *resourceName = [NSString stringWithFormat:@"farmers-markets-%@", key];
+    
     NSURL *url = [[NSBundle mainBundle] URLForResource:resourceName withExtension:@"json"];
     NSData *data = [NSData dataWithContentsOfURL:url];
     NSArray *marketData = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
@@ -37,6 +38,7 @@
     
     
     NSPredicate *idPredicate = [NSPredicate predicateWithFormat:@"FMID == %@", fmid];
+    
     NSArray *filteredArray = [[FMLJSONDictionary jsonDataForKey:key] filteredArrayUsingPredicate:idPredicate];
     
     

@@ -33,12 +33,14 @@
 @property (strong, nonatomic) FMLMapViewDelegate *mapDelegate;
 @property (strong, nonatomic) FMLLocationManagerDelegate *locationDelegate;
 @property (strong, nonatomic) FMLTextFieldDelegate *textFieldDelegate;
-@property (strong, nonatomic) UIView *dimView;
+//@property (strong, nonatomic) UIView *dimView;
 @property (strong, nonatomic) UITextField *searchBarTextField;
 @property (strong, nonatomic) UIButton *searchButton;
-
+@property (assign, nonatomic) BOOL keepRotating;
+@property (assign, nonatomic) NSUInteger timerCount;
 @property (strong, nonatomic) UIButton *snapFilter;
 @property (strong, nonatomic) UIButton *wicFilter;
+@property (strong, nonatomic) NSTimer *rotationTimer;
 
 @end
 
@@ -48,6 +50,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    self.timerCount = 0;
     // Init delegates
     self.mapDelegate = [[FMLMapViewDelegate alloc] initWithTarget:self];
     self.locationDelegate = [[FMLLocationManagerDelegate alloc] initWithTarget:self];
@@ -55,7 +59,7 @@
 
    // Create and customize map view
     self.mapView = [[MKMapView alloc]initWithFrame:self.view.frame];
-
+    self.mapView.showsCompass = NO;
     self.mapView.mapType = MKMapTypeStandard;
     self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self.mapDelegate;
@@ -81,9 +85,22 @@
     [self.redoSearchInMapAreaButton.heightAnchor constraintEqualToConstant:32].active = YES;
     [self.redoSearchInMapAreaButton.widthAnchor constraintEqualToConstant:32].active = YES;
     
+    // Set up search bar background image
+    CGFloat signWidth = self.view.frame.size.width - 120 - 20;
+    UIImageView *signBoard = [[UIImageView alloc] initWithFrame:CGRectMake(120, 10, signWidth, 60)];
+    signBoard.image = [UIImage imageNamed:@"SignBoard"];
+    [self.view addSubview:signBoard];
+
+    
+    UIImageView *signPost = [[UIImageView alloc] initWithFrame:CGRectMake(signBoard.frame.origin.x + signBoard.frame.size.width, 0, 5, 80)];
+    signPost.image = [UIImage imageNamed:@"SignPost"];
+    [self.view addSubview:signPost];
+
     
     //set up search bar and search button view
     self.searchBarTextField = [[UITextField alloc]initWithFrame:CGRectMake(40, 0, 0, 0)];
+    self.searchBarTextField.textColor = [UIColor whiteColor];
+    self.searchBarTextField.placeholder = @"Enter Address Here";
     self.searchBarTextField.delegate = self.textFieldDelegate;
     self.searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -94,10 +111,6 @@
     [self.searchButton addTarget:self action:@selector(callSearchMethod) forControlEvents:UIControlEventTouchUpInside];
     
     
-    self.searchBarTextField.layer.borderColor = [[UIColor blackColor] CGColor];
-    self.searchBarTextField.layer.borderWidth = 1.0;
-    
-    
     self.searchBarTextField.translatesAutoresizingMaskIntoConstraints = NO;
     self.searchButton.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -105,10 +118,10 @@
     [self.view addSubview:self.searchBarTextField];
     [self.view addSubview:self.searchButton];
     
-    [self.searchBarTextField.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:15].active = YES;
-    [self.searchBarTextField.leadingAnchor constraintEqualToAnchor:self.view.centerXAnchor constant:-65].active = YES;
-    [self.searchBarTextField.heightAnchor constraintEqualToConstant:30].active = YES;
-    [self.searchBarTextField.widthAnchor constraintEqualToConstant:200].active = YES;
+    [self.searchBarTextField.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:30].active = YES;
+    [self.searchBarTextField.leadingAnchor constraintEqualToAnchor:self.view.centerXAnchor constant:-40].active = YES;
+    [self.searchBarTextField.heightAnchor constraintEqualToConstant:40].active = YES;
+    [self.searchBarTextField.widthAnchor constraintEqualToConstant:215].active = YES;
     
     [self.searchButton.topAnchor constraintEqualToAnchor:self.searchBarTextField.topAnchor].active = YES;
     [self.searchButton.leadingAnchor constraintEqualToAnchor:self.searchBarTextField.trailingAnchor constant:10].active = YES;
@@ -267,14 +280,44 @@
     CGFloat latitude = [[NSUserDefaults standardUserDefaults] floatForKey:@"latitude"];
     CGFloat longitude = [[NSUserDefaults standardUserDefaults] floatForKey:@"longitude"];
     
-    [FMLAPIClient getMarketsForLatitude:latitude longitude:longitude withCompletion:^(NSMutableArray *marketsArray) {
+    [FMLAPIClient getMarketsForLatitude:latitude longitude:longitude withCompletion:^(NSMutableArray *marketsArray, NSError *error) {
         
-        self.marketsArray = marketsArray;
-        // Plot a pin for the coordinates of each FMLMarket object in marketsArray.
-        [self displayMarketObjects:self.marketsArray FromIndex:0];
+        if (error) {
+            
+            [self showErrorAlert];
+            
+        } else {
+            self.marketsArray = marketsArray;
+            // Plot a pin for the coordinates of each FMLMarket object in marketsArray.
+            [self displayMarketObjects:self.marketsArray FromIndex:0];
+        }
 
         
     }];
+    
+}
+
+-(void)showErrorAlert {
+    
+    // Create alert controller
+    UIAlertController *apiCallFailedAlert = [UIAlertController
+                                             alertControllerWithTitle:@"Could not connect"
+                                             message:@"We could not connect to the data source. Please check your Internet connection."
+                                             preferredStyle:UIAlertControllerStyleAlert];
+    
+    // Create action
+    UIAlertAction *okAction = [UIAlertAction
+                               actionWithTitle:@"Ok"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * _Nonnull action) {
+                                   [apiCallFailedAlert dismissViewControllerAnimated:YES completion:nil];
+                               }];
+    
+    // Add action to controller
+    [apiCallFailedAlert addAction:okAction];
+    
+    // Present alert controller
+    [self presentViewController:apiCallFailedAlert animated:YES completion:nil];
     
 }
 
@@ -282,7 +325,7 @@
     CGFloat latitude = [[NSUserDefaults standardUserDefaults] floatForKey:@"latitude"];
     CGFloat longitude = [[NSUserDefaults standardUserDefaults] floatForKey:@"longitude"];
     
-    [FMLAPIClient getMarketsForLatitude:latitude longitude:longitude withCompletion:^(NSMutableArray *marketsArray) {
+    [FMLAPIClient getMarketsForLatitude:latitude longitude:longitude withCompletion:^(NSMutableArray *marketsArray, NSError *error) {
         NSUInteger index = self.marketsArray.count;
         self.marketsArray = [self.marketsArray arrayByAddingObjectsFromArray:marketsArray];
         // Plot a pin for the coordinates of each FMLMarket object in marketsArray.
@@ -292,6 +335,7 @@
 }
 
 -(void)displayMarketObjects:(NSArray *)marketsArray FromIndex:(NSUInteger)index {
+    self.keepRotating = NO;
     marketsArray = [self filterMarkets:marketsArray];
     
     for (FMLMarket *farmersMarket in marketsArray) {
@@ -347,7 +391,7 @@
 -(UIButton *)setUpMoveToLocationButtonWithAction:(SEL)action {
     // Create and Add MoveToLocation button
     UIButton *moveToLocationButton = [[UIButton alloc] init];
-    UIImage *buttonImage = [UIImage imageNamed:@"gps (1)"];
+    UIImage *buttonImage = [UIImage imageNamed:@"gps"];
     [moveToLocationButton setImage:buttonImage forState:UIControlStateNormal];
     [moveToLocationButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
     
@@ -361,6 +405,7 @@
     CLLocationCoordinate2D currentLocation = self.manager.location.coordinate;
     [self zoomMaptoLatitude:currentLocation.latitude longitude:currentLocation.longitude withLatitudeSpan:0.05 longitudeSpan:0.05];
 }
+
 
 -(UIButton *)createRedoSearchInCurrentMapAreaButtonWithAction:(SEL)action {
     
@@ -377,19 +422,46 @@
 }
 
 -(void)redoSearchInCurrentMapArea {
+    self.keepRotating = YES;
+//    self.rotationTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(rotateRedoSearchButton) userInfo:nil repeats:YES];
+    [self rotateRedoSearchButton];
+    
     
     MKCoordinateRegion currentRegion = self.mapView.region;
     CLLocationDegrees latitude = currentRegion.center.latitude;
     CLLocationDegrees longitude = currentRegion.center.longitude;
-    
-    [FMLAPIClient getMarketsForLatitude:latitude longitude:longitude withCompletion:^(NSMutableArray *marketsArray) {
-        NSUInteger index = [self.marketsArray count];
-        self.marketsArray = [self.marketsArray arrayByAddingObjectsFromArray:marketsArray];
-        [self displayMarketObjects:marketsArray FromIndex:index];
+
+    [FMLAPIClient getMarketsForLatitude:latitude longitude:longitude withCompletion:^(NSMutableArray *marketsArray, NSError *error) {
+        
+        // If error, show error alert. If not, display markets.
+        if (error) {
+            [self showErrorAlert];
+        } else {
+            
+            [FMLAPIClient getMarketsForLatitude:latitude longitude:longitude withCompletion:^(NSMutableArray *marketsArray, NSError *error) {
+                NSUInteger index = [self.marketsArray count];
+                self.marketsArray = [self.marketsArray arrayByAddingObjectsFromArray:marketsArray];
+                [self displayMarketObjects:marketsArray FromIndex:index];
+            }];
+        }
     }];
+}
+
+-(void)rotateRedoSearchButton {
+    if (self.keepRotating) {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.redoSearchInMapAreaButton.transform = CGAffineTransformMakeRotation(self.timerCount/-0.1);
+            self.timerCount += 50;        } completion:^(BOOL finished) {
+            [self rotateRedoSearchButton];
+        }];
+    }
     
+    
+
+
     
 }
+
 -(void)callSearchMethod{
     [FMLSearch searchForNewLocation:self.searchBarTextField.text];
 }

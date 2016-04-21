@@ -21,6 +21,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _sharedStack = [[CoreDataStack alloc] init];
+        _sharedStack.groceryItems = [NSMutableArray new];
     });
     
     return _sharedStack;
@@ -99,5 +100,42 @@
         }
     }
 }
+
+- (NSMutableArray *)groceryItems {
+    
+    NSFetchRequest *getAllItems = [NSFetchRequest fetchRequestWithEntityName:@"FMLGroceryItem"];
+    
+    _groceryItems = [[self.managedObjectContext executeFetchRequest:getAllItems error:nil]mutableCopy];
+    
+    return _groceryItems;
+}
+
+- (FMLGroceryItem *)newGroceryItem {
+   
+    FMLGroceryItem *newItem = [NSEntityDescription insertNewObjectForEntityForName:@"FMLGroceryItem" inManagedObjectContext:self.managedObjectContext];
+    
+    [self saveContext];
+
+    return newItem;
+}
+
+- (NSMutableArray *)groceryLists {
+    
+    NSFetchRequest *getAllLists = [NSFetchRequest fetchRequestWithEntityName:@"FMLGroceryList"];
+    
+    _groceryLists = [[self.managedObjectContext executeFetchRequest:getAllLists error:nil] mutableCopy];
+    
+    return _groceryLists;
+}
+
+- (FMLGroceryList *)newGroceryList {
+    
+    FMLGroceryList *newList = [NSEntityDescription insertNewObjectForEntityForName:@"FMLGroceryList" inManagedObjectContext:self.managedObjectContext];
+    NSLog(@"does a new list ever get created????");
+    [self saveContext];
+    
+    return newList;
+}
+
 
 @end

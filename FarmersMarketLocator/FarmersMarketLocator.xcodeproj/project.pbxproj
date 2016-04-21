@@ -16,13 +16,12 @@
 		1F3ED96C1CAB0AE50038F590 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F3ED96A1CAB0AE50038F590 /* LaunchScreen.storyboard */; };
 		1F3ED9771CAB0AE50038F590 /* FarmersMarketLocatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3ED9761CAB0AE50038F590 /* FarmersMarketLocatorTests.m */; };
 		1F3ED9821CAB0AE50038F590 /* FarmersMarketLocatorUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3ED9811CAB0AE50038F590 /* FarmersMarketLocatorUITests.m */; };
-		8B03872A1CC578ED00854B0D /* Secrets.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0387291CC578ED00854B0D /* Secrets.m */; };
 		8B0548B51CBEBEFA00843CB4 /* FMLContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0548B41CBEBEFA00843CB4 /* FMLContainerViewController.swift */; };
 		8B356E991CBFF86700AEEB11 /* DogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B356E981CBFF86700AEEB11 /* DogViewController.swift */; };
 		8B356E9B1CBFF87100AEEB11 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B356E9A1CBFF87100AEEB11 /* CartViewController.swift */; };
-		8B356E9D1CBFF88B00AEEB11 /* BookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B356E9C1CBFF88B00AEEB11 /* BookViewController.swift */; };
 		8B5635981CAF081A007DC27E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B5635961CAF081A007DC27E /* DataModel.xcdatamodeld */; };
-		8B5635C11CAF0858007DC27E /* CoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5635C01CAF0858007DC27E /* CoreDataStack.m */; };
+		8B7186D21CC7692E00BB6145 /* Secrets.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7186D11CC7692E00BB6145 /* Secrets.m */; };
+		8B788DAF1CC7706100CF39AB /* FMLResourcesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B788DAE1CC7706100CF39AB /* FMLResourcesViewController.swift */; };
 		8B8C59D01CC10983009BE852 /* FMLTitleView.swift in Resources */ = {isa = PBXBuildFile; fileRef = 8B8C59CF1CC10983009BE852 /* FMLTitleView.swift */; };
 		8B9E5A811CB2F7DA0050915D /* FMLJSONDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E5A801CB2F7DA0050915D /* FMLJSONDictionary.m */; };
 		8B9E5A831CB2F7E80050915D /* farmers-markets.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B9E5A821CB2F7E80050915D /* farmers-markets.json */; };
@@ -50,6 +49,22 @@
 		A38CD0D71CC0394A00A0590C /* FMLSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = A38CD0D61CC0394A00A0590C /* FMLSearch.m */; };
 		A38CD0DA1CC039B600A0590C /* FMLTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A38CD0D91CC039B600A0590C /* FMLTextFieldDelegate.m */; };
 		A3BF3C941CC56FD1004E4942 /* FMLTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8C59CF1CC10983009BE852 /* FMLTitleView.swift */; };
+		E10650791CC6DF9200B33FF2 /* CoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5635C01CAF0858007DC27E /* CoreDataStack.m */; };
+		E18965C81CC425FD00D8A488 /* FMLGroceryList+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E18965C51CC425FD00D8A488 /* FMLGroceryList+CoreDataProperties.m */; };
+		E18965C91CC425FD00D8A488 /* FMLGroceryList.m in Sources */ = {isa = PBXBuildFile; fileRef = E18965C71CC425FD00D8A488 /* FMLGroceryList.m */; };
+		E18965CC1CC42A1B00D8A488 /* FMLGroceryListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E18965CB1CC42A1B00D8A488 /* FMLGroceryListCell.m */; };
+		E18965D01CC42B5400D8A488 /* FMLGroceryListCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E18965CE1CC42B5400D8A488 /* FMLGroceryListCellView.m */; };
+		E18965D11CC42B5400D8A488 /* FMLGroceryListCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E18965CF1CC42B5400D8A488 /* FMLGroceryListCellView.xib */; };
+		E1D1AF2F1CBFE93400183165 /* FMLGroceryListsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF1E1CBFE93400183165 /* FMLGroceryListsTVC.m */; };
+		E1D1AF301CBFE93400183165 /* FMLGroceryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF201CBFE93400183165 /* FMLGroceryCell.m */; };
+		E1D1AF311CBFE93400183165 /* FMLGroceryCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF221CBFE93400183165 /* FMLGroceryCellView.m */; };
+		E1D1AF321CBFE93400183165 /* FMLGroceryCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D1AF231CBFE93400183165 /* FMLGroceryCellView.xib */; };
+		E1D1AF351CBFE93400183165 /* GroceryList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1D1AF281CBFE93400183165 /* GroceryList.storyboard */; };
+		E1D1AF361CBFE93400183165 /* FMLGroceryTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF2A1CBFE93400183165 /* FMLGroceryTVC.m */; };
+		E1D1AF371CBFE93400183165 /* FMLNewItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF2C1CBFE93400183165 /* FMLNewItemView.m */; };
+		E1D1AF381CBFE93400183165 /* FMLNewItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF2E1CBFE93400183165 /* FMLNewItemViewController.m */; };
+		E1D1AF3D1CC01B4200183165 /* FMLGroceryItem+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF3A1CC01B4200183165 /* FMLGroceryItem+CoreDataProperties.m */; };
+		E1D1AF3E1CC01B4200183165 /* FMLGroceryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF3C1CC01B4200183165 /* FMLGroceryItem.m */; };
 		E1F95DCD1CAB12D6009DA977 /* FMLAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F95DCC1CAB12D6009DA977 /* FMLAPIClient.m */; };
 /* End PBXBuildFile section */
 
@@ -90,15 +105,15 @@
 		1F3ED9811CAB0AE50038F590 /* FarmersMarketLocatorUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FarmersMarketLocatorUITests.m; sourceTree = "<group>"; };
 		1F3ED9831CAB0AE50038F590 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F3ED98F1CAB0C990038F590 /* Secrets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Secrets.h; path = ../Secrets.h; sourceTree = "<group>"; };
-		8B0387291CC578ED00854B0D /* Secrets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secrets.m; sourceTree = "<group>"; };
 		8B0548B41CBEBEFA00843CB4 /* FMLContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMLContainerViewController.swift; sourceTree = "<group>"; };
 		8B0548B61CBEBF4900843CB4 /* FarmersMarketLocator-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FarmersMarketLocator-Bridging-Header.h"; sourceTree = "<group>"; };
 		8B356E981CBFF86700AEEB11 /* DogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DogViewController.swift; sourceTree = "<group>"; };
 		8B356E9A1CBFF87100AEEB11 /* CartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
-		8B356E9C1CBFF88B00AEEB11 /* BookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookViewController.swift; sourceTree = "<group>"; };
 		8B5635971CAF081A007DC27E /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		8B5635BF1CAF0858007DC27E /* CoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataStack.h; sourceTree = "<group>"; };
 		8B5635C01CAF0858007DC27E /* CoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataStack.m; sourceTree = "<group>"; };
+		8B7186D11CC7692E00BB6145 /* Secrets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secrets.m; sourceTree = "<group>"; };
+		8B788DAE1CC7706100CF39AB /* FMLResourcesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMLResourcesViewController.swift; sourceTree = "<group>"; };
 		8B8C59CF1CC10983009BE852 /* FMLTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMLTitleView.swift; sourceTree = "<group>"; };
 		8B9E5A7F1CB2F7DA0050915D /* FMLJSONDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLJSONDictionary.h; sourceTree = "<group>"; };
 		8B9E5A801CB2F7DA0050915D /* FMLJSONDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLJSONDictionary.m; sourceTree = "<group>"; };
@@ -137,6 +152,33 @@
 		A38CD0D61CC0394A00A0590C /* FMLSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLSearch.m; sourceTree = "<group>"; };
 		A38CD0D81CC039B600A0590C /* FMLTextFieldDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLTextFieldDelegate.h; sourceTree = "<group>"; };
 		A38CD0D91CC039B600A0590C /* FMLTextFieldDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLTextFieldDelegate.m; sourceTree = "<group>"; };
+		E18965C41CC425FD00D8A488 /* FMLGroceryList+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FMLGroceryList+CoreDataProperties.h"; sourceTree = "<group>"; };
+		E18965C51CC425FD00D8A488 /* FMLGroceryList+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMLGroceryList+CoreDataProperties.m"; sourceTree = "<group>"; };
+		E18965C61CC425FD00D8A488 /* FMLGroceryList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryList.h; sourceTree = "<group>"; };
+		E18965C71CC425FD00D8A488 /* FMLGroceryList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryList.m; sourceTree = "<group>"; };
+		E18965CA1CC42A1B00D8A488 /* FMLGroceryListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryListCell.h; sourceTree = "<group>"; };
+		E18965CB1CC42A1B00D8A488 /* FMLGroceryListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryListCell.m; sourceTree = "<group>"; };
+		E18965CD1CC42B5400D8A488 /* FMLGroceryListCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryListCellView.h; sourceTree = "<group>"; };
+		E18965CE1CC42B5400D8A488 /* FMLGroceryListCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryListCellView.m; sourceTree = "<group>"; };
+		E18965CF1CC42B5400D8A488 /* FMLGroceryListCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FMLGroceryListCellView.xib; sourceTree = "<group>"; };
+		E1D1AF1D1CBFE93400183165 /* FMLGroceryListsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryListsTVC.h; sourceTree = "<group>"; };
+		E1D1AF1E1CBFE93400183165 /* FMLGroceryListsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryListsTVC.m; sourceTree = "<group>"; };
+		E1D1AF1F1CBFE93400183165 /* FMLGroceryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryCell.h; sourceTree = "<group>"; };
+		E1D1AF201CBFE93400183165 /* FMLGroceryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryCell.m; sourceTree = "<group>"; };
+		E1D1AF211CBFE93400183165 /* FMLGroceryCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryCellView.h; sourceTree = "<group>"; };
+		E1D1AF221CBFE93400183165 /* FMLGroceryCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryCellView.m; sourceTree = "<group>"; };
+		E1D1AF231CBFE93400183165 /* FMLGroceryCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FMLGroceryCellView.xib; sourceTree = "<group>"; };
+		E1D1AF281CBFE93400183165 /* GroceryList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GroceryList.storyboard; sourceTree = "<group>"; };
+		E1D1AF291CBFE93400183165 /* FMLGroceryTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryTVC.h; sourceTree = "<group>"; };
+		E1D1AF2A1CBFE93400183165 /* FMLGroceryTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryTVC.m; sourceTree = "<group>"; };
+		E1D1AF2B1CBFE93400183165 /* FMLNewItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLNewItemView.h; sourceTree = "<group>"; };
+		E1D1AF2C1CBFE93400183165 /* FMLNewItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLNewItemView.m; sourceTree = "<group>"; };
+		E1D1AF2D1CBFE93400183165 /* FMLNewItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLNewItemViewController.h; sourceTree = "<group>"; };
+		E1D1AF2E1CBFE93400183165 /* FMLNewItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLNewItemViewController.m; sourceTree = "<group>"; };
+		E1D1AF391CC01B4200183165 /* FMLGroceryItem+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FMLGroceryItem+CoreDataProperties.h"; sourceTree = "<group>"; };
+		E1D1AF3A1CC01B4200183165 /* FMLGroceryItem+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMLGroceryItem+CoreDataProperties.m"; sourceTree = "<group>"; };
+		E1D1AF3B1CC01B4200183165 /* FMLGroceryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLGroceryItem.h; sourceTree = "<group>"; };
+		E1D1AF3C1CC01B4200183165 /* FMLGroceryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLGroceryItem.m; sourceTree = "<group>"; };
 		E1F95DCB1CAB12D6009DA977 /* FMLAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLAPIClient.h; sourceTree = "<group>"; };
 		E1F95DCC1CAB12D6009DA977 /* FMLAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLAPIClient.m; sourceTree = "<group>"; };
 		E426A69268E3DA9622C8E051 /* Pods-FarmersMarketLocator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FarmersMarketLocator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FarmersMarketLocator/Pods-FarmersMarketLocator.debug.xcconfig"; sourceTree = "<group>"; };
@@ -199,6 +241,7 @@
 				1F3ED9601CAB0AE50038F590 /* AppDelegate.m */,
 				8B5635BF1CAF0858007DC27E /* CoreDataStack.h */,
 				8B5635C01CAF0858007DC27E /* CoreDataStack.m */,
+				E1D1AF191CBFE68000183165 /* Grocery List */,
 				8BBD40071CAEAF3800A1DB0E /* Custom Views */,
 				8BBD40021CAEAD6600A1DB0E /* View Controllers */,
 				8BBD40061CAEAED600A1DB0E /* Objects */,
@@ -264,9 +307,9 @@
 				8B0548B41CBEBEFA00843CB4 /* FMLContainerViewController.swift */,
 				8BC2BA3F1CADD02E005DD7F3 /* FMLMapViewController.h */,
 				8BC2BA401CADD02E005DD7F3 /* FMLMapViewController.m */,
+				8B788DAE1CC7706100CF39AB /* FMLResourcesViewController.swift */,
 				8B356E981CBFF86700AEEB11 /* DogViewController.swift */,
 				8B356E9A1CBFF87100AEEB11 /* CartViewController.swift */,
-				8B356E9C1CBFF88B00AEEB11 /* BookViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -297,10 +340,18 @@
 		8BBD40051CAEADA200A1DB0E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8BE219A81CAF1D610014D046 /* FMLMarket.h */,
-				8BE219A91CAF1D610014D046 /* FMLMarket.m */,
+				E18965C41CC425FD00D8A488 /* FMLGroceryList+CoreDataProperties.h */,
+				E18965C51CC425FD00D8A488 /* FMLGroceryList+CoreDataProperties.m */,
+				E18965C61CC425FD00D8A488 /* FMLGroceryList.h */,
+				E18965C71CC425FD00D8A488 /* FMLGroceryList.m */,
+				E1D1AF391CC01B4200183165 /* FMLGroceryItem+CoreDataProperties.h */,
+				E1D1AF3A1CC01B4200183165 /* FMLGroceryItem+CoreDataProperties.m */,
+				E1D1AF3B1CC01B4200183165 /* FMLGroceryItem.h */,
+				E1D1AF3C1CC01B4200183165 /* FMLGroceryItem.m */,
 				8BE219A51CAF0A980014D046 /* FMLMarket+CoreDataProperties.h */,
 				8BE219A61CAF0A980014D046 /* FMLMarket+CoreDataProperties.m */,
+				8BE219A81CAF1D610014D046 /* FMLMarket.h */,
+				8BE219A91CAF1D610014D046 /* FMLMarket.m */,
 				8B5635961CAF081A007DC27E /* DataModel.xcdatamodeld */,
 			);
 			name = Models;
@@ -316,7 +367,7 @@
 				E1F95DCB1CAB12D6009DA977 /* FMLAPIClient.h */,
 				E1F95DCC1CAB12D6009DA977 /* FMLAPIClient.m */,
 				1F3ED98F1CAB0C990038F590 /* Secrets.h */,
-				8B0387291CC578ED00854B0D /* Secrets.m */,
+				8B7186D11CC7692E00BB6145 /* Secrets.m */,
 				8B9E5A7F1CB2F7DA0050915D /* FMLJSONDictionary.h */,
 				8B9E5A801CB2F7DA0050915D /* FMLJSONDictionary.m */,
 				A38CD0D21CC0393800A0590C /* GeocodeLocation.h */,
@@ -337,6 +388,32 @@
 				1F1746941CB460C10018383B /* FMLPinAnnotationView.m */,
 			);
 			name = "Custom Views";
+			sourceTree = "<group>";
+		};
+		E1D1AF191CBFE68000183165 /* Grocery List */ = {
+			isa = PBXGroup;
+			children = (
+				E1D1AF281CBFE93400183165 /* GroceryList.storyboard */,
+				E18965CD1CC42B5400D8A488 /* FMLGroceryListCellView.h */,
+				E18965CE1CC42B5400D8A488 /* FMLGroceryListCellView.m */,
+				E18965CF1CC42B5400D8A488 /* FMLGroceryListCellView.xib */,
+				E18965CA1CC42A1B00D8A488 /* FMLGroceryListCell.h */,
+				E18965CB1CC42A1B00D8A488 /* FMLGroceryListCell.m */,
+				E1D1AF1D1CBFE93400183165 /* FMLGroceryListsTVC.h */,
+				E1D1AF1E1CBFE93400183165 /* FMLGroceryListsTVC.m */,
+				E1D1AF211CBFE93400183165 /* FMLGroceryCellView.h */,
+				E1D1AF221CBFE93400183165 /* FMLGroceryCellView.m */,
+				E1D1AF231CBFE93400183165 /* FMLGroceryCellView.xib */,
+				E1D1AF1F1CBFE93400183165 /* FMLGroceryCell.h */,
+				E1D1AF201CBFE93400183165 /* FMLGroceryCell.m */,
+				E1D1AF291CBFE93400183165 /* FMLGroceryTVC.h */,
+				E1D1AF2A1CBFE93400183165 /* FMLGroceryTVC.m */,
+				E1D1AF2B1CBFE93400183165 /* FMLNewItemView.h */,
+				E1D1AF2C1CBFE93400183165 /* FMLNewItemView.m */,
+				E1D1AF2D1CBFE93400183165 /* FMLNewItemViewController.h */,
+				E1D1AF2E1CBFE93400183165 /* FMLNewItemViewController.m */,
+			);
+			name = "Grocery List";
 			sourceTree = "<group>";
 		};
 		F6DD38CCFF2543FDA5788BC3 /* Frameworks */ = {
@@ -466,7 +543,10 @@
 				8BAC6A8A1CB7E615001EEDE1 /* farmers-markets-1.json in Resources */,
 				1F3ED96C1CAB0AE50038F590 /* LaunchScreen.storyboard in Resources */,
 				1F3ED9691CAB0AE50038F590 /* Assets.xcassets in Resources */,
+				E18965D11CC42B5400D8A488 /* FMLGroceryListCellView.xib in Resources */,
+				E1D1AF321CBFE93400183165 /* FMLGroceryCellView.xib in Resources */,
 				1F3ED9671CAB0AE50038F590 /* Main.storyboard in Resources */,
+				E1D1AF351CBFE93400183165 /* GroceryList.storyboard in Resources */,
 				8BAC6A8E1CB7E615001EEDE1 /* farmers-markets-5.json in Resources */,
 				8BAC6A8F1CB7E615001EEDE1 /* farmers-markets-6.json in Resources */,
 				8BAC6A901CB7E615001EEDE1 /* farmers-markets-7.json in Resources */,
@@ -545,20 +625,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E18965CC1CC42A1B00D8A488 /* FMLGroceryListCell.m in Sources */,
 				A3BF3C941CC56FD1004E4942 /* FMLTitleView.swift in Sources */,
 				8BBD3FFE1CAEA8AB00A1DB0E /* FMLMapViewDelegate.m in Sources */,
+				E1D1AF371CBFE93400183165 /* FMLNewItemView.m in Sources */,
+				E18965C91CC425FD00D8A488 /* FMLGroceryList.m in Sources */,
+				E1D1AF2F1CBFE93400183165 /* FMLGroceryListsTVC.m in Sources */,
 				E1F95DCD1CAB12D6009DA977 /* FMLAPIClient.m in Sources */,
+				E1D1AF301CBFE93400183165 /* FMLGroceryCell.m in Sources */,
 				A38CD0DA1CC039B600A0590C /* FMLTextFieldDelegate.m in Sources */,
 				8BE219A71CAF0A980014D046 /* FMLMarket+CoreDataProperties.m in Sources */,
-				8B03872A1CC578ED00854B0D /* Secrets.m in Sources */,
 				8BBD400D1CAED53E00A1DB0E /* FMLDetailView.m in Sources */,
+				8B7186D21CC7692E00BB6145 /* Secrets.m in Sources */,
+				E1D1AF381CBFE93400183165 /* FMLNewItemViewController.m in Sources */,
+				E1D1AF311CBFE93400183165 /* FMLGroceryCellView.m in Sources */,
 				8BE219AA1CAF1D610014D046 /* FMLMarket.m in Sources */,
 				1F3ED9611CAB0AE50038F590 /* AppDelegate.m in Sources */,
+				E1D1AF3E1CC01B4200183165 /* FMLGroceryItem.m in Sources */,
 				A38473B31CADAF7200ED08CA /* Annotation.m in Sources */,
 				8BC2BA411CADD02E005DD7F3 /* FMLMapViewController.m in Sources */,
 				1F3ED95E1CAB0AE50038F590 /* main.m in Sources */,
+				E18965C81CC425FD00D8A488 /* FMLGroceryList+CoreDataProperties.m in Sources */,
+				E1D1AF3D1CC01B4200183165 /* FMLGroceryItem+CoreDataProperties.m in Sources */,
+				8B5635981CAF081A007DC27E /* DataModel.xcdatamodeld in Sources */,
+				E18965D01CC42B5400D8A488 /* FMLGroceryListCellView.m in Sources */,
 				8B356E9B1CBFF87100AEEB11 /* CartViewController.swift in Sources */,
-				8B5635C11CAF0858007DC27E /* CoreDataStack.m in Sources */,
 				8B5635981CAF081A007DC27E /* DataModel.xcdatamodeld in Sources */,
 				A38CD0D71CC0394A00A0590C /* FMLSearch.m in Sources */,
 				8B356E991CBFF86700AEEB11 /* DogViewController.swift in Sources */,
@@ -566,9 +657,11 @@
 				A38473B61CADAFC300ED08CA /* SampleZipCodes.m in Sources */,
 				A38CD0D41CC0393800A0590C /* GeocodeLocation.m in Sources */,
 				8B0548B51CBEBEFA00843CB4 /* FMLContainerViewController.swift in Sources */,
-				8B356E9D1CBFF88B00AEEB11 /* BookViewController.swift in Sources */,
+				E10650791CC6DF9200B33FF2 /* CoreDataStack.m in Sources */,
+				8B788DAF1CC7706100CF39AB /* FMLResourcesViewController.swift in Sources */,
 				8B9E5A811CB2F7DA0050915D /* FMLJSONDictionary.m in Sources */,
 				8BBD400A1CAEB81700A1DB0E /* FMLLocationManagerDelegate.m in Sources */,
+				E1D1AF361CBFE93400183165 /* FMLGroceryTVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

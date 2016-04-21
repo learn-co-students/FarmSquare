@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+#import "FMLGroceryItem.h"
+#import "FMLGroceryList.h"
 
 
 @interface CoreDataStack : NSObject
@@ -16,8 +17,14 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
+@property (strong, nonatomic) NSMutableArray *groceryItems;
+@property (strong, nonatomic) NSMutableArray *groceryLists;
+
 + (instancetype)sharedStack;
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
+
+- (FMLGroceryItem *)newGroceryItem;
+- (FMLGroceryList *)newGroceryList;
 
 @end
