@@ -10,6 +10,7 @@
 #import "FMLGroceryListCell.h"
 #import "FMLGroceryList.h"
 #import "FMLGroceryTVC.h"
+#import "FMLViewSavedListTVC.h"
 
 @interface FMLGroceryListsTVC ()
 
@@ -63,12 +64,11 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
 if ([segue.identifier isEqualToString:@"viewList"]) {
-        FMLGroceryTVC *destVC = segue.destinationViewController;
+        FMLViewSavedListTVC *destVC = segue.destinationViewController;
         
         NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
         FMLGroceryList *selectedGroceryList = self.stack.groceryLists[selectedIndexPath.row];
-        destVC.groceryListToDisplay = selectedGroceryList;
-        destVC.segueIsViewList = YES;
+        destVC.groceryListToView = selectedGroceryList;
     }
 }
 
@@ -87,6 +87,9 @@ if ([segue.identifier isEqualToString:@"viewList"]) {
     }
 }
 
-
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return 80;
+}
 
 @end
