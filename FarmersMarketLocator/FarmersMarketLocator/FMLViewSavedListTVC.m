@@ -19,23 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    
     //self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
--(void) viewWillDisappear:(BOOL)animated {
-    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
-        // back button was pressed.  We know this is true because self is no longer
-        // in the navigation stack.
-    }
-    [super viewWillDisappear:animated];
-}
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
@@ -50,10 +35,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     FMLGroceryCell *cell = (FMLGroceryCell*)[tableView dequeueReusableCellWithIdentifier:@"groceryCell" forIndexPath:indexPath];
-        
-        FMLGroceryItem *currentItem = self.groceryListToView.itemsInList[indexPath.row];
-        [cell.groceryView setGroceryItem:currentItem];
-        return cell;
+    
+    FMLGroceryItem *currentItem = self.groceryListToView.itemsInList[indexPath.row];
+    [cell.groceryView setGroceryItem:currentItem];
+    
+    return cell;
     
 }
 

@@ -154,6 +154,9 @@
                                         <constraint firstItem="Dyd-FL-ag1" firstAttribute="top" secondItem="jlF-y2-HVC" secondAttribute="top" id="oJU-QW-VpG"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="groceryView" destination="Dyd-FL-ag1" id="v3X-Z0-dMG"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
