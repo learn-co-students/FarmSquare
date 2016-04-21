@@ -11,6 +11,6 @@
 
 @interface FMLGroceryCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet FMLGroceryCellView *groceryView;
+@property (strong, nonatomic) IBOutlet FMLGroceryCellView *groceryView;
 
 @end

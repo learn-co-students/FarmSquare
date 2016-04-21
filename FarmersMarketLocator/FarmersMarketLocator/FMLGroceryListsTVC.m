@@ -10,6 +10,7 @@
 #import "FMLGroceryListCell.h"
 #import "FMLGroceryList.h"
 #import "FMLGroceryTVC.h"
+#import "FMLViewSavedListTVC.h"
 
 @interface FMLGroceryListsTVC ()
 
@@ -21,6 +22,9 @@
     [super viewDidLoad];
     
     self.stack = [CoreDataStack sharedStack];
+    
+    //to allow left swipe delete of a cell
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
     
 }
 
@@ -60,14 +64,32 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
 if ([segue.identifier isEqualToString:@"viewList"]) {
-        FMLGroceryTVC *destVC = segue.destinationViewController;
+        FMLViewSavedListTVC *destVC = segue.destinationViewController;
         
         NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
         FMLGroceryList *selectedGroceryList = self.stack.groceryLists[selectedIndexPath.row];
-        destVC.groceryListToDisplay = selectedGroceryList;
-        destVC.segueIsViewList = YES;
+        destVC.groceryListToView = selectedGroceryList;
     }
 }
 
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        //we need to delete the object from the array, but from core data so that the number of rows is updated with one less
+        FMLGroceryList *listToDelete = self.stack.groceryLists[indexPath.row];
+        
+        [self.stack.managedObjectContext deleteObject:listToDelete];
+    
+        [self.stack saveContext];
+        
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return 80;
+}
 
 @end

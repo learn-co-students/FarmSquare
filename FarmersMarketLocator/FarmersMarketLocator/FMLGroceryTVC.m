@@ -90,19 +90,20 @@
     [super viewWillDisappear:animated];
 }
 
--(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        
-        //we need to delete the object from the array, but from core data so that the number of rows is updated with one less
+//-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        
+//        //we need to delete the object from the array, but from core data so that the number of rows is updated with one less
 //        [self.stack.managedObjectContext deleteObject:self.stack.groceryItems[indexPath.row]];
-
-        // TODO: swipe delete breaks here
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        
-        [tableView reloadData];
-    }
-}
+//
+//        //[self.stack saveContext]; //is this needed?
+//        // TODO: swipe delete breaks here
+//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//        
+//        [tableView reloadData]; //is this needed?
+//    }
+//}
 
 #pragma mark - Table view data source
 
