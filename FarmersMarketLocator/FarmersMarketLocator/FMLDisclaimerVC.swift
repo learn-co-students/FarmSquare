@@ -11,30 +11,41 @@ import UIKit
 class FMLDisclaimerVC: UIViewController {
     
     override func viewDidLoad() {
-        // Transparent yellow view
-        let view = UIView()
+        super.viewDidLoad()
+        // Transparent yellow background
         view.backgroundColor = UIColor.yellowColor().colorWithAlphaComponent(0.5)
-        view.translatesAutoresizingMaskIntoConstraints = false;
-        view.snp_makeConstraints { (make) -> Void in
-            make.edges.equalTo(0)
-        }
-
+        
         // Textview with disclaimer
         let textView = UITextView()
+        textView.backgroundColor = UIColor(colorLiteralRed: 118/255.0, green: 78/255.0, blue: 47/255.0, alpha: 1)
+        textView.textColor = UIColor.whiteColor()
         let disclaimerString = "Disclaimer:\n\nThe information presented in this app is provided by the USDA and we can't guarantee that it's always accurate or up-to-date. Sorry!"
         textView.text = disclaimerString
         view.addSubview(textView)
         
+        
+        // Turn off autoresizing mask
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        
         // Size textview
-        let textviewHeight = textView.heightAnchor.constraintEqualToConstant(view.frame.height * 0.5)
-        let textviewWidth = textView.widthAnchor.constraintEqualToConstant(view.frame.width)
+        textView.heightAnchor.constraintEqualToAnchor(view.heightAnchor, multiplier: 0.5, constant: 0).active = true
+        textView.widthAnchor.constraintEqualToAnchor(view.widthAnchor, multiplier: 1).active = true
+        textView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+        textView.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
         
-        // Center textview vertically and horizontally in view
-        let textviewXPosition = NSLayoutConstraint(item: textView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
-        let textviewYPosition = NSLayoutConstraint(item: textView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
-        
-        view.addConstraints([textviewXPosition, textviewYPosition, textviewHeight, textviewWidth])
 
+        let button = UIButton(type: UIButtonType.Custom)
+        button.addTarget(self, action: "dismissSelf", forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(button)
+        button.snp_makeConstraints { (make) in
+            make.edges.equalTo(0)
+        }
+    }
+    
+    func dismissSelf() {
+        self.dismissViewControllerAnimated(true) { 
+            
+        }
     }
 
 }

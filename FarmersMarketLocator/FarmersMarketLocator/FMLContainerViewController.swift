@@ -279,7 +279,7 @@ class FMLContainerViewController: UIViewController {
         petalRight.layer.anchorPoint = CGPointMake(0.5, 1.0)
         petalRight.transform = CGAffineTransformConcat(CGAffineTransformMakeRotation(120), CGAffineTransformMakeTranslation(0, 21))
         
-        let openDisclaimerGesture = UITapGestureRecognizer(target: self, action: #selector(FMLContainerViewController.openDisclaimer))
+        let openDisclaimerGesture = UITapGestureRecognizer(target: self, action: #selector(openDisclaimer))
         
         self.receptacleButton.addSubview(infoImage)
         infoImage.snp_makeConstraints { (make) in
@@ -290,11 +290,12 @@ class FMLContainerViewController: UIViewController {
         }
         infoImage.addGestureRecognizer(openDisclaimerGesture)
         infoImage.alpha = 0
+        infoImage.userInteractionEnabled = true;
     }
     
     func openDisclaimer() {
         print("test")
-        let vc = DogViewController()
+        let vc = FMLDisclaimerVC()
         self.presentViewController(vc, animated: true) {
             
         }
