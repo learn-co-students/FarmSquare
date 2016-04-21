@@ -40,6 +40,7 @@
 @property (assign, nonatomic) NSUInteger timerCount;
 @property (strong, nonatomic) UIButton *snapFilter;
 @property (strong, nonatomic) UIButton *wicFilter;
+@property (strong, nonatomic) UIButton *creditFilter;
 @property (strong, nonatomic) NSTimer *rotationTimer;
 
 @end
@@ -56,8 +57,8 @@
     self.mapDelegate = [[FMLMapViewDelegate alloc] initWithTarget:self];
     self.locationDelegate = [[FMLLocationManagerDelegate alloc] initWithTarget:self];
     self.textFieldDelegate = [[FMLTextFieldDelegate alloc]initWithTarget:self]; //or searchBarTF?
-
-   // Create and customize map view
+    
+    // Create and customize map view
     self.mapView = [[MKMapView alloc]initWithFrame:self.view.frame];
     self.mapView.showsCompass = NO;
     self.mapView.mapType = MKMapTypeStandard;
@@ -90,12 +91,12 @@
     UIImageView *signBoard = [[UIImageView alloc] initWithFrame:CGRectMake(120, 10, signWidth, 60)];
     signBoard.image = [UIImage imageNamed:@"SignBoard"];
     [self.view addSubview:signBoard];
-
+    
     
     UIImageView *signPost = [[UIImageView alloc] initWithFrame:CGRectMake(signBoard.frame.origin.x + signBoard.frame.size.width, 0, 5, 80)];
     signPost.image = [UIImage imageNamed:@"SignPost"];
     [self.view addSubview:signPost];
-
+    
     
     //set up search bar and search button view
     self.searchBarTextField = [[UITextField alloc]initWithFrame:CGRectMake(40, 0, 0, 0)];
@@ -106,7 +107,7 @@
     
     self.searchButton.imageView.image = [UIImage imageNamed:@"magnifying-glass"];
     self.searchButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
-
+    
     
     [self.searchButton addTarget:self action:@selector(callSearchMethod) forControlEvents:UIControlEventTouchUpInside];
     
@@ -221,11 +222,28 @@
     [self.wicFilter.topAnchor constraintEqualToAnchor:self.snapFilter.topAnchor].active = YES;
     [self.wicFilter.leadingAnchor constraintEqualToAnchor:self.snapFilter.trailingAnchor constant:8].active = YES;
     
+    self.creditFilter = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.creditFilter.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.creditFilter setTitle:@"Credit Card" forState:UIControlStateNormal];
+    self.creditFilter.backgroundColor = [UIColor colorWithWhite:1 alpha:0.8];
+    [self.creditFilter addTarget:self action:@selector(selectOrDeselectFilterButton:) forControlEvents:UIControlEventTouchUpInside];
+    if (!([[NSUserDefaults standardUserDefaults]boolForKey:@"Credit Card Filter Enabled"])){
+        [self.creditFilter setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    } else {
+        [self.creditFilter setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    }
+    
+    
+    [self.view addSubview:self.creditFilter];
+    [self.creditFilter.topAnchor constraintEqualToAnchor:self.snapFilter.topAnchor].active = YES;
+    [self.creditFilter.leadingAnchor constraintEqualToAnchor:self.wicFilter.trailingAnchor constant:8].active = YES;
+    
 }
 
 -(void)hideSearchFilters{
     self.wicFilter.alpha = 0;
     self.snapFilter.alpha = 0;
+    self.creditFilter.alpha = 0;
 }
 
 -(void)selectOrDeselectFilterButton:(UIButton *)selector{
@@ -237,7 +255,6 @@
         [[NSUserDefaults standardUserDefaults]setBool:NO forKey:[NSString stringWithFormat:@"%@ Filter Enabled", selector.titleLabel.text]];
     }
     
-    NSLog(@"%d", [[NSUserDefaults standardUserDefaults]boolForKey:[NSString stringWithFormat:@"%@ Filter Enabled", selector.titleLabel.text]]);
 }
 
 -(void)zoomBackOut:(NSNotification *)notification {
@@ -291,7 +308,7 @@
             // Plot a pin for the coordinates of each FMLMarket object in marketsArray.
             [self displayMarketObjects:self.marketsArray FromIndex:0];
         }
-
+        
         
     }];
     
@@ -329,6 +346,7 @@
         NSUInteger index = self.marketsArray.count;
         self.marketsArray = [self.marketsArray arrayByAddingObjectsFromArray:marketsArray];
         // Plot a pin for the coordinates of each FMLMarket object in marketsArray.
+        NSLog(@"about to display new markets");
         [self displayMarketObjects:marketsArray FromIndex:index];
     }];
     
@@ -336,7 +354,9 @@
 
 -(void)displayMarketObjects:(NSArray *)marketsArray FromIndex:(NSUInteger)index {
     self.keepRotating = NO;
+    NSLog(@"about to filter");
     marketsArray = [self filterMarkets:marketsArray];
+    NSLog(@"finished filtering");
     
     for (FMLMarket *farmersMarket in marketsArray) {
         CLLocationCoordinate2D location;
@@ -360,31 +380,38 @@
     
     BOOL filterBySNAP = [[NSUserDefaults standardUserDefaults]boolForKey:@"SNAP Filter Enabled"];
     BOOL filterByWIC = [[NSUserDefaults standardUserDefaults]boolForKey:@"WIC Filter Enabled"];
-    NSArray *filteredArray = [[NSArray alloc]init];
+    BOOL filterByCredit = [[NSUserDefaults standardUserDefaults]boolForKey:@"Credit Card Filter Enabled"];
     
-    if (filterByWIC){
-        NSPredicate *filterByWICPredicate = [NSPredicate predicateWithFormat:@"%K = %@", @"wic", @1];
-        filteredArray = [marketsArray filteredArrayUsingPredicate:filterByWICPredicate];
-   
-    }
-    
-    if (filterBySNAP && filterByWIC){
-        NSPredicate *filterBySNAPPredicate = [NSPredicate predicateWithFormat:@"%K = %@", @"snap", @1];
-        filteredArray = [filteredArray filteredArrayUsingPredicate:filterBySNAPPredicate];
-  
-    } else if (filterBySNAP) {
-        NSPredicate *filterBySNAPPredicate = [NSPredicate predicateWithFormat:@"%K = %@", @"snap", @1];
-        filteredArray = [marketsArray filteredArrayUsingPredicate:filterBySNAPPredicate];
-  
-    }
-    
-    if (filterByWIC || filterBySNAP){
-        return filteredArray;
-    } else {
+    if (!(filterByCredit && filterBySNAP && filterByWIC)){
         return marketsArray;
+    } else {
+        NSMutableArray *mMarketsArray = [marketsArray mutableCopy];
+        
+        if (filterByWIC){
+            NSPredicate *filterByWICPredicate = [NSPredicate predicateWithFormat:@"%K = %@", @"wic", @1];
+            [mMarketsArray filterUsingPredicate:filterByWICPredicate];
+        }
+        
+        if (filterBySNAP){
+            NSPredicate *filterBySNAPPredicate = [NSPredicate predicateWithFormat:@"%K = %@", @"snap", @1];
+            [mMarketsArray filterUsingPredicate:filterBySNAPPredicate];
+        }
+        
+        if (filterByCredit){
+            NSPredicate *filterByCreditPredicate = [NSPredicate predicateWithFormat:@"%K = %@", @"credit", @1];
+            [mMarketsArray filterUsingPredicate:filterByCreditPredicate];
+        }
+        
+        
+        return mMarketsArray;
     }
     
-    
+}
+
+-(NSArray *)filterArray:(NSMutableArray *)mArray usingPredicate:(NSPredicate *)predicate{
+    //    return [array filterUsingPredicate:predicate];
+    [mArray filterUsingPredicate:predicate];
+    return mArray;
 }
 
 
@@ -423,28 +450,29 @@
 
 -(void)redoSearchInCurrentMapArea {
     self.keepRotating = YES;
-//    self.rotationTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(rotateRedoSearchButton) userInfo:nil repeats:YES];
+    //    self.rotationTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(rotateRedoSearchButton) userInfo:nil repeats:YES];
     [self rotateRedoSearchButton];
     
     
     MKCoordinateRegion currentRegion = self.mapView.region;
     CLLocationDegrees latitude = currentRegion.center.latitude;
     CLLocationDegrees longitude = currentRegion.center.longitude;
-
+    
     [FMLAPIClient getMarketsForLatitude:latitude longitude:longitude withCompletion:^(NSMutableArray *marketsArray, NSError *error) {
         
         // If error, show error alert. If not, display markets.
         if (error) {
             [self showErrorAlert];
         } else {
-            
-            [FMLAPIClient getMarketsForLatitude:latitude longitude:longitude withCompletion:^(NSMutableArray *marketsArray, NSError *error) {
-                NSUInteger index = [self.marketsArray count];
-                self.marketsArray = [self.marketsArray arrayByAddingObjectsFromArray:marketsArray];
-                [self displayMarketObjects:marketsArray FromIndex:index];
-            }];
+            NSUInteger index = [self.marketsArray count];
+            self.marketsArray = [self.marketsArray arrayByAddingObjectsFromArray:marketsArray];
+            [self displayMarketObjects:marketsArray FromIndex:index];
         }
     }];
+}
+
+-(void)searchFromUserDefaultsLatLng{
+    
 }
 
 -(void)rotateRedoSearchButton {
@@ -452,14 +480,9 @@
         [UIView animateWithDuration:0.2 animations:^{
             self.redoSearchInMapAreaButton.transform = CGAffineTransformMakeRotation(self.timerCount/-0.1);
             self.timerCount += 50;        } completion:^(BOOL finished) {
-            [self rotateRedoSearchButton];
-        }];
+                [self rotateRedoSearchButton];
+            }];
     }
-    
-    
-
-
-    
 }
 
 -(void)callSearchMethod{
