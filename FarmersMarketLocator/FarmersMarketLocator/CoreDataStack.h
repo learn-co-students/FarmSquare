@@ -23,9 +23,8 @@
 + (instancetype)sharedStack;
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
-- (void) fetchData;
 
-- (FMLGroceryItem *)newGroceryItem;
-- (FMLGroceryList *)newGroceryList;
+//- (FMLGroceryItem *)newGroceryItem;
+//- (FMLGroceryList *)newGroceryList;
 
 @end
