@@ -17,23 +17,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     self.stack = [CoreDataStack sharedStack];
 }
 
 
 - (IBAction)saveTapped:(id)sender {
-    NSLog(@"saveTapped!");
     
     NSString *itemName = self.itemNameTextField.text;
     NSString *itemQuantity = self.itemQuantTextField.text;
     
-    //FMLGroceryItem *addedItem = [FMLGroceryItem new];
     FMLGroceryItem *addedItem = (FMLGroceryItem *)[NSEntityDescription insertNewObjectForEntityForName:@"FMLGroceryItem" inManagedObjectContext:self.stack.managedObjectContext];
     addedItem.name = itemName;
     addedItem.quantity = itemQuantity;
-    
     
     [self.stack saveContext];
     
@@ -48,15 +44,5 @@
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -23,8 +23,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) id <NewItemDelegate> delegate;
 
-//@property (strong, nonatomic) GroceryItem *addedGroceryItem;
-
 @property (strong, nonatomic) CoreDataStack *stack;
 
 @end

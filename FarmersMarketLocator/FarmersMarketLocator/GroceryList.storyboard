@@ -36,8 +36,8 @@
                                 </tableViewCellContentView>
                                 <accessibility key="accessibilityConfiguration" identifier="listCell"/>
                                 <connections>
-                                    <outlet property="groceryListView" destination="ttn-G5-vtj" id="5zg-I6-TW4"/>
-                                    <segue destination="8Bg-lH-Rb2" kind="presentation" identifier="viewList" id="96X-Ep-tGR"/>
+                                    <outlet property="groceryListView" destination="ttn-G5-vtj" id="amo-NV-zzV"/>
+                                    <segue destination="sjZ-oS-ddN" kind="show" identifier="viewList" id="PbP-Ub-0zL"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -125,6 +125,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z8w-7f-H8J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-204" y="-264"/>
+        </scene>
+        <!--View Saved ListTVC-->
+        <scene sceneID="hEp-Lx-1zc">
+            <objects>
+                <tableViewController id="sjZ-oS-ddN" customClass="FMLViewSavedListTVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="o2G-wj-q5M">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="groceryCell" id="AI0-F1-78w" customClass="FMLGroceryCell">
+                                <rect key="frame" x="0.0" y="92" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AI0-F1-78w" id="jlF-y2-HVC">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dyd-FL-ag1" customClass="FMLGroceryCellView">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Dyd-FL-ag1" firstAttribute="leading" secondItem="jlF-y2-HVC" secondAttribute="leading" id="Lhe-DE-20d"/>
+                                        <constraint firstAttribute="trailing" secondItem="Dyd-FL-ag1" secondAttribute="trailing" id="hh3-PV-fHs"/>
+                                        <constraint firstAttribute="bottom" secondItem="Dyd-FL-ag1" secondAttribute="bottom" id="jwd-3U-21q"/>
+                                        <constraint firstItem="Dyd-FL-ag1" firstAttribute="top" secondItem="jlF-y2-HVC" secondAttribute="top" id="oJU-QW-VpG"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="groceryView" destination="Dyd-FL-ag1" id="v3X-Z0-dMG"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="sjZ-oS-ddN" id="BxD-kp-xM8"/>
+                            <outlet property="delegate" destination="sjZ-oS-ddN" id="OHR-pL-YYy"/>
+                        </connections>
+                    </tableView>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="958-Lh-avo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-315" y="436"/>
         </scene>
         <!--New Item View Controller-->
         <scene sceneID="AUO-xP-sS8">
@@ -236,7 +280,4 @@
             <point key="canvasLocation" x="-1196" y="-264"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="96X-Ep-tGR"/>
-    </inferredMetricsTieBreakers>
 </document>

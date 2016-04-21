@@ -14,7 +14,7 @@
 
 @implementation FMLAPIClient
 
-+(void)getMarketsForZip:(NSString *)zip withCompletion:(void (^)(NSMutableArray *marketsArray))zipCompletion {
++(void)getMarketsForZip:(NSString *)zip withCompletion:(void (^)(NSMutableArray *marketsArray, NSError *error))zipCompletion {
     
     //http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=" + zip
     
@@ -24,22 +24,23 @@
     [sessionManager GET:zipURLString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         // Plug that response object into a method that gets details for all of those markets.
-        [FMLAPIClient marketsArrayForListOfMarkets:responseObject withCompletion:^(NSMutableArray *marketsArray) {
+        [FMLAPIClient marketsArrayForListOfMarkets:responseObject withCompletion:^(NSMutableArray *marketsArray, NSError *error) {
             
             // Now we have an array of market objects. All we do with it is pass it to the completion block.
-            zipCompletion(marketsArray);
+            zipCompletion(marketsArray, nil);
             
         }];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        NSLog(@"error: %@", error);
+        // Pass the error up to the view controller
+        zipCompletion(nil, error);
+        NSLog(@"\nError in getMarketsForZip: %@\n", error);
+        
     }];
 }
 
-+(void)getMarketsForLatitude:(CGFloat)latitude longitude:(CGFloat)longitude withCompletion:(void (^)(NSMutableArray *marketsArray))coordinatesCompletion {
-    
-    NSLog(@"Making an API Call");
++(void)getMarketsForLatitude:(CGFloat)latitude longitude:(CGFloat)longitude withCompletion:(void (^)(NSMutableArray *marketsArray, NSError *error))coordinatesCompletion {
     
     //http://search.ams.usda.gov/farmersmarkets/v1/data.svc/locSearch?lat=" + lat + "&lng=" + lng
     //http://search.ams.usda.gov/farmersmarkets/v1/svcdesc.html
@@ -54,23 +55,24 @@
     AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
     [sessionManager GET:finalCoordinatesURLString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-//        NSLog(@"response object: %@", responseObject);
-        
         // Plug that response object into a method that gets details for all of those markets.
-        [FMLAPIClient marketsArrayForListOfMarkets:responseObject withCompletion:^(NSMutableArray *marketsArray) {
+        [FMLAPIClient marketsArrayForListOfMarkets:responseObject withCompletion:^(NSMutableArray *marketsArray, NSError *error) {
             
             // Now we have an array of market objects. All we do with it is pass it to the completion block.
-            coordinatesCompletion(marketsArray);
+            coordinatesCompletion(marketsArray, nil);
             
         }];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
+        // Pass the error up to the view controller
+        coordinatesCompletion(nil, error);
         NSLog(@"\nerror: %@\n", error);
+        
     }];
 }
 
-+(void)getDetailsForMarketWithId:(NSString *)idNumber withCompletion:(void (^)(NSDictionary *marketDetails))idCompletion {
++(void)getDetailsForMarketWithId:(NSString *)idNumber withCompletion:(void (^)(NSDictionary *marketDetails, NSError *error))idCompletion {
     
     // API link:
     // http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=" + id
@@ -88,18 +90,19 @@
         sessionManagerDetails.responseSerializer = [[AFJSONResponseSerializer alloc]init];
         // Get dictionary of market details
         NSDictionary *marketDetails = responseObject[@"marketdetails"];
-        NSLog(@"Market JSON: %@", marketDetails);
         // Pass the dictionary to the completion block
-        idCompletion(marketDetails);
+        idCompletion(marketDetails, nil);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        NSLog(@"\nerror: %@\n", error);
+        idCompletion(nil, error);
+        NSLog(@"\nError in getDetailsForMarketWithId:%@ %@\n", idNumber, error);
+        
     }];
 }
 
 // This method takes the API response containing a list of markets (each with a name and numerical ID), makes an array of FMLMarket objects, and hands this array to its completion block.
-+(void)marketsArrayForListOfMarkets:(NSDictionary *)marketsDict withCompletion:(void (^)(NSMutableArray *marketsArray))listMarketsCompletion {
++(void)marketsArrayForListOfMarkets:(NSDictionary *)marketsDict withCompletion:(void (^)(NSMutableArray *marketsArray, NSError *error))listMarketsCompletion {
     
     // This is the array inside the dictionary we get from the first API call
     NSArray *marketDictionariesArray = marketsDict[@"results"];
@@ -114,7 +117,7 @@
      4) Add the FMLMarket object to an array
      4) Pass that array to the completion block.
      */
-    NSLog(@"About to start for loop");
+
     for (NSDictionary *marketDict in marketDictionariesArray) {
         
         NSString *marketID = marketDict[@"id"];
@@ -162,35 +165,48 @@
 
         
         // Now to give it its properties (other than name), call getDetails... to make the API call that gets the dictionary of details.
-        [FMLAPIClient getDetailsForMarketWithId:marketID withCompletion:^(NSDictionary *marketDetails) {
+        [FMLAPIClient getDetailsForMarketWithId:marketID withCompletion:^(NSDictionary *marketDetails, NSError *error) {
             
-            // Give it its properties, from the marketDetails dictionary.
-            
-            market.address = marketDetails[@"Address"];
-            market.googleMapLink = marketDetails[@"GoogleLink"];
-            //Converting products string into an array of products
-            NSString *productsString = marketDetails[@"Products"];
-            market.produceList = productsString;
+            // If API call in getDetails is successful:
+            if (marketDetails) {
+                
+                // Give FMLMarket object its properties, from the marketDetails dictionary.
 
-            //erasing the <br><br><br> at the end of schedule strings
-            NSString *cleanScheduleString = [marketDetails[@"Schedule"] stringByReplacingOccurrencesOfString:@"<br>" withString:@""];
-            market.scheduleString = cleanScheduleString;
-            
-            // (Use the Google link to get the coordinates before setting them.)
-            NSDictionary *marketCoordinates = [FMLAPIClient getCoordinatesFromGoogleMapsLink:market.googleMapLink];
-            market.latitude = marketCoordinates[@"latitude"];
-            market.longitude = marketCoordinates[@"longitude"];
-            
-            // Add the completed FMLMarket object to our mutable array.
-            [marketObjectsArray addObject:market];
-            
-            // At the end of the last iteration, pass the mutable array to the completion block.
-            if(marketObjectsArray.count == marketDictionariesArray.count) {
-                // Pass the array of market objects to the completion block
-                listMarketsCompletion(marketObjectsArray);
+                market.address = marketDetails[@"Address"];
+                market.googleMapLink = marketDetails[@"GoogleLink"];
+                //Converting products string into an array of products
+                NSString *productsString = marketDetails[@"Products"];
+                market.produceList = productsString;
+                
+                //erasing the <br><br><br> at the end of schedule strings
+                NSString *cleanScheduleString = [marketDetails[@"Schedule"] stringByReplacingOccurrencesOfString:@"<br>" withString:@""];
+                market.scheduleString = cleanScheduleString;
+                
+                // (Use the Google link to get the coordinates before setting them.)
+                NSDictionary *marketCoordinates = [FMLAPIClient getCoordinatesFromGoogleMapsLink:market.googleMapLink];
+                market.latitude = marketCoordinates[@"latitude"];
+                market.longitude = marketCoordinates[@"longitude"];
+                
+                // Add the completed FMLMarket object to our mutable array.
+                [marketObjectsArray addObject:market];
+                
+                // At the end of the last iteration, pass the mutable array to the completion block.
+                if(marketObjectsArray.count == marketDictionariesArray.count) {
+                    // Pass the array of market objects to the completion block
+                    listMarketsCompletion(marketObjectsArray, nil);
+                }
+                
+                [[CoreDataStack sharedStack] saveContext];
+                
+            } else {
+                
+                // If API call is unsuccessful
+                NSLog(@"The API call in getDetailsForMarketWithId: failed on the market with ID %@, named %@.", marketID, nameString);
+                listMarketsCompletion(nil, error);
+                
             }
             
-            [[CoreDataStack sharedStack] saveContext];
+            
         }];
         
         
@@ -208,7 +224,7 @@
     // We want to:
     // 1) Get the number between: "?q=" and "%", and the number between "%20" and "(".
     // 2) Turn each number into a CGFloat and put them in the dictionary as latitude and longitude.
-    // 3) Test this with a bunch of URLs to make sure the link is always formatted the same. Even if it is, put in an if-statement so we don't crash if we can't figure out the coordinates.
+    // 3) Put in an if-statement so we don't crash if we can't figure out the coordinates because the URL isn't formatted as expected (or for any other reason).
 
     // Create a mutable dictionary to hold the coordinates
     NSMutableDictionary *coordinatesDictionary = [NSMutableDictionary new];
@@ -223,11 +239,11 @@
     // Now we have a string of the form "LAT, LONG (name)".
     // Example: "40.704587, -74.014313 (\"Bowling+Green+Greenmarket\")"
     
-    // Get the latitude (from 0 to the comma)
+    // Get the latitude (from 0 to the comma).
     NSRange rangeOfComma = [coordinatesAndName rangeOfString:@","];
     NSRange rangeOfLatitude = NSMakeRange(0, rangeOfComma.location);
     NSString *latitude = [coordinatesAndName substringWithRange:rangeOfLatitude];
-//    NSLog(@"latitude: %@", latitude);
+
     
     // Get the longitude (bounded by spaces)
     NSArray *junkArray = [coordinatesAndName componentsSeparatedByString:@" "];
@@ -241,7 +257,7 @@
     coordinatesDictionary[@"latitude"] = latitude;
     coordinatesDictionary[@"longitude"] = longitude;
 
-//    NSLog(@"Coordinates dictionary: \n%@", coordinatesDictionary);
+
     return coordinatesDictionary;
 }
 
