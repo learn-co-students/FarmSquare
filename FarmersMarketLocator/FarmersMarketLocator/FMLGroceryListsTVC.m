@@ -77,11 +77,13 @@ if ([segue.identifier isEqualToString:@"viewList"]) {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
         //we need to delete the object from the array, but from core data so that the number of rows is updated with one less
-        [self.stack.managedObjectContext deleteObject:self.stack.groceryLists[indexPath.row]];
+        FMLGroceryList *listToDelete = self.stack.groceryLists[indexPath.row];
+        
+        [self.stack.managedObjectContext deleteObject:listToDelete];
+    
+        [self.stack saveContext];
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        
-        [tableView reloadData];
     }
 }
 

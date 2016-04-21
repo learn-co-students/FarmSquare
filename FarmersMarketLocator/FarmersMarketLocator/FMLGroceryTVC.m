@@ -97,10 +97,11 @@
 //        //we need to delete the object from the array, but from core data so that the number of rows is updated with one less
 //        [self.stack.managedObjectContext deleteObject:self.stack.groceryItems[indexPath.row]];
 //
+//        //[self.stack saveContext]; //is this needed?
 //        // TODO: swipe delete breaks here
 //        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 //        
-//        [tableView reloadData];
+//        [tableView reloadData]; //is this needed?
 //    }
 //}
 
