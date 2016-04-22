@@ -55,6 +55,7 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
 #pragma mark - MKMapView Delegate Methods
 
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"Hide search filters" object:nil];
     self.selectedAnnotationView = view;
     
     // Show the detail label; show the circle of product category icons
