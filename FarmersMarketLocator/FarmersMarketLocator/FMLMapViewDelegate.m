@@ -13,6 +13,7 @@
 #import "Annotation.h"
 #import "FMLPinAnnotationView.h"
 #import "FarmersMarketLocator-Swift.h"
+#import "FMLMapViewController.h"
 
 typedef NS_ENUM(NSInteger, FMLMarketStatus) {
     FMLMarketHasNoInfo          = -1,

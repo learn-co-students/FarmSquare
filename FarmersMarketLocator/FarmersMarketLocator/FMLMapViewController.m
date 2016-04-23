@@ -64,9 +64,11 @@
     self.mapView.mapType = MKMapTypeStandard;
     self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self.mapDelegate;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideSearchFilters)];
     
     // Add it to view
     [self.view addSubview:self.mapView];
+    [self.mapView addGestureRecognizer:tap];
     
     
     // Create and Add MoveToLocation Button
@@ -248,6 +250,7 @@
     self.wicFilter.alpha = 0;
     self.snapFilter.alpha = 0;
     self.creditFilter.alpha = 0;
+    [self.searchBarTextField endEditing:YES];
 }
 
 -(void)selectOrDeselectFilterButton:(UIButton *)selector{
