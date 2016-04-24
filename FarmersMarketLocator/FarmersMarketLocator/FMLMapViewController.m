@@ -473,10 +473,6 @@
     }];
 }
 
--(void)searchFromUserDefaultsLatLng{
-    
-}
-
 -(void)rotateRedoSearchButton {
     if (self.keepRotating) {
         [UIView animateWithDuration:0.2 animations:^{
