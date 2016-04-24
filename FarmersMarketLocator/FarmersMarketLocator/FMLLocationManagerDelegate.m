@@ -78,13 +78,8 @@
 
         UIAlertAction *enter = [UIAlertAction actionWithTitle:@"Enter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-//            NSString *input = controller.textFields.firstObject.text;
             NSString *input = textField.text;
             
-//            
-//            if ([self stringIsNumber:input] && input.length == 5) {
-//                // Get coordinates and save it
-//                CLLocationCoordinate2D coordinates = [self coordinatesForZipCode:input];
             [GeocodeLocation getCoordinateForLocation:input withCompletion:^(CLLocationCoordinate2D coordinate) {
                     [self saveUserCoordinates:coordinate];
                     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"zipCodeSaved"];
@@ -94,9 +89,7 @@
                 
 
             }];
-//                        } else {
-//                [self.viewController presentViewController:controller animated:YES completion:nil];
-////            }
+
         }];
         
         [controller addAction:enter];

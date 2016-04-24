@@ -33,7 +33,6 @@
 @property (strong, nonatomic) FMLMapViewDelegate *mapDelegate;
 @property (strong, nonatomic) FMLLocationManagerDelegate *locationDelegate;
 @property (strong, nonatomic) FMLTextFieldDelegate *textFieldDelegate;
-//@property (strong, nonatomic) UIView *dimView;
 @property (strong, nonatomic) UITextField *searchBarTextField;
 @property (strong, nonatomic) UIButton *searchButton;
 @property (assign, nonatomic) BOOL keepRotating;
@@ -56,7 +55,7 @@
     // Init delegates
     self.mapDelegate = [[FMLMapViewDelegate alloc] initWithTarget:self];
     self.locationDelegate = [[FMLLocationManagerDelegate alloc] initWithTarget:self];
-    self.textFieldDelegate = [[FMLTextFieldDelegate alloc]initWithTarget:self]; //or searchBarTF?
+    self.textFieldDelegate = [[FMLTextFieldDelegate alloc]initWithTarget:self];
     
     // Create and customize map view
     self.mapView = [[MKMapView alloc]initWithFrame:self.view.frame];
@@ -497,14 +496,6 @@
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
     return NO;
 }
-
-// Shoot out an icon for each product type available at that Farmer's Market. The icons should radiate out to equidistant positions around a circle centered on the pin. The Assets folder contains an icon for each product category.
-
-// Remove dimView: animate the disappearance of the icons, then remove the view entirely.
-
-
-
-
 
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Icons stuff
