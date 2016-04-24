@@ -352,7 +352,6 @@
         NSUInteger index = self.marketsArray.count;
         self.marketsArray = [self.marketsArray arrayByAddingObjectsFromArray:marketsArray];
         // Plot a pin for the coordinates of each FMLMarket object in marketsArray.
-        NSLog(@"about to display new markets");
         [self displayMarketObjects:marketsArray FromIndex:index];
     }];
     
@@ -360,9 +359,7 @@
 
 -(void)displayMarketObjects:(NSArray *)marketsArray FromIndex:(NSUInteger)index {
     self.keepRotating = NO;
-    NSLog(@"about to filter");
     marketsArray = [self filterMarkets:marketsArray];
-    NSLog(@"finished filtering");
     
     for (FMLMarket *farmersMarket in marketsArray) {
         CLLocationCoordinate2D location;
