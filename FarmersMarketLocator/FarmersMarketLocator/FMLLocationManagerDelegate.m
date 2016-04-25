@@ -75,27 +75,27 @@
     UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"Please enter your location" message:@"Ex: 123 Rockaway Ave, Brooklyn or Brooklyn, NY" preferredStyle:UIAlertControllerStyleAlert];
     
     [controller addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-
-        UIAlertAction *enter = [UIAlertAction actionWithTitle:@"Enter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    
+    UIAlertAction *enter = [UIAlertAction actionWithTitle:@"Enter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        NSString *input = controller.textFields.firstObject.text;
+        
+        [GeocodeLocation getCoordinateForLocation:input withCompletion:^(CLLocationCoordinate2D coordinate) {
+            [self saveUserCoordinates:coordinate];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"zipCodeSaved"];
             
-            NSString *input = textField.text;
+            // Zoom into it
+            [self.viewController zoomMaptoLatitude:coordinate.latitude longitude:coordinate.longitude withLatitudeSpan:0.05 longitudeSpan:0.05];
             
-            [GeocodeLocation getCoordinateForLocation:input withCompletion:^(CLLocationCoordinate2D coordinate) {
-                    [self saveUserCoordinates:coordinate];
-                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"zipCodeSaved"];
-                    
-                    // Zoom into it
-                    [self.viewController zoomMaptoLatitude:coordinate.latitude longitude:coordinate.longitude withLatitudeSpan:0.05 longitudeSpan:0.05];
-                
-
-            }];
-
+            
         }];
         
-        [controller addAction:enter];
-        
-        [self.viewController presentViewController:controller animated:YES completion:nil];
     }];
+    
+    [controller addAction:enter];
+    
+    [self.viewController presentViewController:controller animated:YES completion:nil];
     
 }
 

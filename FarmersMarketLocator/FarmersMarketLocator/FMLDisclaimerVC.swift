@@ -43,17 +43,7 @@ class FMLDisclaimerVC: UIViewController {
         button.snp_makeConstraints { (make) in
             make.edges.equalTo(0)
         }
-        
-//        let imageName = "Icon-83.5@2x.png"
-//        let image = UIImage(named: imageName)
-//        let imageView = UIImageView(image: image!)
-//        
-//        imageView.heightAnchor.constraintEqualToConstant(100).active = true
-//        imageView.widthAnchor.constraintEqualToConstant(100).active = true
-//        imageView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-//        imageView.topAnchor.constraintEqualToAnchor(textView.bottomAnchor, constant: 20)
-//        view.addSubview(imageView)
-        
+            
     }
     
     func dismissSelf() {

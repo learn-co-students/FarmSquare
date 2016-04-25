@@ -30,9 +30,7 @@
 }
 
 +(NSDictionary *)dictionaryForMarketWithId:(NSString *)fmid {
-    
-    
-    
+
     // Last number is the key
     NSString *key = [fmid substringFromIndex:(fmid.length - 1)];
     
@@ -43,9 +41,9 @@
     
     
     if (filteredArray.count > 1) {
-        NSLog(@"WTF, more than 1 market with the id: %@", fmid);
+        NSLog(@"more than 1 market with the id: %@", fmid);
     } else if (filteredArray.count == 0) {
-        NSLog(@"WTF, no market with the id: %@", fmid);
+        NSLog(@"no market with the id: %@", fmid);
     } else {
         NSDictionary *data = (NSDictionary *)filteredArray.firstObject;
         return data;
