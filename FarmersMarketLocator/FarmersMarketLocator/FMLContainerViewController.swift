@@ -13,8 +13,6 @@ import SafariServices
 class FMLContainerViewController: UIViewController {
     
     let mapViewController = FMLMapViewController()
-    var dogViewController = DogViewController()
-    let cartViewController = CartViewController()
     var settingsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Settings")
     var groceryList = UIStoryboard(name: "GroceryList", bundle: nil).instantiateViewControllerWithIdentifier("Grocery")
     var petals = [UIImageView]()
@@ -59,6 +57,9 @@ class FMLContainerViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FMLContainerViewController.hideTheLeaf), name: "HideTheLeaf", object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FMLContainerViewController.showTheLeaf), name: "ShowTheLeaf", object: nil)
+        
+        print("\(NSUserDefaults.standardUserDefaults().boolForKey("CoreDataTurnedOff"))")
+
     }
     
     // MARK: Vine Menu Methods

@@ -18,8 +18,6 @@
 		1F3ED9771CAB0AE50038F590 /* FarmersMarketLocatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3ED9761CAB0AE50038F590 /* FarmersMarketLocatorTests.m */; };
 		1F3ED9821CAB0AE50038F590 /* FarmersMarketLocatorUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3ED9811CAB0AE50038F590 /* FarmersMarketLocatorUITests.m */; };
 		8B0548B51CBEBEFA00843CB4 /* FMLContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0548B41CBEBEFA00843CB4 /* FMLContainerViewController.swift */; };
-		8B356E991CBFF86700AEEB11 /* DogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B356E981CBFF86700AEEB11 /* DogViewController.swift */; };
-		8B356E9B1CBFF87100AEEB11 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B356E9A1CBFF87100AEEB11 /* CartViewController.swift */; };
 		8B441F891CC91D7600D22A16 /* FMLSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B441F881CC91D7600D22A16 /* FMLSwitchCell.swift */; };
 		8B441F8D1CC9395C00D22A16 /* FMLSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B441F8C1CC9395C00D22A16 /* FMLSettingsViewController.swift */; };
 		8B5635981CAF081A007DC27E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B5635961CAF081A007DC27E /* DataModel.xcdatamodeld */; };
@@ -111,8 +109,6 @@
 		1F3ED98F1CAB0C990038F590 /* Secrets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Secrets.h; path = ../Secrets.h; sourceTree = "<group>"; };
 		8B0548B41CBEBEFA00843CB4 /* FMLContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMLContainerViewController.swift; sourceTree = "<group>"; };
 		8B0548B61CBEBF4900843CB4 /* FarmersMarketLocator-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FarmersMarketLocator-Bridging-Header.h"; sourceTree = "<group>"; };
-		8B356E981CBFF86700AEEB11 /* DogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DogViewController.swift; sourceTree = "<group>"; };
-		8B356E9A1CBFF87100AEEB11 /* CartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		8B441F881CC91D7600D22A16 /* FMLSwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMLSwitchCell.swift; sourceTree = "<group>"; };
 		8B441F8C1CC9395C00D22A16 /* FMLSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMLSettingsViewController.swift; sourceTree = "<group>"; };
 		8B5635971CAF081A007DC27E /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -314,8 +310,6 @@
 				8B0548B41CBEBEFA00843CB4 /* FMLContainerViewController.swift */,
 				8BC2BA3F1CADD02E005DD7F3 /* FMLMapViewController.h */,
 				8BC2BA401CADD02E005DD7F3 /* FMLMapViewController.m */,
-				8B356E981CBFF86700AEEB11 /* DogViewController.swift */,
-				8B356E9A1CBFF87100AEEB11 /* CartViewController.swift */,
 				1F368A4A1CC80D5200351818 /* FMLDisclaimerVC.swift */,
 				8B441F8C1CC9395C00D22A16 /* FMLSettingsViewController.swift */,
 			);
@@ -662,11 +656,9 @@
 				E1D1AF3D1CC01B4200183165 /* FMLGroceryItem+CoreDataProperties.m in Sources */,
 				8B5635981CAF081A007DC27E /* DataModel.xcdatamodeld in Sources */,
 				E18965D01CC42B5400D8A488 /* FMLGroceryListCellView.m in Sources */,
-				8B356E9B1CBFF87100AEEB11 /* CartViewController.swift in Sources */,
 				8B5635981CAF081A007DC27E /* DataModel.xcdatamodeld in Sources */,
 				A38CD0D71CC0394A00A0590C /* FMLSearch.m in Sources */,
 				8BB34A121CCE6F1D00431A5B /* Secrets.m in Sources */,
-				8B356E991CBFF86700AEEB11 /* DogViewController.swift in Sources */,
 				1F1746951CB460C10018383B /* FMLPinAnnotationView.m in Sources */,
 				A38473B61CADAFC300ED08CA /* SampleZipCodes.m in Sources */,
 				A38CD0D41CC0393800A0590C /* GeocodeLocation.m in Sources */,

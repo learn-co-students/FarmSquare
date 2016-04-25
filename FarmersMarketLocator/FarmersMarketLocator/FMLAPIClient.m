@@ -196,7 +196,9 @@
                     listMarketsCompletion(marketObjectsArray, nil);
                 }
                 
-                [[CoreDataStack sharedStack] saveContext];
+                if (![[NSUserDefaults standardUserDefaults] boolForKey:@"CoreDataTurnedOff"]) {
+                    [[CoreDataStack sharedStack] saveContext];
+                }
                 
             } else {
                 

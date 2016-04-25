@@ -11,10 +11,11 @@ import UIKit
 class FMLSwitchCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var switchButton: UISwitch!
-    
+    var block: ((isOn: Bool) -> ())?
     
     @IBAction func switchValueChanged(sender: UISwitch) {
-
+        block!(isOn: sender.on)
+        print("\(NSUserDefaults.standardUserDefaults().boolForKey("CoreDataTurnedOff"))")
     }
     
     

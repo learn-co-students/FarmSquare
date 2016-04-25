@@ -17,6 +17,7 @@ class FMLSettingsViewController: UIViewController, UITableViewDataSource, UITabl
         self.tableView.dataSource = self
         self.tableView.reloadData()
         self.automaticallyAdjustsScrollViewInsets = true
+        print("\(NSUserDefaults.standardUserDefaults().boolForKey("CoreDataTurnedOff"))")
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -35,7 +36,11 @@ class FMLSettingsViewController: UIViewController, UITableViewDataSource, UITabl
         if indexPath.row == 0 {
             let cell: FMLSwitchCell = tableView.dequeueReusableCellWithIdentifier("SwitchCell", forIndexPath: indexPath) as! FMLSwitchCell
             cell.titleLabel.text = "Automatically Save Pins"
-            cell.switchButton.on = true
+            cell.switchButton.on = !NSUserDefaults.standardUserDefaults().boolForKey("CoreDataTurnedOff")
+            cell.block = { (isOn: Bool) -> () in
+                NSUserDefaults.standardUserDefaults().setBool(isOn, forKey: "CoreDataTurnedOff")
+            }
+
             return cell
         }
         
