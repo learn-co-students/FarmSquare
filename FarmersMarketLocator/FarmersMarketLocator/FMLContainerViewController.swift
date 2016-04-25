@@ -162,8 +162,8 @@ class FMLContainerViewController: UIViewController {
     }
     
     func bookTapped() {
-        self.vineButton.transform = CGAffineTransformConcat(CGAffineTransformMakeRotation(degrees), CGAffineTransformMakeTranslation(-50, 0))
-        self.hamburger.transform = CGAffineTransformMakeTranslation(-50, 0);
+        self.vineButton.transform = CGAffineTransformConcat(CGAffineTransformMakeRotation(degrees), CGAffineTransformMakeTranslation(-35, 0))
+        self.hamburger.transform = CGAffineTransformMakeTranslation(-35, 0);
         let vc = SFSafariViewController(URL: NSURL(string: "http://www.fns.usda.gov/snap/supplemental-nutrition-assistance-program-snap")!, entersReaderIfAvailable: true)
         self.setEmbeddedViewController(vc)
         self.emptySpaceTapped()
