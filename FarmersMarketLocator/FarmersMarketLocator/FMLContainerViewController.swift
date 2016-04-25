@@ -82,7 +82,6 @@ class FMLContainerViewController: UIViewController {
         hamburger.image = UIImage(named: "three")
         hamburger.alpha = 0.3
         self.view.addSubview(hamburger)
-        print("done")
     }
 
     func makeVineDisappear() {
@@ -314,12 +313,12 @@ class FMLContainerViewController: UIViewController {
             make.centerY.equalTo(self.receptacleButton.snp_centerY)
         }
         infoImage.addGestureRecognizer(openDisclaimerGesture)
-//        infoImage.alpha = 0
+        infoImage.alpha = 0
+        infoImage.userInteractionEnabled = true;
     }
     
     func openDisclaimer() {
-        print("test")
-        let vc = DogViewController()
+        let vc = FMLDisclaimerVC()
         self.presentViewController(vc, animated: true) {
             
         }

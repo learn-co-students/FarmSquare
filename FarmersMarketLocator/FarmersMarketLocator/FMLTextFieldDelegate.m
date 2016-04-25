@@ -34,14 +34,30 @@
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField endEditing:YES];
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"Hide search filters" object:nil];
+    
+    [self hideSearchFilters];
     //and set new coordinates
     [FMLSearch searchForNewLocation:textField.text];
     return YES;
 }
 
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    [self hideSearchFilters];
+}
+
+-(BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    [self hideSearchFilters];
+    return YES;
+}
+
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     [[NSNotificationCenter defaultCenter]postNotificationName:@"Show search filters" object:nil];
+}
+
+#pragma helper methods
+
+-(void) hideSearchFilters{
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"Hide search filters" object:nil];
 }
 
 @end

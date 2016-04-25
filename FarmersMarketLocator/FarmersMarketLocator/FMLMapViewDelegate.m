@@ -13,6 +13,7 @@
 #import "Annotation.h"
 #import "FMLPinAnnotationView.h"
 #import "FarmersMarketLocator-Swift.h"
+#import "FMLMapViewController.h"
 
 typedef NS_ENUM(NSInteger, FMLMarketStatus) {
     FMLMarketHasNoInfo          = -1,
@@ -28,6 +29,7 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
 @property (strong, nonatomic) NSMutableArray *currentProductsIcons;
 @property (assign, nonatomic) CGFloat offset;
 @property (strong, nonatomic) UIView *cover;
+@property (nonatomic) BOOL iconCircleExists;
 
 
 @end
@@ -55,6 +57,7 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
 #pragma mark - MKMapView Delegate Methods
 
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"Hide search filters" object:nil];
     self.selectedAnnotationView = view;
     
     // Show the detail label; show the circle of product category icons
@@ -101,7 +104,6 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         
         // If the map hasn't moved, show the product icons. (If it has, we still want to show them, but the regionDidChange method will notice the zooming and take care of displaying the icons.)
         if (view.center.x == pinLocationBeforeZoom.x && view.center.y == pinLocationBeforeZoom.y) {
-
             [self showProductsCircleForMarket:view];
 
         }
@@ -173,7 +175,6 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
     }];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"VineAndDine" object:nil];
-    
     [UIView animateWithDuration:self.animationSpeed animations:^{
         
         for (UIView *icon in self.currentProductsIcons) {
@@ -189,15 +190,13 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         }
     }];
     
-
-
     self.selectedAnnotationView = nil;
+    self.iconCircleExists = NO;
 }
 
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     
-    
-    if (self.selectedAnnotationView) {
+    if (self.selectedAnnotationView && !self.iconCircleExists) {
         [self showProductsCircleForMarket:self.selectedAnnotationView];
     }
 }
@@ -313,7 +312,8 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         
         // Increment index
         index++;
-        
+        // Icon circle property
+        self.iconCircleExists = YES;
     }
     
 }
