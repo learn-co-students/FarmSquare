@@ -26,6 +26,7 @@
     //to allow left swipe delete of a cell
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
     
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -34,6 +35,8 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:@"new list created" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
         [self.tableView reloadData];
     }];
+    
+    [self.tableView reloadData];
 }
 
 

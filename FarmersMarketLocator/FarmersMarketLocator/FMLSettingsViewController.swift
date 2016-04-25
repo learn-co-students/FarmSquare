@@ -71,6 +71,14 @@ class FMLSettingsViewController: UIViewController, UITableViewDataSource, UITabl
         }
         
         if indexPath.row == 2 {
+            let fetchRequest = NSFetchRequest(entityName: "FMLGroceryList")
+            let locations = try! CoreDataStack.sharedStack().managedObjectContext.executeFetchRequest(fetchRequest)
+            for location in locations {
+                CoreDataStack.sharedStack().managedObjectContext.deleteObject(location as! FMLGroceryList)
+            }
+            CoreDataStack.sharedStack().saveContext()
+            let cell = tableView.cellForRowAtIndexPath(indexPath)
+            cell?.detailTextLabel?.text = "Cleared"
 
         }
     }

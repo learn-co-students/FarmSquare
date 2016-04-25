@@ -120,6 +120,7 @@
                             <outlet property="delegate" destination="8Bg-lH-Rb2" id="3yn-LY-iea"/>
                         </connections>
                     </tableView>
+                    <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z8w-7f-H8J" userLabel="First Responder" sceneMemberID="firstResponder"/>

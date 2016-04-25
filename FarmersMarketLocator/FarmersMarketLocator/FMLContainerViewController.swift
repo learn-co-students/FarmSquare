@@ -55,9 +55,27 @@ class FMLContainerViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FMLContainerViewController.makeVineDisappear), name: "LeafMeAlone", object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FMLContainerViewController.makeVineReappear), name: "VineAndDine", object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FMLContainerViewController.hideTheLeaf), name: "HideTheLeaf", object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FMLContainerViewController.showTheLeaf), name: "ShowTheLeaf", object: nil)
     }
     
     // MARK: Vine Menu Methods
+    
+    func showTheLeaf() {
+        self.vineButton.hidden = false
+        self.hamburger.hidden = false
+        
+    }
+    
+    func hideTheLeaf() {
+        UIView.animateWithDuration(0.5) {
+            self.vineButton.hidden = true
+            self.hamburger.hidden = true
+        }
+        
+    }
     
     func addHamburgerImage() {
         hamburger = UIImageView(frame: CGRectMake(25, 40, 40, 40))
@@ -186,10 +204,10 @@ class FMLContainerViewController: UIViewController {
         resourceButton.addTarget(self, action: #selector(FMLContainerViewController.bookTapped), forControlEvents: UIControlEvents.TouchUpInside)
         vineOutline.addSubview(resourceButton)
         
-        
+        // No longer a search button. Now is settings.
         let searchButton = UIButton(type: UIButtonType.Custom) as UIButton
         searchButton.frame = CGRectMake(70, 420, 50, 50)
-        let searchImage = UIImage(named: "dog")
+        let searchImage = UIImage(named: "gear")
         searchButton.setImage(searchImage, forState: UIControlState.Normal)
         searchButton.addTarget(self, action: #selector(FMLContainerViewController.dogTapped), forControlEvents: UIControlEvents.TouchUpInside)
 
