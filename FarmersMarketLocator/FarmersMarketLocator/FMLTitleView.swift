@@ -69,9 +69,11 @@ import UIKit
         self.addressLabel.trailingAnchor.constraintEqualToAnchor(self.trailingAnchor, constant: 10).active = true
         
         self.nameLabel.bottomAnchor.constraintEqualToAnchor(self.addressLabel.topAnchor, constant: -7).active = true
-        self.nameLabel.leadingAnchor.constraintEqualToAnchor(self.leadingAnchor, constant: 10).active = true
-        self.nameLabel.trailingAnchor.constraintEqualToAnchor(self.trailingAnchor, constant: 10).active = true
-    }
+//        self.nameLabel.leadingAnchor.constraintEqualToAnchor(self.leadingAnchor, constant: 10).active = true
+//        self.nameLabel.trailingAnchor.constraintEqualToAnchor(self.trailingAnchor, constant: 10).active = true
+        self.nameLabel.widthAnchor.constraintEqualToAnchor(self.widthAnchor, constant: -20).active = true
+        self.nameLabel.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
+     }
     
     func showTitleView() {
         UIView.animateWithDuration(0.25) { 
