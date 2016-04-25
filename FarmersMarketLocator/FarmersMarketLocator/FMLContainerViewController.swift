@@ -319,7 +319,10 @@ class FMLContainerViewController: UIViewController {
     }
     
     func openDisclaimer() {
-        let vc = FMLDisclaimerVC()
+        let url = NSBundle.mainBundle().URLForResource("disclaimer", withExtension: "html")!
+        let vc = FMLDisclaimerViewController()
+        vc.url = url
+        
         self.presentViewController(vc, animated: true) {
             
         }

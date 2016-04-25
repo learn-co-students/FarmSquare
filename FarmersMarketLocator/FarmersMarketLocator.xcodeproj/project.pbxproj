@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1687E4D0339E4E560B3F1FAC /* Pods_FarmersMarketLocator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DE4A825F3A5ADCB70B3E46A /* Pods_FarmersMarketLocator.framework */; };
 		1F1746951CB460C10018383B /* FMLPinAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1746941CB460C10018383B /* FMLPinAnnotationView.m */; };
-		1F368A4B1CC80D5200351818 /* FMLDisclaimerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F368A4A1CC80D5200351818 /* FMLDisclaimerVC.swift */; };
 		1F3ED95E1CAB0AE50038F590 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3ED95D1CAB0AE50038F590 /* main.m */; };
 		1F3ED9611CAB0AE50038F590 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3ED9601CAB0AE50038F590 /* AppDelegate.m */; };
 		1F3ED9671CAB0AE50038F590 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F3ED9651CAB0AE50038F590 /* Main.storyboard */; };
@@ -35,6 +34,8 @@
 		8BAC6A911CB7E615001EEDE1 /* farmers-markets-8.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BAC6A871CB7E615001EEDE1 /* farmers-markets-8.json */; };
 		8BAC6A921CB7E615001EEDE1 /* farmers-markets-9.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BAC6A881CB7E615001EEDE1 /* farmers-markets-9.json */; };
 		8BB34A121CCE6F1D00431A5B /* Secrets.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB34A111CCE6F1D00431A5B /* Secrets.m */; };
+		8BBD36A01CCE81FF0003925C /* disclaimer.html in Resources */ = {isa = PBXBuildFile; fileRef = 8BBD369F1CCE81FF0003925C /* disclaimer.html */; };
+		8BBD36A21CCE837A0003925C /* FMLDisclaimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD36A11CCE837A0003925C /* FMLDisclaimerViewController.swift */; };
 		8BBD3FFE1CAEA8AB00A1DB0E /* FMLMapViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD3FFD1CAEA8AB00A1DB0E /* FMLMapViewDelegate.m */; };
 		8BBD400A1CAEB81700A1DB0E /* FMLLocationManagerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD40091CAEB81700A1DB0E /* FMLLocationManagerDelegate.m */; };
 		8BBD400D1CAED53E00A1DB0E /* FMLDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD400C1CAED53E00A1DB0E /* FMLDetailView.m */; };
@@ -91,7 +92,6 @@
 		0DE4A825F3A5ADCB70B3E46A /* Pods_FarmersMarketLocator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FarmersMarketLocator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F1746931CB460C10018383B /* FMLPinAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLPinAnnotationView.h; sourceTree = "<group>"; };
 		1F1746941CB460C10018383B /* FMLPinAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLPinAnnotationView.m; sourceTree = "<group>"; };
-		1F368A4A1CC80D5200351818 /* FMLDisclaimerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMLDisclaimerVC.swift; sourceTree = "<group>"; };
 		1F3ED9591CAB0AE40038F590 /* FarmersMarketLocator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FarmersMarketLocator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F3ED95D1CAB0AE50038F590 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1F3ED95F1CAB0AE50038F590 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -129,6 +129,8 @@
 		8BAC6A871CB7E615001EEDE1 /* farmers-markets-8.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "farmers-markets-8.json"; sourceTree = "<group>"; };
 		8BAC6A881CB7E615001EEDE1 /* farmers-markets-9.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "farmers-markets-9.json"; sourceTree = "<group>"; };
 		8BB34A111CCE6F1D00431A5B /* Secrets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secrets.m; sourceTree = "<group>"; };
+		8BBD369F1CCE81FF0003925C /* disclaimer.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = disclaimer.html; sourceTree = "<group>"; };
+		8BBD36A11CCE837A0003925C /* FMLDisclaimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMLDisclaimerViewController.swift; sourceTree = "<group>"; };
 		8BBD3FFC1CAEA8AB00A1DB0E /* FMLMapViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLMapViewDelegate.h; sourceTree = "<group>"; };
 		8BBD3FFD1CAEA8AB00A1DB0E /* FMLMapViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLMapViewDelegate.m; sourceTree = "<group>"; };
 		8BBD40081CAEB81700A1DB0E /* FMLLocationManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLLocationManagerDelegate.h; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 		1F3ED95C1CAB0AE50038F590 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8BBD369F1CCE81FF0003925C /* disclaimer.html */,
 				8B0548B61CBEBF4900843CB4 /* FarmersMarketLocator-Bridging-Header.h */,
 				1F3ED96D1CAB0AE50038F590 /* Info.plist */,
 				8B9E5A821CB2F7E80050915D /* farmers-markets.json */,
@@ -310,8 +313,8 @@
 				8B0548B41CBEBEFA00843CB4 /* FMLContainerViewController.swift */,
 				8BC2BA3F1CADD02E005DD7F3 /* FMLMapViewController.h */,
 				8BC2BA401CADD02E005DD7F3 /* FMLMapViewController.m */,
-				1F368A4A1CC80D5200351818 /* FMLDisclaimerVC.swift */,
 				8B441F8C1CC9395C00D22A16 /* FMLSettingsViewController.swift */,
+				8BBD36A11CCE837A0003925C /* FMLDisclaimerViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -544,6 +547,7 @@
 				8B9E5A831CB2F7E80050915D /* farmers-markets.json in Resources */,
 				8BAC6A8C1CB7E615001EEDE1 /* farmers-markets-3.json in Resources */,
 				8BAC6A8B1CB7E615001EEDE1 /* farmers-markets-2.json in Resources */,
+				8BBD36A01CCE81FF0003925C /* disclaimer.html in Resources */,
 				8BAC6A911CB7E615001EEDE1 /* farmers-markets-8.json in Resources */,
 				8BAC6A8A1CB7E615001EEDE1 /* farmers-markets-1.json in Resources */,
 				1F3ED96C1CAB0AE50038F590 /* LaunchScreen.storyboard in Resources */,
@@ -630,6 +634,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BBD36A21CCE837A0003925C /* FMLDisclaimerViewController.swift in Sources */,
 				E18965CC1CC42A1B00D8A488 /* FMLGroceryListCell.m in Sources */,
 				A3BF3C941CC56FD1004E4942 /* FMLTitleView.swift in Sources */,
 				8BBD3FFE1CAEA8AB00A1DB0E /* FMLMapViewDelegate.m in Sources */,
@@ -648,7 +653,6 @@
 				1F3ED9611CAB0AE50038F590 /* AppDelegate.m in Sources */,
 				8B441F891CC91D7600D22A16 /* FMLSwitchCell.swift in Sources */,
 				E1D1AF3E1CC01B4200183165 /* FMLGroceryItem.m in Sources */,
-				1F368A4B1CC80D5200351818 /* FMLDisclaimerVC.swift in Sources */,
 				A38473B31CADAF7200ED08CA /* Annotation.m in Sources */,
 				8BC2BA411CADD02E005DD7F3 /* FMLMapViewController.m in Sources */,
 				1F3ED95E1CAB0AE50038F590 /* main.m in Sources */,

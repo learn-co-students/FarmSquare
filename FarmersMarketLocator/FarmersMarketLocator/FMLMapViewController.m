@@ -494,61 +494,7 @@
     return NO;
 }
 
+ 
 
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Icons stuff
- 
- To-do:
- - Somehow make the center of the circle of icons be the actual location, not just the center of the pin view. More like, the bottom middle?
- - Remove green background from pin view.
- - Fix the frames thing: should be based on a calculation with screen size, not an absolute number
- - What if there are too many items? Bigger circle? Spiral? A "..." icon that you can tap to expand more?
- - Should there be little text labels next to the icons? Maybe you can touch an icon to see the text
- - Instead of making new constraints in the animation, just reassign the values of the existing constraints. Rename appropriately.
- - Account for what happens if we get a name of a product type that's not in the Assets
- - ERROR: for the market near the Exploratorium in San Francisco, we get:
- -[MKUserLocation market]: unrecognized selector sent to instance 0x7fafb0d02c00
- 
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- */
-
-// ~ PICTURE CREDITS ~
-// (see https://thenounproject.zendesk.com/hc/en-us/articles/200509928-How-do-I-give-creators-credit-in-my-work-)
-// Tools for editing: http://www.networkworld.com/article/2602971/software/how-to-automate-image-editing-with-gimp.html and https://pixlr.com/editor/
-
-/*
- baked goods -- ??
- Cheese by Arthur Shlain from the Noun Project
- wooden horse by Luis Rodrigues from the Noun Project
- Rose by Juan Pablo Bravo from the Noun Project
- eggs by Alex Bu from the Noun Project
- Fish by Federico Panzano from the Noun Project
- leaf by Ola Möller from the Noun Project
- Broccoli by Creative Stall from the Noun Project
- honey by Cassie McKown from the Noun Project
- Strawberry Jam by Nikita Kozin from the Noun Project
- maple syrup by Pumpkin Juice from the Noun Project
- Steak by Blaise Sewell from the Noun Project
- Peanut by Charlotte Gilissen from the Noun Project
- (plant by Becky Warren: public domain)
- Chicken by Elves Sousa from the Noun Project
- Cafeteria Plate by Studio Fibonacci from the Noun Project
- liquid soap by Arthur Shlain from the Noun Project
- Tree by Edward Boatman from the Noun Project
- Beer by Claire Jones from the Noun Project
- Coffee by Grant Taylor from the Noun Project
- beans by Anna Bearne from the Noun Project
- Apple by Creative Stall from the Noun Project
- Wheat by Creative Stall from the Noun Project
- Cocktail by Виталий Плут from the Noun Project
- Mushrooms by Creative Stall from the Noun Project
- food bowl by Виталий Плут from the Noun Project
- Tofu by Anna Bearne from the Noun Project
- -----  (get rid of this one) fruit tree by Eugene Dobrik from the Noun Project
- Pine Cone by Arthur Shlain from the Noun Project
- 
- redoSearch button:
- Icon made by Minh Hoang (http://www.flaticon.com/authors/minh-hoang) from www.flaticon.com
- 
- */
 
 @end
