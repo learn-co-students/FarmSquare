@@ -23,7 +23,6 @@
 		8B441F891CC91D7600D22A16 /* FMLSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B441F881CC91D7600D22A16 /* FMLSwitchCell.swift */; };
 		8B441F8D1CC9395C00D22A16 /* FMLSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B441F8C1CC9395C00D22A16 /* FMLSettingsViewController.swift */; };
 		8B5635981CAF081A007DC27E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B5635961CAF081A007DC27E /* DataModel.xcdatamodeld */; };
-		8B7186D21CC7692E00BB6145 /* Secrets.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7186D11CC7692E00BB6145 /* Secrets.m */; };
 		8B8C59D01CC10983009BE852 /* FMLTitleView.swift in Resources */ = {isa = PBXBuildFile; fileRef = 8B8C59CF1CC10983009BE852 /* FMLTitleView.swift */; };
 		8B9E5A811CB2F7DA0050915D /* FMLJSONDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E5A801CB2F7DA0050915D /* FMLJSONDictionary.m */; };
 		8B9E5A831CB2F7E80050915D /* farmers-markets.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B9E5A821CB2F7E80050915D /* farmers-markets.json */; };
@@ -37,6 +36,7 @@
 		8BAC6A901CB7E615001EEDE1 /* farmers-markets-7.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BAC6A861CB7E615001EEDE1 /* farmers-markets-7.json */; };
 		8BAC6A911CB7E615001EEDE1 /* farmers-markets-8.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BAC6A871CB7E615001EEDE1 /* farmers-markets-8.json */; };
 		8BAC6A921CB7E615001EEDE1 /* farmers-markets-9.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BAC6A881CB7E615001EEDE1 /* farmers-markets-9.json */; };
+		8BB34A121CCE6F1D00431A5B /* Secrets.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB34A111CCE6F1D00431A5B /* Secrets.m */; };
 		8BBD3FFE1CAEA8AB00A1DB0E /* FMLMapViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD3FFD1CAEA8AB00A1DB0E /* FMLMapViewDelegate.m */; };
 		8BBD400A1CAEB81700A1DB0E /* FMLLocationManagerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD40091CAEB81700A1DB0E /* FMLLocationManagerDelegate.m */; };
 		8BBD400D1CAED53E00A1DB0E /* FMLDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD400C1CAED53E00A1DB0E /* FMLDetailView.m */; };
@@ -118,7 +118,6 @@
 		8B5635971CAF081A007DC27E /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		8B5635BF1CAF0858007DC27E /* CoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataStack.h; sourceTree = "<group>"; };
 		8B5635C01CAF0858007DC27E /* CoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataStack.m; sourceTree = "<group>"; };
-		8B7186D11CC7692E00BB6145 /* Secrets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secrets.m; sourceTree = "<group>"; };
 		8B8C59CF1CC10983009BE852 /* FMLTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMLTitleView.swift; sourceTree = "<group>"; };
 		8B9E5A7F1CB2F7DA0050915D /* FMLJSONDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLJSONDictionary.h; sourceTree = "<group>"; };
 		8B9E5A801CB2F7DA0050915D /* FMLJSONDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLJSONDictionary.m; sourceTree = "<group>"; };
@@ -133,6 +132,7 @@
 		8BAC6A861CB7E615001EEDE1 /* farmers-markets-7.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "farmers-markets-7.json"; sourceTree = "<group>"; };
 		8BAC6A871CB7E615001EEDE1 /* farmers-markets-8.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "farmers-markets-8.json"; sourceTree = "<group>"; };
 		8BAC6A881CB7E615001EEDE1 /* farmers-markets-9.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "farmers-markets-9.json"; sourceTree = "<group>"; };
+		8BB34A111CCE6F1D00431A5B /* Secrets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secrets.m; sourceTree = "<group>"; };
 		8BBD3FFC1CAEA8AB00A1DB0E /* FMLMapViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLMapViewDelegate.h; sourceTree = "<group>"; };
 		8BBD3FFD1CAEA8AB00A1DB0E /* FMLMapViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLMapViewDelegate.m; sourceTree = "<group>"; };
 		8BBD40081CAEB81700A1DB0E /* FMLLocationManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLLocationManagerDelegate.h; sourceTree = "<group>"; };
@@ -375,7 +375,7 @@
 				E1F95DCB1CAB12D6009DA977 /* FMLAPIClient.h */,
 				E1F95DCC1CAB12D6009DA977 /* FMLAPIClient.m */,
 				1F3ED98F1CAB0C990038F590 /* Secrets.h */,
-				8B7186D11CC7692E00BB6145 /* Secrets.m */,
+				8BB34A111CCE6F1D00431A5B /* Secrets.m */,
 				8B9E5A7F1CB2F7DA0050915D /* FMLJSONDictionary.h */,
 				8B9E5A801CB2F7DA0050915D /* FMLJSONDictionary.m */,
 				A38CD0D21CC0393800A0590C /* GeocodeLocation.h */,
@@ -647,7 +647,6 @@
 				A38CD0DA1CC039B600A0590C /* FMLTextFieldDelegate.m in Sources */,
 				8BE219A71CAF0A980014D046 /* FMLMarket+CoreDataProperties.m in Sources */,
 				8BBD400D1CAED53E00A1DB0E /* FMLDetailView.m in Sources */,
-				8B7186D21CC7692E00BB6145 /* Secrets.m in Sources */,
 				E1D1AF381CBFE93400183165 /* FMLNewItemViewController.m in Sources */,
 				E1D1AF311CBFE93400183165 /* FMLGroceryCellView.m in Sources */,
 				E19F96B01CC8906E004C1F6D /* FMLViewSavedListTVC.m in Sources */,
@@ -666,6 +665,7 @@
 				8B356E9B1CBFF87100AEEB11 /* CartViewController.swift in Sources */,
 				8B5635981CAF081A007DC27E /* DataModel.xcdatamodeld in Sources */,
 				A38CD0D71CC0394A00A0590C /* FMLSearch.m in Sources */,
+				8BB34A121CCE6F1D00431A5B /* Secrets.m in Sources */,
 				8B356E991CBFF86700AEEB11 /* DogViewController.swift in Sources */,
 				1F1746951CB460C10018383B /* FMLPinAnnotationView.m in Sources */,
 				A38473B61CADAFC300ED08CA /* SampleZipCodes.m in Sources */,
