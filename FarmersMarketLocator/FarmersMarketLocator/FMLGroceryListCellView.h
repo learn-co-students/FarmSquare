@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "FMLGroceryList.h"
+#import "CoreDataStack.h"
 
 @interface FMLGroceryListCellView : UIView
 @property (weak, nonatomic) IBOutlet UITextField *listName;

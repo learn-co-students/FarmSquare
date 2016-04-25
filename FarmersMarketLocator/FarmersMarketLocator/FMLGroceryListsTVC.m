@@ -26,7 +26,6 @@
     //to allow left swipe delete of a cell
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
     
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated {

@@ -83,7 +83,7 @@
                                     </barButtonItem>
                                     <barButtonItem key="rightBarButtonItem" systemItem="add" id="Wps-Ja-qlN">
                                         <connections>
-                                            <segue destination="Bk3-76-zup" kind="presentation" identifier="makeNewItem" id="iy2-9b-h8o"/>
+                                            <segue destination="Bk3-76-zup" kind="presentation" identifier="makeNewItem" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="iy2-9b-h8o"/>
                                         </connections>
                                     </barButtonItem>
                                 </navigationItem>
@@ -187,37 +187,55 @@
                                 <rect key="frame" x="48" y="99" width="224" height="228"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n4R-oJ-3TO">
-                                        <rect key="frame" x="40" y="40" width="144" height="30"/>
+                                        <rect key="frame" x="40" y="50" width="144" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vlb-QZ-JV8">
-                                        <rect key="frame" x="40" y="130" width="144" height="30"/>
+                                        <rect key="frame" x="40" y="140" width="144" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I need to buy:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pM4-eP-JdW">
-                                        <rect key="frame" x="40" y="11" width="105" height="21"/>
+                                        <rect key="frame" x="40" y="21" width="105" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In the amount of:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="muR-Fi-xUm">
-                                        <rect key="frame" x="40" y="105" width="130" height="21"/>
+                                        <rect key="frame" x="40" y="115" width="130" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RRG-Mc-hOI">
-                                        <rect key="frame" x="125" y="190" width="59" height="30"/>
-                                        <state key="normal" title="CANCEL"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RRG-Mc-hOI">
+                                        <rect key="frame" x="125" y="200" width="59" height="30"/>
+                                        <state key="normal">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="CANCEL">
+                                                    <attributes>
+                                                        <font key="NSFont" size="14" name="Helvetica-Bold"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </state>
                                         <connections>
                                             <action selector="cancelTapped:" destination="Bk3-76-zup" eventType="touchUpInside" id="Ghl-6V-0Qi"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aGy-91-5PT">
-                                        <rect key="frame" x="40" y="190" width="37" height="30"/>
-                                        <state key="normal" title="SAVE"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aGy-91-5PT">
+                                        <rect key="frame" x="40" y="200" width="37" height="30"/>
+                                        <state key="normal">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="SAVE">
+                                                    <attributes>
+                                                        <font key="NSFont" size="14" name="Helvetica-Bold"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </state>
                                         <connections>
                                             <action selector="saveTapped:" destination="Bk3-76-zup" eventType="touchUpInside" id="Kf5-LJ-uRO"/>
                                         </connections>
@@ -228,7 +246,7 @@
                                     <constraint firstItem="vlb-QZ-JV8" firstAttribute="top" secondItem="n4R-oJ-3TO" secondAttribute="bottom" constant="60" id="1mJ-8z-OwN"/>
                                     <constraint firstAttribute="trailing" secondItem="n4R-oJ-3TO" secondAttribute="trailing" constant="40" id="5V9-ck-N4X"/>
                                     <constraint firstItem="RRG-Mc-hOI" firstAttribute="top" secondItem="vlb-QZ-JV8" secondAttribute="bottom" constant="30" id="7Xl-ma-c3u"/>
-                                    <constraint firstItem="n4R-oJ-3TO" firstAttribute="top" secondItem="giL-Bc-6Ou" secondAttribute="top" constant="40" id="82N-a5-Ruj"/>
+                                    <constraint firstItem="n4R-oJ-3TO" firstAttribute="top" secondItem="giL-Bc-6Ou" secondAttribute="top" constant="50" id="82N-a5-Ruj"/>
                                     <constraint firstItem="n4R-oJ-3TO" firstAttribute="leading" secondItem="giL-Bc-6Ou" secondAttribute="leading" constant="40" id="BJh-J1-2wk"/>
                                     <constraint firstItem="aGy-91-5PT" firstAttribute="top" secondItem="vlb-QZ-JV8" secondAttribute="bottom" constant="30" id="IvI-qb-g5V"/>
                                     <constraint firstItem="vlb-QZ-JV8" firstAttribute="top" secondItem="muR-Fi-xUm" secondAttribute="bottom" constant="4" id="OME-Zp-wXp"/>
@@ -257,6 +275,7 @@
                         <outlet property="itemNameTextField" destination="n4R-oJ-3TO" id="WH0-rc-Jnp"/>
                         <outlet property="itemQuantTextField" destination="vlb-QZ-JV8" id="Fdj-S4-I2G"/>
                         <outlet property="saveButton" destination="aGy-91-5PT" id="c31-RT-I0y"/>
+                        <outlet property="yellowView" destination="giL-Bc-6Ou" id="Q8J-td-zsp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xdc-OZ-VIS" userLabel="First Responder" sceneMemberID="firstResponder"/>

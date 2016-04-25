@@ -7,9 +7,10 @@
 //
 
 #import "FMLNewItemViewController.h"
-
+#import "FMLNewItemView.h"
 
 @interface FMLNewItemViewController ()
+@property (weak, nonatomic) IBOutlet FMLNewItemView *yellowView;
 
 @end
 
@@ -19,6 +20,7 @@
     [super viewDidLoad];
     
     self.stack = [CoreDataStack sharedStack];
+    self.yellowView.layer.cornerRadius = 15;
 }
 
 

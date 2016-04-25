@@ -34,7 +34,7 @@
     
     if (self.items.count > 0) {
         FMLGroceryList *addedList = [NSEntityDescription insertNewObjectForEntityForName:@"FMLGroceryList" inManagedObjectContext:self.stack.managedObjectContext];
-        addedList.listName = @"New grocery list";
+        
         addedList.dateModified = [NSDate date];
         
         //adding groceryItems to the new grocery list (its NSOrderedSet property)

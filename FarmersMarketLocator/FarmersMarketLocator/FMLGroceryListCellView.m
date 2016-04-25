@@ -45,7 +45,7 @@
 -(void)setGroceryList:(FMLGroceryList *)list {
     
     self.list = list;
-    self.listName.text = list.listName;
+    //self.listName.text = list.listName;
     
     //converting NSDate to NSString to display on the text label
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
