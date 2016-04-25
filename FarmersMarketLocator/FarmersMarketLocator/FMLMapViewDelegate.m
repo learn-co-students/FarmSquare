@@ -215,7 +215,7 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
     NSMutableArray *iconsArray = [[[annotation.market.produceList stringByReplacingOccurrencesOfString:@"/" withString:@"" ] componentsSeparatedByString:@"; "] mutableCopy];
     
     // Number of degrees separating icons
-    CGFloat degreesBetweenIcons = 360 / iconsArray.count;
+    CGFloat degreesBetweenIcons = 360.0 / iconsArray.count;
     // Index (to multiply number of degrees by)
     NSUInteger index = 0;
     
@@ -231,7 +231,7 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
         // Make a view
         UIView *circleView = [[UIView alloc] init];
         circleView.translatesAutoresizingMaskIntoConstraints = NO;
-        circleView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
+        circleView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
         [annotationView addSubview:circleView];
         [self.currentProductsIcons addObject:circleView];
         // Position constraints: center the circle at the center of the pin view
@@ -300,7 +300,7 @@ typedef NS_ENUM(NSInteger, FMLMarketStatus) {
             // size
             // TODO: make the height and width a calculation based on the size of the view, so it works correctly regardless of device. Or perhaps as a multiple of the size of the pinview or something.
             circleHeight.constant = 45;
-            circleWidth.constant = 45;
+            circleWidth.constant = circleHeight.constant;
             // Corner radius to half of size makes it a circle
             circleView.layer.cornerRadius = 0.5 * circleHeight.constant;
             iconHeight.constant = circleHeight.constant * 0.75;
