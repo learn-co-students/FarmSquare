@@ -21,8 +21,6 @@
 
 @implementation FMLGroceryTVC
 
-
-
 -(void)newItemViewControllerDismissed:(FMLGroceryItem *)newItem {
     
     NSLog(@"newItem is: %@", newItem.name);
@@ -79,7 +77,7 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:@"new item added" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
         [self.tableView reloadData];
     }];
-    
+
 }
 
 -(void) viewWillDisappear:(BOOL)animated {
@@ -89,6 +87,7 @@
     }
     [super viewWillDisappear:animated];
 }
+
 
 //-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 //    
@@ -154,6 +153,10 @@
         destVC.delegate = self;
         self.segueIsViewList = NO; //so that the if statements above execute loading appropriate data
     }
+}
+
+-(BOOL)prefersStatusBarHidden {
+    return YES;
 }
 
 @end
