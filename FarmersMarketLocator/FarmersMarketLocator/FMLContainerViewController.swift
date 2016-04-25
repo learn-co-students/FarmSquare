@@ -64,7 +64,6 @@ class FMLContainerViewController: UIViewController {
         hamburger.image = UIImage(named: "three")
         hamburger.alpha = 0.3
         self.view.addSubview(hamburger)
-        print("done")
     }
 
     func makeVineDisappear() {
@@ -301,7 +300,6 @@ class FMLContainerViewController: UIViewController {
     }
     
     func openDisclaimer() {
-        print("test")
         let vc = FMLDisclaimerVC()
         self.presentViewController(vc, animated: true) {
             

@@ -33,7 +33,6 @@
 @property (strong, nonatomic) FMLMapViewDelegate *mapDelegate;
 @property (strong, nonatomic) FMLLocationManagerDelegate *locationDelegate;
 @property (strong, nonatomic) FMLTextFieldDelegate *textFieldDelegate;
-//@property (strong, nonatomic) UIView *dimView;
 @property (strong, nonatomic) UITextField *searchBarTextField;
 @property (strong, nonatomic) UIButton *searchButton;
 @property (assign, nonatomic) BOOL keepRotating;
@@ -56,7 +55,7 @@
     // Init delegates
     self.mapDelegate = [[FMLMapViewDelegate alloc] initWithTarget:self];
     self.locationDelegate = [[FMLLocationManagerDelegate alloc] initWithTarget:self];
-    self.textFieldDelegate = [[FMLTextFieldDelegate alloc]initWithTarget:self]; //or searchBarTF?
+    self.textFieldDelegate = [[FMLTextFieldDelegate alloc]initWithTarget:self];
     
     // Create and customize map view
     self.mapView = [[MKMapView alloc]initWithFrame:self.view.frame];
@@ -64,9 +63,11 @@
     self.mapView.mapType = MKMapTypeStandard;
     self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self.mapDelegate;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideSearchFilters)];
     
     // Add it to view
     [self.view addSubview:self.mapView];
+    [self.mapView addGestureRecognizer:tap];
     
     
     // Create and Add MoveToLocation Button
@@ -248,6 +249,7 @@
     self.wicFilter.alpha = 0;
     self.snapFilter.alpha = 0;
     self.creditFilter.alpha = 0;
+    [self.searchBarTextField endEditing:YES];
 }
 
 -(void)selectOrDeselectFilterButton:(UIButton *)selector{
@@ -350,7 +352,6 @@
         NSUInteger index = self.marketsArray.count;
         self.marketsArray = [self.marketsArray arrayByAddingObjectsFromArray:marketsArray];
         // Plot a pin for the coordinates of each FMLMarket object in marketsArray.
-        NSLog(@"about to display new markets");
         [self displayMarketObjects:marketsArray FromIndex:index];
     }];
     
@@ -358,9 +359,7 @@
 
 -(void)displayMarketObjects:(NSArray *)marketsArray FromIndex:(NSUInteger)index {
     self.keepRotating = NO;
-    NSLog(@"about to filter");
     marketsArray = [self filterMarkets:marketsArray];
-    NSLog(@"finished filtering");
     
     for (FMLMarket *farmersMarket in marketsArray) {
         CLLocationCoordinate2D location;
@@ -470,10 +469,6 @@
     }];
 }
 
--(void)searchFromUserDefaultsLatLng{
-    
-}
-
 -(void)rotateRedoSearchButton {
     if (self.keepRotating) {
         [UIView animateWithDuration:0.2 animations:^{
@@ -498,14 +493,6 @@
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
     return NO;
 }
-
-// Shoot out an icon for each product type available at that Farmer's Market. The icons should radiate out to equidistant positions around a circle centered on the pin. The Assets folder contains an icon for each product category.
-
-// Remove dimView: animate the disappearance of the icons, then remove the view entirely.
-
-
-
-
 
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Icons stuff

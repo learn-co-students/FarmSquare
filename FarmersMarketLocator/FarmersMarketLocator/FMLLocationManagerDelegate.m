@@ -11,7 +11,6 @@
 #import "SampleZipCodes.h"
 #import "GeocodeLocation.h"
 
-// TODO: Handle Zip Codes not in New York - EDGE CASE
 
 @interface FMLLocationManagerDelegate()
 
@@ -62,7 +61,7 @@
             
             
         } else {
-            [self displayZipCodeAlert];
+            [self displayLocationAlert];
         }
     }
 
@@ -72,20 +71,15 @@
 
 #pragma mark - Helper Methods 
 
--(void)displayZipCodeAlert {
+-(void)displayLocationAlert {
     UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"Please enter your location" message:@"Ex: 123 Rockaway Ave, Brooklyn or Brooklyn, NY" preferredStyle:UIAlertControllerStyleAlert];
     
     [controller addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
 
         UIAlertAction *enter = [UIAlertAction actionWithTitle:@"Enter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-//            NSString *input = controller.textFields.firstObject.text;
             NSString *input = textField.text;
             
-//            
-//            if ([self stringIsNumber:input] && input.length == 5) {
-//                // Get coordinates and save it
-//                CLLocationCoordinate2D coordinates = [self coordinatesForZipCode:input];
             [GeocodeLocation getCoordinateForLocation:input withCompletion:^(CLLocationCoordinate2D coordinate) {
                     [self saveUserCoordinates:coordinate];
                     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"zipCodeSaved"];
@@ -95,9 +89,7 @@
                 
 
             }];
-//                        } else {
-//                [self.viewController presentViewController:controller animated:YES completion:nil];
-////            }
+
         }];
         
         [controller addAction:enter];
@@ -105,21 +97,6 @@
         [self.viewController presentViewController:controller animated:YES completion:nil];
     }];
     
-}
-
--(BOOL)stringIsNumber:(NSString *)string {
-    NSCharacterSet *numberChars = [NSCharacterSet decimalDigitCharacterSet];
-    NSCharacterSet *stringChars = [NSCharacterSet characterSetWithCharactersInString:string];
-
-    return [numberChars isSupersetOfSet:stringChars];
-}
-
--(CLLocationCoordinate2D)coordinatesForZipCode:(NSString *)zipCode {
-    NSUInteger index = [[SampleZipCodes returnZipCodes] indexOfObject:zipCode];
-    NSString *latitude = [SampleZipCodes returnLatitudes][index];
-    NSString *longitude = [SampleZipCodes returnLongitudes][index];
-    
-    return CLLocationCoordinate2DMake([latitude floatValue] , [longitude floatValue]);
 }
 
 -(void)saveUserCoordinates:(CLLocationCoordinate2D)coordinates {
