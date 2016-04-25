@@ -24,7 +24,5 @@
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
-//- (FMLGroceryItem *)newGroceryItem;
-//- (FMLGroceryList *)newGroceryList;
 
 @end

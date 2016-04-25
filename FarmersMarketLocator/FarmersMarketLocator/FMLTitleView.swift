@@ -28,7 +28,6 @@ import UIKit
         self.hideTitleView()
     }
     
-    // Not sure why I need this or even how to implement it
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -69,8 +68,6 @@ import UIKit
         self.addressLabel.trailingAnchor.constraintEqualToAnchor(self.trailingAnchor, constant: 10).active = true
         
         self.nameLabel.bottomAnchor.constraintEqualToAnchor(self.addressLabel.topAnchor, constant: -7).active = true
-//        self.nameLabel.leadingAnchor.constraintEqualToAnchor(self.leadingAnchor, constant: 10).active = true
-//        self.nameLabel.trailingAnchor.constraintEqualToAnchor(self.trailingAnchor, constant: 10).active = true
         self.nameLabel.widthAnchor.constraintEqualToAnchor(self.widthAnchor, constant: -20).active = true
         self.nameLabel.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
      }

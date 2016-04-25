@@ -110,15 +110,6 @@
     return _groceryItems;
 }
 
-//not used
-//- (FMLGroceryItem *)newGroceryItem {
-//   
-//    FMLGroceryItem *newItem = [NSEntityDescription insertNewObjectForEntityForName:@"FMLGroceryItem" inManagedObjectContext:self.managedObjectContext];
-//    
-//    [self saveContext];
-//
-//    return newItem;
-//}
 
 - (NSMutableArray *)groceryLists {
     
@@ -129,15 +120,6 @@
     return _groceryLists;
 }
 
-//not used
-//- (FMLGroceryList *)newGroceryList {
-//    
-//    FMLGroceryList *newList = [NSEntityDescription insertNewObjectForEntityForName:@"FMLGroceryList" inManagedObjectContext:self.managedObjectContext];
-//    NSLog(@"does a new list ever get created????");
-//    [self saveContext];
-//    
-//    return newList;
-//}
 
 
 @end
