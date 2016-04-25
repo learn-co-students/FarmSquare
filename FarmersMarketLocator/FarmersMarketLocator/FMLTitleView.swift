@@ -59,7 +59,7 @@ import UIKit
     func constrainToTop() {
         self.topAnchor.constraintEqualToAnchor(self.superview?.topAnchor, constant: -20).active = true
         self.leadingAnchor.constraintEqualToAnchor(self.superview?.leadingAnchor).active = true
-        self.widthAnchor.constraintEqualToAnchor(self.superview?.widthAnchor).active = true
+        self.trailingAnchor.constraintEqualToAnchor(self.superview?.trailingAnchor).active = true
         self.heightAnchor.constraintEqualToConstant(130).active = true
     }
     
