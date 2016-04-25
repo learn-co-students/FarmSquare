@@ -23,11 +23,7 @@
 
 -(void)newItemViewControllerDismissed:(FMLGroceryItem *)newItem {
     
-    NSLog(@"newItem is: %@", newItem.name);
-    
     [self.items addObject:newItem];
-    
-    NSLog(@"items array's count is:  %lu", self.items.count);
     
     [self.tableView reloadData];
     

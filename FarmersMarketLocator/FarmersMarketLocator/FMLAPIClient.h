@@ -27,7 +27,7 @@
 // Non-internet helper methods
 +(NSDictionary *)getCoordinatesFromGoogleMapsLink:(NSString *)googleMapsLink;
 
-+(NSArray *)searchProducts:(NSArray *)usersProducts inMarkets:(NSArray *)marketsToSearch;
+//+(NSArray *)searchProducts:(NSArray *)usersProducts inMarkets:(NSArray *)marketsToSearch;
 
 
 @end

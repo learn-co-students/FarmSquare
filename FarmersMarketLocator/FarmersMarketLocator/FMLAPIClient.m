@@ -263,21 +263,21 @@
     return coordinatesDictionary;
 }
 
-+(NSArray *)searchProducts:(NSArray *)usersProducts inMarkets:(NSArray *)marketsToSearch {
-    
-    NSMutableArray *marketsWithSearchedProducts = [[NSMutableArray alloc]init];
-    
-    for (FMLMarket *market in marketsToSearch) {
-        for (NSUInteger i = 0; i < usersProducts.count; i++) {
-            if ([market.productsArray containsObject: usersProducts[i]]) {
-                [marketsWithSearchedProducts addObject:market];
-                break;
-            }
-        }
-    }
-
-    return marketsWithSearchedProducts;
-}
+//+(NSArray *)searchProducts:(NSArray *)usersProducts inMarkets:(NSArray *)marketsToSearch {
+//    
+//    NSMutableArray *marketsWithSearchedProducts = [[NSMutableArray alloc]init];
+//    
+//    for (FMLMarket *market in marketsToSearch) {
+//        for (NSUInteger i = 0; i < usersProducts.count; i++) {
+//            if ([market.productsArray containsObject: usersProducts[i]]) {
+//                [marketsWithSearchedProducts addObject:market];
+//                break;
+//            }
+//        }
+//    }
+//
+//    return marketsWithSearchedProducts;
+//}
 
 @end
 

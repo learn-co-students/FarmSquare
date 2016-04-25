@@ -13,8 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FMLMarket : NSManagedObject
 
-@property (strong, nonatomic) NSArray *productsArray;
-
 -(NSString *)nameFromString:(NSString *)name;
 
 @end

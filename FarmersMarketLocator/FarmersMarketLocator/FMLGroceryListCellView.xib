@@ -18,17 +18,18 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ZkD-0D-sdz">
-                    <rect key="frame" x="20" y="0.0" width="300" height="150"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ZkD-0D-sdz">
+                    <rect key="frame" x="120" y="0.0" width="360" height="150"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iGY-PK-rSE">
-                            <rect key="frame" x="274" y="0.0" width="26" height="73"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="iGY-PK-rSE">
+                            <rect key="frame" x="167" y="0.0" width="26" height="73"/>
+                            <color key="backgroundColor" red="1" green="0.94484603830000002" blue="0.25822400029999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <attributedString key="attributedText"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0TE-Ew-wLF">
-                            <rect key="frame" x="262" y="78" width="38" height="72"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="14" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0TE-Ew-wLF">
+                            <rect key="frame" x="163" y="78" width="35" height="72"/>
+                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -37,12 +38,18 @@
             </subviews>
             <color key="backgroundColor" red="0.057573846504568309" green="0.83810536649214662" blue="0.37507779747784853" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="ZkD-0D-sdz" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.5" id="0uP-06-T0z"/>
+                <constraint firstItem="ZkD-0D-sdz" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.6" id="0uP-06-T0z"/>
                 <constraint firstItem="ZkD-0D-sdz" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="AVK-7l-apK"/>
                 <constraint firstItem="ZkD-0D-sdz" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="J3K-Xy-Bbi"/>
                 <constraint firstItem="ZkD-0D-sdz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="qja-h6-1cT"/>
+                <constraint firstItem="ZkD-0D-sdz" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ueM-0s-x6p"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="qja-h6-1cT"/>
+                </mask>
+            </variation>
         </view>
     </objects>
 </document>
