@@ -25,14 +25,13 @@
     [super viewDidAppear:animated];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"HideTheLeaf" object:nil];
-    NSLog(@"hide the leaf posted");
+
 }
 
 
 
 -(void)viewDidDisappear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowTheLeaf" object:nil];
-    NSLog(@"show the leaf posted");
 
 }
 
