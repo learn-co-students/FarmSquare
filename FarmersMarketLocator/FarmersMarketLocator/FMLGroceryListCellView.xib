@@ -21,7 +21,7 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ZkD-0D-sdz">
                     <rect key="frame" x="120" y="0.0" width="360" height="150"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="iGY-PK-rSE">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="iGY-PK-rSE">
                             <rect key="frame" x="96" y="0.0" width="168" height="73"/>
                             <color key="backgroundColor" red="1" green="0.94484603830000002" blue="0.25822400029999998" alpha="1" colorSpace="calibratedRGB"/>
                             <attributedString key="attributedText">
