@@ -15,7 +15,6 @@ class FMLSwitchCell: UITableViewCell {
     
     @IBAction func switchValueChanged(sender: UISwitch) {
         block!(isOn: sender.on)
-        print("\(NSUserDefaults.standardUserDefaults().boolForKey("CoreDataTurnedOff"))")
     }
     
     

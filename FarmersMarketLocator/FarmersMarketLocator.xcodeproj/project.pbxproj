@@ -20,7 +20,6 @@
 		8B441F891CC91D7600D22A16 /* FMLSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B441F881CC91D7600D22A16 /* FMLSwitchCell.swift */; };
 		8B441F8D1CC9395C00D22A16 /* FMLSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B441F8C1CC9395C00D22A16 /* FMLSettingsViewController.swift */; };
 		8B5635981CAF081A007DC27E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B5635961CAF081A007DC27E /* DataModel.xcdatamodeld */; };
-		8B8C59D01CC10983009BE852 /* FMLTitleView.swift in Resources */ = {isa = PBXBuildFile; fileRef = 8B8C59CF1CC10983009BE852 /* FMLTitleView.swift */; };
 		8B9E5A811CB2F7DA0050915D /* FMLJSONDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E5A801CB2F7DA0050915D /* FMLJSONDictionary.m */; };
 		8B9E5A831CB2F7E80050915D /* farmers-markets.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B9E5A821CB2F7E80050915D /* farmers-markets.json */; };
 		8BAC6A891CB7E615001EEDE1 /* farmers-markets-0.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BAC6A7F1CB7E615001EEDE1 /* farmers-markets-0.json */; };
@@ -561,7 +560,6 @@
 				8BAC6A901CB7E615001EEDE1 /* farmers-markets-7.json in Resources */,
 				8BAC6A921CB7E615001EEDE1 /* farmers-markets-9.json in Resources */,
 				8BAC6A8D1CB7E615001EEDE1 /* farmers-markets-4.json in Resources */,
-				8B8C59D01CC10983009BE852 /* FMLTitleView.swift in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -819,7 +817,7 @@
 				INFOPLIST_FILE = FarmersMarketLocator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.flatironschool.FarmersMarketLocator;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.flatironschool.team-hotdog";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FarmersMarketLocator/FarmersMarketLocator-Bridging-Header.h";
@@ -838,7 +836,7 @@
 				INFOPLIST_FILE = FarmersMarketLocator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.flatironschool.FarmersMarketLocator;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.flatironschool.team-hotdog";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FarmersMarketLocator/FarmersMarketLocator-Bridging-Header.h";

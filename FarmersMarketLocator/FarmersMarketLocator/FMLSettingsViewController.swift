@@ -17,7 +17,6 @@ class FMLSettingsViewController: UIViewController, UITableViewDataSource, UITabl
         self.tableView.dataSource = self
         self.tableView.reloadData()
         self.automaticallyAdjustsScrollViewInsets = true
-        print("\(NSUserDefaults.standardUserDefaults().boolForKey("CoreDataTurnedOff"))")
     }
     
     override func viewDidAppear(animated: Bool) {

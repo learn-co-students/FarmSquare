@@ -57,8 +57,6 @@ class FMLContainerViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FMLContainerViewController.hideTheLeaf), name: "HideTheLeaf", object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FMLContainerViewController.showTheLeaf), name: "ShowTheLeaf", object: nil)
-        
-        print("\(NSUserDefaults.standardUserDefaults().boolForKey("CoreDataTurnedOff"))")
 
     }
     
@@ -392,25 +390,5 @@ class FMLContainerViewController: UIViewController {
         return UIStatusBarStyle.LightContent
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
