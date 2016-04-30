@@ -60,11 +60,8 @@
     
     self.stack = [CoreDataStack sharedStack];
     
-    self.tableView.separatorColor = [UIColor greenColor];
-    
     //to allow left swipe delete of a cell
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -78,7 +75,7 @@
 
 -(void) viewWillDisappear:(BOOL)animated {
     if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
-        // back button was pressed.  We know this is true because self is no longer
+        // back button was pressed. We know this is true because self is no longer
         // in the navigation stack.
     }
     [super viewWillDisappear:animated];
@@ -93,8 +90,6 @@
         [self.items removeObject:self.items[indexPath.row]];
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        
-        [tableView reloadData]; //seems the refresh happens faster with this
     }
 }
 

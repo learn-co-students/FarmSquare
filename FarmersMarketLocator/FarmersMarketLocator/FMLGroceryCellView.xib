@@ -26,7 +26,6 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="50" id="tkP-u2-hSe"/>
                             </constraints>
-                            <state key="normal" title="Button"/>
                             <connections>
                                 <action selector="checkboxTapped:" destination="-1" eventType="touchUpInside" id="qoC-Ry-945"/>
                             </connections>
