@@ -85,20 +85,18 @@
 }
 
 
-//-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        
-//        //we need to delete the object from the array, but from core data so that the number of rows is updated with one less
-//        [self.stack.managedObjectContext deleteObject:self.stack.groceryItems[indexPath.row]];
-//
-//        //[self.stack saveContext]; //is this needed?
-//        // TODO: swipe delete breaks here
-//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-//        
-//        [tableView reloadData]; //is this needed?
-//    }
-//}
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        //we need to delete the object from the array of items first, otherwise code crashes        
+        [self.items removeObject:self.items[indexPath.row]];
+        
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        [tableView reloadData]; //seems the refresh happens faster with this
+    }
+}
 
 #pragma mark - Table view data source
 

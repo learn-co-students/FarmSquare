@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "FMLGroceryList.h"
+#import "CoreDataStack.h"
 
 @interface FMLViewSavedListTVC : UITableViewController
 
 @property (nonatomic, strong)FMLGroceryList *groceryListToView;
-
+@property (nonatomic, strong)CoreDataStack *stack;
 
 @end

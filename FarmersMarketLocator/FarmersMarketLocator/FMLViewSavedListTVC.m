@@ -18,6 +18,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.stack = [CoreDataStack sharedStack];
+    
+    //to allow left swipe delete of a cell
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
+
 }
 
 
@@ -60,5 +66,23 @@
     
     return 80;
 }
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        FMLGroceryItem *itemToDelete = self.groceryListToView.itemsInList[indexPath.row];
+        
+        //we need to delete the object from core data
+        [self.stack.managedObjectContext deleteObject:itemToDelete];
+        
+        [self.stack saveContext];
+        
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
+
+
 
 @end
