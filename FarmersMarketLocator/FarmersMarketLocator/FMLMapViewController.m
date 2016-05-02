@@ -189,6 +189,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeAllPins) name:@"GetRidOfTheEvidence!" object:nil];
     self.detailView.transform = CGAffineTransformMakeTranslation(0, self.detailView.frame.size.height);
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showIrretrievableLocationAlert) name:@"Location irretrievable" object:nil];
+    
 }
 
 -(void)removeAllPins {
@@ -343,6 +345,29 @@
     [self presentViewController:apiCallFailedAlert animated:YES completion:nil];
     
 }
+
+-(void)showIrretrievableLocationAlert {
+    
+    // Create alert controller
+    UIAlertController *irretrievableLocationAlert = [UIAlertController alertControllerWithTitle:@"Location Irretrievable"
+                         message:@"Your current location could not be retrieved. Please use the search bar to search for your desired location."
+                  preferredStyle:UIAlertControllerStyleAlert];
+    
+    // Create action
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok"
+                            style:UIAlertActionStyleDefault
+                          handler:^(UIAlertAction * _Nonnull action) {
+                                   [irretrievableLocationAlert dismissViewControllerAnimated:YES completion:nil];
+                               }];
+    
+    // Add action to controller
+    [irretrievableLocationAlert addAction:okAction];
+    
+    // Present alert controller
+    [self presentViewController:irretrievableLocationAlert animated:YES completion:nil];
+    
+}
+
 
 -(void)getNewMarketObjects {
     CGFloat latitude = [[NSUserDefaults standardUserDefaults] floatForKey:@"latitude"];

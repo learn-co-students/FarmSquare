@@ -14,4 +14,6 @@
 
 - (instancetype)initWithTarget:(FMLMapViewController *)target;
 
+- (void)displayLocationAlert;
+
 @end

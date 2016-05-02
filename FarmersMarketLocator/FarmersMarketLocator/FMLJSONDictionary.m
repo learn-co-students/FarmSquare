@@ -23,7 +23,9 @@
     NSString *resourceName = [NSString stringWithFormat:@"farmers-markets-%@", key];
     
     NSURL *url = [[NSBundle mainBundle] URLForResource:resourceName withExtension:@"json"];
+    
     NSData *data = [NSData dataWithContentsOfURL:url];
+    
     NSArray *marketData = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
     
     return marketData;

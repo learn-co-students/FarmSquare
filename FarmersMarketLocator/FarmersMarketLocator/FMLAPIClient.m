@@ -48,28 +48,35 @@
     // Base URL string
     NSString *baseCoordinatesURLString = @"http://search.ams.usda.gov/farmersmarkets/v1/data.svc/locSearch?lat=";
     
-    // Add the queries for latitude and longitude to the URL string
-    NSString *finalCoordinatesURLString = [NSString stringWithFormat:@"%@%f&lng=%f", baseCoordinatesURLString, latitude, longitude];
-    
-    // Make the API call
-    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
-    [sessionManager GET:finalCoordinatesURLString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    if (latitude != 0 && longitude != 0) {
+        // Add the queries for latitude and longitude to the URL string
+        NSString *finalCoordinatesURLString = [NSString stringWithFormat:@"%@%f&lng=%f", baseCoordinatesURLString, latitude, longitude];
         
-        // Plug that response object into a method that gets details for all of those markets.
-        [FMLAPIClient marketsArrayForListOfMarkets:responseObject withCompletion:^(NSMutableArray *marketsArray, NSError *error) {
+        // Make the API call
+        AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
+        [sessionManager GET:finalCoordinatesURLString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
-            // Now we have an array of market objects. All we do with it is pass it to the completion block.
-            coordinatesCompletion(marketsArray, nil);
+            // Plug that response object into a method that gets details for all of those markets.
+            [FMLAPIClient marketsArrayForListOfMarkets:responseObject withCompletion:^(NSMutableArray *marketsArray, NSError *error) {
+                
+                // Now we have an array of market objects. All we do with it is pass it to the completion block.
+                coordinatesCompletion(marketsArray, nil);
+                
+            }];
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+            // Pass the error up to the view controller
+            coordinatesCompletion(nil, error);
+            NSLog(@"\nerror: %@\n", error);
             
         }];
+    } else {
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-        // Pass the error up to the view controller
-        coordinatesCompletion(nil, error);
-        NSLog(@"\nerror: %@\n", error);
-        
-    }];
+        //Notification for alert sent to FMLMapViewController
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Location irretrievable" object:nil];
+    }
+    
 }
 
 +(void)getDetailsForMarketWithId:(NSString *)idNumber withCompletion:(void (^)(NSDictionary *marketDetails, NSError *error))idCompletion {
