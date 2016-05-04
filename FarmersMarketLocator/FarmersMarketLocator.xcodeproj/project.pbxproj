@@ -16,7 +16,6 @@
 		1F3ED96C1CAB0AE50038F590 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F3ED96A1CAB0AE50038F590 /* LaunchScreen.storyboard */; };
 		1F3ED9771CAB0AE50038F590 /* FarmersMarketLocatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3ED9761CAB0AE50038F590 /* FarmersMarketLocatorTests.m */; };
 		1F3ED9821CAB0AE50038F590 /* FarmersMarketLocatorUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3ED9811CAB0AE50038F590 /* FarmersMarketLocatorUITests.m */; };
-		5B0B277C1CDA3BDD00CDE62B /* Secrets.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0B277B1CDA3BDD00CDE62B /* Secrets.m */; };
 		8B0548B51CBEBEFA00843CB4 /* FMLContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0548B41CBEBEFA00843CB4 /* FMLContainerViewController.swift */; };
 		8B441F891CC91D7600D22A16 /* FMLSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B441F881CC91D7600D22A16 /* FMLSwitchCell.swift */; };
 		8B441F8D1CC9395C00D22A16 /* FMLSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B441F8C1CC9395C00D22A16 /* FMLSettingsViewController.swift */; };
@@ -104,8 +103,6 @@
 		1F3ED97D1CAB0AE50038F590 /* FarmersMarketLocatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FarmersMarketLocatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F3ED9811CAB0AE50038F590 /* FarmersMarketLocatorUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FarmersMarketLocatorUITests.m; sourceTree = "<group>"; };
 		1F3ED9831CAB0AE50038F590 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1F3ED98F1CAB0C990038F590 /* Secrets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Secrets.h; path = ../Secrets.h; sourceTree = "<group>"; };
-		5B0B277B1CDA3BDD00CDE62B /* Secrets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secrets.m; sourceTree = "<group>"; };
 		8B0548B41CBEBEFA00843CB4 /* FMLContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMLContainerViewController.swift; sourceTree = "<group>"; };
 		8B0548B61CBEBF4900843CB4 /* FarmersMarketLocator-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FarmersMarketLocator-Bridging-Header.h"; sourceTree = "<group>"; };
 		8B441F881CC91D7600D22A16 /* FMLSwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMLSwitchCell.swift; sourceTree = "<group>"; };
@@ -369,8 +366,6 @@
 				A38473B51CADAFC300ED08CA /* SampleZipCodes.m */,
 				E1F95DCB1CAB12D6009DA977 /* FMLAPIClient.h */,
 				E1F95DCC1CAB12D6009DA977 /* FMLAPIClient.m */,
-				1F3ED98F1CAB0C990038F590 /* Secrets.h */,
-				5B0B277B1CDA3BDD00CDE62B /* Secrets.m */,
 				8B9E5A7F1CB2F7DA0050915D /* FMLJSONDictionary.h */,
 				8B9E5A801CB2F7DA0050915D /* FMLJSONDictionary.m */,
 				A38CD0D21CC0393800A0590C /* GeocodeLocation.h */,
@@ -648,7 +643,6 @@
 				E19F96B01CC8906E004C1F6D /* FMLViewSavedListTVC.m in Sources */,
 				8BE219AA1CAF1D610014D046 /* FMLMarket.m in Sources */,
 				1F3ED9611CAB0AE50038F590 /* AppDelegate.m in Sources */,
-				5B0B277C1CDA3BDD00CDE62B /* Secrets.m in Sources */,
 				8B441F891CC91D7600D22A16 /* FMLSwitchCell.swift in Sources */,
 				E1D1AF3E1CC01B4200183165 /* FMLGroceryItem.m in Sources */,
 				A38473B31CADAF7200ED08CA /* Annotation.m in Sources */,
