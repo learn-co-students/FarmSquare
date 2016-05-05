@@ -64,6 +64,7 @@
 		E1D1AF381CBFE93400183165 /* FMLNewItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF2E1CBFE93400183165 /* FMLNewItemViewController.m */; };
 		E1D1AF3D1CC01B4200183165 /* FMLGroceryItem+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF3A1CC01B4200183165 /* FMLGroceryItem+CoreDataProperties.m */; };
 		E1D1AF3E1CC01B4200183165 /* FMLGroceryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1AF3C1CC01B4200183165 /* FMLGroceryItem.m */; };
+		E1D23A0B1CDBF10E003C51AF /* DataModel.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 8B5635961CAF081A007DC27E /* DataModel.xcdatamodeld */; };
 		E1F95DCD1CAB12D6009DA977 /* FMLAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F95DCC1CAB12D6009DA977 /* FMLAPIClient.m */; };
 /* End PBXBuildFile section */
 
@@ -536,6 +537,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1D23A0B1CDBF10E003C51AF /* DataModel.xcdatamodeld in Resources */,
 				8BAC6A891CB7E615001EEDE1 /* farmers-markets-0.json in Resources */,
 				8B9E5A831CB2F7E80050915D /* farmers-markets.json in Resources */,
 				8BAC6A8C1CB7E615001EEDE1 /* farmers-markets-3.json in Resources */,

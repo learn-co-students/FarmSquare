@@ -49,6 +49,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.view.translatesAutoresizingMaskIntoConstraints = NO;
     
     self.timerCount = 0;
