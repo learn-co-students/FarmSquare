@@ -18,8 +18,8 @@ import UIKit
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = UIColor(patternImage: UIImage(named: "red-painted-wood")!)
-        self.prepareLabels(self.nameLabel, text: "Sample Farmers Market Name", font: "Helvetica", size: 20)
-        self.prepareLabels(self.addressLabel, text: "123 Some Street\nCity, ST 12345", font: "Helvetica", size: 16)
+        self.prepareLabels(self.nameLabel, text: "Sample Farmers Market Name", font: "Superclarendon-Black", size: 20)
+        self.prepareLabels(self.addressLabel, text: "123 Some Street\nCity, ST 12345", font: "Superclarendon-Regular", size: 13)
         self.addSubview(self.nameLabel)
         self.addSubview(self.addressLabel)
         

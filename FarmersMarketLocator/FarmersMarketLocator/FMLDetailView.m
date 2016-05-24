@@ -69,7 +69,7 @@ func setBorder() {
     //create new label using parameters
     UILabel *label = [[UILabel alloc]init];
     label.text = text;
-    label.font = [UIFont fontWithName:@"Helvetica" size:16];
+    label.font = [UIFont fontWithName:@"Superclarendon-Regular" size:14];
     label.textColor = color;
     label.numberOfLines = 0;
     label.translatesAutoresizingMaskIntoConstraints = NO;
@@ -82,7 +82,7 @@ func setBorder() {
     //create TextView to display produce list
     UITextView *textView = [[UITextView alloc]init];
     textView.text = text;
-    textView.font = [UIFont fontWithName:@"Helvetica" size:16];
+    textView.font = [UIFont fontWithName:@"Superclarendon-Regular" size:14];
     textView.textColor = color;
     textView.editable = NO;
     textView.selectable = YES;
