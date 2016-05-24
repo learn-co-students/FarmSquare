@@ -17,7 +17,7 @@ import UIKit
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = UIColor(patternImage: UIImage(named: "red-painted-wood")!)
         self.prepareLabels(self.nameLabel, text: "Sample Farmers Market Name", font: "Helvetica", size: 20)
         self.prepareLabels(self.addressLabel, text: "123 Some Street\nCity, ST 12345", font: "Helvetica", size: 16)
         self.addSubview(self.nameLabel)
@@ -34,7 +34,7 @@ import UIKit
     
     func setBorder() {
         let width = CGFloat(10.0)
-        border.borderColor = UIColor(colorLiteralRed: 38/255.0, green: 89/255.0, blue: 15/255.0, alpha: 1.0).CGColor
+        border.borderColor = UIColor(patternImage: UIImage(named: "white-painted-wood")!).CGColor
         border.frame = CGRect(x: -width, y:  self.frame.size.height-width, width: self.frame.size.width + 2*width, height: self.frame.size.height)
         border.borderWidth = width
         self.layer.addSublayer(border)
@@ -44,7 +44,7 @@ import UIKit
     func prepareLabels(label: UILabel, text: String, font: String, size: Float) {
         label.text = text
         label.font = UIFont(name: font, size: CGFloat(size))
-        label.textColor = UIColor.blackColor()
+        label.textColor = UIColor.whiteColor()
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = NSTextAlignment.Center
