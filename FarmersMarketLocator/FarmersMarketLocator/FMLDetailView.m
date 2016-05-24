@@ -9,25 +9,6 @@
 #import "FMLDetailView.h"
 #import "FMLMapViewController.h"
 
-
-
-
-
-
-
-
-
-/* MAKE THE LABELS LOOK LIKE BARN DOORS
- 
- - Download red painted wood image
- - Download white painted wood image
- - Set the background image of the label to the red wood
- - Bg image of the border view to white wood
- - Change the text to white. Maybe change font, make bold.
- - Lower resolution on those images.
-
-*/
-
 @implementation FMLDetailView
 
 - (instancetype)initWithFrame:(CGRect)frame
