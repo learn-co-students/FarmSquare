@@ -11,6 +11,23 @@
 
 
 
+
+
+
+
+
+
+/* MAKE THE LABELS LOOK LIKE BARN DOORS
+ 
+ - Download red painted wood image
+ - Download white painted wood image
+ - Set the background image of the label to the red wood
+ - Bg image of the border view to white wood
+ - Change the text to white. Maybe change font, make bold.
+ - Lower resolution on those images.
+
+*/
+
 @implementation FMLDetailView
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -18,8 +35,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         _produceTextView = [self setUpProduceTextViewWithText:@"Fruits and Vegetables"
-                                                 textColor:[UIColor blackColor]];
-        _scheduleLabel = [self setUpLabelWithText:@"Mon-Fri 7am-4pm" textColor:[UIColor blackColor]];
+                                                 textColor:[UIColor whiteColor]];
+        _scheduleLabel = [self setUpLabelWithText:@"Mon-Fri 7am-4pm" textColor:[UIColor whiteColor]];
         _yelpButton = [self setUpButtonWithImageName:@"yelp_review_btn_red" action:@selector(yelpButtonPressed)];
         _directionsButton = [self setUpButtonWithImageName:@"direction24px" action:@selector(directionsButtonPressed)];
     }
@@ -28,7 +45,9 @@
     [self addSubview:_yelpButton];
     [self addSubview:_directionsButton];
     
-    self.backgroundColor = [UIColor whiteColor];
+//    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"red-painted-wood"]];
+    
     [self setBorder];
     
     UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideButtonPressed)];
@@ -50,7 +69,8 @@ func setBorder() {
 
 -(void)setBorder {
     UIView *fauxBorder = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 10.0)];
-    fauxBorder.backgroundColor = [UIColor colorWithRed:38/255.0 green:89/255.0 blue:15/255.0 alpha:1.0];
+//    fauxBorder.backgroundColor = [UIColor colorWithRed:38/255.0 green:89/255.0 blue:15/255.0 alpha:1.0];
+    fauxBorder.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"white-painted-wood"]];
     fauxBorder.translatesAutoresizingMaskIntoConstraints = NO;
     self.border = fauxBorder;
 
